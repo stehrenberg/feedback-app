@@ -8,8 +8,8 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
+  background-color: #148eca;
+  height: 80px;
   padding: 20px;
   color: white;
 }
@@ -22,3 +22,27 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.Questionnaire {
+  display: flex;
+  flex-direction: column;
+}
+
+.Question {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.Question input {
+    width: 400px;
+}
+
+.Question button {
+  width: 80px;
+}
+
+
