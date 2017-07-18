@@ -5,14 +5,15 @@ class Question extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            answered: false,
-        }
+            isAnswered: false,
+            answer: '',
+        };
 
         this.isNumber.bind(this);
+        this.answer.bind(this);
     }
 
     render() {
-        let numberMinMax = 'min="0" max="10"';
         let opts = {};
 
         if(this.isNumber()) {
@@ -22,14 +23,31 @@ class Question extends Component {
 
         return (
             <div className="Question">
-                <label className={ this.props.name }>{ this.props.label }</label>
-                <input type={this.props.inputType} placeholder={ this.props.placeholder } {...opts}/>
+                <label className={ this.props.className }>{ this.props.label }</label>
+                <input
+                    type={ this.props.inputType }
+                    placeholder={ this.props.placeholder }
+                    onChange={ this.answer }
+                    {...opts} />
             </div>
         );
     }
 
     isNumber() {
         return this.props.inputType === 'number';
+    }
+
+    answer = (event) => {
+        let inputValue = event.target.value;
+        console.log(this.props.className, inputValue);
+
+        let newState = {
+            isAnswered: true,
+            answer: inputValue
+        };
+
+        this.setState(newState);
+        localStorage.setItem(this.props.className, inputValue);
     }
 
 }

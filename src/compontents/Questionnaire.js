@@ -1,9 +1,19 @@
 import React, {Component} from "react";
 import Question from './Question'
+import questions from '../questionTexts'
 
 class Questionnaire extends Component {
 
+    Questionnaire() {
+        this.state = {
+            isAnswered: false,
+        }
+    }
+
+
     render() {
+        const QUESTIONS = questions;
+
         return (
             <div className="Questionnaire">
                 <h2>Goals</h2>
@@ -14,19 +24,19 @@ class Questionnaire extends Component {
                     improve.
                 </p>
                 <form>
-                    <Question label="How well do we understand what your company actually needs from us?" inputType="number"/>
-                    <Question label="How well do we cooperate?" inputType="number"/>
-                    <Question label="Core Deliveries and Roles"/>
-                    <Question label="What are the Must-Be's we have to deliver?"/>
-                    <Question label="What should we deliver more of?"/>
-                    <Question label="What should we avoid to do in the future?"/>
-                    <Question label="What should we deliver additionally?"/>
-                    <Question label="What competencies and abilities should we acquire?"/>
+                    <Question className="understanding" label={ QUESTIONS.UNDERSTANDING } inputType="number"/>
+                    <Question label={ QUESTIONS.COOPERATION } inputType="number"/>
+                    <Question label={ QUESTIONS.DELIVERIES_AND_ROLES }/>
+                    <Question label={ QUESTIONS.MUST_BES } />
+                    <Question label={ QUESTIONS.DELIVER_MORE } />
+                    <Question label={ QUESTIONS.AVOID } />
+                    <Question label={ QUESTIONS.DELIVER_ADDITIONALLY } />
+                    <Question label={ QUESTIONS.ACQUIRE } />
                     <h3>Net Promoter Score</h3>
                     <Question
-                        label="How likely is it that you would recommend our company/product to a friend or colleague?"/>
-                    <Question label="Tasks for the next iteration:"/>
-                    <Question label="Next Meeting:" inputType="date"/>
+                        label={ QUESTIONS.NPS } />
+                    <Question label={ QUESTIONS.TASKS } />
+                    <Question label={ QUESTIONS.NEXT_MEETING } inputType="date"/>
 
                 </form>
             </div>
