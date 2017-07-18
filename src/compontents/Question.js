@@ -11,6 +11,19 @@ class Question extends Component {
 
         this.isNumber.bind(this);
 
+        if(this.props.persist) {
+            this.loadCachedValue();
+        }
+
+    }
+
+    handleChange(event) {
+        let inputValue = event.target.value;
+
+        this.setState({ isAnswered: true, answer: inputValue });
+        if(this.props.persist) {
+            this.saveAnswer(inputValue);
+        }
     }
 
     render() {
@@ -21,37 +34,39 @@ class Question extends Component {
             opts['max'] = '10';
         }
 
+        if(this.state.isAnswered) {
+            opts['value'] = this.state.answer;
+        }
+
         return (
             <div className="Question">
                 <label id={ this.props.id }>{ this.props.label }</label>
                 <input
                     type={ this.props.inputType }
                     placeholder={ this.props.placeholder }
-                    onChange={ this.answer.bind(this) }
+                    onChange={ this.handleChange.bind(this) }
                     {...opts} />
             </div>
         );
     }
 
-    isNumber() {
-        return this.props.inputType === 'number';
-    }
+    // Helperstuff
 
-    answer(event) {
-        let inputValue = event.target.value;
-        let newState = {
-            isAnswered: true,
-            answer: inputValue
-        };
+    loadCachedValue() {
+        let cachedValue = localStorage.getItem(this.props.id);
 
-        this.setState(newState);
-        if(this.props.persist) {
-            this.saveAnswer(inputValue);
+        if(!(!cachedValue)) {
+            this.state = { isAnswered: true, answer: cachedValue };
+            console.log(this.state);
         }
     }
 
     saveAnswer(inputValue) {
         localStorage.setItem(this.props.id, inputValue);
+    }
+
+    isNumber() {
+        return this.props.inputType === 'number';
     }
 
 }
