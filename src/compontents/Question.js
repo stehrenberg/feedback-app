@@ -10,7 +10,7 @@ class Question extends Component {
         };
 
         this.isNumber.bind(this);
-        this.answer.bind(this);
+
     }
 
     render() {
@@ -23,11 +23,11 @@ class Question extends Component {
 
         return (
             <div className="Question">
-                <label className={ this.props.className }>{ this.props.label }</label>
+                <label id={ this.props.id }>{ this.props.label }</label>
                 <input
                     type={ this.props.inputType }
                     placeholder={ this.props.placeholder }
-                    onChange={ this.answer }
+                    onChange={ this.answer.bind(this) }
                     {...opts} />
             </div>
         );
@@ -37,17 +37,21 @@ class Question extends Component {
         return this.props.inputType === 'number';
     }
 
-    answer = (event) => {
+    answer(event) {
         let inputValue = event.target.value;
-        console.log(this.props.className, inputValue);
-
         let newState = {
             isAnswered: true,
             answer: inputValue
         };
 
         this.setState(newState);
-        localStorage.setItem(this.props.className, inputValue);
+        if(this.props.persist) {
+            this.saveAnswer(inputValue);
+        }
+    }
+
+    saveAnswer(inputValue) {
+        localStorage.setItem(this.props.id, inputValue);
     }
 
 }

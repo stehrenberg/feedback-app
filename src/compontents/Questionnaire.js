@@ -24,19 +24,18 @@ class Questionnaire extends Component {
                     improve.
                 </p>
                 <form>
-                    <Question className="understanding" label={ QUESTIONS.UNDERSTANDING } inputType="number"/>
-                    <Question label={ QUESTIONS.COOPERATION } inputType="number"/>
-                    <Question label={ QUESTIONS.DELIVERIES_AND_ROLES }/>
-                    <Question label={ QUESTIONS.MUST_BES } />
-                    <Question label={ QUESTIONS.DELIVER_MORE } />
-                    <Question label={ QUESTIONS.AVOID } />
-                    <Question label={ QUESTIONS.DELIVER_ADDITIONALLY } />
-                    <Question label={ QUESTIONS.ACQUIRE } />
+                    <Question id="understanding" label={ QUESTIONS.UNDERSTANDING } inputType="number" persist="false" />
+                    <Question id="cooperation" label={ QUESTIONS.COOPERATION } inputType="number" persist="false" />
+                    <Question id="deliveriesAndRoles" label={ QUESTIONS.DELIVERIES_AND_ROLES } persist="true" />
+                    <Question id="mustBes" label={ QUESTIONS.MUST_BES } persist="true" />
+                    <Question id="deliverMore" label={ QUESTIONS.DELIVER_MORE } persist="true" />
+                    <Question id="avoid" label={ QUESTIONS.AVOID } />
+                    <Question id="deliverAdditionally" label={ QUESTIONS.DELIVER_ADDITIONALLY } persist="true" />
+                    <Question id="acquire" label={ QUESTIONS.ACQUIRE } persist="true" />
                     <h3>Net Promoter Score</h3>
-                    <Question
-                        label={ QUESTIONS.NPS } />
-                    <Question label={ QUESTIONS.TASKS } />
-                    <Question label={ QUESTIONS.NEXT_MEETING } inputType="date"/>
+                    <Question id="nps" label={ QUESTIONS.NPS } persist="false" />
+                    <Question id="tasks" label={ QUESTIONS.TASKS } persist="false" />
+                    <Question id="nextMeeting" label={ QUESTIONS.NEXT_MEETING } inputType="date" persist="false"/>
 
                 </form>
             </div>
