@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, {Component} from "react"
+import ReactStars from 'react-stars'
 
 class Question extends Component {
 
@@ -11,7 +12,7 @@ class Question extends Component {
 
         this.isNumber.bind(this);
 
-        if(this.props.persist) {
+        if (this.props.persist) {
             this.loadCachedValue();
         }
 
@@ -20,31 +21,36 @@ class Question extends Component {
     handleChange(event) {
         let inputValue = event.target.value;
 
-        this.setState({ isAnswered: true, answer: inputValue });
-        if(this.props.persist) {
+        this.setState({isAnswered: true, answer: inputValue});
+        if (this.props.persist) {
             this.saveAnswer(inputValue);
         }
     }
 
     render() {
-        let opts = {};
-
-        if(this.isNumber()) {
-            opts['min'] = '0';
-            opts['max'] = '10';
-        }
-
         return (
             <div className="Question">
                 <label id={ this.props.id }>{ this.props.label }</label>
-                <input
-                    type={ this.props.inputType }
-                    placeholder={ this.props.placeholder }
-                    value={ this.state.answer }
-                    onChange={ this.handleChange.bind(this) }
-                    {...opts} />
+                { this.getAppropriateInputField() }
             </div>
         );
+    }
+
+    getAppropriateInputField() {
+        let inputElement =  this.isNumber() ?
+            <ReactStars
+                count={ 10 }
+                onChange={ () => {} }
+                half={ 'false' }
+                size={ 16 }
+                color2={ '#ffd700' }/>
+            : <input
+                type={ this.props.inputType }
+                placeholder={ this.props.placeholder }
+                value={ this.state.answer }
+                onChange={ this.handleChange.bind(this) } />
+
+        return inputElement;
     }
 
     // Helperstuff
@@ -52,8 +58,8 @@ class Question extends Component {
     loadCachedValue() {
         let cachedValue = localStorage.getItem(this.props.id);
 
-        if(!(!cachedValue)) {
-            this.state = { isAnswered: true, answer: cachedValue };
+        if (!(!cachedValue)) {
+            this.state = {isAnswered: true, answer: cachedValue};
         }
     }
 

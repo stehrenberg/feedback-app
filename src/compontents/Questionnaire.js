@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component} from "react"
 import Question from './Question'
 import questions from '../questionTexts'
 
