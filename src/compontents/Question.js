@@ -42,8 +42,8 @@ class Question extends Component {
                 count={ 10 }
                 onChange={ () => {} }
                 half={ 'false' }
-                size={ 16 }
-                color2={ '#ffd700' }/>
+                size={ 24 }
+                color2={ '#ffc300' }/>
             : <input
                 type={ this.props.inputType }
                 placeholder={ this.props.placeholder }

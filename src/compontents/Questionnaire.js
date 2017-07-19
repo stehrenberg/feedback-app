@@ -38,7 +38,7 @@ class Questionnaire extends Component {
                     <Question id="deliverAdditionally" label={ QUESTIONS.DELIVER_ADDITIONALLY } persist="true" />
                     <Question id="acquire" label={ QUESTIONS.ACQUIRE } persist="true" />
                     <h3>Net Promoter Score</h3>
-                    <Question id="nps" label={ QUESTIONS.NPS } persist="false" />
+                    <Question id="nps" label={ QUESTIONS.NPS } inputType="number" persist="false" />
                     <Question id="tasks" label={ QUESTIONS.TASKS } persist="false" />
                     <Question id="nextMeeting" label={ QUESTIONS.NEXT_MEETING } inputType="date" persist="false"/>
                     <button type="submit">Speichern</button>
