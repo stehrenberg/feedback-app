@@ -57,4 +57,7 @@
   width: 80px;
 }
 
+span[data-forhalf] {
+  padding: 3px;
+}
 
