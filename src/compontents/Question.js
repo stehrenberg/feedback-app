@@ -34,16 +34,13 @@ class Question extends Component {
             opts['max'] = '10';
         }
 
-        if(this.state.isAnswered) {
-            opts['value'] = this.state.answer;
-        }
-
         return (
             <div className="Question">
                 <label id={ this.props.id }>{ this.props.label }</label>
                 <input
                     type={ this.props.inputType }
                     placeholder={ this.props.placeholder }
+                    value={ this.state.answer }
                     onChange={ this.handleChange.bind(this) }
                     {...opts} />
             </div>
@@ -57,7 +54,6 @@ class Question extends Component {
 
         if(!(!cachedValue)) {
             this.state = { isAnswered: true, answer: cachedValue };
-            console.log(this.state);
         }
     }
 
