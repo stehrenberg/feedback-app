@@ -1,6 +1,5 @@
-import React, {Component} from "react"
-import Question from './Question'
-import questions from '../questionTexts'
+import React, {Component} from 'react';
+import Question from './Question';
 
 class Questionnaire extends Component {
 
@@ -9,7 +8,8 @@ class Questionnaire extends Component {
         this.state = {
             isAnswered: false,
             isSaved: false,
-        }
+            questions: this.props.content,
+        }s
     }
 
     handleSubmit(event) {
@@ -19,8 +19,6 @@ class Questionnaire extends Component {
     }
 
     render() {
-        const QUESTIONS = questions;
-
         return (
             <div className="Questionnaire">
                 <h2>Goals</h2>
@@ -29,18 +27,18 @@ class Questionnaire extends Component {
                     to help us align to his targets give us ideas of what competences to build and where to
                         improve.</strong></p>
                 <form action="" method="POST" onSubmit={ this.handleSubmit.bind(this) }>
-                    <Question id="understanding" label={ QUESTIONS.UNDERSTANDING } inputType="number" persist="false" />
-                    <Question id="cooperation" label={ QUESTIONS.COOPERATION } inputType="number" persist="false" />
-                    <Question id="deliveriesAndRoles" label={ QUESTIONS.DELIVERIES_AND_ROLES } persist="true" />
-                    <Question id="mustBes" label={ QUESTIONS.MUST_BES } persist="true" />
-                    <Question id="deliverMore" label={ QUESTIONS.DELIVER_MORE } persist="true" />
-                    <Question id="avoid" label={ QUESTIONS.AVOID } />
-                    <Question id="deliverAdditionally" label={ QUESTIONS.DELIVER_ADDITIONALLY } persist="true" />
-                    <Question id="acquire" label={ QUESTIONS.ACQUIRE } persist="true" />
+                    <Question id="understanding" label={ this.state.questions.UNDERSTANDING } inputType="number" persist="false" />
+                    <Question id="cooperation" label={ this.state.questions.COOPERATION } inputType="number" persist="false" />
+                    <Question id="deliveriesAndRoles" label={ this.state.questions.DELIVERIES_AND_ROLES } persist="true" />
+                    <Question id="mustBes" label={ this.state.questions.MUST_BES } persist="true" />
+                    <Question id="deliverMore" label={ this.state.questions.DELIVER_MORE } persist="true" />
+                    <Question id="avoid" label={ this.state.questions.AVOID } />
+                    <Question id="deliverAdditionally" label={ this.state.questions.DELIVER_ADDITIONALLY } persist="true" />
+                    <Question id="acquire" label={ this.state.questions.ACQUIRE } persist="true" />
                     <h3>Net Promoter Score</h3>
-                    <Question id="nps" label={ QUESTIONS.NPS } inputType="number" persist="false" />
-                    <Question id="tasks" label={ QUESTIONS.TASKS } persist="false" />
-                    <Question id="nextMeeting" label={ QUESTIONS.NEXT_MEETING } inputType="date" persist="false"/>
+                    <Question id="nps" label={ this.state.questions.NPS } inputType="number" persist="false" />
+                    <Question id="tasks" label={ this.state.questions.TASKS } persist="false" />
+                    <Question id="nextMeeting" label={ this.state.questions.NEXT_MEETING } inputType="date" persist="false"/>
                     <button type="submit">Speichern</button>
                 </form>
             </div>
