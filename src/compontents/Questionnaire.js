@@ -15,7 +15,10 @@ class Questionnaire extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.props.id, this);
+
+        let formData = "";
+
+        localStorage.setItem(this.props.id, formData);
         this.setState({ isAnswered: true, isSaved: true });
     }
 

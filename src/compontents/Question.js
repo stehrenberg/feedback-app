@@ -15,7 +15,6 @@ class Question extends Component {
         if (this.props.preload) {
             this.loadCachedValue();
         }
-
     }
 
     handleChange(event) {
@@ -35,20 +34,19 @@ class Question extends Component {
     }
 
     getAppropriateInputField() {
-        let inputElement =  this.isNumber() ?
-            <ReactStars
-                count={ 10 }
-                onChange={ () => {} }
-                half={ 'false' }
-                size={ 24 }
-                color2={ '#ffc300' }/>
-            : <input
-                type={ this.props.inputType }
-                placeholder={ this.props.placeholder }
-                value={ this.state.answer }
-                onChange={ this.handleChange.bind(this) } />
+        let ratingInput = <ReactStars
+            count={ 10 }
+            onChange={ () => {} }
+            half={ 'false' }
+            size={ 24 }
+            color2={ '#ffc300' }/>;
+        let textInput = <input
+            type={ this.props.inputType }
+            placeholder={ this.props.placeholder }
+            value={ this.state.answer }
+            onChange={ this.handleChange.bind(this) } />;
 
-        return inputElement;
+        return this.isNumber() ? ratingInput : textInput;
     }
 
     // Helperstuff
