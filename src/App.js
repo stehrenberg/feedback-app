@@ -4,12 +4,11 @@ import Moment from 'moment';
 import logo from './logo.svg';
 import './App.css';
 import Questionnaire from './compontents/Questionnaire';
-import questions from './questionTexts';
+import questions from './questionTexts.json';
 
 class App extends Component {
 
     render() {
-        const questionnaire = questions;
 
         return (
             <div className="App">
@@ -18,7 +17,7 @@ class App extends Component {
                 </div>
                 <div className="App">
                     <h2>Cooperation Feedback Questionnaire</h2>
-                    <Questionnaire id={ this.generateId() } content={ questionnaire } />
+                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } />
                 </div>
             </div>
         );

@@ -1,0 +1,68 @@
+{
+    "questionTexts" : [
+        {
+            "id" : "understanding",
+            "text" : "How well do we understand what your company actually needs from us?",
+            "inputType" : "number",
+            "preload" : "false"
+        },
+        {
+            "id" : "cooperation",
+            "text" : "How well do we cooperate?",
+            "inputType" : "number",
+            "preload" : "false"
+        },
+        {
+            "id" : "deliveriesAndRoles",
+            "text" : "Core Deliveries and Roles",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "mustBes",
+            "text" : "What are the Must-Be's we have to deliver?",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "deliverMore",
+            "text" : "What should we deliver more of?",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "avoid",
+            "text" : "What should we avoid to do in the future?",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "deliverAdditionally",
+            "text" : "What should we deliver additionally?",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "acquire",
+            "text" : "What competencies and abilities should we acquire?",
+            "inputType" : "input",
+            "preload" : "true"
+        },
+        {
+            "id" : "nps",
+            "text" : "How likely is it that you would recommend our company/product to a friend or colleague?",
+            "inputType" : "number",
+            "preload" : "false"
+        },
+        {
+            "id" : "tasks",
+            "text" : "Tasks for the next iteration:",
+            "inputType" : "input"
+        },
+        {
+            "id" : "nextMeeting",
+            "text" : "Next Meeting:",
+            "inputType" : "date"
+        }
+    ]
+}

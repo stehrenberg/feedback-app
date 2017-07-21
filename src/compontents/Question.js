@@ -12,7 +12,7 @@ class Question extends Component {
 
         this.isNumber.bind(this);
 
-        if (this.props.persist) {
+        if (this.props.preload) {
             this.loadCachedValue();
         }
 
@@ -22,9 +22,7 @@ class Question extends Component {
         let inputValue = event.target.value;
 
         this.setState({isAnswered: true, answer: inputValue});
-        if (this.props.persist) {
-            this.saveAnswer(inputValue);
-        }
+        this.saveAnswer(inputValue);
     }
 
     render() {
