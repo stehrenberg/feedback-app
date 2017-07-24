@@ -39,6 +39,7 @@ class Questionnaire extends Component {
         var partialState = {};
 
         //this.setState({ [name]: value });
+        console.log("done");
         partialState[name] = value;
         this.setState(partialState);
     }
@@ -56,7 +57,8 @@ class Questionnaire extends Component {
                             question => <Question key={ question.id }
                                                   name={ question.id }
                                                   label={ question.text }
-                                                  onChange={ this.handleChange }
+                                                  value={ this.state.question.id.answer }
+                                                  onChange={ () => this.handleChange }
                                 {...question} />)
                     }
                     <button type="submit">Speichern</button>
