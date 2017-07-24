@@ -3,14 +3,14 @@ import Question from './Question';
 
 class Questionnaire extends Component {
 
-    // TODO Destructuring?
     constructor(props) {
         super(props);
+
         this.state = {
-            isAnswered: false,
-            isSaved: false,
             questions: this.props.questions,
         }
+
+        this.preloadCachedInputValues();
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -18,19 +18,8 @@ class Questionnaire extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-
-        let formData = "";
-
-        localStorage.setItem(this.props.id, formData);
-        this.setState({ isAnswered: true, isSaved: true });
+        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
     }
-
-    // handleChange(event) {
-    //     let inputValue = event.target.value;
-    //
-    //     this.setState({isAnswered: true, answer: inputValue});
-    //     this.saveAnswer(inputValue);
-    // }
 
     handleChange(event) {
         const name = event.target.name;
@@ -40,6 +29,7 @@ class Questionnaire extends Component {
         targetQuestion.value = value;
 
         this.setState({ questions: questions });
+        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
     }
 
     render() {
@@ -64,6 +54,10 @@ class Questionnaire extends Component {
             </div>
 
         );
+    }
+
+    preloadCachedInputValues() {
+        this.state.questions.map(question => question.value = localStorage.getItem(question.id));
     }
 }
 

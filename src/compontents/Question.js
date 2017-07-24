@@ -5,24 +5,9 @@ class Question extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            isAnswered: false,
-            answer: '',
-        };
 
-        this.isNumber.bind(this);
-
-        if (this.props.preload) {
-            this.loadCachedValue();
-        }
+        this.isNumber = this.isNumber.bind(this);
     }
-
-    // handleChange(event) {
-    //     let inputValue = event.target.value;
-    //
-    //     this.setState({isAnswered: true, answer: inputValue});
-    //     this.saveAnswer(inputValue);
-    // }
 
     render() {
         return (
@@ -37,7 +22,7 @@ class Question extends Component {
         let ratingInput = <ReactStars
             name={ this.props.name }
             count={ 10 }
-            onChange={ () => {} }
+            onChange={ (event) => {} }
             half={ 'false' }
             size={ 24 }
             color2={ '#ffc300' }/>;
@@ -49,20 +34,6 @@ class Question extends Component {
             onChange={ (event) => this.props.onChange(event) } />;
 
         return this.isNumber() ? ratingInput : textInput;
-    }
-
-    // Helperstuff
-
-    loadCachedValue() {
-        let cachedValue = localStorage.getItem(this.props.id);
-
-        if (!(!cachedValue)) {
-            this.state = {isAnswered: true, answer: cachedValue};
-        }
-    }
-
-    saveAnswer(inputValue) {
-        localStorage.setItem(this.props.id, inputValue);
     }
 
     isNumber() {
