@@ -33,11 +33,13 @@ class Questionnaire extends Component {
     // }
 
     handleChange(event) {
-
         const name = event.target.name;
         const value = event.target.value;
+        const questions = this.state.questions;
+        const targetQuestion = questions.find((question) => question.id === name);
+        targetQuestion.value = value;
 
-        this.setState({ [name]: value });
+        this.setState({ questions: questions });
     }
 
     render() {
@@ -53,7 +55,7 @@ class Questionnaire extends Component {
                             question => <Question key={ question.id }
                                                   name={ question.id }
                                                   label={ question.text }
-                                                  value={ this.state.questions.answer }
+                                                  value={ question.value }
                                                   onChange={ this.handleChange }
                                 {...question} />)
                     }
