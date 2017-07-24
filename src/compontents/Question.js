@@ -44,7 +44,7 @@ class Question extends Component {
             type={ this.props.inputType }
             placeholder={ this.props.placeholder }
             value={ this.state.answer }
-            onChange={ () => this.props.onChange() } />;
+            onChange={ (event) => this.props.onChange(event) } />;
 
         return this.isNumber() ? ratingInput : textInput;
     }

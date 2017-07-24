@@ -12,7 +12,8 @@ class Questionnaire extends Component {
             questions: this.props.questions,
         }
 
-        this.handleSubmit.bind(this)
+        this.handleSubmit.bind(this);
+        this.handleChange.bind(this);
     }
 
     handleSubmit(event) {
@@ -39,7 +40,7 @@ class Questionnaire extends Component {
                 <form action="" method="POST" onSubmit={ this.handleSubmit }>
                     {
                         this.state.questions.map(
-                            question => <Question key={ question.id } label={ question.text } onChange={ this.handleChange.bind(this) } {...question} />)
+                            question => <Question key={ question.id } label={ question.text } onChange={ this.handleChange } {...question} />)
                     }
                     <button type="submit">Speichern</button>
                 </form>
