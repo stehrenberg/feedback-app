@@ -25,9 +25,22 @@ class Questionnaire extends Component {
         this.setState({ isAnswered: true, isSaved: true });
     }
 
+    // handleChange(event) {
+    //     let inputValue = event.target.value;
+    //
+    //     this.setState({isAnswered: true, answer: inputValue});
+    //     this.saveAnswer(inputValue);
+    // }
+
     handleChange(event) {
-        let targetName = event.target.value;
-        console.log(targetName);
+
+        const name = event.target.name;
+        const value = event.target.value;
+        var partialState = {};
+
+        //this.setState({ [name]: value });
+        partialState[name] = value;
+        this.setState(partialState);
     }
 
     render() {
@@ -40,7 +53,11 @@ class Questionnaire extends Component {
                 <form action="" method="POST" onSubmit={ this.handleSubmit }>
                     {
                         this.state.questions.map(
-                            question => <Question key={ question.id } label={ question.text } onChange={ this.handleChange } {...question} />)
+                            question => <Question key={ question.id }
+                                                  name={ question.id }
+                                                  label={ question.text }
+                                                  onChange={ this.handleChange }
+                                {...question} />)
                     }
                     <button type="submit">Speichern</button>
                 </form>

@@ -35,12 +35,14 @@ class Question extends Component {
 
     getAppropriateInputField() {
         let ratingInput = <ReactStars
+            name={ this.props.name }
             count={ 10 }
             onChange={ () => {} }
             half={ 'false' }
             size={ 24 }
             color2={ '#ffc300' }/>;
         let textInput = <input
+            name={ this.props.name }
             type={ this.props.inputType }
             placeholder={ this.props.placeholder }
             value={ this.state.answer }
