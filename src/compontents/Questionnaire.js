@@ -11,6 +11,8 @@ class Questionnaire extends Component {
             isSaved: false,
             questions: this.props.questions,
         }
+
+        this.handleSubmit.bind(this)
     }
 
     handleSubmit(event) {
@@ -22,6 +24,11 @@ class Questionnaire extends Component {
         this.setState({ isAnswered: true, isSaved: true });
     }
 
+    handleChange(event) {
+        let targetName = event.target.value;
+        console.log(targetName);
+    }
+
     render() {
         return (
             <div className="Questionnaire">
@@ -29,10 +36,10 @@ class Questionnaire extends Component {
                 <p>
                     <strong>We would like to improve the quality of the services we supply continuously. We need our customers' help to achieve this, to help us align to his targets give us ideas of what competences to build and where to improve.</strong>
                 </p>
-                <form action="" method="POST" onSubmit={ this.handleSubmit.bind(this) }>
+                <form action="" method="POST" onSubmit={ this.handleSubmit }>
                     {
                         this.state.questions.map(
-                            question => <Question key={ question.id } label={ question.text } {...question} />)
+                            question => <Question key={ question.id } label={ question.text } onChange={ this.handleChange.bind(this) } {...question} />)
                     }
                     <button type="submit">Speichern</button>
                 </form>

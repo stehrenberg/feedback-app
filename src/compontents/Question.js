@@ -17,12 +17,12 @@ class Question extends Component {
         }
     }
 
-    handleChange(event) {
-        let inputValue = event.target.value;
-
-        this.setState({isAnswered: true, answer: inputValue});
-        this.saveAnswer(inputValue);
-    }
+    // handleChange(event) {
+    //     let inputValue = event.target.value;
+    //
+    //     this.setState({isAnswered: true, answer: inputValue});
+    //     this.saveAnswer(inputValue);
+    // }
 
     render() {
         return (
@@ -44,7 +44,7 @@ class Question extends Component {
             type={ this.props.inputType }
             placeholder={ this.props.placeholder }
             value={ this.state.answer }
-            onChange={ this.handleChange.bind(this) } />;
+            onChange={ () => this.props.onChange() } />;
 
         return this.isNumber() ? ratingInput : textInput;
     }
