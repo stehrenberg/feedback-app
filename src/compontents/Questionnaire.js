@@ -12,8 +12,8 @@ class Questionnaire extends Component {
             questions: this.props.questions,
         }
 
-        this.handleSubmit.bind(this);
-        this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleSubmit(event) {
@@ -36,12 +36,8 @@ class Questionnaire extends Component {
 
         const name = event.target.name;
         const value = event.target.value;
-        var partialState = {};
 
-        //this.setState({ [name]: value });
-        console.log("done");
-        partialState[name] = value;
-        this.setState(partialState);
+        this.setState({ [name]: value });
     }
 
     render() {
@@ -57,8 +53,8 @@ class Questionnaire extends Component {
                             question => <Question key={ question.id }
                                                   name={ question.id }
                                                   label={ question.text }
-                                                  value={ this.state.question.id.answer }
-                                                  onChange={ () => this.handleChange }
+                                                  value={ this.state.questions.answer }
+                                                  onChange={ this.handleChange }
                                 {...question} />)
                     }
                     <button type="submit">Speichern</button>
