@@ -57,7 +57,13 @@ class Questionnaire extends Component {
     }
 
     preloadCachedInputValues() {
-        this.state.questions.map(question => question.value = localStorage.getItem(question.id));
+        const storedQuestions = JSON.parse(localStorage.getItem(this.props.id));
+        if (storedQuestions !== null) {
+            this.state.questions.forEach(question => {
+                const storedQuestion = storedQuestions.find(storedQuestion => storedQuestion.id === question.id);
+                question.value = storedQuestion.value;
+            });
+        }
     }
 }
 
