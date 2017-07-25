@@ -24,7 +24,6 @@ class Questionnaire extends Component {
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(value);
         const questions = this.state.questions;
         const targetQuestion = questions.find((question) => question.id === name);
         targetQuestion.value = value;
