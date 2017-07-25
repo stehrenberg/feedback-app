@@ -19,10 +19,12 @@ class Question extends Component {
     }
 
     getAppropriateInputField() {
+
         let ratingInput = <ReactStars
             name={ this.props.name }
             count={ 10 }
-            onChange={ (event) => {} }
+            value={ this.props.value }
+            onChange={ (rating) => this.props.onChange(this.props.name, rating) }
             half={ 'false' }
             size={ 24 }
             color2={ '#ffc300' }/>;
@@ -31,7 +33,7 @@ class Question extends Component {
             type={ this.props.inputType }
             placeholder={ this.props.placeholder }
             value={ this.props.value }
-            onChange={ (event) => this.props.onChange(event) } />;
+            onChange={ (event) => this.props.onChange(this.props.name, event.target.value) } />;
 
         return this.isNumber() ? ratingInput : textInput;
     }
@@ -39,7 +41,6 @@ class Question extends Component {
     isNumber() {
         return this.props.inputType === 'number';
     }
-
 }
 
 export default Question

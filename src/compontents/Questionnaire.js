@@ -21,9 +21,8 @@ class Questionnaire extends Component {
         localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
     }
 
-    handleChange(event) {
-        const name = event.target.name;
-        const value = event.target.value;
+    handleChange(name, value) {
+
         const questions = this.state.questions;
         const targetQuestion = questions.find((question) => question.id === name);
         targetQuestion.value = value;
