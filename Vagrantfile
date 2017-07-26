@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:
       vb.memory = "1024"
+      vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant","1"]
   end
   #
   # View the documentation for the provider you are using for more
@@ -64,8 +65,27 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", inline: <<-SHELL
-      apt-get update
-      apt-get install -y apache2 npm nodejs-legacy
-    SHELL
+
+  $rootScript = <<-SCRIPT
+    apt-get update
+    apt-get install -y git-core curl apache2
+  SCRIPT
+
+  ## install nvm as the default 'vagrant' user
+  $userScript = <<-SCRIPT
+    cd /home/vagrant
+
+    # Installing nvm
+    wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+
+    # This enables NVM without a logout/login
+    export NVM_DIR="/home/vagrant/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+    nvm install stable
+  SCRIPT
+
+  config.vm.provision "shell", inline: $rootScript
+  config.vm.provision "shell", inline: $userScript, privileged: false
+
 end
