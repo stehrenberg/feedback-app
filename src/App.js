@@ -1,20 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Moment from 'moment';
 
-import logo from './mayflower_logo.png';
-import './App.css';
 import Questionnaire from './compontents/Questionnaire';
+import LogoHeader from './compontents/LogoHeader';
 import questions from './questionTexts.json';
+
+import './App.css';
 
 class App extends Component {
 
     render() {
         return (
             <div className="App">
-                <div className="App-header">
-                    <img src={ logo } className="App-logo" alt="logo"/>
-                    <h2>Cooperation Feedback Questionnaire</h2>
-                </div>
+                <LogoHeader title="Cooperation Feedback Questionnaire" />
                 <div className="App-content">
                     <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } />
                 </div>
