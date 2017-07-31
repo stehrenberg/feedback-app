@@ -5,13 +5,13 @@ import Questionnaire from '../../components/Questionnaire';
 import LogoHeader from '../../components/LogoHeader';
 import questions from '../../config/questionTexts.json';
 
-import './App.css';
+import './FeedbackForm.css';
 
-class App extends Component {
+class FeedbackForm extends Component {
 
     render() {
         return (
-            <div className="App">
+            <div className="FeedbackForm">
                 <LogoHeader title="Cooperation Feedback Questionnaire" />
                 <div className="App-content">
                     <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } />
@@ -25,4 +25,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default FeedbackForm;
