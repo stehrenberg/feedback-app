@@ -16,7 +16,7 @@ class MenuPage extends Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/">
+                        <Link to="/form-history">
                             Alte Frageb&ouml;gen ansehen
                         </Link>
                     </li>
