@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, Redirect, Switch } from 'react-router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 
 import FeedbackForm from './pages/feedback-form/FeedbackForm';
@@ -12,12 +12,12 @@ const history = createHashHistory({
     queryKey: false,
 });
 
-const router = <Router history={ history }>
+const router = <BrowserRouter history={ history }>
     <Switch>
-        <Route path='/menu' component={ MenuPage } />
-        <Route path='/feedback' component={ FeedbackForm } />
+        <Route exact path='/' component={ MenuPage } />
+        <Route exact path='/feedback' component={ FeedbackForm } />
     </Switch>
-</Router>;
+</BrowserRouter>;
 
 ReactDOM.render(router, document.getElementById('root'));
 registerServiceWorker();

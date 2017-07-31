@@ -6,12 +6,10 @@ import LogoHeader from '../../components/LogoHeader';
 class MenuPage extends Component {
 
     render() {
-        console.log("japp, hier!");
-
         return (
             <div>
-                <LogoHeader title="Menü" />
-                <ul className="menue">
+                <LogoHeader title="&Uuml;bersicht" />
+                <ul className="menu">
                     <li>
                         <Link to="/feedback">
                             Neuen Fragebogen ausf&uuml;llen
