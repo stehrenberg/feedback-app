@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import logo from '../mayflower_logo.png';
+import logo from '../assets/mayflower_logo.png';
 
 class LogoHeader extends Component {
 
