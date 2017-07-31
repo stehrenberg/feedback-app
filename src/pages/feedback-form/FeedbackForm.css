@@ -29,6 +29,12 @@
   width: 70%;
 }
 
+.App-footer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 30px 0 50px 0;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -47,25 +53,26 @@
   border-style: solid;
 }
 
-
 .Question {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 10px;
+  padding: 10px 0 10px 0;
 }
 
 .Question input {
-    width: 400px;
+    width: 100%;
 }
 
-.Question button {
-  width: 80px;
+.save-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0 20px 0;
 }
 
 span[data-forhalf] {
-  padding: 3px;
+  padding: 3px 0 3px 0;
 }
 

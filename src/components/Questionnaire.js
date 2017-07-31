@@ -48,7 +48,9 @@ class Questionnaire extends Component {
                                                   onChange={ this.handleChange }
                                 {...question} />)
                     }
-                    <button type="submit">Speichern</button>
+                    <div className="save-btn">
+                        <button type="submit">Speichern</button>
+                    </div>
                 </form>
             </div>
 
