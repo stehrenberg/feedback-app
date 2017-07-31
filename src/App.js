@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
 
-import Questionnaire from './compontents/Questionnaire';
-import LogoHeader from './compontents/LogoHeader';
+import Questionnaire from './components/Questionnaire';
+import LogoHeader from './components/LogoHeader';
 import questions from './questionTexts.json';
 
 import './App.css';
