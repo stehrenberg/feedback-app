@@ -18,7 +18,16 @@ class Questionnaire extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
+        let questionnaires = JSON.parse(localStorage.getItem("questionnaires")) || [];
+        let newQuestionnaire = this.props.id;
+
+        if(!questionnaires.includes(newQuestionnaire)) {
+            questionnaires.push(newQuestionnaire);
+        }
+
         localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
+        localStorage.setItem("questionnaires", JSON.stringify(questionnaires));
     }
 
     handleChange(name, value) {
