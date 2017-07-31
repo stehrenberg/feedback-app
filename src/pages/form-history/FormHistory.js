@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+import LogoHeader from '../../components/LogoHeader';
 
 class FormHistory extends Component {
 
@@ -14,6 +17,7 @@ class FormHistory extends Component {
     render() {
         return (
             <div>
+                <LogoHeader title="Past Questionnaires" />
                 <ul className="forms">{
                     this.state.forms.map(
                         form => <li key={ form.id }>
@@ -24,6 +28,11 @@ class FormHistory extends Component {
                         </li>
                     )}
                 </ul>
+                <div className="App-footer">
+                    <Link to="/">
+                        <button className="nav-btn">back to menu</button>
+                    </Link>
+                </div>
             </div>
         );
     }

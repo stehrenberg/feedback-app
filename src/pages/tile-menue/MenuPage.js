@@ -8,16 +8,16 @@ class MenuPage extends Component {
     render() {
         return (
             <div>
-                <LogoHeader title="&Uuml;bersicht" />
+                <LogoHeader title="Overview" />
                 <ul className="menu">
                     <li>
                         <Link to="/feedback">
-                            Neuen Fragebogen ausf&uuml;llen
+                            create new feedback questionnaire
                         </Link>
                     </li>
                     <li>
                         <Link to="/form-history">
-                            Alte Frageb&ouml;gen ansehen
+                            view old feedback questionnaires
                         </Link>
                     </li>
                 </ul>
