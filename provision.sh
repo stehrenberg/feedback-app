@@ -4,6 +4,7 @@ DBHOST=localhost
 DBNAME=feedback
 DBUSER=dbuser
 DBPASSWD=best4all
+DBSCRIPT=/vagrant/db/db_setup.sql
 
 echo "\nStart provisioning root stuff...\n"
 
@@ -19,3 +20,5 @@ mysql -uroot -p$DBPASSWD -e "CREATE DATABASE IF NOT EXISTS $DBNAME"
 mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'localhost' identified by '$DBPASSWD'"
 
 apt-get install mysql-server -y
+
+mysql -uroot -p$DBPASSWD $DBNAME < $DBSCRIPT
