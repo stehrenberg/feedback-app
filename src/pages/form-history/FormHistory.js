@@ -39,7 +39,7 @@ class FormHistory extends Component {
 
     loadFormData() {
         let forms = [];
-        let formIds = JSON.parse(localStorage.getItem("questionnaires"));
+        let formIds = JSON.parse(localStorage.getItem("questionnaires")) || [];
 
         formIds.sort();
         formIds.forEach(formId => {
