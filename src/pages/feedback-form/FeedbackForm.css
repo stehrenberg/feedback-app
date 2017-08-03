@@ -48,7 +48,7 @@
   padding-right: 50px;
   padding-top: 20px;
   background-color: #efefef;
-  border: 1px;
+  border-width: 1px;
   border-color: rgba(13, 51, 73, 0.23);
   border-style: solid;
 }
@@ -64,6 +64,14 @@
 
 .Question input {
     width: 100%;
+}
+
+.Question input[disabled] {
+  border: none;
+  background-color: #efefef;
+  color: #88878B;
+  padding: 0px 8px 10px;
+  font-size: 16px;
 }
 
 .save-btn {
