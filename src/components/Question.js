@@ -3,10 +3,6 @@ import ReactStars from 'react-stars';
 
 class Question extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="Question">
@@ -17,11 +13,13 @@ class Question extends Component {
     }
 
     getAppropriateInputField(type) {
-
         let inputField;
+        let optionalProps = {};
+        const isReadOnly = this.props.isReadOnly;
 
         switch(type) {
             case 'number':
+                optionalProps = isReadOnly? { edit: "false" } : {};
                 inputField = <ReactStars
                     name={ this.props.name }
                     count={ 10 }
@@ -29,7 +27,8 @@ class Question extends Component {
                     onChange={ (rating) => this.props.onChange(this.props.name, rating) }
                     half={ 'false' }
                     size={ 24 }
-                    color2={ '#ffc300' }/>;
+                    color2={ '#ffc300' }
+                    {...optionalProps} />;
                     break;
             default:
                 inputField = <input
@@ -37,7 +36,8 @@ class Question extends Component {
                     type={ this.props.inputType }
                     placeholder={ this.props.placeholder }
                     value={ this.props.value }
-                    onChange={ (event) => this.props.onChange(this.props.name, event.target.value) } />;
+                    onChange={ (event) => this.props.onChange(this.props.name, event.target.value) }
+                    {...optionalProps} />;
                     break;
         }
 
