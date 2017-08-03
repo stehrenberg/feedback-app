@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import Moment from 'moment';
 
 import Questionnaire from '../../components/Questionnaire';
@@ -18,9 +17,7 @@ class FeedbackForm extends Component {
                 <div className="App-content">
                     <Questionnaire id={ formId } questions={ questions.questionTexts } isReadOnly={ true } />
                     <div className="App-footer">
-                        <Link to="/">
-                            <button className="nav-btn">back to menu</button>
-                        </Link>
+                        <button className="nav-btn" onClick={ this.props.history.goBack }>back to menu</button>
                     </div>
                 </div>
             </div>

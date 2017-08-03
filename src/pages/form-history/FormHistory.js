@@ -31,9 +31,7 @@ class FormHistory extends Component {
                     )}
                 </ul>
                 <div className="App-footer">
-                    <Link to="/">
-                        <button className="nav-btn">back to menu</button>
-                    </Link>
+                    <button className="nav-btn" onClick={ this.props.history.goBack }>back to menu</button>
                 </div>
             </div>
         );
