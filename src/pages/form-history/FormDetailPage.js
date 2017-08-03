@@ -16,7 +16,7 @@ class FeedbackForm extends Component {
             <div className="FeedbackForm">
                 <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` } />
                 <div className="App-content">
-                    <Questionnaire id={ formId } questions={ [] } isReadOnly={ true } />
+                    <Questionnaire id={ formId } questions={ questions.questionTexts } isReadOnly={ true } />
                     <div className="App-footer">
                         <Link to="/">
                             <button className="nav-btn">back to menu</button>
