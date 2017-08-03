@@ -47,7 +47,6 @@ class Questionnaire extends Component {
                     <strong>We would like to improve the quality of the services we supply continuously. We need our customers' help to achieve this, to help us align to his targets give us ideas of what competences to build and where to improve.</strong>
                 </p>
                 <form action="" method="POST" onSubmit={ this.handleSubmit }>
-                    { console.log(this.props.isReadOnly) }
                     {
                         this.state.questions.map(
                             question => <Question key={ question.id }

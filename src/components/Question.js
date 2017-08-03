@@ -16,10 +16,11 @@ class Question extends Component {
         let inputField;
         let optionalProps = {};
         const isReadOnly = this.props.isReadOnly;
+        console.log(isReadOnly);
 
         switch(type) {
             case 'number':
-                optionalProps = isReadOnly? { edit: "false" } : {};
+                optionalProps = isReadOnly? { edit: false } : {};
                 inputField = <ReactStars
                     name={ this.props.name }
                     count={ 10 }
@@ -31,6 +32,7 @@ class Question extends Component {
                     {...optionalProps} />;
                     break;
             default:
+                optionalProps = isReadOnly? { disabled: true } : {};
                 inputField = <input
                     name={ this.props.name }
                     type={ this.props.inputType }

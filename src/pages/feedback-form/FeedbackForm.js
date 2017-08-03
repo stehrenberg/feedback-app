@@ -15,7 +15,7 @@ class FeedbackForm extends Component {
             <div className="FeedbackForm">
                 <LogoHeader title="Cooperation Feedback Questionnaire" />
                 <div className="App-content">
-                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } isReadOnly={ true } />
+                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } isReadOnly={ false } />
                     <div className="App-footer">
                         <Link to="/">
                             <button className="nav-btn">back to menu</button>
