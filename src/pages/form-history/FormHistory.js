@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import LogoHeader from '../../components/LogoHeader';
 
@@ -31,7 +32,10 @@ class FormHistory extends Component {
                     )}
                 </ul>
                 <div className="App-footer">
-                    <button className="nav-btn" onClick={ this.props.history.goBack }>back to menu</button>
+                    <RaisedButton className="nav-btn"
+                                  primary={ true }
+                                  label="Back to Menu"
+                                  onClick={ this.props.history.goBack } />
                 </div>
             </div>
         );
