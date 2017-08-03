@@ -66,11 +66,6 @@ Vagrant.configure("2") do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
 
-  $rootScript = <<-SCRIPT
-    apt-get update
-    apt-get install -y git-core curl apache2
-  SCRIPT
-
   ## install nvm as the default 'vagrant' user
   $userScript = <<-SCRIPT
     cd /home/vagrant
@@ -83,9 +78,16 @@ Vagrant.configure("2") do |config|
     [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
     nvm install stable
+
+
+
+
+
+
+
   SCRIPT
 
-  config.vm.provision "shell", inline: $rootScript
+  config.vm.provision "shell", path: "provision.sh"
   config.vm.provision "shell", inline: $userScript, privileged: false
 
 end
