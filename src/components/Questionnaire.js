@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Question from './Question';
-import RaisedButton from 'material-ui/RaisedButton';
+import SaveBtn from '../components/SaveBtn'
 
 class Questionnaire extends Component {
 
@@ -62,9 +62,7 @@ class Questionnaire extends Component {
                                                   isReadOnly={ this.props.isReadOnly }
                                 {...question} />)
                     }
-                    { this.props.isReadOnly ? null : <div className="save-btn">
-                        <RaisedButton type="submit" label="Save" primary={true} />
-                    </div> }
+                    { this.props.isReadOnly ? null : <div className="save-btn"><SaveBtn /></div> }
                 </form>
             </div>
         );

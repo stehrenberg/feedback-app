@@ -11,7 +11,7 @@ import FormDetailPage from "./pages/form-history/FormDetailPage";
 import MenuPage from './pages/tile-menue/MenuPage';
 import registerServiceWorker from './registerServiceWorker';
 
-import './index.css';
+import './theme.css';
 
 const history = createHashHistory({
     queryKey: false,
