@@ -21,10 +21,12 @@ class FormHistory extends Component {
                 <ul className="forms">{
                     this.state.forms.map(
                         form => <li key={ form.id }>
-                            <span>ID: { form.id } </span>
-                            <span>NPS: { this.findQuestion(form, 'nps') } </span>
-                            <span>Understanding: { this.findQuestion(form, 'understanding') } </span>
-                            <span>Cooperation: { this.findQuestion(form, 'cooperation') } </span>
+                            <Link to={ `/feedback/${ form.id}` }>
+                                <span>ID: { form.id } </span>
+                                <span>NPS: { this.findQuestion(form, 'nps') } </span>
+                                <span>Understanding: { this.findQuestion(form, 'understanding') } </span>
+                                <span>Cooperation: { this.findQuestion(form, 'cooperation') } </span>
+                            </Link>
                         </li>
                     )}
                 </ul>

@@ -5,6 +5,7 @@ import createHashHistory from 'history/createHashHistory';
 
 import FeedbackForm from './pages/feedback-form/FeedbackForm';
 import FormHistory from "./pages/form-history/FormHistory";
+import FormDetailPage from "./pages/form-history/FormDetailPage";
 import MenuPage from './pages/tile-menue/MenuPage';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -19,6 +20,7 @@ const router = <BrowserRouter history={ history }>
         <Route exact path='/' component={ MenuPage } />
         <Route exact path='/feedback' component={ FeedbackForm } />
         <Route exact path='/form-history' component={ FormHistory } />
+        <Route path="/feedback/:formId" component={ FormDetailPage } />
     </Switch>
 </BrowserRouter>;
 
