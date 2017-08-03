@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactStars from 'react-stars';
+import DatePicker from 'material-ui/DatePicker';
 
 class Question extends Component {
 
@@ -30,6 +31,11 @@ class Question extends Component {
                     color2={ '#ffc300' }
                     {...optionalProps} />;
                     break;
+            case 'date':
+                inputField = <DatePicker
+                    value={ this.props.value }
+                    hintText="Pick a date" />
+                break;
             default:
                 optionalProps = isReadOnly? { disabled: true } : {};
                 inputField = <input
