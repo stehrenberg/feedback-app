@@ -16,7 +16,6 @@ class Question extends Component {
         let inputField;
         let optionalProps = {};
         const isReadOnly = this.props.isReadOnly;
-        console.log(isReadOnly);
 
         switch(type) {
             case 'number':

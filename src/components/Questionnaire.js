@@ -18,15 +18,19 @@ class Questionnaire extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        let questionnaires = JSON.parse(localStorage.getItem("questionnaires")) || [];
-        let newQuestionnaire = this.props.id;
 
-        if(!questionnaires.includes(newQuestionnaire)) {
-            questionnaires.push(newQuestionnaire);
+        if(!this.props.isReadOnly) {
+
+            let questionnaires = JSON.parse(localStorage.getItem("questionnaires")) || [];
+            let newQuestionnaire = this.props.id;
+
+            if (!questionnaires.includes(newQuestionnaire)) {
+                questionnaires.push(newQuestionnaire);
+            }
+
+            localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
+            localStorage.setItem("questionnaires", JSON.stringify(questionnaires));
         }
-
-        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
-        localStorage.setItem("questionnaires", JSON.stringify(questionnaires));
     }
 
     handleChange(name, value) {
@@ -57,9 +61,9 @@ class Questionnaire extends Component {
                                                   isReadOnly={ this.props.isReadOnly }
                                 {...question} />)
                     }
-                    <div className="save-btn">
+                    { this.props.isReadOnly ? null : <div className="save-btn">
                         <button type="submit">Speichern</button>
-                    </div>
+                    </div> }
                 </form>
             </div>
         );
