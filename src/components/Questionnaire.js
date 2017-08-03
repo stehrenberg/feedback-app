@@ -61,7 +61,6 @@ class Questionnaire extends Component {
                     </div>
                 </form>
             </div>
-
         );
     }
 

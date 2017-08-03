@@ -5,41 +5,43 @@ class Question extends Component {
 
     constructor(props) {
         super(props);
-
-        this.isNumber = this.isNumber.bind(this);
     }
 
     render() {
         return (
             <div className="Question">
                 <label id={ this.props.id }>{ this.props.label }</label>
-                { this.getAppropriateInputField() }
+                { this.getAppropriateInputField(this.props.inputType) }
             </div>
         );
     }
 
-    getAppropriateInputField() {
+    getAppropriateInputField(type) {
 
-        let ratingInput = <ReactStars
-            name={ this.props.name }
-            count={ 10 }
-            value={ this.props.value }
-            onChange={ (rating) => this.props.onChange(this.props.name, rating) }
-            half={ 'false' }
-            size={ 24 }
-            color2={ '#ffc300' }/>;
-        let textInput = <input
-            name={ this.props.name }
-            type={ this.props.inputType }
-            placeholder={ this.props.placeholder }
-            value={ this.props.value }
-            onChange={ (event) => this.props.onChange(this.props.name, event.target.value) } />;
+        let inputField;
 
-        return this.isNumber() ? ratingInput : textInput;
-    }
+        switch(type) {
+            case 'number':
+                inputField = <ReactStars
+                    name={ this.props.name }
+                    count={ 10 }
+                    value={ this.props.value }
+                    onChange={ (rating) => this.props.onChange(this.props.name, rating) }
+                    half={ 'false' }
+                    size={ 24 }
+                    color2={ '#ffc300' }/>;
+                    break;
+            default:
+                inputField = <input
+                    name={ this.props.name }
+                    type={ this.props.inputType }
+                    placeholder={ this.props.placeholder }
+                    value={ this.props.value }
+                    onChange={ (event) => this.props.onChange(this.props.name, event.target.value) } />;
+                    break;
+        }
 
-    isNumber() {
-        return this.props.inputType === 'number';
+        return inputField;
     }
 }
 
