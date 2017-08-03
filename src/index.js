@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import FeedbackForm from './pages/feedback-form/FeedbackForm';
 import FormHistory from "./pages/form-history/FormHistory";
@@ -15,14 +17,17 @@ const history = createHashHistory({
     queryKey: false,
 });
 
-const router = <BrowserRouter history={ history }>
-    <Switch>
-        <Route exact path='/' component={ MenuPage } />
-        <Route exact path='/feedback' component={ FeedbackForm } />
-        <Route exact path='/form-history' component={ FormHistory } />
-        <Route path="/feedback/:formId" component={ FormDetailPage } />
-    </Switch>
-</BrowserRouter>;
+const app = <MuiThemeProvider>
+        <BrowserRouter history={ history }>
+            <Switch>
+                <Route exact path='/' component={ MenuPage } />
+                <Route exact path='/feedback' component={ FeedbackForm } />
+                <Route exact path='/form-history' component={ FormHistory } />
+                <Route path="/feedback/:formId" component={ FormDetailPage } />
+            </Switch>
+        </BrowserRouter>
+    </MuiThemeProvider>;
 
-ReactDOM.render(router, document.getElementById('root'));
+injectTapEventPlugin();
+ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();

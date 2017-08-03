@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import Questionnaire from '../../components/Questionnaire';
 import LogoHeader from '../../components/LogoHeader';
@@ -17,7 +18,7 @@ class FeedbackForm extends Component {
                 <div className="App-content">
                     <Questionnaire id={ formId } questions={ questions.questionTexts } isReadOnly={ true } />
                     <div className="App-footer">
-                        <button className="nav-btn" onClick={ this.props.history.goBack }>back to menu</button>
+                        <RaisedButton className="nav-btn" label="Back" onClick={ this.props.history.goBack } />
                     </div>
                 </div>
             </div>
