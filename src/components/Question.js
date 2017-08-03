@@ -32,9 +32,10 @@ class Question extends Component {
                     {...optionalProps} />;
                     break;
             case 'date':
+                optionalProps = isReadOnly? { disabled: true, hintText: this.props.value } : { hintText: "Pick a date" };
                 inputField = <DatePicker
                     value={ this.props.value }
-                    hintText="Pick a date" />
+                    {...optionalProps}/>
                 break;
             default:
                 optionalProps = isReadOnly? { disabled: true } : {};
