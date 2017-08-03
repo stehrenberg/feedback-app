@@ -82,5 +82,6 @@
 
 span[data-forhalf] {
   padding: 3px 0 3px 0;
+  cursor: default !important;
 }
 
