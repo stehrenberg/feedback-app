@@ -1,20 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactStars from 'react-stars';
 import DatePicker from 'material-ui/DatePicker';
-import Moment from 'moment';
 
-class Question extends Component {
+class AnswerInput extends Component {
 
     render() {
-        return (
-            <div className="Question">
-                <label id={ this.props.id }>{ this.props.label }</label>
-                { this.getAppropriateInputField(this.props.inputType) }
-            </div>
-        );
-    }
+        let { isReadOnly, name, value, onChange} = this.props;
+        console.log(isReadOnly);
 
-    getAppropriateInputField(type) {
         let inputField;
         let optionalProps = {};
         const isReadOnly = this.props.isReadOnly;
@@ -31,11 +24,11 @@ class Question extends Component {
                     size={ 24 }
                     color2={ '#ffc300' }
                     {...optionalProps} />;
-                    break;
+                break;
             case 'date':
                 optionalProps = isReadOnly? { disabled: true, hintText: this.props.value } : { hintText: "Pick a date" };
                 inputField = <DatePicker
-                    value={ Moment(this.props.value, "YYYYMMDD") }
+                    value={ this.props.value }
                     {...optionalProps}/>
                 break;
             default:
@@ -47,11 +40,10 @@ class Question extends Component {
                     value={ this.props.value }
                     onChange={ (event) => this.props.onChange(this.props.name, event.target.value) }
                     {...optionalProps} />;
-                    break;
+                break;
         }
 
         return inputField;
     }
-}
 
-export default Question
+}
