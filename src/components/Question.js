@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactStars from 'react-stars';
 import DatePicker from 'material-ui/DatePicker';
-import Moment from 'moment';
 
 class Question extends Component {
 
@@ -32,12 +31,17 @@ class Question extends Component {
                     color2={ '#ffc300' }
                     {...optionalProps} />;
                     break;
+
             case 'date':
                 optionalProps = isReadOnly? { disabled: true, hintText: this.props.value } : { hintText: "Pick a date" };
+                const handleChange = (event, date) => this.props.onChange(this.props.name, date);
                 inputField = <DatePicker
-                    value={ Moment(this.props.value, "YYYYMMDD") }
+                    id={ this.props.name }
+                    value={ !(!this.props.value)? new Date(this.props.value) : null }
+                    onChange={ handleChange }
                     {...optionalProps}/>
                 break;
+
             default:
                 optionalProps = isReadOnly? { disabled: true } : {};
                 inputField = <input
