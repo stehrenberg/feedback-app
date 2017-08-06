@@ -15,7 +15,8 @@
   text-align: center;
   height: 100px;
   width: 100%;
-  padding: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   color: white;
 }
 
@@ -36,21 +37,14 @@
   justify-content: flex-start;
   padding-top: 20px;
   padding-bottom: 50px;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  width: 100%;
 }
 
 .Questionnaire {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-left: 60px;
-  padding-right: 100px;
-  padding-top: 30px;
-  padding-bottom: 10px;
+  padding: 30px 100px 10px 60px;
   background-color: #ffffff;
   border-width: 1px;
   border-color: rgba(227, 224, 230, 0.23);
