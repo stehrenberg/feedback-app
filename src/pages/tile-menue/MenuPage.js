@@ -20,8 +20,8 @@ class MenuPage extends Component {
                 paddingTop: 60,
             },
             gridList: {
-                width: 540,
-                height: 380,
+                width: 580,
+                height: 370,
                 overflowY: 'auto',
             },
             title: {
