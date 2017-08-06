@@ -1,6 +1,7 @@
 .GridTile {
     border: 1px solid #88878B;
     box-shadow: 2px 2px 2px #888888;
+    background-color: #ffffff;
 }
 
 .GridTile img {
@@ -20,6 +21,10 @@
 .GridList > div {
     padding: 10px !important;
 
+}
+
+body {
+    background-color: #eeeeee;
 }
 
 
