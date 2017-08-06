@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  background-color: #eeeeee
 }
 
 .App-logo {
@@ -27,7 +27,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 70%;
+  width: 720px;
+  padding: 30px;
 }
 
 .App-footer {
@@ -46,13 +47,15 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 20px;
-  background-color: #efefef;
+  padding-left: 60px;
+  padding-right: 100px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  background-color: #ffffff;
   border-width: 1px;
-  border-color: rgba(13, 51, 73, 0.23);
+  border-color: rgba(227, 224, 230, 0.23);
   border-style: solid;
+  box-shadow: -0.5px -0.5px 8px 3px #c9c9c9;
 }
 
 .Question {
@@ -61,18 +64,26 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 10px 0 10px 0;
+  padding: 10px 0 15px 0;
 }
 
 .Question input {
     width: 100%;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #88878B;
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #c9c9c9;
+    outline: none;
 }
 
 .Question input[disabled] {
   border: none;
   background-color: #efefef;
   color: #88878B;
-  padding: 0px 8px 10px;
+  padding: 0 8px 10px;
   font-size: 16px;
 }
 
