@@ -13,15 +13,17 @@ class MenuPage extends Component {
         const styles = {
             root: {
                 display: 'flex',
-                flexWrap: 'wrap',
-                justifyContent: 'space-around',
+                flexWrap: 'space-between',
+                justifyContent: 'center',
             },
             gridList: {
-                width: 500,
-                height: 450,
+                width: 384,
+                height: 200,
+                padding: 10,
                 overflowY: 'auto',
             },
         };
+
         const tilesData = [
             {
                 img: AddQuestionnaireIcon,
@@ -29,17 +31,49 @@ class MenuPage extends Component {
                 link: "/feedback"
             },
             {
-            img: HistoryIcon,
-            title: "Past Feedback Data",
-            link: "/form-history"
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
+            },
+            {
+                img: HistoryIcon,
+                title: "Past Feedback Data",
+                link: "/form-history"
             },
         ];
 
         return (
+            <div>
+                <LogoHeader title="Overview" />
                 <div className="gridList" style={ styles.root }>
-                    <LogoHeader title="Overview" />
                     <GridList
-                        cellHeight={ 120 }
+                        cols={ 4 }
+                        cellHeight={ 96 }
                         style={ styles.gridList }>
                         { tilesData.map((tile) => (
                             <Link to={ tile.link }>
@@ -52,6 +86,7 @@ class MenuPage extends Component {
                         ))}
                     </GridList>
                 </div>
+            </div>
         );
     }
 }
