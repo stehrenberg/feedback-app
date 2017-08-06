@@ -1,0 +1,25 @@
+.GridTile {
+    border: 1px solid #88878B;
+    box-shadow: 2px 2px 2px #888888;
+}
+
+.GridTile img {
+    height: 96px !important;
+    width: 96px !important;
+    transform: translateX(-50%) !important;
+    position: absolute !important;
+    top: calc(50% - 60px) !important;
+    left: 50% !important;
+
+}
+
+.GridTile > div > div {
+    margin-left: 0 !important;
+}
+
+.GridList > div {
+    padding: 10px !important;
+
+}
+
+
