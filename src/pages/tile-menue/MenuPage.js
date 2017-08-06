@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { GridList, GridTile } from 'material-ui/GridList';
+
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png'
 import HistoryIcon from '../../assets/history_icon.png'
-
 import LogoHeader from '../../components/LogoHeader';
+
+import './menuPage.css';
 
 class MenuPage extends Component {
 
@@ -15,13 +17,20 @@ class MenuPage extends Component {
                 display: 'flex',
                 flexWrap: 'space-between',
                 justifyContent: 'center',
+                paddingTop: 60,
             },
             gridList: {
-                width: 384,
-                height: 200,
-                padding: 10,
+                width: 540,
+                height: 380,
                 overflowY: 'auto',
             },
+            title: {
+                fontSize: 16,
+                fontWeight: 'bold',
+                color: '#00BCD4',
+                textAlign: 'center',
+                marginLeft: 0,
+            }
         };
 
         const tilesData = [
@@ -32,37 +41,27 @@ class MenuPage extends Component {
             },
             {
                 img: HistoryIcon,
-                title: "Past Feedback Data",
+                title: "Past Surveys",
                 link: "/form-history"
             },
             {
                 img: HistoryIcon,
-                title: "Past Feedback Data",
+                title: "...",
                 link: "/form-history"
             },
             {
                 img: HistoryIcon,
-                title: "Past Feedback Data",
+                title: "...",
                 link: "/form-history"
             },
             {
                 img: HistoryIcon,
-                title: "Past Feedback Data",
+                title: "...",
                 link: "/form-history"
             },
             {
                 img: HistoryIcon,
-                title: "Past Feedback Data",
-                link: "/form-history"
-            },
-            {
-                img: HistoryIcon,
-                title: "Past Feedback Data",
-                link: "/form-history"
-            },
-            {
-                img: HistoryIcon,
-                title: "Past Feedback Data",
+                title: "...",
                 link: "/form-history"
             },
         ];
@@ -72,14 +71,19 @@ class MenuPage extends Component {
                 <LogoHeader title="Overview" />
                 <div className="gridList" style={ styles.root }>
                     <GridList
-                        cols={ 4 }
-                        cellHeight={ 96 }
+                        className="GridList"
+                        cols={ 3 }
+                        rows={ 2 }
+                        cellHeight={ 180 }
                         style={ styles.gridList }>
                         { tilesData.map((tile) => (
                             <Link to={ tile.link }>
                                 <GridTile
                                     key={ tile.img }
-                                    title={ tile.title }>
+                                    className="GridTile"
+                                    title={ tile.title }
+                                    titleBackground={ 'none' }
+                                    titleStyle={ styles.title }>
                                     <img src={ tile.img } alt={ "" } />
                                 </GridTile>
                             </Link>
