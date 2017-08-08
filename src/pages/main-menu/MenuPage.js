@@ -27,21 +27,6 @@ class MenuPage extends Component {
                 title: "...",
                 link: "/form-history"
             },
-            {
-                img: HistoryIcon,
-                title: "...",
-                link: "/form-history"
-            },
-            {
-                img: HistoryIcon,
-                title: "...",
-                link: "/form-history"
-            },
-            {
-                img: HistoryIcon,
-                title: "...",
-                link: "/form-history"
-            },
         ];
 
         return (
