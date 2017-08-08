@@ -18,6 +18,7 @@ class Questionnaire extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.saveForm = this.saveForm.bind(this);
+        this.getQuestionValue = this.getQuestionValue.bind(this);
     }
 
     handleSubmit(event) {
@@ -84,10 +85,13 @@ class Questionnaire extends Component {
     }
 
     saveForm() {
-        const endpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+        const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+        const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
+        const answerValue = this.getQuestionValue("understanding");
         let newSurveyId;
 
-        fetch(endpoint, {
+        // create new survey record with survey_id
+        fetch(surveyEndpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -100,7 +104,42 @@ class Questionnaire extends Component {
                     "created_at" : ""
                 }
             })
-        }).then((response) => response.json()).then((data) => newSurveyId = data.resource[0].survey_id);
+        }).then(function(response) {
+            if(response.ok) {
+                return response.json();
+            }
+        }).then(function(data) {
+            newSurveyId = data.resource[0].survey_id;
+            console.log(`Creation of new survey record with Id ${ newSurveyId } was successful.`);
+
+            // create new survey_result record, using just-created survey_id
+            return fetch(surveyResultEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'X-DreamFactory-Api-Key' : appConfig.dreamfactoryApi.apiKey
+                },
+                body: JSON.stringify({
+                    "resource": {
+                        "survey_id" : newSurveyId,
+                        "question_id" : 1,
+                        "question_answer": answerValue
+                    }
+                })
+            })
+        }).then(function(response) {
+            if(response.ok) {
+                return response.json();
+            }
+        }).then(function(data) {
+            let newSurveyResultId = data.resource[0].survey_result_id;
+            console.log(`Creation of new survey result record with Id ${ newSurveyResultId } was successful.`);
+        });;
+    }
+
+    getQuestionValue(question_id) {
+        return this.state.questions.find((question) => question.id === "understanding").value
     }
 }
 
