@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { GridList, GridTile } from 'material-ui/GridList';
 
-function TileMenu({ tileData }) {
+function TileMenu({ tileData, cols, rows }) {
 
     const styles = {
         root: {
@@ -28,8 +28,8 @@ function TileMenu({ tileData }) {
     return <div className="gridList" style={ styles.root }>
         <GridList
             className="GridList"
-            cols={ 3 }
-            rows={ 2 }
+            cols={ cols }
+            rows={ rows }
             cellHeight={ 180 }
             style={ styles.gridList }>
             { tileData.map((tile) => (

@@ -48,7 +48,9 @@ class MenuPage extends Component {
             <div>
                 <LogoHeader title="Overview" />
                 <TileMenu className="TileMenu"
-                          tileData={ tileData } />
+                          tileData={ tileData }
+                          cols={ 3 }
+                          rows={ 2 } />
             </div>
         );
     }
