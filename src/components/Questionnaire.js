@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Question from './Question';
 import SaveBtn from '../components/SaveBtn'
 
+import appConfig from '../config/config.json'
+
 class Questionnaire extends Component {
 
     constructor(props) {
@@ -15,6 +17,7 @@ class Questionnaire extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.saveForm = this.saveForm.bind(this);
     }
 
     handleSubmit(event) {
@@ -31,6 +34,8 @@ class Questionnaire extends Component {
 
             localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
             localStorage.setItem("questionnaires", JSON.stringify(questionnaires));
+
+            this.saveForm();
         }
     }
 
@@ -51,7 +56,7 @@ class Questionnaire extends Component {
                 <p>
                     <strong>We would like to improve the quality of the services we supply continuously. We need our customers' help to achieve this, to help us align to his targets give us ideas of what competences to build and where to improve.</strong>
                 </p>
-                <form action="" method="POST" onSubmit={ this.handleSubmit }>
+                <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                     {
                         this.state.questions.map(
                             question => <Question key={ question.id }
@@ -76,6 +81,26 @@ class Questionnaire extends Component {
                 question.value = storedQuestion.value;
             });
         }
+    }
+
+    saveForm() {
+        const endpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+        let newSurveyId;
+
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-DreamFactory-Api-Key' : appConfig.dreamfactoryApi.apiKey
+            },
+            body: JSON.stringify({
+                "resource": {
+                    "customer_id" : "",
+                    "created_at" : ""
+                }
+            })
+        }).then((response) => response.json()).then((data) => newSurveyId = data.resource[0].survey_id);
     }
 }
 

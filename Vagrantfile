@@ -79,12 +79,6 @@ Vagrant.configure("2") do |config|
 
     nvm install stable
 
-
-
-
-
-
-
   SCRIPT
 
   config.vm.provision "shell", path: "provision.sh"
