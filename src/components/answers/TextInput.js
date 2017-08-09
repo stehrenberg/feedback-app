@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TextInput = ({isReadOnly, onChange, value, name, inputType, placeholder}) => {
+const TextInput = ({isReadOnly, handleChange, value, name, inputType, placeholder}) => {
 
     const optionalProps = isReadOnly? { disabled: true } : {};
 
@@ -9,7 +9,7 @@ const TextInput = ({isReadOnly, onChange, value, name, inputType, placeholder}) 
         type={ inputType }
         placeholder={ placeholder }
         value={ value }
-        onChange={ (event) => onChange(name, event.target.value) }
+        onChange={ (event) => handleChange(name, event.target.value) }
         {...optionalProps} />;
 };
 

@@ -4,24 +4,18 @@ import SaveBtn from '../components/SaveBtn'
 
 class Questionnaire extends Component {
 
-    getInitialState() {
-        return {
-            questions: this.props.questions
-        };
-    }
-
-    componentDidMount() {
-        this.preloadCachedInputValues();
-    }
-
-/*    constructor(props) {
+    constructor(props) {
         super(props);
 
+        this.state = {
+            questions: this.props.questions
+        };
 
-        //are these really necessary?
+        this.preloadCachedInputValues();
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-    }*/
+    }
 
     handleSubmit(event) {
         event.preventDefault();

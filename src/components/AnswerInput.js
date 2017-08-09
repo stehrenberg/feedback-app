@@ -10,18 +10,27 @@ function AnswerInput({ inputType, isReadOnly, onChange, name, placeholder, value
 
     switch(inputType) {
         case 'number':
-            inputField = <NumberInput  isReadOnly={ isReadOnly }/>;
+            inputField = <NumberInput name={ name }
+                                      value={ value }
+                                      handleChange={ onChange }
+                                      isReadOnly={ isReadOnly }/>;
+            break;
 
         case 'date':
-            inputField = <DateInput handleChange={ (event, date) => onChange(name, date) }/>;
+            inputField = <DateInput name={ name }
+                                    value={ value }
+                                    handleChange={ (event, date) => onChange(name, date) }
+                                    isReadOnly={ isReadOnly }/>;
+            break;
 
         default:
             inputField = <TextInput inputType={ inputType }
                                     isReadOnly={ isReadOnly }
-                                    onChange={ onChange }
+                                    handleChange={ onChange }
                                     name={ name }
                                     placeholder={ placeholder }
                                     value={ value } />;
+            break;
     }
 
     return inputField;
