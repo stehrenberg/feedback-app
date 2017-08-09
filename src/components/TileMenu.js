@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { GridList, GridTile } from 'material-ui/GridList';
 
-function TileMenu({ tileData, cols, rows }) {
+const TileMenu = ({ tileData, cols, rows }) => {
 
     const styles = {
         root: {

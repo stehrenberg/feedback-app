@@ -15,20 +15,21 @@ class FeedbackForm extends Component {
     render() {
         return (
             <div className="FeedbackForm">
-                <LogoHeader title="Cooperation Feedback Questionnaire" />
+                <LogoHeader title="Cooperation Feedback Questionnaire"/>
                 <div className="App-content">
-                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } isReadOnly={ false } />
+                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } isReadOnly={ false }/>
                     <div className="App-footer">
                         <RaisedButton className="nav-btn"
                                       onClick={ this.props.history.goBack }
                                       icon={ <ArrowBack /> }
                                       primary={ true }
-                                      label={ "Back" } />
+                                      label={ "Back" }/>
                     </div>
                 </div>
             </div>
         );
     }
+
 
     generateId() {
         return Moment().format("YYYYMMDD");

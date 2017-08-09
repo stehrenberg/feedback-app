@@ -4,7 +4,7 @@ import NumberInput from './answers/NumberInput';
 import DateInput from './answers/DateInput';
 import TextInput from './answers/TextInput';
 
-function AnswerInput({ inputType, isReadOnly, onChange, name, placeholder, value }) {
+const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value }) => {
 
     let inputField;
 
