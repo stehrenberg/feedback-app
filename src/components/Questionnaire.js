@@ -67,7 +67,6 @@ class Questionnaire extends Component {
                                                   name={ question.id }
                                                   label={ question.text }
                                                   value={ question.value }
-                                                  {/* do not write this. here */}
                                                   onChange={ this.handleChange }
                                                   isReadOnly={ this.props.isReadOnly }
                                 {...question} />)

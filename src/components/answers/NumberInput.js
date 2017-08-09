@@ -3,7 +3,8 @@ import ReactStars from 'react-stars';
 
 const NumberInput = ({isReadOnly, onChange, value, name,}) => {
 
-    optionalProps = isReadOnly ? {edit: false} : {};
+    const optionalProps = isReadOnly ? {edit: false} : {};
+
     return <ReactStars
         name={name}
         count={10}
@@ -13,13 +14,6 @@ const NumberInput = ({isReadOnly, onChange, value, name,}) => {
         size={24}
         color2={'#ffc300'}
         {...optionalProps} />;
-};
-
-NumberInput.propTypes = {
-    isReadOnly: React.PropTypes.boolean.isRequired,
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.number.isRequired,
-    name: React.PropTypes.string.isRequired,
 };
 
 export default NumberInput;
