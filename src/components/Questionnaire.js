@@ -10,6 +10,7 @@ class Questionnaire extends Component {
         super(props);
 
         this.state = {
+            surveyId: null,
             questions: this.props.questions,
         }
 
@@ -74,25 +75,16 @@ class Questionnaire extends Component {
         );
     }
 
-    preloadCachedInputValues() {
-        const storedQuestions = JSON.parse(localStorage.getItem(this.props.id));
-        if (storedQuestions !== null) {
-            this.state.questions.forEach(question => {
-                const storedQuestion = storedQuestions.find(storedQuestion => storedQuestion.id === question.id);
-                question.value = storedQuestion.value;
-            });
-        }
-    }
-
     saveForm() {
         const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
         const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
         const answerValue = this.getQuestionValue("understanding");
+        const httpMethod = 'POST';
         let newSurveyId;
 
         // create new survey record with survey_id
         fetch(surveyEndpoint, {
-            method: 'POST',
+            method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -140,6 +132,17 @@ class Questionnaire extends Component {
 
     getQuestionValue(question_id) {
         return this.state.questions.find((question) => question.id === "understanding").value
+    }
+
+
+    preloadCachedInputValues() {
+        const storedQuestions = JSON.parse(localStorage.getItem(this.props.id));
+        if (storedQuestions !== null) {
+            this.state.questions.forEach(question => {
+                const storedQuestion = storedQuestions.find(storedQuestion => storedQuestion.id === question.id);
+                question.value = storedQuestion.value;
+            });
+        }
     }
 }
 
