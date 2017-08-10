@@ -36,24 +36,21 @@ class Questionnaire extends Component {
 
     handleChange(name, value) {
 
-        const questions = this.state.questions;                                         //O(1)
-        const targetQuestion = questions.find((question) => question.id === name);      //O(n)
-        targetQuestion.value = value;                                                   //O(1)
+        const questions = this.state.questions;
+        const targetQuestion = questions.find((question) => question.id === name);
+        targetQuestion.value = value;
 
-        this.setState({ questions: questions });                                        //async
-        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"])); //sync
+        this.setState({ questions: questions });
+        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
     }
 
     render() {
-        {/* this all could be split into container / component(s) */}
         return (
             <div className="Questionnaire">
-                {/* this could also be a dummy component */}
                 <h2>Goals</h2>
                 <p>
                     <strong>We would like to improve the quality of the services we supply continuously. We need our customers' help to achieve this, to help us align to his targets give us ideas of what competences to build and where to improve.</strong>
                 </p>
-                {/* this must be its own container */}
                 <form action="" method="POST" onSubmit={ this.handleSubmit }>
                     {
                         this.state.questions.map(
