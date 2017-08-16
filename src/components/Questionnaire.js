@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Question from './Question';
-import SaveBtn from '../components/SaveBtn'
+import SaveBtn from '../components/SaveBtn';
 
 import appConfig from '../config/config.json'
 
@@ -10,33 +10,20 @@ class Questionnaire extends Component {
         super(props);
 
         this.state = {
-            surveyId: null,
             questions: this.props.questions,
-        }
-
-        this.preloadCachedInputValues();
+            isSaved: false,
+        };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.saveForm = this.saveForm.bind(this);
-        this.getQuestionValue = this.getQuestionValue.bind(this);
+        this.getQuestionValuesAsArray = this.getQuestionValuesAsArray.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
 
         if(!this.props.isReadOnly) {
-
-            let questionnaires = JSON.parse(localStorage.getItem("questionnaires")) || [];
-            let newQuestionnaire = this.props.id;
-
-            if (!questionnaires.includes(newQuestionnaire)) {
-                questionnaires.push(newQuestionnaire);
-            }
-
-            localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
-            localStorage.setItem("questionnaires", JSON.stringify(questionnaires));
-
             this.saveForm();
         }
     }
@@ -78,13 +65,13 @@ class Questionnaire extends Component {
     saveForm() {
         const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
         const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
-        const answerValue = this.getQuestionValue("understanding");
-        const httpMethod = 'POST';
-        let newSurveyId;
+        const httpPostMethod = 'POST';
+        const questionsAsArray = this.getQuestionValuesAsArray();
+        console.log(questionsAsArray);
 
         // create new survey record with survey_id
         fetch(surveyEndpoint, {
-            method: httpMethod,
+            method: httpPostMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -92,6 +79,7 @@ class Questionnaire extends Component {
             },
             body: JSON.stringify({
                 "resource": {
+                    "survey_id" : this.props.id,
                     "customer_id" : "",
                     "created_at" : ""
                 }
@@ -101,48 +89,38 @@ class Questionnaire extends Component {
                 return response.json();
             }
         }).then(function(data) {
-            newSurveyId = data.resource[0].survey_id;
-            console.log(`Creation of new survey record with Id ${ newSurveyId } was successful.`);
+            console.log(`Creation of new survey record was successful.`);
 
-            // create new survey_result record, using just-created survey_id
+            // create new survey_result record
             return fetch(surveyResultEndpoint, {
-                method: 'POST',
+                method: httpPostMethod,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'X-DreamFactory-Api-Key' : appConfig.dreamfactoryApi.apiKey
                 },
                 body: JSON.stringify({
-                    "resource": {
-                        "survey_id" : newSurveyId,
-                        "question_id" : 1,
-                        "question_answer": answerValue
-                    }
+                    "resource": questionsAsArray,
                 })
             })
         }).then(function(response) {
             if(response.ok) {
                 return response.json();
             }
-        }).then(function(data) {
-            let newSurveyResultId = data.resource[0].survey_result_id;
-            console.log(`Creation of new survey result record with Id ${ newSurveyResultId } was successful.`);
-        });;
+        }).catch(err => {
+            console.log("blink");
+            console.log(err);
+        });
     }
 
-    getQuestionValue(question_id) {
-        return this.state.questions.find((question) => question.id === "understanding").value
-    }
-
-
-    preloadCachedInputValues() {
-        const storedQuestions = JSON.parse(localStorage.getItem(this.props.id));
-        if (storedQuestions !== null) {
-            this.state.questions.forEach(question => {
-                const storedQuestion = storedQuestions.find(storedQuestion => storedQuestion.id === question.id);
-                question.value = storedQuestion.value;
-            });
-        }
+    getQuestionValuesAsArray() {
+        return this.state.questions.map((question, index) => {
+            return {
+                "survey_id" : this.props.id,
+                "question_id" : index+1,
+                "question_answer" : question.value,
+            };
+        });
     }
 }
 

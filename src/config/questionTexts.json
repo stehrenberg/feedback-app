@@ -22,8 +22,8 @@
             "value": ""
         },
         {
-            "id" : "mustBes",
-            "text" : "What are the Must-Be's we have to deliver?",
+            "id" : "essentials",
+            "text" : "What are the essentials we have to deliver?",
             "inputType" : "input",
             "preload" : "true",
             "value": ""
@@ -67,6 +67,7 @@
             "id" : "tasks",
             "text" : "Tasks for the next iteration:",
             "inputType" : "input",
+            "preload" : "false",
             "value": ""
         },
         {
