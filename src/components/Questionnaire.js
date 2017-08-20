@@ -64,53 +64,61 @@ class Questionnaire extends Component {
 
     saveForm() {
         const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
-        const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
-        const httpPostMethod = 'POST';
         const questionsAsArray = this.getQuestionValuesAsArray();
-        console.log(questionsAsArray);
+        const httpMethod = this.state.isSaved ? 'PATCH' : 'POST';
 
-        // create new survey record with survey_id
-        fetch(surveyEndpoint, {
-            method: httpPostMethod,
+        this.createNewSurveyRecord(surveyEndpoint, httpMethod).then((response) => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                console.log(response.error);
+            }
+        }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
+        ).then((response) => {
+            if(response.ok) {
+                this.setState({ isSaved: true });
+                return response.json();
+            } else {
+                console.log(response.error);
+            }
+        }).catch(err => {
+            console.log("error!");
+            console.log(err);
+        });
+    }
+
+    createNewSurveyRecord(surveyEndpoint, httpMethod) {
+        return fetch(surveyEndpoint, {
+            method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key' : appConfig.dreamfactoryApi.apiKey
+                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
                 "resource": {
-                    "survey_id" : this.props.id,
-                    "customer_id" : "",
-                    "created_at" : ""
+                    "survey_id": this.props.id,
+                    "customer_id": "",
+                    "created_at": ""
                 }
             })
-        }).then(function(response) {
-            if(response.ok) {
-                return response.json();
-            }
-        }).then(function(data) {
-            console.log(`Creation of new survey record was successful.`);
-
-            // create new survey_result record
-            return fetch(surveyResultEndpoint, {
-                method: httpPostMethod,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-DreamFactory-Api-Key' : appConfig.dreamfactoryApi.apiKey
-                },
-                body: JSON.stringify({
-                    "resource": questionsAsArray,
-                })
-            })
-        }).then(function(response) {
-            if(response.ok) {
-                return response.json();
-            }
-        }).catch(err => {
-            console.log("blink");
-            console.log(err);
         });
+    }
+
+    createNewSurveyResultRecord(httpMethod, questionsAsArray) {
+        const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
+
+        return fetch(`${surveyResultEndpoint}?id_field=survey_id%2C%20question_id`, {
+            method: httpMethod,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+            },
+            body: JSON.stringify({
+                "resource": questionsAsArray,
+            }),
+        })
     }
 
     getQuestionValuesAsArray() {
