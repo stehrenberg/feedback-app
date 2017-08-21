@@ -31,10 +31,12 @@ class FormHistory extends Component {
                 <LogoHeader title="Past Questionnaires"/>
                 <ul className="forms">{
                     this.state.forms.map(
-                        form => <li key={ form.id }>
-                            <Link to={ `/feedback/${ form.id }` }>
-                                <span>ID: { form.id } </span>
+                        form => <li key={ form.surveyId }>
+                            <Link to={ `/feedback/${ form.surveyId }` } >
+                                <span>ID: { form.surveyId } </span>
                                 <span>NPS: { this.findQuestion(form.data, nps_id) } </span>
+                                <span>Cooperation: { this.findQuestion(form.data, cooperation_id) } </span>
+                                <span>Understanding: { this.findQuestion(form.data, understanding_id) } </span>
                             </Link>
                         </li>
                     )}
@@ -51,26 +53,16 @@ class FormHistory extends Component {
 
     fetchFormData() {
         const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?order=survey_id&group=survey_id%2C%20question_id`;
-        const formsData = this.fetchSurveyIdsList().then((surveyIdList) => {
-            const surveyIdsAsArray = surveyIdList;
-            const transformationFunc = (data) => {
-                const formsData = this.organizeBySurveyId(data.resource, surveyIdList);
-                return formsData;
-            };
+        return this.fetchSurveyIdsList().then((surveyIdList) => {
+            const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
 
             return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
         });
-
-        return formsData;
     }
 
     fetchSurveyIdsList() {
         const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
-
-        const transformationFunc = (data) => {
-            const surveyIds = data.resource.map(resource => resource.survey_id);
-            return surveyIds;
-        };
+        const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
 
         return this.fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc);
     }
@@ -96,7 +88,7 @@ class FormHistory extends Component {
 
     organizeBySurveyId(rawData, surveyIdList) {
         return surveyIdList.map((surveyId) => {
-            let newEntry = {
+            return {
                 surveyId: surveyId,
                 data: rawData.filter((resultTuple) => resultTuple.survey_id === surveyId).map(resultTuple => {
                     return {
@@ -105,14 +97,12 @@ class FormHistory extends Component {
                     };
                 })
             };
-            return newEntry;
         });
     }
 
-    findQuestion(form, questionId) {
-        //console.log(form, Array.isArray(form));
-        //const question = form.find(data => data.id === questionId);
-        return '';//!(!question) ? question.value : '---';
+    findQuestion(formData, questionId) {
+        const question = formData.find(data => data.questionId === questionId);
+        return !(!question) ? question.questionValue : '---';
     }
 
 }

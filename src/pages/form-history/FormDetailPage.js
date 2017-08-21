@@ -8,6 +8,14 @@ import questions from '../../config/questionTexts.json';
 
 class FeedbackForm extends Component {
 
+    componentWillMount() {
+        questions.questionTexts.forEach(question => {
+            const storedQuestion = 1;              //storedQuestions.find(storedQuestion => storedQuestion.id === question.id);
+            question.value = storedQuestion;
+            console.log(question.value);
+        });
+    }
+
     render() {
         const formId = this.props.match.params.formId;
         const meetingDate = Moment(formId.toString(), 'YYYYMMDD').format("dddd, MMMM Do YYYY");
