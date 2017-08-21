@@ -1,79 +1,80 @@
 {
-    "questionTexts" : [
-        {
-            "id" : "understanding",
-            "text" : "How well do we understand what your company actually needs from us?",
-            "inputType" : "number",
-            "preload" : "false",
-            "value": ""
-        },
-        {
-            "id" : "cooperation",
-            "text" : "How well do we cooperate?",
-            "inputType" : "number",
-            "preload" : "false",
-            "value": ""
-        },
-        {
-            "id" : "deliveriesAndRoles",
-            "text" : "Core Deliveries and Roles",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "mustBes",
-            "text" : "What are the Must-Be's we have to deliver?",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "deliverMore",
-            "text" : "What should we deliver more of?",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "avoid",
-            "text" : "What should we avoid to do in the future?",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "deliverAdditionally",
-            "text" : "What should we deliver additionally?",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "acquire",
-            "text" : "What competencies and abilities should we acquire?",
-            "inputType" : "input",
-            "preload" : "true",
-            "value": ""
-        },
-        {
-            "id" : "nps",
-            "text" : "How likely is it that you would recommend our company/product to a friend or colleague?",
-            "inputType" : "number",
-            "preload" : "false",
-            "value": ""
-        },
-        {
-            "id" : "tasks",
-            "text" : "Tasks for the next iteration:",
-            "inputType" : "input",
-            "value": ""
-        },
-        {
-            "id" : "nextMeeting",
-            "text" : "Next Meeting:",
-            "inputType" : "date",
-            "value": ""
-        }
-    ]
+  "questionTexts": [
+    {
+      "id": "understanding",
+      "text": "How well do we understand what your company actually needs from us?",
+      "inputType": "number",
+      "preload": "false",
+      "value": ""
+    },
+    {
+      "id": "cooperation",
+      "text": "How well do we cooperate?",
+      "inputType": "number",
+      "preload": "false",
+      "value": ""
+    },
+    {
+      "id": "deliveriesAndRoles",
+      "text": "Core Deliveries and Roles",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "essentials",
+      "text": "What are the essentials we have to deliver?",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "deliverMore",
+      "text": "What should we deliver more of?",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "avoid",
+      "text": "What should we avoid to do in the future?",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "deliverAdditionally",
+      "text": "What should we deliver additionally?",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "acquire",
+      "text": "What competencies and abilities should we acquire?",
+      "inputType": "input",
+      "preload": "true",
+      "value": ""
+    },
+    {
+      "id": "nps",
+      "text": "How likely is it that you would recommend our company/product to a friend or colleague?",
+      "inputType": "number",
+      "preload": "false",
+      "value": ""
+    },
+    {
+      "id": "tasks",
+      "text": "Tasks for the next iteration:",
+      "inputType": "input",
+      "preload": "false",
+      "value": ""
+    },
+    {
+      "id": "nextMeeting",
+      "text": "Next Meeting:",
+      "inputType": "date",
+      "value": ""
+    }
+  ]
 }
