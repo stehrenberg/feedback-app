@@ -18,7 +18,7 @@ class FormHistory extends Component {
     }
 
     componentWillMount() {
-        this.fetchFormData().then((formDataAsArray) => this.setState({forms: formDataAsArray}));
+        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray}));
     }
 
     render() {
@@ -53,24 +53,12 @@ class FormHistory extends Component {
         const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?order=survey_id&group=survey_id%2C%20question_id`;
         const formsData = this.fetchSurveyIdsList().then((surveyIdList) => {
             const surveyIdsAsArray = surveyIdList;
-
-            return fetch(surveyResultsEndpoint, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
-                },
-            }).then((response) => {
-                if (response.ok) {
-                    return response.json();
-                } else {
-                    console.log(response.error);
-                }
-            }).then((data) => {
+            const transformationFunc = (data) => {
                 const formsData = this.organizeBySurveyId(data.resource, surveyIdList);
                 return formsData;
-            }).catch(err => console.log(err));
+            };
+
+            return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
         });
 
         return formsData;
