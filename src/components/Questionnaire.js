@@ -20,21 +20,70 @@ class Questionnaire extends Component {
         this.getQuestionValuesAsArray = this.getQuestionValuesAsArray.bind(this);
     }
 
+    // TODO Remove following redundant logic when rebuild using Redux!
+    componentWillMount() {
+        if (this.props.isReadOnly) {
+            this.fetchFormData().then((formsDataAsArray) => {
+                const updatedQuestions = this.state.questions.map(question => {
+                    // FIXME Find why question.id from questionTexts.json gets converted to string
+                    const storedQuestion = formsDataAsArray.find(storedQuestion => storedQuestion.id == question.id);
+                    const questionValue = !(!storedQuestion) ? storedQuestion.questionValue : "";
+
+                    return  Object.assign({}, {...question}, {value: questionValue});
+                });
+
+                this.setState({questions: updatedQuestions});
+            });
+        }
+    }
+
+    fetchFormData() {
+        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
+        const transformationFunc = (data) => data.resource.map((resultTuple) => {
+            return {
+                id: resultTuple.question_id,
+                questionValue: resultTuple.question_answer,
+            };
+        });
+
+        return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
+    }
+
+    fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod) {
+        return fetch(apiEndpoint, {
+            method: httpMethod,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+            },
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.log(response.error);
+            }
+        }).then((data) => {
+            return dataTransformMethod(data);
+        }).catch(err => console.log(err));
+    }
+
+    // TODO Remove all the above :D
+
     handleSubmit(event) {
         event.preventDefault();
 
-        if(!this.props.isReadOnly) {
+        if (!this.props.isReadOnly) {
             this.saveForm();
         }
     }
 
     handleChange(name, value) {
-
         const questions = this.state.questions;
-        const targetQuestion = questions.find((question) => question.id === name);
+        const targetQuestion = questions.find((question) => question.shortText === name);
         targetQuestion.value = value;
 
-        this.setState({ questions: questions });
+        this.setState({questions: {...questions}});
         localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
     }
 
@@ -43,18 +92,19 @@ class Questionnaire extends Component {
             <div className="Questionnaire">
                 <h2>Goals</h2>
                 <p>
-                    <strong>We would like to improve the quality of the services we supply continuously. We need our customers' help to achieve this, to help us align to his targets give us ideas of what competences to build and where to improve.</strong>
+                    <strong>We would like to improve the quality of the services we supply continuously. We need our
+                        customers' help to achieve this, to help us align to his targets give us ideas of what
+                        competences to build and where to improve.</strong>
                 </p>
                 <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                    {
-                        this.state.questions.map(
-                            question => <Question key={ question.id }
-                                                  name={ question.id }
-                                                  label={ question.text }
-                                                  value={ question.value }
-                                                  onChange={ this.handleChange }
-                                                  isReadOnly={ this.props.isReadOnly }
-                                {...question} />)
+                    {   this.state.questions.map(
+                        question => <Question key={ question.shortText }
+                                              name={ question.shortText }
+                                              label={ question.text }
+                                              value={ question.value }
+                                              onChange={ this.handleChange }
+                                              isReadOnly={ this.props.isReadOnly }
+                            {...question} />)
                     }
                     { this.props.isReadOnly ? null : <div className="save-btn"><SaveBtn /></div> }
                 </form>
@@ -68,15 +118,15 @@ class Questionnaire extends Component {
         const httpMethod = this.state.isSaved ? 'PATCH' : 'POST';
 
         this.createNewSurveyRecord(surveyEndpoint, httpMethod).then((response) => {
-            if(response.ok) {
+            if (response.ok) {
                 return response.json();
             } else {
                 console.log(response.error);
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
         ).then((response) => {
-            if(response.ok) {
-                this.setState({ isSaved: true });
+            if (response.ok) {
+                this.setState({isSaved: true});
                 return response.json();
             } else {
                 console.log(response.error);
@@ -124,9 +174,9 @@ class Questionnaire extends Component {
     getQuestionValuesAsArray() {
         return this.state.questions.map((question, index) => {
             return {
-                "survey_id" : this.props.id,
-                "question_id" : index+1,
-                "question_answer" : question.value,
+                "survey_id": this.props.id,
+                "question_id": index + 1,
+                "question_answer": question.value,
             };
         });
     }

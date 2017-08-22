@@ -1,77 +1,88 @@
 {
   "questionTexts": [
     {
-      "id": "understanding",
+      "id": 1,
+      "shortText": "understanding",
       "text": "How well do we understand what your company actually needs from us?",
       "inputType": "number",
       "preload": "false",
       "value": ""
     },
     {
-      "id": "cooperation",
+      "id": 2,
+      "shortText": "cooperation",
       "text": "How well do we cooperate?",
       "inputType": "number",
       "preload": "false",
       "value": ""
     },
     {
-      "id": "deliveriesAndRoles",
+      "id": 3,
+      "shortText": "deliveriesAndRoles",
       "text": "Core Deliveries and Roles",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "essentials",
+      "id": 4,
+      "shortText": "essentials",
       "text": "What are the essentials we have to deliver?",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "deliverMore",
+      "id": 5,
+      "shortText": "deliverMore",
       "text": "What should we deliver more of?",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "avoid",
+      "id": 6,
+      "shortText": "avoid",
       "text": "What should we avoid to do in the future?",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "deliverAdditionally",
+      "id": 7,
+      "shortText": "deliverAdditionally",
       "text": "What should we deliver additionally?",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "acquire",
+      "id": 8,
+      "shortText": "acquire",
       "text": "What competencies and abilities should we acquire?",
       "inputType": "input",
       "preload": "true",
       "value": ""
     },
     {
-      "id": "nps",
+      "id": 9,
+      "shortText": "nps",
       "text": "How likely is it that you would recommend our company/product to a friend or colleague?",
       "inputType": "number",
       "preload": "false",
       "value": ""
     },
     {
-      "id": "tasks",
+      "id": 10,
+      "shortText": "tasks",
       "text": "Tasks for the next iteration:",
       "inputType": "input",
       "preload": "false",
       "value": ""
     },
     {
-      "id": "nextMeeting",
+      "id": 11,
+      "shortText": "nextMeeting",
       "text": "Next Meeting:",
       "inputType": "date",
       "value": ""
