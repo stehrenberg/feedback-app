@@ -7,6 +7,8 @@ class LoginMask extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        //TODO Kundennamen im store ablegen
+
 
     }
 
@@ -14,15 +16,19 @@ class LoginMask extends Component {
         return (
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
-                <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                    <label>Projektname:</label>
-                    <input type="text" autoComplete="off"/>
-                    <SaveBtn />
-                </form>
+                <div className="App-content">
+                    <form className="login-form" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
+                        <label>Projektname:</label>
+                        <input type="text" autoComplete="off"/>
+                        <div className="save-btn">
+                            <SaveBtn className="save-btn"/>
+                        </div>
+                    </form>
+                </div>
+
             </div>
         );
     }
-
 }
 
 export default LoginMask;

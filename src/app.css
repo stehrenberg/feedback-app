@@ -86,6 +86,12 @@ body {
     font-size: 16px;
 }
 
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .save-btn {
     display: flex;
     justify-content: flex-end;
