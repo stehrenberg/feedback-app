@@ -7,8 +7,7 @@ import Questionnaire from '../../components/Questionnaire';
 import LogoHeader from '../../components/LogoHeader';
 import questions from '../../config/questionTexts.json';
 
-import './FeedbackForm.css';
-import '../../theme.css'
+import '../../app.css'
 
 class FeedbackForm extends Component {
 

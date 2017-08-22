@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
 .FeedbackForm {
     display: flex;
     flex-direction: column;
@@ -89,5 +95,11 @@
 span[data-forhalf] {
     padding: 3px 0 3px 0;
     cursor: default !important;
+}
+
+.icon-large {
+    width: 120px;
+    height: 120px;
+    padding: 30px;
 }
 

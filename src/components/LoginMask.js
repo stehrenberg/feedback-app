@@ -15,7 +15,7 @@ class LoginMask extends Component {
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
                 <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                    <label>Projektname</label>
+                    <label>Projektname:</label>
                     <input type="text" autoComplete="off"/>
                     <SaveBtn />
                 </form>

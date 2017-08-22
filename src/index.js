@@ -12,7 +12,7 @@ import LoginMask from "./components/LoginMask";
 import AppMenu from './components/app-menu/AppMenu';
 import registerServiceWorker from './registerServiceWorker';
 
-import './theme.css';
+import './app.css';
 
 const history = createHashHistory({
     queryKey: false,

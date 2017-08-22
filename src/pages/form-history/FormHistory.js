@@ -1,9 +1,11 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import LogoHeader from '../../components/LogoHeader';
 import appConfig from '../../config/config.json'
+import '../../app.css';
+
 
 class FormHistory extends Component {
 
