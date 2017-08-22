@@ -139,6 +139,10 @@ class Questionnaire extends Component {
     }
 
     createNewSurveyRecord(surveyEndpoint, httpMethod) {
+
+        const projectName = appConfig.appConfig.projectName;
+        console.log(projectName);
+
         return fetch(surveyEndpoint, {
             method: httpMethod,
             headers: {
@@ -149,7 +153,7 @@ class Questionnaire extends Component {
             body: JSON.stringify({
                 "resource": {
                     "survey_id": this.props.id,
-                    "customer_id": "",
+                    "project_name": projectName,
                     "created_at": ""
                 }
             })
