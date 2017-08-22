@@ -79,12 +79,13 @@ class Questionnaire extends Component {
     }
 
     handleChange(name, value) {
-        const questions = this.state.questions;
-        const targetQuestion = questions.find((question) => question.shortText === name);
-        targetQuestion.value = value;
+        const oldQuestions = this.state.questions;
+        const updatedQuestions = oldQuestions.map(question => {
+            const newValue = question.shortText === name? value : question.value;
+            return Object.assign({}, {...question}, {value: newValue});
+        });
 
-        this.setState({questions: {...questions}});
-        localStorage.setItem(this.props.id, JSON.stringify(this.state.questions, ["id", "value"]));
+        this.setState({ questions: updatedQuestions });
     }
 
     render() {
