@@ -2,12 +2,13 @@ import React from 'react';
 
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
-import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png'
-import HistoryIcon from '../../assets/history_icon.png'
+import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
+import HistoryIcon from '../../assets/history_icon.png';
+import config from '../../config/config.json';
 
 import './appMenu.css';
 
-const MenuPage = () => {
+const MenuPage = (props) => {
 
     const tileData = [
         {
@@ -26,6 +27,8 @@ const MenuPage = () => {
             link: "/form-history"
         },
     ];
+
+    config.appConfig.projectName = props.match.params.projectName;
 
     return (
         <div>

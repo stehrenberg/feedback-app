@@ -5,6 +5,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import LogoHeader from '../../components/LogoHeader';
 import appConfig from '../../config/config.json'
 import '../../app.css';
+import config from  '../../config/config.json';
 
 
 class FormHistory extends Component {
@@ -54,7 +55,13 @@ class FormHistory extends Component {
     }
 
     fetchFormData() {
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?order=survey_id&group=survey_id%2C%20question_id`;
+        const projectName = config.appConfig.projectName;
+        console.log(projectName);
+        const table = '_table/survey_result';
+        const filter = !(!projectName)? `&filter=projectName%3D'${ projectName }` : '';
+        const params = `order=survey_id&group=survey_id%2C%20question_id`;
+        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ params }${ filter }`;
+
         return this.fetchSurveyIdsList().then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
 

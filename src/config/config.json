@@ -5,5 +5,8 @@
         "password" : "",
         "apiKey": "855c53fd0cbca8c5cc3446dc162cd4fdba7af4b182964c07e22a585ec0170abc"
 
+    },
+    "appConfig": {
+        "projectName" : ""
     }
 }
