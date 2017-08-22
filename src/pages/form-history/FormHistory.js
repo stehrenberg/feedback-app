@@ -5,8 +5,6 @@ import RaisedButton from 'material-ui/RaisedButton';
 import LogoHeader from '../../components/LogoHeader';
 import appConfig from '../../config/config.json'
 import '../../app.css';
-import config from  '../../config/config.json';
-
 
 class FormHistory extends Component {
 
@@ -55,22 +53,25 @@ class FormHistory extends Component {
     }
 
     fetchFormData() {
-        const projectName = config.appConfig.projectName;
-        console.log(projectName);
+        const projectName = appConfig.appConfig.projectName;
+        console.log("projectName: ", projectName);
+        console.log("conf: ", appConfig);
         const table = '_table/survey_result';
-        const filter = !(!projectName)? `&filter=projectName%3D'${ projectName }` : '';
         const params = `order=survey_id&group=survey_id%2C%20question_id`;
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ params }${ filter }`;
+        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ params }`;
 
-        return this.fetchSurveyIdsList().then((surveyIdList) => {
+        return this.fetchSurveyIdsListForProject(projectName).then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
 
             return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
         });
     }
 
-    fetchSurveyIdsList() {
-        const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+    fetchSurveyIdsListForProject(projectName) {
+        const table = '_table/survey';
+        const filter = `filter=project_name='${ projectName }'`;
+        const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ filter }`;
+        console.log(surveyIdsEndpoint);
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
 
         return this.fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc);
