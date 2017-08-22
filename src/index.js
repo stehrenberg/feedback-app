@@ -35,3 +35,6 @@ const app = <MuiThemeProvider>
 injectTapEventPlugin();
 ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+};

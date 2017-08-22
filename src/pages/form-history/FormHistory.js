@@ -26,10 +26,12 @@ class FormHistory extends Component {
         const understanding_id = 1;
         const cooperation_id = 2;
         const nps_id = 9;
+        const projectName = appConfig.appConfig.projectName;
+        const headerProjectName = projectName? `for ${ projectName.capitalize() }` : "";
 
         return (
             <div>
-                <LogoHeader title="Past Questionnaires"/>
+                <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
                 <ul className="forms">{
                     this.state.forms.map(
                         form => <li key={ form.surveyId }>
@@ -54,11 +56,8 @@ class FormHistory extends Component {
 
     fetchFormData() {
         const projectName = appConfig.appConfig.projectName;
-        console.log("projectName: ", projectName);
-        console.log("conf: ", appConfig);
-        const table = '_table/survey_result';
-        const params = `order=survey_id&group=survey_id%2C%20question_id`;
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ params }`;
+        const table = `_table/survey_result_${ projectName }`;
+        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
 
         return this.fetchSurveyIdsListForProject(projectName).then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
@@ -68,10 +67,8 @@ class FormHistory extends Component {
     }
 
     fetchSurveyIdsListForProject(projectName) {
-        const table = '_table/survey';
-        const filter = `filter=project_name='${ projectName }'`;
-        const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }?${ filter }`;
-        console.log(surveyIdsEndpoint);
+        const table = `_table/survey_${ projectName }`;
+        const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
 
         return this.fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc);
