@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+import LogoHeader from './LogoHeader';
+import SaveBtn from './SaveBtn';
+
 class LoginMask extends Component {
 
     handleSubmit(event) {
@@ -9,14 +12,17 @@ class LoginMask extends Component {
 
     render(props) {
         return (
-            <div className="LoginForm">
-                <form action="" method="" onSubmit={ (event) => handleSubmit(event) }>
+            <div className="LoginMask">
+                <LogoHeader title={ "Login" }/>
+                <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                     <label>Projektname</label>
                     <input type="text" autoComplete="off"/>
-                    <button type="submit"/>
+                    <SaveBtn />
                 </form>
             </div>
         );
     }
 
 }
+
+export default LoginMask;
