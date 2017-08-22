@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Question from './Question';
-import SaveBtn from '../components/SaveBtn';
+import SaveBtn from '../components/buttons/SaveBtn';
 
 import appConfig from '../config/config.json'
 

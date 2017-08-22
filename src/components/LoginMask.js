@@ -1,18 +1,15 @@
 import React, {Component} from 'react';
 
 import LogoHeader from './LogoHeader';
-import SaveBtn from './SaveBtn';
+import LoginBtn from './buttons/LoginBtn';
 
 class LoginMask extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        //TODO Kundennamen im store ablegen
-
-
     }
 
-    render(props) {
+    render() {
         return (
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
@@ -21,7 +18,7 @@ class LoginMask extends Component {
                         <label>Projektname:</label>
                         <input type="text" autoComplete="off"/>
                         <div className="save-btn">
-                            <SaveBtn className="save-btn"/>
+                            <LoginBtn {...this.props.history} />
                         </div>
                     </form>
                 </div>

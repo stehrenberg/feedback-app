@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import createHashHistory from 'history/createHashHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -19,7 +19,7 @@ const history = createHashHistory({
 });
 
 const app = <MuiThemeProvider>
-    <BrowserRouter history={ history }>
+    <HashRouter history={ history }>
         <Switch>
             <Route exact path='/' component={ LoginMask } />
             <Route exact path='/home' component={ AppMenu } />
@@ -27,7 +27,7 @@ const app = <MuiThemeProvider>
             <Route exact path='/form-history' component={ FormHistory } />
             <Route path="/feedback/:formId" component={ FormDetail } />
         </Switch>
-    </BrowserRouter>
+    </HashRouter>
 </MuiThemeProvider>;
 
 injectTapEventPlugin();

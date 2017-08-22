@@ -29,7 +29,6 @@ class FeedbackForm extends Component {
         );
     }
 
-
     generateId() {
         return Moment().format("YYYYMMDD");
     }
