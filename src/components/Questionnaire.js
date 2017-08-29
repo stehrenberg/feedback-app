@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import SurveyForm from '../components/SurveyForm';
 import Question from './Question';
 import SaveBtn from '../components/buttons/SaveBtn';
 
@@ -13,11 +14,6 @@ class Questionnaire extends Component {
             questions: this.props.questions,
             isSaved: false,
         };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.saveForm = this.saveForm.bind(this);
-        this.getQuestionValuesAsArray = this.getQuestionValuesAsArray.bind(this);
     }
 
     // TODO Remove following redundant logic when rebuild using Redux!
@@ -37,7 +33,7 @@ class Questionnaire extends Component {
         }
     }
 
-    fetchFormData() {
+    fetchFormData = () => {
         const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
@@ -49,7 +45,7 @@ class Questionnaire extends Component {
         return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
     }
 
-    fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod) {
+    fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod) => {
         return fetch(apiEndpoint, {
             method: httpMethod,
             headers: {
@@ -70,7 +66,7 @@ class Questionnaire extends Component {
 
     // TODO Remove all the above :D
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         if (!this.props.isReadOnly) {
@@ -78,7 +74,7 @@ class Questionnaire extends Component {
         }
     }
 
-    handleChange(name, value) {
+    handleChange = (name, value) => {
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
             const newValue = question.shortText === name? value : question.value;
@@ -97,23 +93,17 @@ class Questionnaire extends Component {
                         customers' help to achieve this, to help us align to his targets give us ideas of what
                         competences to build and where to improve.</strong>
                 </p>
-                <form action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                    {   this.state.questions.map(
-                        question => <Question key={ question.shortText }
-                                              name={ question.shortText }
-                                              label={ question.text }
-                                              value={ question.value }
-                                              onChange={ this.handleChange }
-                                              isReadOnly={ this.props.isReadOnly }
-                            {...question} />)
-                    }
-                    { this.props.isReadOnly ? null : <div className="save-btn"><SaveBtn /></div> }
-                </form>
+                <SurveyForm
+                    questions={ this.state.questions }
+                    onChange={ this.handleChange }
+                    onSubmit={ this.handleSubmit }
+                    isReadOnly={ this.isReadOnly }
+                />
             </div>
         );
     }
 
-    saveForm() {
+    saveForm = () => {
         const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
         const questionsAsArray = this.getQuestionValuesAsArray();
         const httpMethod = this.state.isSaved ? 'PATCH' : 'POST';
@@ -138,10 +128,9 @@ class Questionnaire extends Component {
         });
     }
 
-    createNewSurveyRecord(surveyEndpoint, httpMethod) {
+    createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
 
         const projectName = appConfig.appConfig.projectName;
-        console.log(projectName);
 
         return fetch(surveyEndpoint, {
             method: httpMethod,
@@ -160,7 +149,7 @@ class Questionnaire extends Component {
         });
     }
 
-    createNewSurveyResultRecord(httpMethod, questionsAsArray) {
+    createNewSurveyResultRecord = (httpMethod, questionsAsArray) => {
         const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
 
         return fetch(`${surveyResultEndpoint}?id_field=survey_id%2C%20question_id`, {
@@ -176,7 +165,7 @@ class Questionnaire extends Component {
         })
     }
 
-    getQuestionValuesAsArray() {
+    getQuestionValuesAsArray = () => {
         return this.state.questions.map((question, index) => {
             return {
                 "survey_id": this.props.id,
