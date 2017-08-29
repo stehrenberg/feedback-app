@@ -19,7 +19,7 @@ class FormHistory extends Component {
     }
 
     componentWillMount() {
-        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray || []}));
+        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray /*|| []*/}));
     }
 
     render() {
@@ -86,11 +86,14 @@ class FormHistory extends Component {
             if (response.ok) {
                 return response.json();
             } else {
-                console.log(response.error);
+                return JSON.stringify([]);
             }
         }).then((data) => {
             return dataTransformMethod(data);
-        }).catch(err => console.log(err));
+        }).catch(err => {
+            console.info("Don't worry, that 404 error is due to API endpoint testing.");
+            return dataTransformMethod({ resource: [] });
+        });
     }
 
     organizeBySurveyId(rawData, surveyIdList) {
