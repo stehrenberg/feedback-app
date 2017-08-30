@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/mayflower_logo.png';
+import PropTypes from 'prop-types';
 
 const LogoHeader = ({ title }) => (
     <div className="App-header">
@@ -7,5 +8,9 @@ const LogoHeader = ({ title }) => (
         <h2>{ title }</h2>
     </div>
 );
+
+LogoHeader.PropTypes = {
+    title: PropTypes.string.isRequired,
+};
 
 export default LogoHeader;
