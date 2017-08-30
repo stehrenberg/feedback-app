@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import NumberInput from './answers/NumberInput';
 import DateInput from './answers/DateInput';
@@ -34,6 +35,15 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
     }
 
     return inputField;
-}
+};
+
+AnswerInput.propTypes = {
+    name: PropTypes.string.isRequired,
+    inputType: PropTypes.oneOf(['date', 'text', 'number']).isRequired,
+    isReadOnly: PropTypes.bool.isRequired,
+    onChange: PropTypes.func.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+};
 
 export default AnswerInput;
