@@ -25,7 +25,7 @@ const FormDetail = ({ match, history }) => {
 };
 
 FormDetail.propTypes = {
-    match: PropTypes.array.isRequired,
+    match: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
 };
 
