@@ -13,8 +13,8 @@ import '../app.css';
 
 const ClickableTableRow = (props) => {
     return (
-        <TableRow onClick={ () => props.history.push(`/feedback/${ props.name }`) }>
-            { props.rowData.map(cell => (<TableRowColumn>{ cell.cellData } </TableRowColumn>)) }
+        <TableRow key={ props.name } onClick={ () => props.history.push(`/feedback/${ props.name }`) }>
+            { props.rowData.map(cell => (<TableRowColumn key={ `${ props.name }-${ cell }` }>{ cell.cellData } </TableRowColumn>)) }
         </TableRow>
     );
 }
