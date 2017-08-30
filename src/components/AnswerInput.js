@@ -39,11 +39,11 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
 
 AnswerInput.propTypes = {
     name: PropTypes.string.isRequired,
-    inputType: PropTypes.oneOf(['date', 'text', 'number']).isRequired,
+    inputType: PropTypes.oneOf(['date', 'text', 'number', 'input']).isRequired,
     isReadOnly: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
-    placeholder: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
 };
 
 export default AnswerInput;
