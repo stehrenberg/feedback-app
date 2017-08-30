@@ -13,7 +13,6 @@ class FormHistory extends Component {
         this.state = {
             forms: [],
         };
-
         this.fetchFormData = this.fetchFormData.bind(this);
     }
 
@@ -24,12 +23,11 @@ class FormHistory extends Component {
     render() {
         const projectName = appConfig.appConfig.projectName;
         const headerProjectName = projectName? `for ${ projectName.capitalize() }` : "";
-        console.log("Forms in FormHistory:", this.state.forms);
 
         return (
             <div>
                 <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
-                <SurveyDataTable formData={ this.state.forms } />
+                <SurveyDataTable formData={ this.state.forms } history={ this.props.history }/>
                 <div className="App-footer">
                     <RaisedButton className="nav-btn"
                                   primary={ true }

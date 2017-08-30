@@ -44,7 +44,7 @@ class Questionnaire extends Component {
                     questions={ this.state.questions }
                     onChange={ this.handleChange }
                     onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.isReadOnly }
+                    isReadOnly={ this.props.isReadOnly }
                 />
             </div>
         );

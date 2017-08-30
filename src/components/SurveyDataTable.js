@@ -14,7 +14,7 @@ import '../app.css';
 
 const ClickableTableRow = (props) => {
     return (
-        <TableRow onClick={ () => props.onClick }>
+        <TableRow onClick={ () => props.history.push(`/feedback/${ props.name }`) }>
             { props.rowData.map(cell => (<TableRowColumn>{ cell.cellData } </TableRowColumn>)) }
         </TableRow>
     );
@@ -41,13 +41,13 @@ export default class SurveyDataTable extends Component {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={ false } showRowHover={ true }>
-                            { /* this.props.history.push(`/feedback/${ form.surveyId }`) */}
                             { formData.map(
                                 form => {
                                     return (
                                         <ClickableTableRow
                                             key={ form.surveyId }
-                                            onClick={ ()=>console.log("cluck!")/*(item) => this.props.history.push(`/feedback/${ form.surveyId }`)*/ }
+                                            name={ form.surveyId }
+                                            history={ this.props.history }
                                             rowData={[
                                                 { cellData: Moment(form.surveyId, "YYYYMMDD").format("DD-MM-YYYY") },
                                                 { cellData: this.findQuestion(form.data, nps_id) },
