@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import LogoHeader from '../../components/LogoHeader';
+import SurveyDataTable from '../../components/SurveyDataTable';
 import appConfig from '../../config/config.json'
 import '../../app.css';
 
@@ -14,7 +14,6 @@ class FormHistory extends Component {
             forms: [],
         };
 
-        this.findQuestion = this.findQuestion.bind(this);
         this.fetchFormData = this.fetchFormData.bind(this);
     }
 
@@ -23,27 +22,14 @@ class FormHistory extends Component {
     }
 
     render() {
-        const understanding_id = 1;
-        const cooperation_id = 2;
-        const nps_id = 9;
         const projectName = appConfig.appConfig.projectName;
         const headerProjectName = projectName? `for ${ projectName.capitalize() }` : "";
+        console.log("Forms in FormHistory:", this.state.forms);
 
         return (
             <div>
                 <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
-                <ul className="forms">{
-                    this.state.forms.map(
-                        form => <li key={ form.surveyId }>
-                            <Link to={ `/feedback/${ form.surveyId }` } >
-                                <span>ID: { form.surveyId } </span>
-                                <span>NPS: { this.findQuestion(form.data, nps_id) } </span>
-                                <span>Cooperation: { this.findQuestion(form.data, cooperation_id) } </span>
-                                <span>Understanding: { this.findQuestion(form.data, understanding_id) } </span>
-                            </Link>
-                        </li>
-                    )}
-                </ul>
+                <SurveyDataTable formData={ this.state.forms } />
                 <div className="App-footer">
                     <RaisedButton className="nav-btn"
                                   primary={ true }
@@ -109,12 +95,6 @@ class FormHistory extends Component {
             };
         });
     }
-
-    findQuestion(formData, questionId) {
-        const question = formData.find(data => data.questionId === questionId);
-        return !(!question) ? question.questionValue : '---';
-    }
-
 }
 
 export default FormHistory;
