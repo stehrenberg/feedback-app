@@ -42,7 +42,7 @@ AnswerInput.propTypes = {
     inputType: PropTypes.oneOf(['date', 'text', 'number', 'input']).isRequired,
     isReadOnly: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.object ]),
     placeholder: PropTypes.string,
 };
 
