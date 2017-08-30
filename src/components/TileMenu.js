@@ -33,7 +33,7 @@ const TileMenu = ({ tileData, cols, rows }) => {
             cellHeight={ 180 }
             style={ styles.gridList }>
             { tileData.map((tile) => (
-                <Link to={ tile.link }>
+                <Link to={ tile.link } key={ tile.link }>
                     <GridTile
                         key={ tile.img }
                         className="GridTile"
