@@ -24,7 +24,7 @@ const MenuPage = (props) => {
         {
             img: HistoryIcon,
             title: "...",
-            link: "/form-history"
+            link: "tba"
         },
     ];
 

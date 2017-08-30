@@ -17,7 +17,7 @@ const ClickableTableRow = (props) => {
             { props.rowData.map(cell => (<TableRowColumn key={ `${ props.name }-${ cell }` }>{ cell.cellData } </TableRowColumn>)) }
         </TableRow>
     );
-}
+};
 
 export default class SurveyDataTable extends Component {
     render() {

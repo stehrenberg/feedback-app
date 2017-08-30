@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'moment';
 import RaisedButton from 'material-ui/RaisedButton';
+import PropTypes from 'prop-types';
 
 import Questionnaire from './Questionnaire';
 import LogoHeader from './LogoHeader';
@@ -21,6 +22,11 @@ const FormDetail = ({ match, history }) => {
             </div>
         </div>
     );
+};
+
+FormDetail.propTypes = {
+    match: PropTypes.array.isRequired,
+    history: PropTypes.object.isRequired,
 };
 
 export default FormDetail;
