@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import LogoHeader from './LogoHeader';
 import LoginBtn from './buttons/LoginBtn';
@@ -39,5 +40,9 @@ class LoginForm extends Component {
         );
     }
 }
+
+LoginForm.PropTypes = {
+    history: PropTypes.object.isRequired,
+};
 
 export default LoginForm;
