@@ -11,32 +11,24 @@ import {
 
 import '../app.css';
 
-const ClickableTableRow = (props) => {
-    return (
-        <TableRow key={ props.name } onClick={ () => props.history.push(`/feedback/${ props.name }`) }>
-            { props.rowData.map(cell => (<TableRowColumn key={ `${ props.name }-${ cell }` }>{ cell.cellData } </TableRowColumn>)) }
-        </TableRow>
-    );
-};
-
 export default class SurveyDataTable extends Component {
     render() {
-        const { onEvent, formData } = this.props;
         const understanding_id = 1;
         const cooperation_id = 2;
         const nps_id = 9;
+        const { formData, history } = this.props;
 
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="App-content">
                 <div className="Questionnaire">
                     <Table className="forms">
-                        <TableHeader displaySelectAll={ false }>
-                            <TableRow>
-                                <TableHeaderColumn>Date</TableHeaderColumn>
-                                <TableHeaderColumn>NPS</TableHeaderColumn>
-                                <TableHeaderColumn>Cooperation</TableHeaderColumn>
-                                <TableHeaderColumn>Understanding</TableHeaderColumn>
+                        <TableHeader className="TableHeader" displaySelectAll={ false }>
+                            <TableRow className="TableRow">
+                                <TableHeaderColumn className="TableHeaderColumn">Date</TableHeaderColumn>
+                                <TableHeaderColumn className="TableHeaderColumn">NPS</TableHeaderColumn>
+                                <TableHeaderColumn className="TableHeaderColumn">Cooperation</TableHeaderColumn>
+                                <TableHeaderColumn className="TableHeaderColumn">Understanding</TableHeaderColumn>
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={ false } showRowHover={ true }>
@@ -46,13 +38,14 @@ export default class SurveyDataTable extends Component {
                                         <ClickableTableRow
                                             key={ form.surveyId }
                                             name={ form.surveyId }
-                                            history={ this.props.history }
+                                            history={ history }
                                             rowData={[
                                                 { cellData: Moment(form.surveyId, "YYYYMMDD").format("DD-MM-YYYY") },
                                                 { cellData: this.findQuestion(form.data, nps_id) },
                                                 { cellData: this.findQuestion(form.data, cooperation_id) },
                                                 { cellData: this.findQuestion(form.data, understanding_id) }
-                                            ]}/>
+                                            ]}
+                                        />
                                     );
                                 }
                             )}
@@ -69,3 +62,12 @@ export default class SurveyDataTable extends Component {
         return !(!question) ? question.questionValue : '---';
     }
 };
+
+const ClickableTableRow = ({ name, history, rowData }) => {
+    return (
+        <TableRow key={ name } onClick={ () => history.push(`/feedback/${ name }`) } className="ClickableTableRow" hoverable={ true }>
+            { rowData.map(cell => (<TableRowColumn key={ `${ name }-${ cell }` } className="TableRowColumn">{ cell.cellData } </TableRowColumn>)) }
+        </TableRow>
+    );
+};
+

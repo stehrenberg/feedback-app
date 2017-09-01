@@ -17,7 +17,7 @@ class FormHistory extends Component {
     }
 
     componentWillMount() {
-        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray /*|| []*/}));
+        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray }));
     }
 
     render() {

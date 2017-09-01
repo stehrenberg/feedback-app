@@ -20,7 +20,8 @@ class LoginForm extends Component {
 
     handleChange(event) {
         event.preventDefault();
-        this.setState({ projectName: event.target.value });
+        console.log(event.target);
+        //this.setState({ projectName: event.target.value });
     }
 
     render() {
@@ -28,9 +29,15 @@ class LoginForm extends Component {
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
                 <div className="App-content">
-                    <form className="login-form" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                        <label>Projektname:</label>
-                        <input type="text" autoComplete="off" onChange={ (event) => this.handleChange(event) }/>
+                    <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
+                        <div className="login-inputfield">
+                            <label>Project name:</label>
+                            <input name="projectName" type="text" autoComplete="off" onChange={ (event) => this.handleChange(event) }/>
+                        </div>
+                        <div className="login-inputfield">
+                            <label>Password:</label>
+                            <input name="password" type="password" onChange={ (event) => this.handleChange(event) }/>
+                        </div>
                         <div className="save-btn">
                             <LoginBtn {...this.props.history}  />
                         </div>
