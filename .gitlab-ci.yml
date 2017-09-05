@@ -9,6 +9,9 @@ test:
   stage: test
   script: "npm run test"
 
+before_script:
+  - "npm install"
+
 prod_build:
   stage: deploy
   script:
