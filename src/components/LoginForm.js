@@ -32,11 +32,18 @@ class LoginForm extends Component {
                     <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                         <div className="login-inputfield">
                             <label>Project name:</label>
-                            <input name="projectName" type="text" autoComplete="off" onChange={ (event) => this.handleChange(event) }/>
+                            <input name="projectName"
+                                   type="text"
+                                   autoComplete="off"
+                                   onChange={ (event) => this.handleChange(event) }
+                                   autofocus
+                            />
                         </div>
                         <div className="login-inputfield">
                             <label>Password:</label>
-                            <input name="password" type="password" onChange={ (event) => this.handleChange(event) }/>
+                            <input name="password"
+                                   type="password"
+                                   onChange={ (event) => this.handleChange(event) }/>
                         </div>
                         <div className="save-btn">
                             <LoginBtn {...this.props.history}  />
