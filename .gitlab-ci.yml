@@ -1,0 +1,19 @@
+image: node
+
+stages:
+  - build
+  - test
+  - deploy
+
+test:
+  stage: test
+  script: "npm run test"
+
+prod_build:
+  stage: deploy
+  script:
+    - echo 'Building Feedback-App for production'
+    - npm run build"
+  only: master
+  when: always
+
