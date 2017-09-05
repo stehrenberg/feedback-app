@@ -12,8 +12,8 @@ test:
 prod_build:
   stage: deploy
   script:
-    - echo 'Building Feedback-App for production'
-    - npm run build"
+    - "echo 'Building Feedback-App for production'"
+    - "npm run build"
   only: master
   when: always
 
