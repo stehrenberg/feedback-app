@@ -112,6 +112,12 @@ th {
 }
 
 .save-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0 20px 0;
+}
+
+.login-btn {
     justify-content: center !important;
     width: 270px;
     color: #00BCD4;

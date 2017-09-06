@@ -45,7 +45,7 @@ class LoginForm extends Component {
                                    type="password"
                                    onChange={ (event) => this.handleChange(event) }/>
                         </div>
-                        <div className="save-btn">
+                        <div className="login-btn">
                             <LoginBtn {...this.props.history}  />
                         </div>
                     </form>
