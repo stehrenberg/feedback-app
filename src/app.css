@@ -108,16 +108,22 @@ th {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    padding-top: 30px;
     width: 285px;
 }
 
+.credentials {
+    margin-top: 20px;
+}
+
 .login-inputfield {
-    margin: 10px;
+    margin: 15px;
 }
 
 .login-inputfield > input {
     margin-left: 10px;
     color: #88878B;
+    font-size: 14px;
     border: none;
     border-bottom-width: 2px;
     border-bottom-style: solid;

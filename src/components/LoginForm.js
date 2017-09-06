@@ -31,20 +31,32 @@ class LoginForm extends Component {
                 <div className="App-content">
                     <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                         <div className="login-inputfield">
-                            <label>Project name:</label>
+                            <label>Project:</label>
                             <input name="projectName"
                                    type="text"
                                    autoComplete="off"
                                    onChange={ (event) => this.handleChange(event) }
                                    autofocus
+                                   required
                             />
                         </div>
-                        <div className="login-inputfield">
-                            <label>Password:</label>
-                            <input name="password"
-                                   type="password"
-                                   onChange={ (event) => this.handleChange(event) }/>
+                        <div className="credentials">
+                            <div className="login-inputfield">
+                                <label>Customer:</label>
+                                <input name="customerName"
+                                       type="text"
+                                       autoComplete="off"
+                                       onChange={ (event) => this.handleChange(event) }
+                                />
+                            </div>
+                            <div className="login-inputfield">
+                                <label>Password:</label>
+                                <input name="password"
+                                       type="password"
+                                       onChange={ (event) => this.handleChange(event) }/>
+                            </div>
                         </div>
+
                         <div className="login-btn">
                             <LoginBtn {...this.props.history}  />
                         </div>
