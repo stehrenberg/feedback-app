@@ -111,27 +111,23 @@ th {
     width: 285px;
 }
 
-.save-btn {
-    display: flex;
-    justify-content: flex-end;
-    margin: 20px 0 20px 0;
-}
-
-.login-btn {
-    display: flex;
-    justify-content: center !important;
-    padding-top: 30px;
-    padding-bottom: 15px;
-    width: 270px;
-    color: #00BCD4;
-}
-
 .login-inputfield {
     margin: 10px;
 }
 
 .login-inputfield > input {
     margin-left: 10px;
+    color: #88878B;
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #c9c9c9;
+    outline: none;
+}
+
+.login-inputfield > label {
+    color: #3c3c3c;
+    font-size: 16px;
 }
 
 .LoginMask {
@@ -145,6 +141,15 @@ th {
     justify-content: flex-end;
     margin: 20px 0 20px 0;
 }
+
+.login-btn {
+    display: flex;
+    justify-content: center !important;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    width: 270px;
+}
+
 
 span[data-forhalf] {
     padding: 3px 0 3px 0;
