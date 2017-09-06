@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import LogoHeader from './LogoHeader';
-import LoginBtn from './buttons/LoginBtn';
+import LogoHeader from '../../components/LogoHeader';
+import LoginBtn from '../../components/buttons/LoginBtn';
 
 class LoginForm extends Component {
 
@@ -20,8 +20,9 @@ class LoginForm extends Component {
 
     handleChange(event) {
         event.preventDefault();
-        console.log(event.target);
-        //this.setState({ projectName: event.target.value });
+        const fieldName = event.target.name;
+        const value = event.target.value;
+        this.setState({[fieldName] :  value});
     }
 
     render() {
@@ -36,7 +37,7 @@ class LoginForm extends Component {
                                    type="text"
                                    autoComplete="off"
                                    onChange={ (event) => this.handleChange(event) }
-                                   autofocus
+                                   autoFocus
                                    required
                             />
                         </div>

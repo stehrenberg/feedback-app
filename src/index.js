@@ -8,7 +8,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import FeedbackForm from './pages/feedback-form/FeedbackForm';
 import FormHistory from "./pages/form-history/FormHistory";
 import FormDetail from "./components/FormDetail";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./pages/login/LoginForm";
 import AppMenu from './components/app-menu/AppMenu';
 import registerServiceWorker from './registerServiceWorker';
 
