@@ -118,7 +118,10 @@ th {
 }
 
 .login-btn {
+    display: flex;
     justify-content: center !important;
+    padding-top: 30px;
+    padding-bottom: 15px;
     width: 270px;
     color: #00BCD4;
 }
