@@ -33,6 +33,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     width: 720px;
     padding: 30px;
 }
@@ -43,6 +44,23 @@ body {
     padding-top: 20px;
     padding-bottom: 50px;
     width: 100%;
+}
+
+.ClickableTableRow {
+    cursor: pointer;
+}
+
+.TableRowColumn {
+    padding-left: 19px !important;
+}
+
+.TableHeaderColumn {
+    padding-left: 0 !important;
+}
+
+th {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 .Questionnaire {
@@ -89,6 +107,38 @@ body {
 .login-form {
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+    padding-top: 30px;
+    width: 285px;
+}
+
+.credentials {
+    margin-top: 20px;
+}
+
+.login-inputfield {
+    margin: 15px;
+}
+
+.login-inputfield > input {
+    margin-left: 10px;
+    color: #88878B;
+    font-size: 14px;
+    border: none;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #c9c9c9;
+    outline: none;
+}
+
+.login-inputfield > label {
+    color: #3c3c3c;
+    font-size: 16px;
+}
+
+.LoginMask {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -97,6 +147,15 @@ body {
     justify-content: flex-end;
     margin: 20px 0 20px 0;
 }
+
+.login-btn {
+    display: flex;
+    justify-content: center !important;
+    padding-top: 30px;
+    padding-bottom: 15px;
+    width: 270px;
+}
+
 
 span[data-forhalf] {
     padding: 3px 0 3px 0;
