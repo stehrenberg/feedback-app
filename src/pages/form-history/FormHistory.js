@@ -5,6 +5,7 @@ import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
 import appConfig from '../../config/config.json'
 import '../../app.css';
+import { fetchDataFrom } from '../../util/utils';
 
 class FormHistory extends Component {
 
@@ -46,7 +47,7 @@ class FormHistory extends Component {
         return this.fetchSurveyIdsListForProject(projectName).then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
 
-            return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
+            return fetchDataFrom(surveyResultsEndpoint, 'GET', {}, transformationFunc);
         });
     }
 
@@ -55,30 +56,9 @@ class FormHistory extends Component {
         const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
 
-        return this.fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc);
+        return fetchDataFrom(surveyIdsEndpoint, 'GET', {}, transformationFunc);
     }
 
-    fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod) {
-        return fetch(apiEndpoint, {
-            method: httpMethod,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
-            },
-        }).then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return JSON.stringify([]);
-            }
-        }).then((data) => {
-            return dataTransformMethod(data);
-        }).catch(err => {
-            console.info("Don't worry, that 404 error is due to API endpoint testing.");
-            return dataTransformMethod({ resource: [] });
-        });
-    }
 
     organizeBySurveyId(rawData, surveyIdList) {
         return surveyIdList.map((surveyId) => {

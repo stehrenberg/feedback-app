@@ -33,13 +33,13 @@ store.dispatch(setProject("blubb"));
 const app = <MuiThemeProvider>
     <HashRouter history={ history }>
         <Switch>
+            <Route exact path='/' component={ LoginForm } />
             <Route exact path='/home' component={ AppMenu } />
             <Route extact path='/home/:projectName' component={ AppMenu } />
             <Redirect from ='/home/:projectName' to='/home' component={ AppMenu } />
             <Route exact path='/feedback' component={ FeedbackForm } />
-            <Route exact path='/form-history' component={ FormHistory } />
             <Route path="/feedback/:formId" component={ FormDetail } />
-            <Route exact path='/' component={ LoginForm } />
+            <Route exact path='/form-history' component={ FormHistory } />
         </Switch>
     </HashRouter>
 </MuiThemeProvider>;

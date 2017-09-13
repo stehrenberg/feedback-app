@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 
-import appConfig from '../config/config.json'
+import { fetchDataFrom } from '../util/utils';
+import appConfig from '../config/config.json';
 
 class Questionnaire extends Component {
 
@@ -59,26 +60,7 @@ class Questionnaire extends Component {
             };
         });
 
-        return this.fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc);
-    };
-
-    fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod) => {
-        return fetch(apiEndpoint, {
-            method: httpMethod,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
-            },
-        }).then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                console.log(response.error);
-            }
-        }).then((data) => {
-            return dataTransformMethod(data);
-        }).catch(err => console.log(err));
+        return fetchDataFrom(surveyResultsEndpoint, 'GET', {}, transformationFunc);
     };
 
     // TODO Remove all the above :D
