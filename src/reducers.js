@@ -1,15 +1,11 @@
-import { combineReducers } from 'react-redux';s
+import { combineReducers } from 'redux';
 import './actions';
 
-const initialState = {
-    projectName: '',
-};
-
 const feedbackApp = combineReducers({
-   setProject,
+    projectName,
 });
 
-function setProject(state = '', action) {
+function projectName(state = '', action) {
     switch(action.type) {
         case 'SET_PROJECT':
             return action.projectName;

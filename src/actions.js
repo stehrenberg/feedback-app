@@ -1,13 +1,10 @@
 export const LOGIN = 'LOGIN';
 
-export const SET_PROJECT = {
-    type: 'SET_PROJECT',
-    projectName,
-};
+export const SET_PROJECT = 'SET_PROJECT';
 
-export function setProject(projectName) {
+export const setProject = (projectName) => {
     return {
-        type: LOGIN,
+        type: SET_PROJECT,
         projectName,
-    }
+    };
 }
