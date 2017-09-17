@@ -113,7 +113,10 @@ th {
 }
 
 .credentials {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
+    align-items: flex-end;
 }
 
 .login-inputfield {
