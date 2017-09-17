@@ -1,14 +1,21 @@
 import appConfig from '../config/config.json';
 
-export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod) => {
-    return fetch(apiEndpoint, {
+export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod, payload = null) => {
+
+    let config = {
         method: httpMethod,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
-        },
-    }).then((response) => {
+        }
+    };
+
+    if(!(!payload)) {
+        config.body = JSON.stringify(payload);
+    }
+
+    return fetch(apiEndpoint, config).then((response) => {
         if (response.ok) {
             return response.json();
         } else {
