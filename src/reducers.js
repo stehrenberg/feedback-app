@@ -1,11 +1,6 @@
 import { combineReducers } from 'redux';
 import './actions';
 
-const feedbackApp = combineReducers({
-    projectName,
-    jwt,
-});
-
 function projectName(state = '', action) {
     switch(action.type) {
         case 'SET_PROJECT':
@@ -15,7 +10,10 @@ function projectName(state = '', action) {
     }
 }
 
-function jwt(state = '', action) {
+function jwt(state = {}, action) {
+
+    console.log("reducer jwt --> action: ", action);
+
     switch(action.type) {
         case 'LOGIN':
             return action.jwt;
@@ -23,5 +21,10 @@ function jwt(state = '', action) {
             return state;
     }
 }
+
+const feedbackApp = combineReducers({
+    projectName,
+    jwt,
+});
 
 export default feedbackApp;

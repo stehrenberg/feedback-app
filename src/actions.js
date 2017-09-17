@@ -6,12 +6,12 @@ export const setProject = (projectName) => {
         type: SET_PROJECT,
         projectName,
     };
-}
+};
 
 export const setJWT = (jwt) => {
     console.log("setJWT called!");
     return {
         type: LOGIN,
-        jwt
+        jwt,
     };
-}
+};

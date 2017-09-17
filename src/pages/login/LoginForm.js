@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
 import config from '../../config/config.json';
+import { setJWT } from '../../actions';
 import { fetchDataFrom } from '../../util/utils';
 
 class LoginForm extends Component {
@@ -13,15 +15,19 @@ class LoginForm extends Component {
         this.state = {
             projectName: '',
         };
+        console.log("dispatch: ", this.props.dispatch);
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        const userName = this.state.userName;
+        const email = this.state.email;
         const password = this.state.password;
-        const jwt = this.authenticate(userName, password);
-
-        this.props.history.push(`/home/${ this.state.projectName }`);
+        const jwt = this.authenticate(email, password)
+            .then((jwt) => {
+                console.log("jwt:", jwt);
+                this.props.dispatch(setJWT(jwt));
+                this.props.history.push(`/home/${ this.state.projectName }`);
+            });
     }
 
     handleChange(event) {
@@ -50,8 +56,8 @@ class LoginForm extends Component {
                         </div>
                         <div className="credentials">
                             <div className="login-inputfield">
-                                <label>Customer:</label>
-                                <input name="customerName"
+                                <label>Email:</label>
+                                <input name="email"
                                        type="text"
                                        autoComplete="off"
                                        onChange={ (event) => this.handleChange(event) }
@@ -64,7 +70,6 @@ class LoginForm extends Component {
                                        onChange={ (event) => this.handleChange(event) }/>
                             </div>
                         </div>
-
                         <div className="login-btn">
                             <LoginBtn {...this.props.history}  />
                         </div>
@@ -74,28 +79,17 @@ class LoginForm extends Component {
         );
     }
 
-    authenticate = (username, password) => {
-
-        const jwt = {};
+    authenticate = (email, password) => {
         const apiEndpoint = `${config.dreamfactoryApi.loginEndpoint}session`;
         const httpMethod = 'POST';
         const dataTransformMethod = (data) => console.log(data);
-
-            /**data..map((resultTuple) => {
-            return {
-                id: resultTuple.question_id,
-                questionValue: resultTuple.question_answer,
-            };*/
-
         const payload = {
-            "email": username,
+            "email": email,
             "password": password,
             "duration": 0
         };
-        console.log(fetchDataFrom);
-        console.log("bla", fetchDataFrom(apiEndpoint, 'POST', payload, (data) => { console.log(data) }));
 
-        return jwt;
+        return fetchDataFrom(apiEndpoint, 'POST', (jwt) => jwt, payload);
     };
 }
 
@@ -103,4 +97,4 @@ LoginForm.PropTypes = {
     history: PropTypes.object.isRequired,
 };
 
-export default LoginForm;
+export default connect()(LoginForm);
