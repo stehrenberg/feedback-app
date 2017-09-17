@@ -1,8 +1,8 @@
 image: node
 
 stages:
-  - build
   - test
+  - build
   - deploy
 
 before_script:
@@ -10,14 +10,31 @@ before_script:
 
 test:
   stage: test
-  script: "npm run test"
+  script:
+    - "echo 'Running tests for Feedback-App'"
+    - "npm run test"
 
-prod_build:
+build:
+  stage: build
+  script:
+    - "echo 'Building Feedback-App'"
+    - "npm run build"
+
+deploy:
   stage: deploy
   script:
-    - "echo 'Building Feedback-App for production'"
+    - "echo 'Building Feedback-App for production deployment'"
     - "npm run build"
+    - "echo 'Deploying Feedback-App to production'"
+    - "apt-get update"
+    - "apt-get install --yes rsync"
+    - "touch cfq_deploy"
+    - "chmod go-rwx cfq_deploy"
+    - "echo $DEPLOY_ED25519 > cfq_deploy"
+    - "sed -i -e 's/\\r /\\n/g' cfq_deploy"
+    - "mkdir -p ~/.ssh/"
+    - "echo $DEPLOY_HOST_KEY > ~/.ssh/known_hosts"
+    - "chmod go-rwx -R ~/.ssh/"
+    - "rsync -v -r -e 'ssh -4 -i cfq_deploy' build/ cfq-deploy@webnix.mgmt.fs.mayflower.zone:/srv/www/cfq.mayflower.de/htdocs/"
   only:
-  - master
-  when: always
-
+    - master
