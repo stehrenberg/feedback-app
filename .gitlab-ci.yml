@@ -35,6 +35,6 @@ deploy:
     - "mkdir -p ~/.ssh/"
     - "echo $DEPLOY_HOST_KEY > ~/.ssh/known_hosts"
     - "chmod go-rwx -R ~/.ssh/"
-    - "rsync -v -r -e 'ssh -4 -i cfq_deploy' build/ cfq-deploy@webnix.mgmt.fs.mayflower.zone:/srv/www/cfq.mayflower.de/htdocs/"
+    - "rsync -v -r --delete -e 'ssh -4 -i cfq_deploy' build/ cfq-deploy@webnix.mgmt.fs.mayflower.zone:/srv/www/cfq.mayflower.de/htdocs/"
   only:
     - master
