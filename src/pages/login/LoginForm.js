@@ -15,7 +15,6 @@ class LoginForm extends Component {
         this.state = {
             projectName: '',
         };
-        console.log("dispatch: ", this.props.dispatch);
     }
 
     handleSubmit(event) {

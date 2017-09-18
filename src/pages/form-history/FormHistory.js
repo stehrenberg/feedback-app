@@ -5,7 +5,7 @@ import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
 import appConfig from '../../config/config.json'
 import '../../app.css';
-import { fetchDataFrom } from '../../util/utils';
+import { fetchDataFrom, capitalize } from '../../util/utils';
 
 class FormHistory extends Component {
 
@@ -23,7 +23,7 @@ class FormHistory extends Component {
 
     render() {
         const projectName = appConfig.appConfig.projectName;
-        const headerProjectName = projectName? `for ${ projectName.capitalize() }` : "";
+        const headerProjectName = projectName? `for ${ capitalize(projectName) }` : "";
 
         return (
             <div>

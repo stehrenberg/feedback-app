@@ -11,7 +11,7 @@ export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod, payl
         }
     };
 
-    if(!(!payload)) {
+    if(Object.keys(payload).length > 0) {
         config.body = JSON.stringify(payload);
     }
 
@@ -25,3 +25,5 @@ export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod, payl
         return dataTransformMethod(data);
     }).catch(err => console.log(err));
 };
+
+export const capitalize = (someString)  => someString.charAt(0).toUpperCase() + someString.slice(1);

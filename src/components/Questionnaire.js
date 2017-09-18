@@ -60,7 +60,7 @@ class Questionnaire extends Component {
             };
         });
 
-        return fetchDataFrom(surveyResultsEndpoint, 'GET', {}, transformationFunc);
+        return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, {});
     };
 
     // TODO Remove all the above :D

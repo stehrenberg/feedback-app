@@ -11,9 +11,6 @@ function projectName(state = '', action) {
 }
 
 function jwt(state = {}, action) {
-
-    console.log("reducer jwt --> action: ", action);
-
     switch(action.type) {
         case 'LOGIN':
             return action.jwt;
