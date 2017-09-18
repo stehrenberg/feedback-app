@@ -23,7 +23,6 @@ class LoginForm extends Component {
         const password = this.state.password;
         const jwt = this.authenticate(email, password)
             .then((jwt) => {
-                console.log("jwt:", jwt);
                 this.props.dispatch(setJWT(jwt));
                 this.props.history.push(`/home/${ this.state.projectName }`);
             });
@@ -58,15 +57,17 @@ class LoginForm extends Component {
                                 <label>Email:</label>
                                 <input name="email"
                                        type="text"
-                                       autoComplete="off"
                                        onChange={ (event) => this.handleChange(event) }
+                                       required
                                 />
                             </div>
                             <div className="login-inputfield">
                                 <label>Password:</label>
                                 <input name="password"
                                        type="password"
-                                       onChange={ (event) => this.handleChange(event) }/>
+                                       onChange={ (event) => this.handleChange(event) }
+                                       required
+                                />
                             </div>
                         </div>
                         <div className="login-btn">
