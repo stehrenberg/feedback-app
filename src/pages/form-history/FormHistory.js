@@ -46,8 +46,9 @@ class FormHistory extends Component {
 
         return this.fetchSurveyIdsListForProject(projectName).then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
+            const errorHandler = (error) => console.log(error);
 
-            return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc,  {});
+            return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
         });
     }
 
@@ -55,8 +56,9 @@ class FormHistory extends Component {
         const table = `_table/survey_${ projectName }`;
         const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
+        const errorHandler = (error) => console.log(error);
 
-        return fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc, {});
+        return fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc, errorHandler, {});
     }
 
 

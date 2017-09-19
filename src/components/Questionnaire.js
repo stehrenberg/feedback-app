@@ -52,6 +52,7 @@ class Questionnaire extends Component {
 
     fetchFormData = () => {
         const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
+        const errorHandler = (error) => console.log(error);
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
                 // ID is stored as int in db but we need it as string for further comparisons.
@@ -60,7 +61,7 @@ class Questionnaire extends Component {
             };
         });
 
-        return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, {});
+        return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
     };
 
     // TODO Remove all the above :D
