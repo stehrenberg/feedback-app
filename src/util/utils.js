@@ -18,7 +18,10 @@ export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod, erro
     return fetch(apiEndpoint, config)
         .then((response) => response.ok ? response.json() : Promise.reject(response))
         .then((data) => dataTransformMethod(data))
-        .catch(response => errorHandler(response.error));
+        .catch(response => {
+            errorHandler(response.error);
+            return Promise.reject(response.error);
+        });
 };
 
 export const capitalize = (someString)  => someString.charAt(0).toUpperCase() + someString.slice(1);

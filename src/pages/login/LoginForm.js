@@ -14,6 +14,7 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             projectName: '',
+            loginFailed: false,
         };
     }
 
@@ -25,7 +26,7 @@ class LoginForm extends Component {
             .then((jwt) => {
                 this.props.dispatch(setJWT(jwt));
                 this.props.history.push(`/home/${ this.state.projectName }`);
-            });
+            }).catch((error) => console.log(error));
     }
 
     handleChange(event) {
@@ -42,6 +43,7 @@ class LoginForm extends Component {
                 <LogoHeader title={ "Login" }/>
                 <div className="App-content">
                     <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
+                        { this.state.loginFailed ? <p>Invalid credentials.</p> : '' }
                         <div className="login-inputfield">
                             <label>Project:</label>
                             <input name="projectName"
@@ -83,13 +85,17 @@ class LoginForm extends Component {
         const apiEndpoint = `${config.dreamfactoryApi.loginEndpoint}session`;
         const httpMethod = 'POST';
         const dataTransformMethod = (jwt) => jwt;
+        const errorHandler = (error) => {
+            console.log("bla", error);
+            this.setState({ loginFailed: true });
+        };
         const payload = {
             "email": email,
             "password": password,
             "duration": 0
         };
 
-        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, payload);
+        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 }
 
