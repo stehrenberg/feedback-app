@@ -14,12 +14,18 @@ class FormHistory extends Component {
         super(props);
         this.state = {
             forms: [],
+            showAlertBox: false,
         };
         this.fetchFormData = this.fetchFormData.bind(this);
     }
 
     componentWillMount() {
-        this.fetchFormData().then((formsDataAsArray) => this.setState({forms: formsDataAsArray }));
+        this.fetchFormData().then((formsDataAsArray) => {
+            this.setState({
+                forms: formsDataAsArray,
+                showAlertBox: false,
+            });
+        }).catch((err) => this.setState({ showAlertBox: true }));
     }
 
     render() {
@@ -31,9 +37,10 @@ class FormHistory extends Component {
                 <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
                 <SurveyDataTable formData={ this.state.forms.reverse() } history={ this.props.history }/>
                 <AlertBox 
-                    show={ this.state.forms.length === 0 }
+                    show={ this.state.showAlertBox }
                     dialogText={ "No completed surveys to show yet." }
                     btnTexts={ ["Noted!"] }
+                    handleClose={ () => this.setState({ showAlertBox: false }) }
                 />
                 <div className="App-footer">
                     <RaisedButton className="nav-btn"

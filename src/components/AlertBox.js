@@ -3,44 +3,36 @@ import PropTypes from 'prop-types';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
-export default class AlertBox extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            show: this.props.show,
-        }
-    }
+const AlertBox = (props) => {
+    const actions = props.btnTexts.map((text) => {
+        return <FlatButton
+            key={ text }
+            label={ text }
+            primary={ true }
+            onClick={ props.handleClose }
+        />;
+    });
 
-    handleClose = () =>  this.setState({ show: false });
-
-    render() {
-        const actions = this.props.btnTexts.map((text) => {
-            return <FlatButton
-                key={ text }
-                label={ text }
-                primary={ true }
-                onClick={ this.handleClose }
-            />;
-        });
-
-        return (
-            <div>
-                <Dialog
-                    actions={ actions }
-                    modal={ false }
-                    open={ this.state.show }
-                    onRequestClose={ this.props.handleClose }
-                    contentStyle={{ width: 350, textAlign: 'center' }}
-                >
-                    { this.props.dialogText }
-                </Dialog>
-            </div>
-        );
-    }
-}
+    return (
+        <div>
+            <Dialog
+                actions={ actions }
+                modal={ false }
+                open={ props.show }
+                onRequestClose={ props.handleClose }
+                contentStyle={{ width: 350, textAlign: 'center' }}
+            >
+                { props.dialogText }
+            </Dialog>
+        </div>
+    );
+};
 
 AlertBox.PropTypes = {
     show: PropTypes.bool.isRequired,
     dialogText: PropTypes.string.isRequired,
     btnTexts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    handleClose: PropTypes.func.isRequired,
 };
+
+export default AlertBox;
