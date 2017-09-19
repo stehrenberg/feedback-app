@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { TextField } from 'material-ui';
 
 import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
@@ -9,6 +10,7 @@ import { setJWT } from '../../actions';
 import { fetchDataFrom } from '../../util/utils';
 
 class LoginForm extends Component {
+
 
     constructor(props) {
         super(props);
@@ -38,39 +40,42 @@ class LoginForm extends Component {
     }
 
     render() {
+        const INVALID_CREDS_MSG = 'Invalid credentials';
+
         return (
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
                 <div className="App-content">
                     <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                        { this.state.loginFailed ? <p>Invalid credentials.</p> : '' }
-                        <div className="login-inputfield">
-                            <label>Project:</label>
-                            <input name="projectName"
-                                   type="text"
-                                   autoComplete="off"
-                                   onChange={ (event) => this.handleChange(event) }
-                                   autoFocus
-                                   required
-                            />
-                        </div>
+                        <TextField
+                            name="projectName"
+                            floatingLabelText="Project"
+                            floatingLabelFixed={true}
+                            type="text"
+                            autoComplete="off"
+                            onChange={ (event) => this.handleChange(event) }
+                            autoFocus
+                            required
+                        />
                         <div className="credentials">
-                            <div className="login-inputfield">
-                                <label>Email:</label>
-                                <input name="email"
-                                       type="text"
-                                       onChange={ (event) => this.handleChange(event) }
-                                       required
-                                />
-                            </div>
-                            <div className="login-inputfield">
-                                <label>Password:</label>
-                                <input name="password"
-                                       type="password"
-                                       onChange={ (event) => this.handleChange(event) }
-                                       required
-                                />
-                            </div>
+                            <TextField
+                                name="email"
+                                floatingLabelText="Email"
+                                floatingLabelFixed={true}
+                                errorText={ this.state.loginFailed ? INVALID_CREDS_MSG : "" }
+                                type="text"
+                                onChange={ (event) => this.handleChange(event) }
+                                required
+                            />
+                            <TextField
+                                name="password"
+                                floatingLabelText="Password"
+                                floatingLabelFixed={true}
+                                errorText={ this.state.loginFailed ? INVALID_CREDS_MSG : "" }
+                                type="password"
+                                onChange={ (event) => this.handleChange(event) }
+                                required
+                            />
                         </div>
                         <div className="login-btn">
                             <LoginBtn {...this.props.history}  />
@@ -85,10 +90,7 @@ class LoginForm extends Component {
         const apiEndpoint = `${config.dreamfactoryApi.loginEndpoint}session`;
         const httpMethod = 'POST';
         const dataTransformMethod = (jwt) => jwt;
-        const errorHandler = (error) => {
-            console.log("bla", error);
-            this.setState({ loginFailed: true });
-        };
+        const errorHandler = (error) => this.setState({ loginFailed: true });
         const payload = {
             "email": email,
             "password": password,
