@@ -22,6 +22,9 @@ build:
 
 deploy:
   stage: deploy
+  environment:
+    name: production
+    url: https://feedback.mayflower.de
   script:
     - "echo 'Building Feedback-App for production deployment'"
     - "npm run build"
