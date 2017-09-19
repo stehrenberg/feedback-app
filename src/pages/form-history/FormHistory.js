@@ -28,7 +28,7 @@ class FormHistory extends Component {
         return (
             <div>
                 <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
-                <SurveyDataTable formData={ this.state.forms } history={ this.props.history }/>
+                <SurveyDataTable formData={ this.state.forms.reverse() } history={ this.props.history }/>
                 <div className="App-footer">
                     <RaisedButton className="nav-btn"
                                   primary={ true }
