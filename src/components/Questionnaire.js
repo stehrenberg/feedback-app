@@ -20,8 +20,7 @@ class Questionnaire extends Component {
         if (this.props.isReadOnly) {
             this.fetchFormData().then((formsDataAsArray) => {
                 const updatedQuestions = this.state.questions.map(question => {
-                    // FIXME Find why question.id from questionTexts.json gets converted to string
-                    const storedQuestion = formsDataAsArray.find(storedQuestion => storedQuestion.id == question.id);
+                    const storedQuestion = formsDataAsArray.find(storedQuestion => storedQuestion.id === question.id);
                     const questionValue = !(!storedQuestion) ? storedQuestion.questionValue : "";
 
                     return  Object.assign({}, {...question}, {value: questionValue});
@@ -55,7 +54,8 @@ class Questionnaire extends Component {
         const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
-                id: resultTuple.question_id,
+                // ID is stored as int in db but we need it as string for further comparisons.
+                id: resultTuple.question_id.toString(),
                 questionValue: resultTuple.question_answer,
             };
         });
