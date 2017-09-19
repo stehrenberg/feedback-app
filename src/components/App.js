@@ -14,7 +14,9 @@ import AppMenu from '../components/app-menu/AppMenu';
 class App extends Component {
 
     componentWillMount = () => {
-        
+        const storedSessionToken = localStorage.getItem("sessionToken");
+        const sessionToken = !(!storedSessionToken)? JSON.parse(storedSessionToken) : {};
+        console.log(sessionToken);
     };
 
     render() {
@@ -35,7 +37,9 @@ class App extends Component {
         );
     }
 
-    checkAuthentication = () => Object.keys(this.props.store.getState().jwt).length > 0;
+    checkAuthentication = () => {
+        return Object.keys(this.props.store.getState().jwt).length > 0;
+    }
 }
 
 App.PropTypes = {
