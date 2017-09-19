@@ -4,6 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
 import appConfig from '../../config/config.json'
+import AlertBox from '../../components/AlertBox';
 import '../../app.css';
 import { fetchDataFrom, capitalize } from '../../util/utils';
 
@@ -29,6 +30,11 @@ class FormHistory extends Component {
             <div>
                 <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
                 <SurveyDataTable formData={ this.state.forms.reverse() } history={ this.props.history }/>
+                <AlertBox 
+                    show={ this.state.forms.length === 0 }
+                    dialogText={ "No completed surveys to show yet." }
+                    btnTexts={ ["Noted!"] }
+                />
                 <div className="App-footer">
                     <RaisedButton className="nav-btn"
                                   primary={ true }
