@@ -21,7 +21,7 @@ class LoginForm extends Component {
         event.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
-        const jwt = this.authenticate(email, password)
+        this.authenticate(email, password)
             .then((jwt) => {
                 this.props.dispatch(setJWT(jwt));
                 this.props.history.push(`/home/${ this.state.projectName }`);
@@ -82,14 +82,14 @@ class LoginForm extends Component {
     authenticate = (email, password) => {
         const apiEndpoint = `${config.dreamfactoryApi.loginEndpoint}session`;
         const httpMethod = 'POST';
-        const dataTransformMethod = (data) => console.log(data);
+        const dataTransformMethod = (jwt) => jwt;
         const payload = {
             "email": email,
             "password": password,
             "duration": 0
         };
 
-        return fetchDataFrom(apiEndpoint, 'POST', (jwt) => jwt, payload);
+        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, payload);
     };
 }
 
