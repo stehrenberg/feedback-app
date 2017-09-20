@@ -29,6 +29,7 @@ class LoginForm extends Component {
                 this.props.dispatch(setJWT(jwt));
                 this.props.history.push(`/home/${ this.state.projectName }`);
                 localStorage.setItem("sessionToken", JSON.stringify(jwt));
+                localStorage.setItem("projectName", this.state.projectName);
             }).catch((error) => console.log(error));
     }
 
