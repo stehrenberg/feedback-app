@@ -23,7 +23,7 @@ class FormHistory extends Component {
         this.fetchFormData().then((formsDataAsArray) => {
             this.setState({
                 forms: formsDataAsArray,
-                showAlertBox: false,
+                showAlertBox: formsDataAsArray.length === 0,
             });
         }).catch((err) => this.setState({ showAlertBox: true }));
     }
