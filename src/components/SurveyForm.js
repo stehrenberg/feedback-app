@@ -2,6 +2,7 @@ import React from 'react';
 
 import Question from './Question';
 import SaveBtn from './buttons/SaveBtn';
+import TodoList from '../components/TodoList';
 
 const SurveyForm = (props) => {
     return (
@@ -15,6 +16,7 @@ const SurveyForm = (props) => {
                                   isReadOnly={ props.isReadOnly }
                 {...question} />)
         }
+        <TodoList todos={ props.todos }/>
         { props.isReadOnly ? null : <div className="save-btn"><SaveBtn /></div> }
     </form>
     );
