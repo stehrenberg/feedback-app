@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Moment from 'moment';
 import RaisedButton from 'material-ui/RaisedButton';
 import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
@@ -9,17 +9,19 @@ import questions from '../../config/questionTexts.json';
 
 import '../../app.css'
 
-class FeedbackForm extends Component {
+const FeedbackForm = (props) => {
 
-    render() {
         return (
             <div className="FeedbackForm">
                 <LogoHeader title="Cooperation Feedback Questionnaire"/>
                 <div className="App-content">
-                    <Questionnaire id={ this.generateId() } questions={ questions.questionTexts } isReadOnly={ false }/>
+                    <Questionnaire id={ generateId() }
+                                   questions={ questions.questionTexts }
+                                   todos={ [] }
+                                   isReadOnly={ false }/>
                     <div className="App-footer">
                         <RaisedButton className="nav-btn"
-                                      onClick={ this.props.history.goBack }
+                                      onClick={ props.history.goBack }
                                       icon={ <ArrowBack /> }
                                       primary={ true }
                                       label={ "Back" }/>
@@ -27,11 +29,10 @@ class FeedbackForm extends Component {
                 </div>
             </div>
         );
-    }
 
-    generateId() {
-        return Moment().format("YYYYMMDD");
-    }
-}
+
+};
+
+const generateId = () => Moment().format("YYYYMMDD");
 
 export default FeedbackForm;
