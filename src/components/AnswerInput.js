@@ -44,7 +44,7 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
 
 AnswerInput.propTypes = {
     name: PropTypes.string.isRequired,
-    inputType: PropTypes.oneOf(['date', 'text', 'number', 'input']).isRequired,
+    inputType: PropTypes.oneOf(['date', 'text', 'number', 'input', 'todo']).isRequired,
     isReadOnly: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.object ]),
