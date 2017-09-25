@@ -4,13 +4,14 @@ const TextInput = ({isReadOnly, handleChange, value, name, inputType, placeholde
 
     const optionalProps = isReadOnly? { disabled: true } : {};
 
-    return <input
+    return <textarea
         name={ name }
         type={ inputType }
-        placeholder={ placeholder }
         value={ value }
+        placeholder={ placeholder }
         onChange={ (event) => handleChange(name, event.target.value) }
-        {...optionalProps} />;
+        rows={ 3 }
+        {...optionalProps}/>;
 };
 
 export default TextInput;

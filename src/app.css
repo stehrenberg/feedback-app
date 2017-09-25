@@ -84,21 +84,22 @@ th {
     padding: 10px 0 15px 0;
 }
 
-.Question input {
+.Question textarea {
     width: 100%;
+    resize: vertical;
     margin-top: 10px;
     font-size: 14px;
     color: #88878B;
-    border: none;
+    border-style: solid;
     border-bottom-width: 2px;
-    border-bottom-style: solid;
-    border-bottom-color: #c9c9c9;
+    border-color: #c9c9c9;
     outline: none;
 }
 
-.Question input[disabled] {
+.Question textarea[disabled] {
     border: none;
     background-color: #ffffff;
+    resize: none;
     color: #88878B;
     padding: 0 8px 5px 2px;
     font-size: 16px;
