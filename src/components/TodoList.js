@@ -1,15 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TodoList = ({ todos }) => {
     return (
         <ul>
-            { todos.map((todo) => <li>{ todo.text }</li>) }
+            { todos.map((todo) => <li key={ todo.text }>{ todo.text }</li>) }
         </ul>
     )
 };
 
 TodoList.PropTypes = {
-    todos: PropTypes.ArrayOf(PropTypes.string),
+    todos: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default TodoList;
