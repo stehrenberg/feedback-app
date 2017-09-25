@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import NumberInput from './answers/NumberInput';
 import DateInput from './answers/DateInput';
 import TextInput from './answers/TextInput';
+import TodoInput from './answers/TodoInput';
 
 const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value }) => {
 
@@ -22,6 +23,10 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
                                     value={ value }
                                     handleChange={ (event, date) => onChange(name, date) }
                                     isReadOnly={ isReadOnly }/>;
+            break;
+
+        case 'todo':
+            inputField = <TodoInput />;
             break;
 
         default:
