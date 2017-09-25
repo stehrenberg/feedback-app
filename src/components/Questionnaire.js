@@ -11,6 +11,7 @@ class Questionnaire extends Component {
 
         this.state = {
             questions: this.props.questions,
+            todos: this.props.todos,
             isSaved: false,
         };
     }
@@ -41,6 +42,7 @@ class Questionnaire extends Component {
                 </p>
                 <SurveyForm
                     questions={ this.state.questions }
+                    todos={ this.state.todos }
                     onChange={ this.handleChange }
                     onSubmit={ this.handleSubmit }
                     isReadOnly={ this.props.isReadOnly }
