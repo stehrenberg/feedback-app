@@ -9,6 +9,7 @@ export const setProject = (projectName) => {
 };
 
 export const setJWT = (jwt) => {
+    console.log(jwt);
     return {
         type: LOGIN,
         jwt,
