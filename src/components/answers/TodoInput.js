@@ -1,4 +1,6 @@
 import React from 'react';
-const TodoInput = () => <input placeholder="Add item..." />;
+import TextField from 'material-ui/TextField';
+
+const TodoInput = () => <TextField hintText="Add item..." fullWidth={ true }/>;
 
 export default TodoInput;
