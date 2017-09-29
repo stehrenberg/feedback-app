@@ -10,8 +10,7 @@ import { setJWT } from '../../actions';
 import { fetchDataFrom } from '../../util/utils';
 
 class LoginForm extends Component {
-
-
+    
     constructor(props) {
         super(props);
         this.state = {

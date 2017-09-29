@@ -3,7 +3,7 @@ import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 
 import { fetchDataFrom } from '../util/utils';
-import appConfig from '../config/config.json';
+import config from '../config/config.json';
 
 class Questionnaire extends Component {
 
@@ -54,7 +54,7 @@ class Questionnaire extends Component {
     }
 
     fetchFormData = () => {
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
+        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
         const errorHandler = (error) => console.log(error);
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
@@ -74,7 +74,7 @@ class Questionnaire extends Component {
 
         if (!this.props.isReadOnly) {
             //this.saveForm();
-            this.saveTodos();
+            this.saveTodos(this.state.todos);
         }
     };
 
@@ -90,7 +90,7 @@ class Questionnaire extends Component {
     };
 
     saveForm = () => {
-        const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+        const surveyEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey`;
         const questionsAsArray = this.getQuestionValuesAsArray();
         const httpMethod = this.state.isSaved ? 'PATCH' : 'POST';
 
@@ -108,21 +108,22 @@ class Questionnaire extends Component {
             } else {
                 console.log(response.error);
             }
-        }).catch(err => {
+        }).then(() => this.saveTodos(this.props.todos)
+        ).catch(err => {
             console.log("error!");
             console.log(err);
         });
     };
     
     createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
-        const projectName = appConfig.appConfig.projectName;
+        const projectName = config.appConfig.projectName;
 
         return fetch(surveyEndpoint, {
             method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+                'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
                 "resource": {
@@ -135,19 +136,49 @@ class Questionnaire extends Component {
     };
 
     createNewSurveyResultRecord = (httpMethod, questionsAsArray) => {
-        const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
+        const surveyResultEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
 
         return fetch(`${surveyResultEndpoint}?id_field=survey_id%2C%20question_id`, {
             method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+                'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
                 "resource": questionsAsArray,
             }),
         })
+    };
+
+    saveTodos = (todosAsArray) => {
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+        const httpMethod = 'POST';
+        const dataTransformMethod = (data) => console.log(data);
+        const errorHandler = (error) => console.log(error);
+        const todosToSave = todosAsArray.map(todo => {
+            return {
+                survey_id: this.props.surveyId,
+                text: todo.text,
+                completed: todo.completed
+            };
+        });
+
+        console.log(todosToSave);
+
+        const payload = {
+            "resource": [{
+                    "survey_id": "20170929",
+                    "text": "bla"
+                },
+                    {
+                        "survey_id": "20170929",
+                        "text": "blubb"
+                    }
+            ]
+        };
+
+        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     getQuestionValuesAsArray = () => {

@@ -17,7 +17,6 @@ export const setJWT = (jwt) => {
 };
 
 export const addTodo = (newTodo) => {
-    console.log("actions->addTodo called with ", newTodo);
     return {
         type: ADD_TODO,
         newTodo,

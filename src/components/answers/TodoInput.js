@@ -14,10 +14,7 @@ class TodoInput extends Component {
         };
     }
 
-    handleChange  = (event) => {
-        this.setState({ input:  event.target.value});
-        console.log(this.state);
-    };
+    handleChange  = (event) => this.setState({ input:  event.target.value});
 
     handleClick = (event) => {
         event.preventDefault();

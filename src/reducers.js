@@ -22,7 +22,6 @@ function jwt(state = {}, action) {
 function todos(state = [], action) {
     switch(action.type) {
         case 'ADD_TODO':
-            console.log("reducers->todos called");
             return [
                 ...state,
                 {
