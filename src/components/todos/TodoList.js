@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import TodoItem from './TodoItem';
+import { List } from 'material-ui/List';
 
 const TodoList = ({ todos }) => {
     return (
-        <ul key={ todos }>
+        <List key={ todos }>
             { todos.map(
                 (todo) => <TodoItem key={ todo.text }
                                     text={ todo.text }
                                     completed={ todo.completed }/>) }
-        </ul>
+        </List>
     )
 };
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TodoItem = ({ text, completed }) => <li className="todo-item">{ text }</li>;
+const TodoItem = ({ text, completed }) => (
+    <li className={`TodoItem ${completed? 'completed' : ''}`}>{ text }</li>
+);
 
 TodoItem.PropTypes = {
     text: PropTypes.string.isRequired,

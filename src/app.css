@@ -114,6 +114,10 @@ th {
     display: none;
 }
 
+.TodoItem.completed {
+    text-decoration: line-through;
+}
+
 .login-form {
     display: flex;
     justify-content: center;
