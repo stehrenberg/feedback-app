@@ -26,7 +26,7 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
             break;
 
         case 'todo':
-            inputField = <TodoInput surveyId={ surveyId }/>;
+            inputField = <TodoInput surveyId={ surveyId } isReadOnly={ isReadOnly }/>;
             break;
 
         default:
