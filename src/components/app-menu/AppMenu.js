@@ -23,8 +23,8 @@ const MenuPage = (props) => {
         },
         {
             img: HistoryIcon,
-            title: "...",
-            link: "tba"
+            title: "Open Todos",
+            link: "/open-todos"
         },
     ];
 
