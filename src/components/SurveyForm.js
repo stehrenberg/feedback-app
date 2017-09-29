@@ -2,7 +2,7 @@ import React from 'react';
 
 import Question from './Question';
 import SaveBtn from './buttons/SaveBtn';
-import TodoList from '../components/TodoList';
+import TodoList from './todos/TodoList';
 
 const SurveyForm = (props) => {
     return (

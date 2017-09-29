@@ -10,7 +10,6 @@ import questions from '../../config/questionTexts.json';
 import '../../app.css'
 
 const FeedbackForm = (props) => {
-
         return (
             <div className="FeedbackForm">
                 <LogoHeader title="Cooperation Feedback Questionnaire"/>

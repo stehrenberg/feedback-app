@@ -105,6 +105,14 @@ th {
     font-size: 16px;
 }
 
+.todo-input {
+    display: flex;
+}
+
+.todo-input > button {
+    display:none;
+}
+
 .login-form {
     display: flex;
     justify-content: center;

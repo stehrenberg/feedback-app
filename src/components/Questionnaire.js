@@ -71,7 +71,7 @@ class Questionnaire extends Component {
         event.preventDefault();
 
         if (!this.props.isReadOnly) {
-            this.saveForm();
+            //this.saveForm();
         }
     };
 
