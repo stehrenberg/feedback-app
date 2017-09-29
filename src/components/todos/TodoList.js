@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import TodoItem from './TodoItem';
 
 const TodoList = ({ todos }) => {
     return (
         <ul key={ todos }>
-            { todos.map((todo) => <li key={ todo.text }>{ todo.text }</li>) }
+            { todos.map(
+                (todo) => <TodoItem key={ todo.text }
+                                    text={ todo.text }
+                                    completed={ todo.completed }/>) }
         </ul>
     )
 };
