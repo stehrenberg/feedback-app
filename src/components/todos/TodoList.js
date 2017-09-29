@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 const TodoList = ({ todos }) => {
     return (
@@ -13,4 +14,8 @@ TodoList.PropTypes = {
     todos: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default TodoList;
+const mapStateToProps = state => {
+    return { todos: state.todos };
+};
+
+export default connect(mapStateToProps)(TodoList);

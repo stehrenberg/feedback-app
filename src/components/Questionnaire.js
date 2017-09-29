@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
+import { connect } from 'react-redux';
 
 import { fetchDataFrom } from '../util/utils';
 import appConfig from '../config/config.json';
@@ -41,6 +42,7 @@ class Questionnaire extends Component {
                         competences to build and where to improve.</strong>
                 </p>
                 <SurveyForm
+                    surveyId={ this.props.id }
                     questions={ this.state.questions }
                     todos={ this.state.todos }
                     onChange={ this.handleChange }
@@ -72,10 +74,12 @@ class Questionnaire extends Component {
 
         if (!this.props.isReadOnly) {
             //this.saveForm();
+            this.saveTodos();
         }
     };
 
     handleChange = (name, value) => {
+        console.log(`handleChange on Questionnaire for $(name) called`);
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
             const newValue = question.shortText === name? value : question.value;
@@ -109,7 +113,7 @@ class Questionnaire extends Component {
             console.log(err);
         });
     };
-
+    
     createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
         const projectName = appConfig.appConfig.projectName;
 
@@ -157,4 +161,9 @@ class Questionnaire extends Component {
     };
 }
 
-export default Questionnaire;
+const mapStateToProps = (state) => {
+    console.log("state changed!", state);
+    return { todos: state.todos };
+};
+
+export default connect(mapStateToProps)(Questionnaire);

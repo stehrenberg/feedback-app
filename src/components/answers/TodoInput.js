@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import TextField from 'material-ui/TextField';
 import TodoList from '../../components/todos/TodoList';
+import { addTodo } from '../../actions';
 
 class TodoInput extends Component {
 
@@ -8,7 +11,6 @@ class TodoInput extends Component {
         super(props);
         this.state = {
             input: '',
-            todos: [],
         };
     }
 
@@ -17,12 +19,14 @@ class TodoInput extends Component {
         console.log(this.state);
     };
 
-    handleSubmit = (event) => {
+    handleClick = (event) => {
         event.preventDefault();
-        const newTodo = { text: this.state.input };
-        this.state.todos.push(newTodo);
+        const newTodo = {
+            text: this.state.input,
+            completed: false,
+        };
+        this.props.dispatch(addTodo(newTodo));
         this.setState({ input: ''});
-        console.log(this.state);
     };
 
     render() {
@@ -35,13 +39,12 @@ class TodoInput extends Component {
                     hintText="Add item..."
                     autoComplete="off"
                     onChange={ this.handleChange }/>
-                <button type="submit" label="Add" onClick={ (event) => this.handleSubmit(event) } />
+                <button type="submit" label="Add" onClick={ (event) => this.handleClick(event) } />
             </div>
-            <TodoList todos={ this.state.todos }/>
+            <TodoList />
         </div>
         );
     }
 }
 
-
-export default TodoInput;
+export default connect()(TodoInput);

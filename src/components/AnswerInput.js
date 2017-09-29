@@ -6,7 +6,7 @@ import DateInput from './answers/DateInput';
 import TextInput from './answers/TextInput';
 import TodoInput from './answers/TodoInput';
 
-const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value }) => {
+const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value, surveyId }) => {
 
     let inputField;
 
@@ -26,7 +26,7 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
             break;
 
         case 'todo':
-            inputField = <TodoInput />;
+            inputField = <TodoInput surveyId={ surveyId }/>;
             break;
 
         default:
@@ -44,6 +44,7 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
 
 AnswerInput.propTypes = {
     name: PropTypes.string.isRequired,
+    surveyId: PropTypes.string.isRequired,
     inputType: PropTypes.oneOf(['date', 'text', 'number', 'input', 'todo']).isRequired,
     isReadOnly: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,

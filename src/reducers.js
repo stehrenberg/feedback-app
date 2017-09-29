@@ -19,9 +19,25 @@ function jwt(state = {}, action) {
     }
 }
 
+function todos(state = [], action) {
+    switch(action.type) {
+        case 'ADD_TODO':
+            console.log("reducers->todos called");
+            return [
+                ...state,
+                {
+                text: action.newTodo.text,
+                completed: action.newTodo.completed,
+            }];
+        default:
+            return state;
+    }
+}
+
 const feedbackApp = combineReducers({
     projectName,
     jwt,
+    todos,
 });
 
 export default feedbackApp;
