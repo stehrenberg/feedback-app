@@ -7,7 +7,7 @@ import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
 import config from '../../config/config.json';
 import { setJWT } from '../../actions';
-import { fetchDataFrom } from '../../util/utils';
+import { apiCall } from '../../util/utils';
 
 class LoginForm extends Component {
     
@@ -98,7 +98,7 @@ class LoginForm extends Component {
             "duration": 0
         };
 
-        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 }
 

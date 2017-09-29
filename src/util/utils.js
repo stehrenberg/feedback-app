@@ -1,6 +1,6 @@
 import appConfig from '../config/config.json';
 
-export const fetchDataFrom = (apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload = null) => {
+export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload = null) => {
 
     let config = {
         method: httpMethod,

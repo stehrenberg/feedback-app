@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 
-import { fetchDataFrom } from '../util/utils';
+import { apiCall } from '../util/utils';
 import config from '../config/config.json';
 
 class Questionnaire extends Component {
@@ -12,7 +12,6 @@ class Questionnaire extends Component {
 
         this.state = {
             questions: this.props.questions,
-            todos: this.props.todos,
             isSaved: false,
         };
     }
@@ -44,7 +43,6 @@ class Questionnaire extends Component {
                 <SurveyForm
                     surveyId={ this.props.id }
                     questions={ this.state.questions }
-                    todos={ this.state.todos }
                     onChange={ this.handleChange }
                     onSubmit={ this.handleSubmit }
                     isReadOnly={ this.props.isReadOnly }
@@ -64,7 +62,7 @@ class Questionnaire extends Component {
             };
         });
 
-        return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
+        return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
     };
 
     // TODO Remove all the above :D
@@ -73,13 +71,11 @@ class Questionnaire extends Component {
         event.preventDefault();
 
         if (!this.props.isReadOnly) {
-            //this.saveForm();
-            this.saveTodos(this.state.todos);
+            this.saveForm();
         }
     };
 
     handleChange = (name, value) => {
-        console.log(`handleChange on Questionnaire for $(name) called`);
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
             const newValue = question.shortText === name? value : question.value;
@@ -101,15 +97,9 @@ class Questionnaire extends Component {
                 console.log(response.error);
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
-        ).then((response) => {
-            if (response.ok) {
-                this.setState({isSaved: true});
-                return response.json();
-            } else {
-                console.log(response.error);
-            }
-        }).then(() => this.saveTodos(this.props.todos)
-        ).catch(err => {
+        ).then(() => this.saveTodos(this.props.todos)).then(() => {
+             this.setState({isSaved: true});
+        }).catch(err => {
             console.log("error!");
             console.log(err);
         });
@@ -154,31 +144,21 @@ class Questionnaire extends Component {
     saveTodos = (todosAsArray) => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'POST';
-        const dataTransformMethod = (data) => console.log(data);
+        const dataTransformMethod = () => {};
         const errorHandler = (error) => console.log(error);
         const todosToSave = todosAsArray.map(todo => {
             return {
-                survey_id: this.props.surveyId,
+                survey_id: this.props.id,
                 text: todo.text,
                 completed: todo.completed
             };
         });
 
-        console.log(todosToSave);
-
         const payload = {
-            "resource": [{
-                    "survey_id": "20170929",
-                    "text": "bla"
-                },
-                    {
-                        "survey_id": "20170929",
-                        "text": "blubb"
-                    }
-            ]
+            "resource": todosToSave
         };
 
-        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     getQuestionValuesAsArray = () => {
@@ -193,8 +173,7 @@ class Questionnaire extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("state changed!", state);
-    return { todos: state.todos };
+    return { todos: [...state.todos] };
 };
 
 export default connect(mapStateToProps)(Questionnaire);

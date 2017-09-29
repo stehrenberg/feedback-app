@@ -12,7 +12,7 @@ import FormDetail from "../components/FormDetail";
 import LoginForm from "../pages/login/LoginForm";
 import AppMenu from '../components/app-menu/AppMenu';
 import { setJWT } from '../actions';
-import { fetchDataFrom } from '../util/utils';
+import { apiCall } from '../util/utils';
 import config from '../config/config.json';
 
 class App extends Component {
@@ -38,7 +38,7 @@ class App extends Component {
         const errorHandler = (error) => console.log(error);
         const payload = { session_token: jwt.session_token };
 
-        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     render() {
