@@ -19,6 +19,7 @@ class FilteredTodos extends Component {
         const dataTransformMethod = (data) => {
             return data.resource.map((todo) => {
                 return {
+                    surveyId: todo.survey_id.toString(),
                     text: todo.text,
                     completed: todo.completed,
                     createdAt: Moment(todo.created_at),
@@ -42,8 +43,6 @@ class FilteredTodos extends Component {
             default:
                 filterMode = 'completed';
         }
-
-        console.log(filterMode);
 
         return (
             <div>

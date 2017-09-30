@@ -19,6 +19,7 @@ class TodoInput extends Component {
     handleClick = (event) => {
         event.preventDefault();
         const newTodo = {
+            surveyId: this.props.surveyId,
             text: this.state.input,
             completed: false,
         };
@@ -41,7 +42,7 @@ class TodoInput extends Component {
                 }
                 <button type="submit" label="Add" onClick={ (event) => this.handleClick(event) } />
             </div>
-            <TodoList />
+            <TodoList surveyId={ this.props.surveyId }/>
         </div>
         );
     }
