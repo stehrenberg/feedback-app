@@ -32,8 +32,17 @@ class FilteredTodos extends Component {
     };
 
     render = () => {
-        // FIXME Mhm, nich einfach so verwenden...
-        const filterMode = this.props.match.params.filter;
+        const filterParam = this.props.match.params.filter;
+        let filterMode;
+
+        switch(filterParam) {
+            case 'open':
+                filterMode = 'open';
+                break;
+            default:
+                filterMode = 'completed';
+        }
+
         console.log(filterMode);
 
         return (
