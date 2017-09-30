@@ -46,6 +46,6 @@ const TileMenu = ({ tileData, cols, rows }) => {
             ))}
         </GridList>
     </div>;
-}
+};
 
 export default TileMenu;
