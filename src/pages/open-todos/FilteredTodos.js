@@ -28,10 +28,7 @@ class FilteredTodos extends Component {
         const errorHandler = (error) => console.log(error);
 
         apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
-            .then((todosAsArray) => {
-                console.log(todosAsArray);
-                this.props.dispatch(loadOpenTodos(todosAsArray));
-            });
+            .then((todosAsArray) => this.props.dispatch(loadOpenTodos(todosAsArray)));
     };
 
     render = () => {
@@ -44,8 +41,7 @@ class FilteredTodos extends Component {
                         <List>
                             { this.props.todos.map(
                                 (todo) => <TodoItem key={ `${todo.text}-${todo.created_at}` }
-                                                    text={ todo.text }
-                                                    completed={ todo.completed }/>)
+                                                    todoType="miniCard" {...todo}/>)
                             }
                         </List>
                     </div>
@@ -61,7 +57,7 @@ class FilteredTodos extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        todos: [...state.todos].filter((todo) => !todo.completed)
+        todos: [...state.todos]//.filter((todo) => !todo.completed) --> not yet...
     };
 };
 
