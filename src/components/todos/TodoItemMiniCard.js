@@ -19,10 +19,10 @@ class TodoItemMiniCard extends Component {
     };
 
     render = () => {
-        const { text, completed, createdAt=Moment() } = this.props;
+        const { text, createdAt=Moment() } = this.props;
 
         return (
-            <ListItem className={ `TodoItem ${completed? 'completed' : ''}` }
+            <ListItem className={ `TodoItem ${this.state.completed? 'completed' : ''}` }
                       primaryText={ text }
                       secondaryText={ createdAt.format("YYYY-MM-DD") }
                       leftCheckbox={
