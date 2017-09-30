@@ -12,7 +12,6 @@ import { apiCall } from '../../util/utils';
 import config from '../../config/config.json';
 
 class FilteredTodos extends Component {
-
     componentWillMount = () => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'GET';
