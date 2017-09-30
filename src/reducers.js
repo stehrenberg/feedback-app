@@ -25,8 +25,9 @@ function todos(state = [], action) {
             return [
                 ...state,
                 {
-                text: action.newTodo.text,
-                completed: action.newTodo.completed,
+                    surveyId: action.newTodo.surveyId,
+                    text: action.newTodo.text,
+                    completed: action.newTodo.completed,
             }];
 
         case 'LOAD_OPEN_TODOS':
