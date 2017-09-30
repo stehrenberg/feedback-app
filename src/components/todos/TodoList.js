@@ -16,7 +16,8 @@ const TodoList = ({ todos, surveyId }) => {
 };
 
 TodoList.PropTypes = {
-    todos: PropTypes.arrayOf(PropTypes.string),
+    todos: PropTypes.arrayOf(PropTypes.string).isRequired,
+    surveyId: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {
