@@ -172,8 +172,8 @@ class Questionnaire extends Component {
     };
 }
 
-const mapStateToProps = (state) => {
-    return { todos: [...state.todos] };
+const mapStateToProps = (state, ownProps) => {
+    return { todos: ownProps.isReadOnly? [...state.todos].filter((todo) => todo.surveyId === ownProps.id) : [] };
 };
 
 export default connect(mapStateToProps)(Questionnaire);
