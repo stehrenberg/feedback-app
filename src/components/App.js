@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 
 import PrivateRoute from './PrivateRoute';
 import FeedbackForm from '../pages/feedback-form/FeedbackForm';
-import FormHistory from "../pages/form-history/FormHistory";
-import FormDetail from "../components/FormDetail";
-import OpenTodos from '../pages/open-todos/OpenTodos';
-import LoginForm from "../pages/login/LoginForm";
+import FormHistory from '../pages/form-history/FormHistory';
+import FormDetail from '../components/FormDetail';
+import FilteredTodos from '../pages/open-todos/FilteredTodos';
+import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../components/app-menu/AppMenu';
 import { setJWT } from '../actions';
 import { apiCall } from '../util/utils';
@@ -53,7 +53,7 @@ class App extends Component {
                             <PrivateRoute exact path='/feedback' component={ FeedbackForm } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute path="/feedback/:formId" component={ FormDetail } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute exact path='/form-history' component={ FormHistory } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/open-todos' component={ OpenTodos } isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/open-todos' component={ FilteredTodos } isAuthenticated={ this.checkAuthentication }/>
                             <Route exact path='/login' component={ LoginForm }/>
                         </Switch>
                     </HashRouter>
