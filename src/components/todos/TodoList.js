@@ -4,18 +4,19 @@ import { connect } from 'react-redux';
 import TodoItem from './TodoItem';
 import { List } from 'material-ui/List';
 
-const TodoList = ({ surveyId, todos }) => {
+const TodoList = ({ todos, surveyId }) => {
     return (
         <List key={ todos }>
             { todos.map(
-                (todo) => <TodoItem key={ todo.text } {...todo}/>) }
+                (todo) => <TodoItem key={ todo.text }
+                                    text={ todo.text }
+                                    completed={ todo.completed } {...todo}/>) }
         </List>
     )
 };
 
 TodoList.PropTypes = {
-    todos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    surveyId: PropTypes.string.isRequired,
+    todos: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = (state, ownProps) => {
