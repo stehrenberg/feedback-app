@@ -28,6 +28,9 @@ function todos(state = [], action) {
                 text: action.newTodo.text,
                 completed: action.newTodo.completed,
             }];
+
+        case 'LOAD_OPEN_TODOS':
+            return [...action.openTodos];
         default:
             return state;
     }

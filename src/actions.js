@@ -1,6 +1,7 @@
 export const SET_PROJECT = 'SET_PROJECT';
 export const LOGIN = 'LOGIN';
 export const ADD_TODO = 'ADD_TODO';
+export const LOAD_OPEN_TODOS = 'LOAD_OPEN_TODOS';
 
 export const setProject = (projectName) => {
     return {
@@ -20,5 +21,12 @@ export const addTodo = (newTodo) => {
     return {
         type: ADD_TODO,
         newTodo,
+    }
+};
+
+export const loadOpenTodos = (openTodos) => {
+    return {
+        type: LOAD_OPEN_TODOS,
+        openTodos,
     }
 };
