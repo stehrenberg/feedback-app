@@ -9,6 +9,7 @@ import questions from '../../config/questionTexts.json';
 class FeedbackForm extends Component {
 
     render() {
+        // FIXME Mhm, besser einfach so verwenden...?
         const formId = this.props.match.params.formId;
         const meetingDate = Moment(formId.toString(), 'YYYYMMDD').format("dddd, MMMM Do YYYY");
 

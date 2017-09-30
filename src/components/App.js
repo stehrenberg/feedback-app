@@ -53,7 +53,7 @@ class App extends Component {
                             <PrivateRoute exact path='/feedback' component={ FeedbackForm } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute path="/feedback/:formId" component={ FormDetail } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute exact path='/form-history' component={ FormHistory } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/open-todos' component={ FilteredTodos } isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/todos/:filter' component={ FilteredTodos } isAuthenticated={ this.checkAuthentication }/>
                             <Route exact path='/login' component={ LoginForm }/>
                         </Switch>
                     </HashRouter>

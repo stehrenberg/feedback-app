@@ -24,7 +24,7 @@ const MenuPage = (props) => {
         {
             img: HistoryIcon,
             title: "Open Todos",
-            link: "/open-todos"
+            link: "/todos/open"
         },
     ];
 

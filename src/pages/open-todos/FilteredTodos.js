@@ -8,11 +8,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
 import { loadOpenTodos } from '../../actions';
-import { apiCall } from '../../util/utils';
+import { apiCall, capitalize } from '../../util/utils';
 import config from '../../config/config.json';
 
 class FilteredTodos extends Component {
-    
+
     componentWillMount = () => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'GET';
@@ -32,9 +32,13 @@ class FilteredTodos extends Component {
     };
 
     render = () => {
+        // FIXME Mhm, nich einfach so verwenden...
+        const filterMode = this.props.match.params.filter;
+        console.log(filterMode);
+
         return (
             <div>
-            <LogoHeader title="Open ToDos" />
+            <LogoHeader title={`${capitalize(filterMode)} ToDos`} />
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="App-content">
                     <div className="Questionnaire">
