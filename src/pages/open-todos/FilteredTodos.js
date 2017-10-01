@@ -8,12 +8,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
 import { loadTodos, setTodoFilter } from '../../actions';
-import { apiCall, capitalize } from '../../util/utils';
+import { apiCall } from '../../util/utils';
 import config from '../../config/config.json';
 
 class FilteredTodos extends Component {
 
-    componentWillMount = () => {
+    componentDidMount = () => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => {
@@ -80,7 +80,7 @@ const getVisibleTodos = (todos, filter) => {
     let visibleTodos;
 
     switch(filter) {
-        case 'SHOW_DONE':
+        case 'SHOW_COMPLETED':
             visibleTodos = todos.filter((todo) => todo.completed);
             break;
         case 'SHOW_OPEN':

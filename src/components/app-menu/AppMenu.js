@@ -5,6 +5,7 @@ import LogoHeader from '../../components/LogoHeader';
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
 import HistoryIcon from '../../assets/history_icon.png';
 import OpenTodosIcon from '../../assets/open_todos_icon.png';
+import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 import config from '../../config/config.json';
 
 import './appMenu.css';
@@ -27,6 +28,11 @@ const MenuPage = (props) => {
             title: "Open Todos",
             link: "/todos/open"
         },
+        {
+            img: CompletedTodosIcon,
+            title: "Completed Todos",
+            link: "/todos/completed"
+        },
     ];
 
     config.appConfig.projectName = props.match.params.projectName;
@@ -36,7 +42,7 @@ const MenuPage = (props) => {
             <LogoHeader title="Overview" />
             <TileMenu className="TileMenu"
                       tileData={ tileData }
-                      cols={ 3 }
+                      cols={ 2 }
                       rows={ 2 } />
         </div>
     );

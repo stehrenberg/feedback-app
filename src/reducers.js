@@ -37,7 +37,6 @@ function todos(state = [], action) {
 }
 
 function todoFilter(state = 'SHOW_ALL', action) {
-    console.log(action.type, action.todoFilter);
     switch(action.type) {
         case 'SET_TODO_FILTER':
             return action.todoFilter;
