@@ -35,7 +35,6 @@ class FilteredTodos extends Component {
     };
 
     render = () => {
-        console.log("render called!");
         return (
             <div>
             <LogoHeader title="ToDos" />
@@ -70,7 +69,6 @@ class FilteredTodos extends Component {
             default:
                 todoFilter = 'SHOW_ALL';
         }
-        console.log(urlParam, todoFilter);
 
         return todoFilter;
     };
@@ -87,15 +85,13 @@ const getVisibleTodos = (todos, filter) => {
             visibleTodos = todos.filter((todo) => !todo.completed);
             break;
         default:
-            console.log("bla", filter);
             visibleTodos = todos;
     }
 
-    return visibleTodos;
+    return visibleTodos.reverse();
 };
 
 const mapStateToProps = (state) => {
-    console.log("mapStateToProps called");
     return {
         todos: getVisibleTodos(state.todos, state.todoFilter)
     };
