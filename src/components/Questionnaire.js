@@ -158,6 +158,8 @@ class Questionnaire extends Component {
             "resource": todosToSave
         };
 
+        console.log(payload);
+
         return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
@@ -173,7 +175,7 @@ class Questionnaire extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { todos: ownProps.isReadOnly? [...state.todos].filter((todo) => todo.surveyId === ownProps.id) : [] };
+    return { todos: [...state.todos].filter((todo) => todo.surveyId === ownProps.id) };
 };
 
 export default connect(mapStateToProps)(Questionnaire);
