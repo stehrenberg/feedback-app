@@ -12,9 +12,9 @@ const TileMenu = ({ tileData, cols, rows }) => {
             paddingTop: 60,
         },
         gridList: {
-            width: 580,
-            height: 370,
             overflowY: 'auto',
+            maxWidth: 450,
+            maxHeight: 370,
         },
         title: {
             fontSize: 16,
