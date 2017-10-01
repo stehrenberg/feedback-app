@@ -12,12 +12,6 @@ class TodoItemMiniCard extends Component {
         }
     }
 
-    handleCheckboxToggle = () => {
-        this.setState((oldState) => {
-            return { completed: !oldState.completed };
-        });
-    };
-
     render = () => {
         const { text, createdAt=Moment() } = this.props;
 
@@ -30,6 +24,12 @@ class TodoItemMiniCard extends Component {
                                 onCheck={ this.handleCheckboxToggle }/> }
             />
         );
+    };
+
+    handleCheckboxToggle = () => {
+        this.setState((oldState) => {
+            return { completed: !oldState.completed };
+        });
     };
 }
 

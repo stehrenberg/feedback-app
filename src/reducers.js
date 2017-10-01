@@ -29,9 +29,18 @@ function todos(state = [], action) {
                     text: action.newTodo.text,
                     completed: action.newTodo.completed,
             }];
+        case 'LOAD_TODOS':
+            return [...action.todos];
+        default:
+            return state;
+    }
+}
 
-        case 'LOAD_OPEN_TODOS':
-            return [...action.openTodos];
+function todoFilter(state = 'SHOW_ALL', action) {
+    console.log(action.type, action.todoFilter);
+    switch(action.type) {
+        case 'SET_TODO_FILTER':
+            return action.todoFilter;
         default:
             return state;
     }
@@ -41,6 +50,7 @@ const feedbackApp = combineReducers({
     projectName,
     jwt,
     todos,
+    todoFilter,
 });
 
 export default feedbackApp;

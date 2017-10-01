@@ -1,7 +1,8 @@
 export const SET_PROJECT = 'SET_PROJECT';
 export const LOGIN = 'LOGIN';
 export const ADD_TODO = 'ADD_TODO';
-export const LOAD_OPEN_TODOS = 'LOAD_OPEN_TODOS';
+export const LOAD_TODOS = 'LOAD_TODOS';
+export const SET_TODO_FILTER = 'SET_TODO_FILTER';
 
 export const setProject = (projectName) => {
     return {
@@ -24,9 +25,16 @@ export const addTodo = (newTodo) => {
     }
 };
 
-export const loadOpenTodos = (openTodos) => {
+export const loadTodos = (todos) => {
     return {
-        type: LOAD_OPEN_TODOS,
-        openTodos,
+        type: LOAD_TODOS,
+        todos,
+    }
+};
+
+export const setTodoFilter = (todoFilter) => {
+    return {
+        type: SET_TODO_FILTER,
+        todoFilter,
     }
 };

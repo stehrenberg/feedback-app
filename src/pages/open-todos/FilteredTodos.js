@@ -7,7 +7,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
-import { loadOpenTodos } from '../../actions';
+import { loadTodos, setTodoFilter } from '../../actions';
 import { apiCall, capitalize } from '../../util/utils';
 import config from '../../config/config.json';
 
@@ -27,26 +27,18 @@ class FilteredTodos extends Component {
             })
         };
         const errorHandler = (error) => console.log(error);
+        const todoFilter = this.decodeTodoFilter(this.props.match.params.filter);
 
+        this.props.dispatch(setTodoFilter(todoFilter));
         apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
-            .then((todosAsArray) => this.props.dispatch(loadOpenTodos(todosAsArray)));
+            .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
 
     render = () => {
-        const filterParam = this.props.match.params.filter;
-        let filterMode;
-
-        switch(filterParam) {
-            case 'open':
-                filterMode = 'open';
-                break;
-            default:
-                filterMode = 'completed';
-        }
-
+        console.log("render called!");
         return (
             <div>
-            <LogoHeader title={`${capitalize(filterMode)} ToDos`} />
+            <LogoHeader title="ToDos" />
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="App-content">
                     <div className="Questionnaire">
@@ -65,11 +57,47 @@ class FilteredTodos extends Component {
             </div>
         );
     };
+
+    decodeTodoFilter = (urlParam) => {
+        let todoFilter;
+        switch(urlParam) {
+            case 'open':
+                todoFilter = 'SHOW_OPEN';
+                break;
+            case 'completed':
+                todoFilter = 'SHOW_COMPLETED';
+                break;
+            default:
+                todoFilter = 'SHOW_ALL';
+        }
+        console.log(urlParam, todoFilter);
+
+        return todoFilter;
+    };
 }
 
+const getVisibleTodos = (todos, filter) => {
+    let visibleTodos;
+
+    switch(filter) {
+        case 'SHOW_DONE':
+            visibleTodos = todos.filter((todo) => todo.completed);
+            break;
+        case 'SHOW_OPEN':
+            visibleTodos = todos.filter((todo) => !todo.completed);
+            break;
+        default:
+            console.log("bla", filter);
+            visibleTodos = todos;
+    }
+
+    return visibleTodos;
+};
+
 const mapStateToProps = (state) => {
+    console.log("mapStateToProps called");
     return {
-        todos: [...state.todos]//.filter((todo) => !todo.completed) --> not yet...
+        todos: getVisibleTodos(state.todos, state.todoFilter)
     };
 };
 
