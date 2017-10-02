@@ -1,4 +1,5 @@
 import appConfig from '../config/config.json';
+import Moment from 'moment';
 
 export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload = {}) => {
 
@@ -25,3 +26,5 @@ export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandl
 };
 
 export const capitalize = (someString)  => someString.charAt(0).toUpperCase() + someString.slice(1);
+
+export const momentFromSurveyId = (surveyId) => Moment(surveyId.split('-')[0], "YYYYMMDD");
