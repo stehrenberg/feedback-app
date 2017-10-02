@@ -4,11 +4,13 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import dotenv from 'dotenv';
 
 import App from './components/App';
 import feedbackApp from './reducers';
 import './app.css';
 
+dotenv.config();
 const store = createStore(feedbackApp);
 const app = <Provider store={ store }>
     <App store={ store }/>
@@ -17,5 +19,4 @@ const app = <Provider store={ store }>
 injectTapEventPlugin();
 ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
-
 

@@ -3,7 +3,7 @@ import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 
 import { apiCall } from '../util/utils';
-import config from '../config/config.json';
+import { config } from '../config/config.json';
 
 class Questionnaire extends Component {
 
@@ -109,7 +109,7 @@ class Questionnaire extends Component {
     };
     
     createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
-        const projectName = config.appConfig.projectName;
+        const projectName = this.props.projectName;
 
         return fetch(surveyEndpoint, {
             method: httpMethod,

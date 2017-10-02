@@ -14,7 +14,7 @@ import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../components/app-menu/AppMenu';
 import { setJWT, setProject } from '../actions';
 import { apiCall } from '../util/utils';
-import config from '../config/config.json';
+import { config } from '../config/config.json';
 
 class App extends Component {
     constructor(props) {
