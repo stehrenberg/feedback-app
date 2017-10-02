@@ -7,12 +7,13 @@ import { connect } from 'react-redux';
 
 import PrivateRoute from './PrivateRoute';
 import FeedbackForm from '../pages/feedback-form/FeedbackForm';
-import FormHistory from "../pages/form-history/FormHistory";
-import FormDetail from "../components/FormDetail";
-import LoginForm from "../pages/login/LoginForm";
+import FormHistory from '../pages/form-history/FormHistory';
+import FormDetail from '../components/FormDetail';
+import FilteredTodos from '../pages/open-todos/FilteredTodos';
+import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../components/app-menu/AppMenu';
-import { setJWT } from '../actions';
-import { fetchDataFrom } from '../util/utils';
+import { setJWT, setProject } from '../actions';
+import { apiCall } from '../util/utils';
 import config from '../config/config.json';
 
 class App extends Component {
@@ -32,13 +33,14 @@ class App extends Component {
         const httpMethod = 'PUT';
         const dataTransformMethod = (jwt) => {
             this.props.dispatch(setJWT(jwt));
+            this.props.dispatch(setProject(storedProjectName));
             localStorage.setItem("sessionToken", JSON.stringify(jwt));
             this.state.history.push(`/home/${ storedProjectName }`);
         };
         const errorHandler = (error) => console.log(error);
         const payload = { session_token: jwt.session_token };
 
-        return fetchDataFrom(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     render() {
@@ -50,8 +52,9 @@ class App extends Component {
                             <PrivateRoute exact path='/home/:projectName' component={ AppMenu } isAuthenticated={ this.checkAuthentication }/>
                             <Redirect from ='/home/:projectName' to='/home' component={ AppMenu } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute exact path='/feedback' component={ FeedbackForm } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/form-history' component={ FormHistory } isAuthenticated={ this.checkAuthentication }/>
                             <PrivateRoute path="/feedback/:formId" component={ FormDetail } isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/form-history' component={ FormHistory } isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/todos/:filter' component={ FilteredTodos } isAuthenticated={ this.checkAuthentication }/>
                             <Route exact path='/login' component={ LoginForm }/>
                         </Switch>
                     </HashRouter>

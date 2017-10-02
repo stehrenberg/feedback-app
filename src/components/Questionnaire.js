@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
+import { connect } from 'react-redux';
 
-import { fetchDataFrom } from '../util/utils';
-import appConfig from '../config/config.json';
+import { apiCall } from '../util/utils';
+import config from '../config/config.json';
 
 class Questionnaire extends Component {
 
@@ -40,6 +41,7 @@ class Questionnaire extends Component {
                         competences to build and where to improve.</strong>
                 </p>
                 <SurveyForm
+                    surveyId={ this.props.id }
                     questions={ this.state.questions }
                     onChange={ this.handleChange }
                     onSubmit={ this.handleSubmit }
@@ -50,7 +52,7 @@ class Questionnaire extends Component {
     }
 
     fetchFormData = () => {
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
+        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
         const errorHandler = (error) => console.log(error);
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
@@ -60,7 +62,7 @@ class Questionnaire extends Component {
             };
         });
 
-        return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
+        return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
     };
 
     // TODO Remove all the above :D
@@ -84,7 +86,7 @@ class Questionnaire extends Component {
     };
 
     saveForm = () => {
-        const surveyEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey`;
+        const surveyEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey`;
         const questionsAsArray = this.getQuestionValuesAsArray();
         const httpMethod = this.state.isSaved ? 'PATCH' : 'POST';
 
@@ -95,28 +97,26 @@ class Questionnaire extends Component {
                 console.log(response.error);
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
-        ).then((response) => {
-            if (response.ok) {
-                this.setState({isSaved: true});
-                return response.json();
-            } else {
-                console.log(response.error);
-            }
+        ).then(() => {
+            if(this.props.todos.length > 0) {
+                this.saveTodos(this.props.todos);
+            }}).then(() => {
+             this.setState({isSaved: true});
         }).catch(err => {
             console.log("error!");
             console.log(err);
         });
     };
-
+    
     createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
-        const projectName = appConfig.appConfig.projectName;
+        const projectName = config.appConfig.projectName;
 
         return fetch(surveyEndpoint, {
             method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+                'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
                 "resource": {
@@ -129,19 +129,36 @@ class Questionnaire extends Component {
     };
 
     createNewSurveyResultRecord = (httpMethod, questionsAsArray) => {
-        const surveyResultEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
+        const surveyResultEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result`;
 
         return fetch(`${surveyResultEndpoint}?id_field=survey_id%2C%20question_id`, {
             method: httpMethod,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-DreamFactory-Api-Key': appConfig.dreamfactoryApi.apiKey
+                'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
                 "resource": questionsAsArray,
             }),
         })
+    };
+
+    saveTodos = (todosAsArray) => {
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+        const httpMethod = 'POST';
+        const dataTransformMethod = () => {};
+        const errorHandler = (error) => console.log(error);
+        const todosToSave = todosAsArray.map(todo => ({
+            survey_id: this.props.id,
+            text: todo.text,
+            completed: todo.completed
+        }));
+        const payload = {
+            "resource": todosToSave
+        };
+
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     getQuestionValuesAsArray = () => {
@@ -155,4 +172,8 @@ class Questionnaire extends Component {
     };
 }
 
-export default Questionnaire;
+const mapStateToProps = (state, ownProps) => {
+    return { todos: [...state.todos].filter((todo) => todo.surveyId === ownProps.id) };
+};
+
+export default connect(mapStateToProps)(Questionnaire);

@@ -6,7 +6,7 @@ import SurveyDataTable from '../../components/SurveyDataTable';
 import appConfig from '../../config/config.json'
 import AlertBox from '../../components/AlertBox';
 import '../../app.css';
-import { fetchDataFrom, capitalize } from '../../util/utils';
+import { apiCall, capitalize } from '../../util/utils';
 
 class FormHistory extends Component {
 
@@ -23,7 +23,7 @@ class FormHistory extends Component {
         this.fetchFormData().then((formsDataAsArray) => {
             this.setState({
                 forms: formsDataAsArray,
-                showAlertBox: false,
+                showAlertBox: formsDataAsArray.length === 0,
             });
         }).catch((err) => this.setState({ showAlertBox: true }));
     }
@@ -61,7 +61,7 @@ class FormHistory extends Component {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
             const errorHandler = (error) => console.log(error);
 
-            return fetchDataFrom(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
+            return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
         });
     }
 
@@ -71,7 +71,7 @@ class FormHistory extends Component {
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
         const errorHandler = (error) => console.log(error);
 
-        return fetchDataFrom(surveyIdsEndpoint, 'GET', transformationFunc, errorHandler, {});
+        return apiCall(surveyIdsEndpoint, 'GET', transformationFunc, errorHandler, {});
     }
 
 

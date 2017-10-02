@@ -74,17 +74,17 @@
     },
     {
       "id": "10",
-      "shortText": "tasks",
-      "text": "Tasks for the next iteration:",
-      "inputType": "input",
-      "preload": "false",
+      "shortText": "nextMeeting",
+      "text": "Next Meeting:",
+      "inputType": "date",
       "value": ""
     },
     {
       "id": "11",
-      "shortText": "nextMeeting",
-      "text": "Next Meeting:",
-      "inputType": "date",
+      "shortText": "tasks",
+      "text": "Tasks for the next iteration:",
+      "inputType": "todo",
+      "preload": "false",
       "value": ""
     }
   ]

@@ -105,6 +105,19 @@ th {
     font-size: 16px;
 }
 
+.todo-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-input > button {
+    display: none;
+}
+
+.TodoItem.completed {
+    text-decoration: line-through;
+}
+
 .login-form {
     display: flex;
     justify-content: center;
