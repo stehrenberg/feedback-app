@@ -16,18 +16,16 @@ class FilteredTodos extends Component {
     componentDidMount = () => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'GET';
-        const dataTransformMethod = (data) => {
-            return data.resource.map((todo) => {
-                //FIXME *_id.toString() entfernen, sobald im BE umgestellt!
-                return {
-                    todoId: todo.todo_id.toString(),
-                    surveyId: todo.survey_id.toString(),
-                    text: todo.text,
-                    completed: todo.completed,
-                    createdAt: Moment(todo.created_at),
-                };
-            })
-        };
+        const dataTransformMethod = (data) => data.resource.map((todo) => {
+            return {
+                todoId: todo.todo_id.toString(),
+                surveyId: todo.survey_id.toString(),
+                text: todo.text,
+                completed: todo.completed,
+                createdAt: Moment(todo.created_at),
+            };
+        });
+
         const errorHandler = (error) => console.log(error);
         const todoFilter = this.decodeTodoFilter(this.props.match.params.filter);
 
