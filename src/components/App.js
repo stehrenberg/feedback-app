@@ -12,7 +12,7 @@ import FormDetail from '../components/FormDetail';
 import FilteredTodos from '../pages/open-todos/FilteredTodos';
 import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../components/app-menu/AppMenu';
-import { setJWT } from '../actions';
+import { setJWT, setProject } from '../actions';
 import { apiCall } from '../util/utils';
 import config from '../config/config.json';
 
@@ -33,6 +33,7 @@ class App extends Component {
         const httpMethod = 'PUT';
         const dataTransformMethod = (jwt) => {
             this.props.dispatch(setJWT(jwt));
+            this.props.dispatch(setProject(storedProjectName));
             localStorage.setItem("sessionToken", JSON.stringify(jwt));
             this.state.history.push(`/home/${ storedProjectName }`);
         };
