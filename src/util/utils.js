@@ -2,8 +2,7 @@ import Moment from 'moment';
 import { config } from '../config/config';
 
 export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload = {}) => {
-
-    let config = {
+    let callConfig = {
         method: httpMethod,
         headers: {
             'Accept': 'application/json',
@@ -13,10 +12,10 @@ export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandl
     };
 
     if(Object.keys(payload).length > 0) {
-        config.body = JSON.stringify(payload);
+        callConfig.body = JSON.stringify(payload);
     }
 
-    return fetch(apiEndpoint, config)
+    return fetch(apiEndpoint, callConfig)
         .then((response) => response.ok ? response.json() : Promise.reject(response))
         .then((data) => dataTransformMethod(data))
         .catch(response => {

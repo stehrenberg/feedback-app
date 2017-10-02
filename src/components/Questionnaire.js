@@ -3,7 +3,7 @@ import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 
 import { apiCall } from '../util/utils';
-import { config } from '../config/config.json';
+import { config } from '../config/config.js';
 
 class Questionnaire extends Component {
 
@@ -173,7 +173,10 @@ class Questionnaire extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { todos: [...state.todos].filter((todo) => todo.surveyId === ownProps.id) };
+    return {
+        todos: [...state.todos].filter((todo) => todo.surveyId === ownProps.id),
+        projectName: state.projectName,
+    };
 };
 
 export default connect(mapStateToProps)(Questionnaire);

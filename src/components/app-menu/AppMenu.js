@@ -6,7 +6,6 @@ import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
 import HistoryIcon from '../../assets/history_icon.png';
 import OpenTodosIcon from '../../assets/open_todos_icon.png';
 import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
-import { config } from '../../config/config';
 
 import './appMenu.css';
 
@@ -34,8 +33,6 @@ const MenuPage = (props) => {
             link: "/todos/completed"
         },
     ];
-
-    config.appConfig.projectName = props.match.params.projectName;
 
     return (
         <div>

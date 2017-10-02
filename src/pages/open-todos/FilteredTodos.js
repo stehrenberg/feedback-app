@@ -9,7 +9,7 @@ import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
 import { loadTodos, setTodoFilter } from '../../actions';
 import { apiCall } from '../../util/utils';
-import config from '../../config/config.json';
+import { config } from '../../config/config';
 
 class FilteredTodos extends Component {
 

@@ -5,7 +5,7 @@ import { TextField } from 'material-ui';
 
 import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
-import { config } from '../../config/config.json';
+import { config } from '../../config/config';
 import { setJWT, setProject } from '../../actions';
 import { apiCall } from '../../util/utils';
 
