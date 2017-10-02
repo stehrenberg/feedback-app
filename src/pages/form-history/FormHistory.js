@@ -54,7 +54,7 @@ class FormHistory extends Component {
     }
 
     fetchFormData = () => {
-        const projectName = this.props.projectName;
+        const projectName = normalizeProjectName(this.props.projectName);
         const table = `_table/survey_result_${ projectName }`;
         const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}${ table }`;
 

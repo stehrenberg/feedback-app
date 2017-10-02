@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 
-import { apiCall } from '../util/utils';
+import { apiCall, normalizeProjectName } from '../util/utils';
 import { config } from '../config/config.js';
 
 class Questionnaire extends Component {
@@ -52,7 +52,8 @@ class Questionnaire extends Component {
     }
 
     fetchFormData = () => {
-        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result?filter=survey_id%3D'${ this.props.id }'`;
+        const projectName = normalizeProjectName(this.props.projectName);
+        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result_${projectName}?filter=survey_id%3D'${ this.props.id }'`;
         const errorHandler = (error) => console.log(error);
         const transformationFunc = (data) => data.resource.map((resultTuple) => {
             return {
