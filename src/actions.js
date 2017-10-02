@@ -3,6 +3,7 @@ export const LOGIN = 'LOGIN';
 export const ADD_TODO = 'ADD_TODO';
 export const LOAD_TODOS = 'LOAD_TODOS';
 export const SET_TODO_FILTER = 'SET_TODO_FILTER';
+export const TOGGLE_TODO_STATUS = 'TOGGLE_TODO_STATUS';
 
 export const setProject = (projectName) => {
     return {
@@ -37,4 +38,11 @@ export const setTodoFilter = (todoFilter) => {
         type: SET_TODO_FILTER,
         todoFilter,
     }
+};
+
+export const toggleTodoStatus = (todoText) => {
+    return {
+        type: TOGGLE_TODO_STATUS,
+        todoText
+    };
 };

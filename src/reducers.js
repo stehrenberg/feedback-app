@@ -31,6 +31,11 @@ function todos(state = [], action) {
             }];
         case 'LOAD_TODOS':
             return [...action.todos];
+        case 'TOGGLE_TODO_STATUS':
+            return state.map((todo) =>
+                (todo.text === action.todoText)
+                    ? {...todo, completed: !todo.completed}
+                    : todo);
         default:
             return state;
     }
