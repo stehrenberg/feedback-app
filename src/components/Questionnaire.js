@@ -97,7 +97,10 @@ class Questionnaire extends Component {
                 console.log(response.error);
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
-        ).then(() => this.saveTodos(this.props.todos)).then(() => {
+        ).then(() => {
+            if(this.props.todos.length > 0) {
+                this.saveTodos(this.props.todos);
+            }}).then(() => {
              this.setState({isSaved: true});
         }).catch(err => {
             console.log("error!");

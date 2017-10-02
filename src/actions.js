@@ -27,7 +27,6 @@ export const addTodo = (newTodo) => {
 };
 
 export const loadTodos = (todos) => {
-    console.log("fired with:", todos);
     return {
         type: LOAD_TODOS,
         todos,
