@@ -8,13 +8,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
 import { loadTodos, setTodoFilter } from '../../actions';
-import { apiCall } from '../../util/utils';
+import { apiCall, normalizeProjectName } from '../../util/utils';
 import { config } from '../../config/config';
 
 class FilteredTodos extends Component {
 
     componentDidMount = () => {
-        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+        const projectName = normalizeProjectName(this.props.projectName);
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos_${projectName}`;
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => data.resource.map((todo) => {
             return {
@@ -111,12 +112,14 @@ const mapStateToProps = (state) => {
     return {
         todos: state.todos,
         todoFilter: state.todoFilter,
+        projectName: state.projectName,
     };
 };
 
 FilteredTodos.PropTypes = {
     todos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    todoFilter: PropTypes.string
+    projectName: PropTypes.string.isRequired,
+    todoFilter: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(FilteredTodos);
