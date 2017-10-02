@@ -1,5 +1,5 @@
 import isMoment from 'moment';
-import { momentFromSurveyId } from './utils';
+import { momentFromSurveyId, normalizeProjectName} from './utils';
 
 describe('Testing transformation of surveyId to Moment object', () => {
     it('returns a valid Moment Obj from SurveyId', () => {
@@ -20,4 +20,21 @@ describe('Testing transformation of surveyId to Moment object', () => {
         console.log(result);
         expect(result.isValid()).toBe(false);
     });
+});
+
+describe('Normalizing projectName by transforming projectName string to lowercase', () => {
+    it('returns a normalized projectName from a mixed-case projectName string', () => {
+        const normalizedProjectName = normalizeProjectName('TestProject');
+        expect(/[A-Z]/.test(normalizedProjectName)).toBe(false);
+    });
+
+    it('returns a normalized projectName from a mixed-char projectName string', () => {
+        const normalizedProjectName = normalizeProjectName('0Test-Pr0ject3');
+        expect(/[A-Z]/.test(normalizedProjectName)).toBe(false);
+    });
+
+    it('returns an empty string for an empty projectName', () => {
+        const normalizedProjectName = normalizeProjectName('');
+        expect(normalizedProjectName === '').toBe(true);
+    })
 });

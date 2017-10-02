@@ -9,7 +9,7 @@ it('renders without crashing', () => {
         name: 'bla',
         surveyId: '20171010-testproject',
         inputType: 'number',
-        isReadOnly: 'false',
+        isReadOnly: false,
         onChange: () => {},
         value: '',
         placeholder: 'bla',
