@@ -18,7 +18,9 @@ class FilteredTodos extends Component {
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => {
             return data.resource.map((todo) => {
+                //FIXME *_id.toString() entfernen, sobald im BE umgestellt!
                 return {
+                    todoId: todo.todo_id.toString(),
                     surveyId: todo.survey_id.toString(),
                     text: todo.text,
                     completed: todo.completed,
@@ -34,7 +36,22 @@ class FilteredTodos extends Component {
             .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
 
+    // TODO Move to TodoList Component after refactoring of FilteredTodos->render()
+    componentWillUnmount = () => {
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+        const httpMethod = 'PATCH';
+        const dataTransformMethod = () => {};
+        const errorHandler = (error) => console.log(error);
+        const payload = {
+            "resource": this.props.todos.map((todo) => ({ todo_id: todo.todoId, completed: todo.completed }))
+        };
+
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+    };
+
     render = () => {
+        const { todos, todoFilter, history} = this.props;
+
         return (
             <div>
             <LogoHeader title="ToDos" />
@@ -42,7 +59,7 @@ class FilteredTodos extends Component {
                 <div className="App-content">
                     <div className="Questionnaire">
                         <List>
-                            { this.props.todos.map(
+                            { this.getVisibleTodos(todos, todoFilter).map(
                                 (todo) => <TodoItem key={ `${todo.text}-${todo.created_at}` }
                                                     todoType="miniCard" {...todo}/>)
                             }
@@ -51,7 +68,7 @@ class FilteredTodos extends Component {
                 </div>
                 </div>
                 <div className="App-footer">
-                    <RaisedButton className="nav-btn" label="Back" onClick={ this.props.history.goBack } primary={ true } />
+                    <RaisedButton className="nav-btn" label="Back" onClick={ history.goBack } primary={ true } />
                 </div>
             </div>
         );
@@ -72,33 +89,36 @@ class FilteredTodos extends Component {
 
         return todoFilter;
     };
+
+    getVisibleTodos = (todos, filter) => {
+        let visibleTodos;
+
+        switch(filter) {
+            case 'SHOW_COMPLETED':
+                visibleTodos = todos.filter((todo) => todo.completed);
+                break;
+            case 'SHOW_OPEN':
+                visibleTodos = todos.filter((todo) => !todo.completed);
+                break;
+            default:
+                visibleTodos = todos;
+        }
+
+        return visibleTodos.reverse();
+    };
+
 }
-
-const getVisibleTodos = (todos, filter) => {
-    let visibleTodos;
-
-    switch(filter) {
-        case 'SHOW_COMPLETED':
-            visibleTodos = todos.filter((todo) => todo.completed);
-            break;
-        case 'SHOW_OPEN':
-            visibleTodos = todos.filter((todo) => !todo.completed);
-            break;
-        default:
-            visibleTodos = todos;
-    }
-
-    return visibleTodos.reverse();
-};
 
 const mapStateToProps = (state) => {
     return {
-        todos: getVisibleTodos(state.todos, state.todoFilter)
+        todos: state.todos,
+        todoFilter: state.todoFilter,
     };
 };
 
 FilteredTodos.PropTypes = {
-    todos: PropTypes.arrayOf(PropTypes.string),
+    todos: PropTypes.arrayOf(PropTypes.string).isRequired,
+    todoFilter: PropTypes.string
 };
 
 export default connect(mapStateToProps)(FilteredTodos);

@@ -27,6 +27,7 @@ export const addTodo = (newTodo) => {
 };
 
 export const loadTodos = (todos) => {
+    console.log("fired with:", todos);
     return {
         type: LOAD_TODOS,
         todos,
@@ -40,9 +41,9 @@ export const setTodoFilter = (todoFilter) => {
     }
 };
 
-export const toggleTodoStatus = (todoText) => {
+export const toggleTodoStatus = (todoId) => {
     return {
         type: TOGGLE_TODO_STATUS,
-        todoText
+        todoId
     };
 };

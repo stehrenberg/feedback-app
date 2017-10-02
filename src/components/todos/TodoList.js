@@ -1,22 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import TodoItem from './TodoItem';
 import { List } from 'material-ui/List';
+import { connect } from 'react-redux';
 
-const TodoList = (props) => {
-    const { todos } = props;
+import TodoItem from './TodoItem';
 
-    return (
-        <List key={ todos }>
-            { todos.map(
-                (todo) => <TodoItem key={ todo.text }
-                                    text={ todo.text }
-                                    completed={ todo.completed }
-                    {...todo}/>) }
-        </List>
-    )
-};
+class TodoList extends React.Component {
+
+    render = () => {
+        const { todos } = this.props;
+
+        return (
+            <List key={ todos }>
+                { todos.map(
+                    (todo) => <TodoItem key={ todo.text }
+                                        text={ todo.text }
+                                        completed={ todo.completed }
+                        {...todo}/>) }
+            </List>
+        )
+    };
+}
+
 
 const mapStateToProps = (state, ownProps) => {
     return { todos: state.todos.filter((todo) => todo.surveyId === ownProps.surveyId) };

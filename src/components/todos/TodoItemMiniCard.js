@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { ListItem } from 'material-ui/List';
 import Moment from 'moment';
+import { ListItem } from 'material-ui/List';
 import { Checkbox } from 'material-ui';
 import { connect } from 'react-redux';
+
 import { toggleTodoStatus } from '../../actions';
 
 class TodoItemMiniCard extends Component {
 
     render = () => {
-        const { text, completed, createdAt=Moment() } = this.props;
+        const { todoId, text, completed, createdAt=Moment() } = this.props;
 
         return (
             <ListItem name={ text }
@@ -16,7 +17,7 @@ class TodoItemMiniCard extends Component {
                       primaryText={ text }
                       secondaryText={ createdAt.format("YYYY-MM-DD") }
                       leftCheckbox={
-                      <Checkbox name={ text }
+                      <Checkbox name={ todoId }
                                 checked={ completed }
                                 onCheck={ (event) => this.handleTodoClick(event) }/> }
             />
@@ -24,15 +25,15 @@ class TodoItemMiniCard extends Component {
     };
 
     handleTodoClick = (event) => {
-        const todoText = event.target.name;
-        this.props.dispatch(toggleTodoStatus(todoText));
+        const todoId = event.target.name;
+        this.props.dispatch(toggleTodoStatus(todoId));
     };
 }
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        completed: !(state.todos.find((todo) => todo.text === ownProps.text).completed)
+        completed: state.todos.find((todo) => todo.todoId === ownProps.todoId).completed
     }
 };
 
-export default connect()(TodoItemMiniCard);
+export default connect(mapStateToProps)(TodoItemMiniCard);
