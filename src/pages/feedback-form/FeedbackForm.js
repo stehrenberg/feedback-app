@@ -10,27 +10,24 @@ import questions from '../../config/questionTexts.json';
 
 import '../../app.css'
 
-const FeedbackForm = (props) => {
-    console.log(props.id);
-    return (
-        <div className="FeedbackForm">
-            <LogoHeader title="Cooperation Feedback Questionnaire"/>
-            <div className="App-content">
-                <Questionnaire id={ props.id }
-                               questions={ questions.questionTexts }
-                               todos={ [] }
-                               isReadOnly={ false }/>
-                <div className="App-footer">
-                    <RaisedButton className="nav-btn"
-                                  onClick={ props.history.goBack }
-                                  icon={ <ArrowBack /> }
-                                  primary={ true }
-                                  label={ "Back" }/>
-                </div>
+const FeedbackForm = (props) => (
+    <div className="FeedbackForm">
+        <LogoHeader title="Cooperation Feedback Questionnaire"/>
+        <div className="App-content">
+            <Questionnaire id={ props.id }
+                           questions={ questions.questionTexts }
+                           todos={ [] }
+                           isReadOnly={ false }/>
+            <div className="App-footer">
+                <RaisedButton className="nav-btn"
+                              onClick={ props.history.goBack }
+                              icon={ <ArrowBack /> }
+                              primary={ true }
+                              label={ "Back" }/>
             </div>
         </div>
+    </div>
     );
-};
 
 const mapStateToProps = (state, ownProps) => ({ id: `${ Moment().format("YYYYMMDD") }-${ state.projectName }` });
 

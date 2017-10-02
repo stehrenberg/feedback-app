@@ -32,12 +32,10 @@ function todos(state = [], action) {
         case 'LOAD_TODOS':
             return [...action.todos];
         case 'TOGGLE_TODO_STATUS':
-            const newState = state.map((todo) =>
+            return state.map((todo) =>
                 (todo.todoId === action.todoId)
                     ? {...todo, completed: !todo.completed}
                     : todo);
-            console.log(newState);
-            return newState;
         default:
             return state;
     }

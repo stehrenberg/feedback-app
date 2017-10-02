@@ -149,19 +149,14 @@ class Questionnaire extends Component {
         const httpMethod = 'POST';
         const dataTransformMethod = () => {};
         const errorHandler = (error) => console.log(error);
-        const todosToSave = todosAsArray.map(todo => {
-            return {
-                survey_id: this.props.id,
-                text: todo.text,
-                completed: todo.completed
-            };
-        });
-
+        const todosToSave = todosAsArray.map(todo => ({
+            survey_id: this.props.id,
+            text: todo.text,
+            completed: todo.completed
+        }));
         const payload = {
             "resource": todosToSave
         };
-
-        console.log(payload);
 
         return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
