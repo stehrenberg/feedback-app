@@ -293,7 +293,8 @@ INSERT INTO `todos` (`todo_id`, `survey_id`, `text`, `completed`, `created_at`) 
 --
 DROP VIEW IF EXISTS `todos_kundenprojekt`;
 CREATE TABLE IF NOT EXISTS `todos_kundenprojekt` (
-`survey_id` varchar(32)
+`todo_id` varchar(32)
+,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
 ,`created_at` timestamp
@@ -305,7 +306,8 @@ CREATE TABLE IF NOT EXISTS `todos_kundenprojekt` (
 --
 DROP VIEW IF EXISTS `todos_refinedlabs`;
 CREATE TABLE IF NOT EXISTS `todos_refinedlabs` (
-`survey_id` varchar(32)
+`todo_id` varchar(32)
+,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
 ,`created_at` timestamp
@@ -317,7 +319,8 @@ CREATE TABLE IF NOT EXISTS `todos_refinedlabs` (
 --
 DROP VIEW IF EXISTS `todos_testproject`;
 CREATE TABLE IF NOT EXISTS `todos_testproject` (
-`survey_id` varchar(32)
+`todo_id` varchar(32)
+,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
 ,`created_at` timestamp
@@ -383,7 +386,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `todos_kundenprojekt`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_kundenprojekt` AS select `todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_kundenprojekt`.`survey_id` from `survey_kundenprojekt`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_kundenprojekt` AS select `todos`.`todo_id` AS `todo_id`,`todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_kundenprojekt`.`survey_id` from `survey_kundenprojekt`);
 
 -- --------------------------------------------------------
 
@@ -392,7 +395,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `todos_refinedlabs`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_refinedlabs` AS select `todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_refinedlabs`.`survey_id` from `survey_refinedlabs`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_refinedlabs` AS select `todos`.`todo_id` AS `todo_id`,`todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_refinedlabs`.`survey_id` from `survey_refinedlabs`);
 
 -- --------------------------------------------------------
 
@@ -401,7 +404,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `todos_testproject`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_testproject` AS select `todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_testproject`.`survey_id` from `survey_testproject`);
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `todos_testproject` AS select `todos`.`todo_id` AS `todo_id`,`todos`.`survey_id` AS `survey_id`,`todos`.`text` AS `text`,`todos`.`completed` AS `completed`,`todos`.`created_at` AS `created_at` from `todos` where `todos`.`survey_id` in (select `survey_testproject`.`survey_id` from `survey_testproject`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
