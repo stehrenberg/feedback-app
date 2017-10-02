@@ -2,37 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { List } from 'material-ui/List';
 import PropTypes from 'prop-types';
-import Moment from 'moment';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
-import { loadTodos, setTodoFilter } from '../../actions';
-import { apiCall, normalizeProjectName } from '../../util/utils';
+import { setTodoFilter } from '../../actions';
+import { apiCall } from '../../util/utils';
 import { config } from '../../config/config';
 
 class FilteredTodos extends Component {
 
     componentDidMount = () => {
-        const projectName = normalizeProjectName(this.props.projectName);
-        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos_${projectName}`;
-        const httpMethod = 'GET';
-        const dataTransformMethod = (data) => data.resource.map((todo) => {
-            return {
-                todoId: todo.todo_id.toString(),
-                surveyId: todo.survey_id.toString(),
-                text: todo.text,
-                completed: todo.completed,
-                createdAt: Moment(todo.created_at),
-            };
-        });
-
-        const errorHandler = (error) => console.log(error);
         const todoFilter = this.decodeTodoFilter(this.props.match.params.filter);
-
         this.props.dispatch(setTodoFilter(todoFilter));
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
-            .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
 
     // TODO Move to TodoList Component after refactoring of FilteredTodos->render()

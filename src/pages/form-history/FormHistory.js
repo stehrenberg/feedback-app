@@ -75,7 +75,6 @@ class FormHistory extends Component {
         return apiCall(surveyIdsEndpoint, 'GET', transformationFunc, errorHandler, {});
     }
 
-
     organizeBySurveyId(rawData, surveyIdList) {
         return surveyIdList.map((surveyId) => {
             return {
