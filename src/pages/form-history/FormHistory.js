@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
 
 import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
-import appConfig from '../../config/config.json'
 import AlertBox from '../../components/AlertBox';
+import { config } from '../../config/config'
+import { apiCall, capitalize, normalizeProjectName } from '../../util/utils';
 import '../../app.css';
-import { apiCall, capitalize } from '../../util/utils';
 
 class FormHistory extends Component {
 
@@ -16,7 +17,7 @@ class FormHistory extends Component {
             forms: [],
             showAlertBox: false,
         };
-        this.fetchFormData = this.fetchFormData.bind(this);
+        this.fetchFormData();
     }
 
     componentWillMount() {
@@ -29,7 +30,7 @@ class FormHistory extends Component {
     }
 
     render() {
-        const projectName = appConfig.appConfig.projectName;
+        const projectName = this.props.projectName;
         const headerProjectName = projectName? `for ${ capitalize(projectName) }` : "";
 
         return (
@@ -52,10 +53,10 @@ class FormHistory extends Component {
         );
     }
 
-    fetchFormData() {
-        const projectName = appConfig.appConfig.projectName;
+    fetchFormData = () => {
+        const projectName = normalizeProjectName(this.props.projectName);
         const table = `_table/survey_result_${ projectName }`;
-        const surveyResultsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
+        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}${ table }`;
 
         return this.fetchSurveyIdsListForProject(projectName).then((surveyIdList) => {
             const transformationFunc = (data) => this.organizeBySurveyId(data.resource, surveyIdList);
@@ -67,7 +68,7 @@ class FormHistory extends Component {
 
     fetchSurveyIdsListForProject(projectName) {
         const table = `_table/survey_${ projectName }`;
-        const surveyIdsEndpoint = `${appConfig.dreamfactoryApi.apiBaseUrl}${ table }`;
+        const surveyIdsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}${ table }`;
         const transformationFunc = (data) =>  data.resource.map(resource => resource.survey_id);
         const errorHandler = (error) => console.log(error);
 
@@ -90,4 +91,6 @@ class FormHistory extends Component {
     }
 }
 
-export default FormHistory;
+const mapStateToProps = (state) => ({ projectName: state.projectName });
+
+export default connect(mapStateToProps)(FormHistory);
