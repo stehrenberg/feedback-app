@@ -6,7 +6,7 @@ import { TextField } from 'material-ui';
 import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
 import config from '../../config/config.json';
-import { setJWT } from '../../actions';
+import { setJWT, setProject } from '../../actions';
 import { apiCall } from '../../util/utils';
 
 class LoginForm extends Component {
@@ -23,6 +23,7 @@ class LoginForm extends Component {
         event.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
+        const projectName = this.state.projectName;
         this.authenticate(email, password)
             .then((jwt) => {
                 this.props.dispatch(setJWT(jwt));
@@ -30,6 +31,7 @@ class LoginForm extends Component {
                 localStorage.setItem("sessionToken", JSON.stringify(jwt));
                 localStorage.setItem("projectName", this.state.projectName);
             }).catch((error) => console.log(error));
+        this.props.dispatch(setProject(projectName));
     }
 
     handleChange(event) {
