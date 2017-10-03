@@ -67,7 +67,8 @@ th {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 30px 100px 10px 60px;
+    padding: 30px 100px 30px 60px;
+    width: 558px;
     background-color: #ffffff;
     border-width: 1px;
     border-color: rgba(227, 224, 230, 0.23);
@@ -105,17 +106,31 @@ th {
     font-size: 16px;
 }
 
+.todos {
+    width: 100% !important;
+}
+
 .todo-input {
     display: flex;
     flex-direction: column;
 }
 
-.todo-input > button {
+.TodoList {
+    padding-left: 0 !important;
+}
+
+.todo-input > div > button {
     display: none;
 }
 
 .TodoItem {
     width: 470px;
+    padding-bottom: 0px !important;
+    padding-left: 60px !important;
+}
+
+.TodoItem.Checkbox {
+    padding-left: 100px;
 }
 
 .TodoItem.completed {

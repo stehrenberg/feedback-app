@@ -32,15 +32,18 @@ class TodoInput extends Component {
             <div className="todos">
             <div className="todo-input">
                 { this.props.isReadOnly ?
-                    <p></p>
+                    ''
                     : <TextField
-                    name="add-todo"
-                    value={ this.state.input }
-                    hintText="Add item..."
-                    autoComplete="off"
-                    onChange={ this.handleChange }/>
+                            name="add-todo"
+                            value={ this.state.input }
+                            hintText="Add item..."
+                            fullWidth={ true }
+                            autoComplete="off"
+                            onChange={ this.handleChange }/>
                 }
-                <button type="submit" label="Add" onClick={ (event) => this.handleClick(event) } />
+                <div>
+                    <button type="submit" label="Add" onClick={ (event) => this.handleClick(event) } />
+                </div>
             </div>
             <TodoList surveyId={ this.props.surveyId }/>
         </div>

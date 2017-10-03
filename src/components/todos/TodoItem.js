@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItemMiniCard from './TodoItemMiniCard';
+import { ListItem } from 'material-ui/List';
+import { Checkbox } from 'material-ui';
 
 const TodoItem = (props) => {
     const { text, completed, todoType } = props;
@@ -11,7 +13,13 @@ const TodoItem = (props) => {
             todoItem = <TodoItemMiniCard {...props}/>;
             break;
         default:
-            todoItem = <li className={`TodoItem ${completed? 'completed' : ''}`}>{ text }</li>;
+            todoItem = <ListItem className={`TodoItem ${completed? 'completed' : ''}`}
+                                 primaryText={ text }
+                                 leftCheckbox={
+                                    <Checkbox className="Checkbox"
+                                        disabled={ true }
+                                        checked={ completed }/>
+                                 }/>;
     }
 
     return todoItem;
