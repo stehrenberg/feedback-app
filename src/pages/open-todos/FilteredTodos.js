@@ -19,15 +19,17 @@ class FilteredTodos extends Component {
 
     // TODO Move to TodoList Component after refactoring of FilteredTodos->render()
     componentWillUnmount = () => {
-        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
-        const httpMethod = 'PATCH';
-        const dataTransformMethod = () => {};
-        const errorHandler = (error) => console.log(error);
-        const payload = {
-            "resource": this.props.todos.map((todo) => ({ todo_id: todo.todoId, completed: todo.completed }))
-        };
+        if(!(!this.props.todos) && this.props.todos.length > 0) {
+            const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+            const httpMethod = 'PATCH';
+            const dataTransformMethod = () => {};
+            const errorHandler = (error) => console.log(error);
+            const payload = {
+                "resource": this.props.todos.map((todo) => ({ todo_id: todo.todoId, completed: todo.completed }))
+            };
 
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+            apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        }
     };
 
     render = () => {
