@@ -38,7 +38,7 @@ class FilteredTodos extends Component {
             <LogoHeader title="ToDos" />
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="App-content">
-                    <div className="Questionnaire">
+                    <div className="Paperbox">
                         <List>
                             { this.getVisibleTodos(todos, todoFilter).map(
                                 (todo) => <TodoItem key={ `${todo.text}-${todo.created_at}` }

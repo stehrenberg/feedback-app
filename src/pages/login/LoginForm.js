@@ -49,7 +49,7 @@ class LoginForm extends Component {
             <div className="LoginMask">
                 <LogoHeader title={ "Login" }/>
                 <div className="App-content">
-                    <form className="login-form Questionnaire" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
+                    <form className="login-form Paperbox" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                         <TextField
                             name="projectName"
                             floatingLabelText="Project"

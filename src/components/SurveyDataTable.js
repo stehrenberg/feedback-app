@@ -21,7 +21,7 @@ export default class SurveyDataTable extends Component {
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="App-content">
-                <div className="Questionnaire">
+                <div className="Paperbox">
                     <Table className="forms">
                         <TableHeader className="TableHeader" displaySelectAll={ false }>
                             <TableRow className="TableRow">

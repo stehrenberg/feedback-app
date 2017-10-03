@@ -34,8 +34,8 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 720px;
     padding: 30px;
+    max-width: 720px;
 }
 
 .App-footer {
@@ -63,7 +63,7 @@ th {
     padding-right: 0 !important;
 }
 
-.Questionnaire {
+.Paperbox {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -112,6 +112,10 @@ th {
 
 .todo-input > button {
     display: none;
+}
+
+.TodoItem {
+    width: 470px;
 }
 
 .TodoItem.completed {
