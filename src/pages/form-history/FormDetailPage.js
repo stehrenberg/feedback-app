@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
-import RaisedButton from 'material-ui/RaisedButton';
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 
 import Questionnaire from '../../components/Questionnaire';
 import LogoHeader from '../../components/LogoHeader';
+import NavBackBtn from '../../components/buttons/NavBackBtn';
 import questions from '../../config/questionTexts.json';
 
 class FeedbackForm extends Component {

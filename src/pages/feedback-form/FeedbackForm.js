@@ -5,6 +5,7 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { connect } from 'react-redux';
 
 import Questionnaire from '../../components/Questionnaire';
+import NavBackBtn from '../../components/buttons/NavBackBtn';
 import LogoHeader from '../../components/LogoHeader';
 import questions from '../../config/questionTexts.json';
 
@@ -19,11 +20,7 @@ const FeedbackForm = (props) => (
                            todos={ [] }
                            isReadOnly={ false }/>
             <div className="App-footer">
-                <RaisedButton className="nav-btn"
-                              onClick={ props.history.goBack }
-                              icon={ <ArrowBack /> }
-                              primary={ true }
-                              label={ "Back" }/>
+                <NavBackBtn history={ props.history } />
             </div>
         </div>
     </div>
