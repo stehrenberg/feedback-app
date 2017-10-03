@@ -1,7 +1,5 @@
 import React from 'react';
 import Moment from 'moment';
-import RaisedButton from 'material-ui/RaisedButton';
-import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 import { connect } from 'react-redux';
 
 import Questionnaire from '../../components/Questionnaire';
