@@ -7,7 +7,7 @@ const NavBackBtn = ({ history }) => (
               onClick={ history.goBack }
               icon={ <ArrowBack /> }
               primary={ true }
-              label={ "Bla" } />
+              label={ "Back" } />
 );
 
 export default NavBackBtn;
