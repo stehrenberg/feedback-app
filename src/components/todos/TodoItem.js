@@ -2,10 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItemMiniCard from './TodoItemMiniCard';
 import { ListItem } from 'material-ui/List';
-import { Checkbox } from 'material-ui';
+import { Checkbox, IconButton } from 'material-ui';
+import ClearIcon from 'material-ui/svg-icons/content/clear';
 
 const TodoItem = (props) => {
     const { text, completed, todoType } = props;
+    const iconButtonElement = (
+        <IconButton onClick={ (event) => console.log("hi!", event.target) }>
+            <ClearIcon color={ 'ee0033' }/>
+        </IconButton>);
+    const leftCheckbox = <Checkbox className="Checkbox" checked={ completed }/>;
     let todoItem;
 
     switch(todoType) {
@@ -15,11 +21,8 @@ const TodoItem = (props) => {
         default:
             todoItem = <ListItem className={`TodoItem ${completed? 'completed' : ''}`}
                                  primaryText={ text }
-                                 leftCheckbox={
-                                    <Checkbox className="Checkbox"
-                                        disabled={ true }
-                                        checked={ completed }/>
-                                 }/>;
+                                 leftCheckbox={ leftCheckbox }
+                                 rightIconButton={ iconButtonElement }/>;
     }
 
     return todoItem;
