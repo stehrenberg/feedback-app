@@ -4,6 +4,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const LOAD_TODOS = 'LOAD_TODOS';
 export const SET_TODO_FILTER = 'SET_TODO_FILTER';
 export const TOGGLE_TODO_STATUS = 'TOGGLE_TODO_STATUS';
+export const DELETE_TODO = 'DELETE_TODO';
 
 export const setProject = (projectName) => {
     return {
@@ -25,6 +26,14 @@ export const addTodo = (newTodo) => {
         newTodo,
     }
 };
+
+export const deleteTodo = (todoText) => {
+    return {
+        type: DELETE_TODO,
+        todoText,
+    }
+};
+
 
 export const loadTodos = (todos) => {
     return {

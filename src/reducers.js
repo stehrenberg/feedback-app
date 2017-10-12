@@ -29,6 +29,8 @@ function todos(state = [], action) {
                     text: action.newTodo.text,
                     completed: action.newTodo.completed,
             }];
+        case 'DELETE_TODO':
+            return state.filter((todo) => todo.text !== action.todoText);
         case 'LOAD_TODOS':
             return [...action.todos];
         case 'TOGGLE_TODO_STATUS':

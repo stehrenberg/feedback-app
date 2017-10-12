@@ -23,6 +23,7 @@ class TodoInput extends Component {
             text: this.state.input,
             completed: false,
         };
+        
         this.props.dispatch(addTodo(newTodo));
         this.setState({ input: ''});
     };
