@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { List } from 'material-ui/List';
 import { connect } from 'react-redux';
 
+import { deleteTodo } from '../../actions';
 import TodoItem from './TodoItem';
 
 class TodoList extends React.Component {
 
     render = () => {
-        const { todos } = this.props;
+        const { todos, dispatch } = this.props;
 
         return (
             <List key={ todos } className="TodoList" >
@@ -16,12 +17,12 @@ class TodoList extends React.Component {
                     (todo) => <TodoItem key={ todo.text }
                                         text={ todo.text }
                                         completed={ todo.completed }
+                                        onDelete={ () => dispatch(deleteTodo(todo.text)) }
                         {...todo}/>) }
             </List>
         )
     };
 }
-
 
 const mapStateToProps = (state, ownProps) => {
     return { todos: state.todos.filter((todo) => todo.surveyId === ownProps.surveyId) };
