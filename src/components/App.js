@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
+import DocumentTitle from 'react-document-title';
 import { Redirect, HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -27,7 +28,7 @@ class App extends Component {
     componentWillMount = () => {
         const storedProjectName = localStorage.getItem("projectName");
         const storedJWT = localStorage.getItem("sessionToken");
-        const jwt = !(!storedJWT)? JSON.parse(storedJWT) : {};
+        const jwt = !(!storedJWT) ? JSON.parse(storedJWT) : {};
 
         const apiEndpoint = `${config.dreamfactoryApi.loginEndpoint}session`;
         const httpMethod = 'PUT';
@@ -45,20 +46,29 @@ class App extends Component {
 
     render() {
         return (
-                <MuiThemeProvider>
+            <MuiThemeProvider>
+                <DocumentTitle title="Cooperation Feedback Questionnaire">
                     <HashRouter history={ this.state.history }>
                         <Switch>
-                            <PrivateRoute exact path='/' component={ AppMenu } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/home/:projectName' component={ AppMenu } isAuthenticated={ this.checkAuthentication }/>
-                            <Redirect from ='/home/:projectName' to='/home' component={ AppMenu } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/feedback' component={ FeedbackForm } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute path="/feedback/:formId" component={ FormDetail } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/form-history' component={ FormHistory } isAuthenticated={ this.checkAuthentication }/>
-                            <PrivateRoute exact path='/todos/:filter' component={ FilteredTodos } isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/' component={ AppMenu }
+                                          isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/home/:projectName' component={ AppMenu }
+                                          isAuthenticated={ this.checkAuthentication }/>
+                            <Redirect from='/home/:projectName' to='/home' component={ AppMenu }
+                                      isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/feedback' component={ FeedbackForm }
+                                          isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute path="/feedback/:formId" component={ FormDetail }
+                                          isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/form-history' component={ FormHistory }
+                                          isAuthenticated={ this.checkAuthentication }/>
+                            <PrivateRoute exact path='/todos/:filter' component={ FilteredTodos }
+                                          isAuthenticated={ this.checkAuthentication }/>
                             <Route exact path='/login' component={ LoginForm }/>
                         </Switch>
                     </HashRouter>
-                </MuiThemeProvider>
+                </DocumentTitle>
+            </MuiThemeProvider>
         );
     }
 
