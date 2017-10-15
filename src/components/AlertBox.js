@@ -21,6 +21,7 @@ const AlertBox = (props) => {
                 open={ props.show }
                 onRequestClose={ props.handleClose }
                 contentStyle={{ width: 350, textAlign: 'center' }}
+                overlayStyle={ props.overlayStyle }
             >
                 { props.dialogText }
             </Dialog>

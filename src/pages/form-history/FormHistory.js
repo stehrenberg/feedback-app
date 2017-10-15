@@ -64,7 +64,7 @@ class FormHistory extends Component {
 
             return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
         });
-    }
+    };
 
     fetchSurveyIdsListForProject(projectName) {
         const table = `_table/survey_${ projectName }`;
