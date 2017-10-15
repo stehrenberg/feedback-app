@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
+import AlertBox from '../components/AlertBox';
 
 import { apiCall, normalizeProjectName } from '../util/utils';
 import { config } from '../config/config.js';
@@ -13,6 +14,7 @@ class Questionnaire extends Component {
         this.state = {
             questions: this.props.questions,
             isSaved: false,
+            showAlertBox: false,
         };
     }
 
@@ -46,6 +48,13 @@ class Questionnaire extends Component {
                     onChange={ this.handleChange }
                     onSubmit={ this.handleSubmit }
                     isReadOnly={ this.props.isReadOnly }
+                />
+                <AlertBox
+                    show={ this.state.showAlertBox }
+                    dialogText={ "Survey saved." }
+                    btnTexts={[]}
+                    overlayStyle={{ display: 'none' }}
+                    handleClose={ () => this.setState({ showAlertBox: false }) }
                 />
             </div>
         );
@@ -84,6 +93,7 @@ class Questionnaire extends Component {
         });
 
         this.setState({ questions: updatedQuestions });
+        //this.saveForm();
     };
 
     saveForm = () => {
@@ -102,7 +112,8 @@ class Questionnaire extends Component {
             if(this.props.todos.length > 0) {
                 this.saveTodos(this.props.todos);
             }}).then(() => {
-             this.setState({isSaved: true});
+             this.setState({isSaved: true, showAlertBox: true});
+            setTimeout(() => this.setState({ showAlertBox: false}), 1000);
         }).catch(err => {
             console.log("error!");
             console.log(err);
