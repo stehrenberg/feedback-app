@@ -4,12 +4,21 @@ import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 
 const AlertBox = (props) => {
-    const actions = props.btnTexts.map((text) => {
+    const {
+        btnTexts,
+        handleClose,
+        show,
+        overlayStyle,
+        style,
+        dialogText
+    } = this.props;
+
+    const actions = btnTexts.map((text) => {
         return <FlatButton
             key={ text }
             label={ text }
             primary={ true }
-            onClick={ props.handleClose }
+            onClick={ handleClose }
         />;
     });
 
@@ -18,12 +27,13 @@ const AlertBox = (props) => {
             <Dialog
                 actions={ actions }
                 modal={ false }
-                open={ props.show }
-                onRequestClose={ props.handleClose }
+                open={ show }
+                onRequestClose={ handleClose }
                 contentStyle={{ width: 350, textAlign: 'center' }}
-                overlayStyle={ props.overlayStyle }
+                overlayStyle={ overlayStyle }
+                style={ style }
             >
-                { props.dialogText }
+                { dialogText }
             </Dialog>
         </div>
     );
