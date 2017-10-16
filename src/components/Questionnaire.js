@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
-import AlertBox from '../components/AlertBox';
+import SnackBar from 'material-ui/Snackbar';
 
 import { apiCall, normalizeProjectName } from '../util/utils';
 import { config } from '../config/config.js';
@@ -16,6 +16,8 @@ class Questionnaire extends Component {
             isSaved: false,
             showAlertBox: false,
         };
+
+        this.saveTimeout = undefined;
     }
 
     // TODO Remove following redundant logic when rebuild using Redux!
@@ -36,7 +38,7 @@ class Questionnaire extends Component {
 
     render() {
         return (
-            <div className="Paperbox">
+            <div className='Paperbox'>
                 <p>
                     <strong>We would like to improve the quality of the services we supply continuously. We need our
                         customers' help to achieve this, to help us align to his targets give us ideas of what
@@ -49,12 +51,13 @@ class Questionnaire extends Component {
                     onSubmit={ this.handleSubmit }
                     isReadOnly={ this.props.isReadOnly }
                 />
-                <AlertBox
-                    show={ this.state.showAlertBox }
-                    dialogText={ "Survey saved." }
-                    btnTexts={[]}
-                    overlayStyle={{ display: 'none' }}
-                    handleClose={ () => this.setState({ showAlertBox: false }) }
+                <SnackBar
+                    className={ 'save-feedback' }
+                    open={ this.state.showAlertBox }
+                    autoHideDuration={ 1000 }
+                    message={ 'Survey saved.' }
+                    style={{ left: '80%', bottom: 0 }}
+                    onRequestClose={ () => this.setState({ showAlertBox: false }) }
                 />
             </div>
         );
@@ -86,6 +89,7 @@ class Questionnaire extends Component {
     };
 
     handleChange = (name, value) => {
+        window.clearTimeout(this.saveTimeout);
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
             const newValue = question.shortText === name? value : question.value;
@@ -93,7 +97,7 @@ class Questionnaire extends Component {
         });
 
         this.setState({ questions: updatedQuestions });
-        //this.saveForm();
+        this.saveTimeout = window.setTimeout(() => this.saveForm(), 500);
     };
 
     saveForm = () => {
@@ -113,9 +117,8 @@ class Questionnaire extends Component {
                 this.saveTodos(this.props.todos);
             }}).then(() => {
              this.setState({isSaved: true, showAlertBox: true});
-            setTimeout(() => this.setState({ showAlertBox: false}), 1000);
         }).catch(err => {
-            console.log("error!");
+            console.log('error!');
             console.log(err);
         });
     };
@@ -131,10 +134,10 @@ class Questionnaire extends Component {
                 'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
-                "resource": {
-                    "survey_id": this.props.id,
-                    "project_name": projectName,
-                    "created_at": ""
+                'resource': {
+                    'survey_id': this.props.id,
+                    'project_name': projectName,
+                    'created_at': ''
                 }
             })
         });
@@ -151,7 +154,7 @@ class Questionnaire extends Component {
                 'X-DreamFactory-Api-Key': config.dreamfactoryApi.apiKey
             },
             body: JSON.stringify({
-                "resource": questionsAsArray,
+                'resource': questionsAsArray,
             }),
         })
     };
@@ -159,15 +162,22 @@ class Questionnaire extends Component {
     saveTodos = (todosAsArray) => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
         const httpMethod = 'POST';
-        const dataTransformMethod = () => {};
+        const dataTransformMethod = (data) => {
+            const generatedRecords = data.resource;
+            const pimpedTodos = todosAsArray.map((todoObj, index) => ({
+                id: generatedRecords[index].todo_id,
+                ...todoObj
+            }));
+            console.log(pimpedTodos);
+        };
         const errorHandler = (error) => console.log(error);
-        const todosToSave = todosAsArray.map(todo => ({
+        const todosToSave = todosAsArray.filter(todo => todo.id === undefined).map(todo => ({
             survey_id: this.props.id,
             text: todo.text,
             completed: todo.completed
         }));
         const payload = {
-            "resource": todosToSave
+            'resource': todosToSave
         };
 
         return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
@@ -176,9 +186,9 @@ class Questionnaire extends Component {
     getQuestionValuesAsArray = () => {
         return this.state.questions.map((question, index) => {
             return {
-                "survey_id": this.props.id,
-                "question_id": index + 1,
-                "question_answer": question.value,
+                'survey_id': this.props.id,
+                'question_id': index + 1,
+                'question_answer': question.value,
             };
         });
     };
