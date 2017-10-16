@@ -7,15 +7,19 @@ import { connect } from 'react-redux';
 import ClearIcon from 'material-ui/svg-icons/content/clear';
 
 const TodoItem = (props) => {
-    const { text, completed, todoType, onDelete } = props;
-    const iconButtonElement = (
-        <IconButton onClick={ () => onDelete(text) }>
-            <ClearIcon color={ 'ee0033' }/>
-        </IconButton>);
+    const { text, completed, todoType, onDelete, isReadOnly } = props;
     const leftCheckbox = <Checkbox className="Checkbox" checked={ completed }/>;
+    const optProps = isReadOnly
+        ? {}
+        : {
+        rightIconButton: <IconButton onClick={ () => onDelete(text) }>
+            <ClearIcon color={ 'ee0033' }/>
+        </IconButton>
+    };
+
     let todoItem;
 
-    switch(todoType) {
+    switch (todoType) {
         case 'miniCard':
             todoItem = <TodoItemMiniCard {...props}/>;
             break;
@@ -23,7 +27,7 @@ const TodoItem = (props) => {
             todoItem = <ListItem className={`TodoItem ${completed? 'completed' : ''}`}
                                  primaryText={ text }
                                  leftCheckbox={ leftCheckbox }
-                                 rightIconButton={ iconButtonElement }
+                {...optProps}
             />;
     }
 
@@ -35,6 +39,7 @@ TodoItem.PropTypes = {
     surveyId: PropTypes.string.isRequired,
     todoType: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
+    isReadOnly: PropTypes.bool.isRequired,
     onDelete: PropTypes.func.isRequired,
     createdAt: PropTypes.object,
 };
