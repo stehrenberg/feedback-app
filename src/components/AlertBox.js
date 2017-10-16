@@ -8,10 +8,9 @@ const AlertBox = (props) => {
         btnTexts,
         handleClose,
         show,
-        overlayStyle,
         style,
         dialogText
-    } = this.props;
+    } = props;
 
     const actions = btnTexts.map((text) => {
         return <FlatButton
@@ -30,7 +29,6 @@ const AlertBox = (props) => {
                 open={ show }
                 onRequestClose={ handleClose }
                 contentStyle={{ width: 350, textAlign: 'center' }}
-                overlayStyle={ overlayStyle }
                 style={ style }
             >
                 { dialogText }
