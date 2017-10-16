@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { List } from 'material-ui/List';
 import { connect } from 'react-redux';
 
-import { deleteTodo } from '../../actions';
 import TodoItem from './TodoItem';
+import { deleteTodo } from '../../actions';
+import { apiCall } from '../../util/utils';
+import { config } from '../../config/config.js';
 
 class TodoList extends React.Component {
 
@@ -17,11 +19,24 @@ class TodoList extends React.Component {
                     (todo) => <TodoItem key={ todo.id }
                                         text={ todo.text }
                                         completed={ todo.completed }
-                                        onDelete={ () => dispatch(deleteTodo(todo.id)) }
+                                        onDelete={ () => {
+                                            dispatch(deleteTodo(todo.id));
+                                            this.deleteTodoFromBE(todo.id);
+                                        } }
                         {...todo}/>) }
             </List>
         )
     };
+
+    deleteTodoFromBE = (todoId) => {
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos/${todoId}`;
+        console.log(apiEndpoint);
+        const httpMethod = 'DELETE';
+        const dataTransformMethod = (data) => console.log(data);
+        const errorHandler = (error) => console.log(error);
+
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler);
+    }
 }
 
 const mapStateToProps = (state, ownProps) => {

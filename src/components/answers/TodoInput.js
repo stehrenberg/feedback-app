@@ -63,9 +63,12 @@ class TodoInput extends Component {
         const dataTransformMethod = () => {};
         const errorHandler = (error) => console.log(error);
         const todoToSave = {
+            todo_id: newTodo.id,
             survey_id: newTodo.surveyId,
-            ...newTodo
+            text: newTodo.text,
+            completed: newTodo.completed
         };
+        console.log(todoToSave);
         const payload = {
             'resource': todoToSave
         };
