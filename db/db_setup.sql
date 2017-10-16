@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `survey_testproject` (
 
 DROP TABLE IF EXISTS `todos`;
 CREATE TABLE IF NOT EXISTS `todos` (
-  `todo_id` varchar(32) NOT NULL,
+  `todo_id` varchar(36) NOT NULL,
   `survey_id` varchar(32) NOT NULL,
   `text` text NOT NULL,
   `completed` tinyint(1) NOT NULL DEFAULT '0',
@@ -293,7 +293,7 @@ INSERT INTO `todos` (`todo_id`, `survey_id`, `text`, `completed`, `created_at`) 
 --
 DROP VIEW IF EXISTS `todos_kundenprojekt`;
 CREATE TABLE IF NOT EXISTS `todos_kundenprojekt` (
-`todo_id` varchar(32)
+`todo_id` varchar(36)
 ,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
@@ -306,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `todos_kundenprojekt` (
 --
 DROP VIEW IF EXISTS `todos_refinedlabs`;
 CREATE TABLE IF NOT EXISTS `todos_refinedlabs` (
-`todo_id` varchar(32)
+`todo_id` varchar(36)
 ,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
@@ -319,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `todos_refinedlabs` (
 --
 DROP VIEW IF EXISTS `todos_testproject`;
 CREATE TABLE IF NOT EXISTS `todos_testproject` (
-`todo_id` varchar(32)
+`todo_id` varchar(36)
 ,`survey_id` varchar(32)
 ,`text` text
 ,`completed` tinyint(1)
