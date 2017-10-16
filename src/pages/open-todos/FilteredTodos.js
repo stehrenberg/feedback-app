@@ -25,7 +25,7 @@ class FilteredTodos extends Component {
             const dataTransformMethod = () => {};
             const errorHandler = (error) => console.log(error);
             const payload = {
-                "resource": this.props.todos.map((todo) => ({ todo_id: todo.todoId, completed: todo.completed }))
+                "resource": this.props.todos.map((todo) => ({ todo_id: todo.id, completed: todo.completed }))
             };
 
             apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
@@ -43,7 +43,7 @@ class FilteredTodos extends Component {
                     <div className="Paperbox">
                         <List>
                             { this.getVisibleTodos(todos, todoFilter).map(
-                                (todo) => <TodoItem key={ `${todo.text}-${todo.created_at}` }
+                                (todo) => <TodoItem key={ todo.id }
                                                     todoType="miniCard" {...todo}/>)
                             }
                         </List>

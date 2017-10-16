@@ -61,7 +61,7 @@ class AppMenu extends React.Component {
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => data.resource.map((todo) => {
             return {
-                todoId: todo.todo_id.toString(),
+                id: todo.todo_id.toString(),
                 surveyId: todo.survey_id.toString(),
                 text: todo.text,
                 completed: todo.completed,

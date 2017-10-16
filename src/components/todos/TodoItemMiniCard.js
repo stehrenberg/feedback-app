@@ -9,7 +9,7 @@ import { toggleTodoStatus } from '../../actions';
 class TodoItemMiniCard extends Component {
 
     render = () => {
-        const { todoId, text, completed, createdAt=Moment() } = this.props;
+        const { id, text, completed, createdAt=Moment() } = this.props;
 
         return (
             <ListItem name={ text }
@@ -17,7 +17,7 @@ class TodoItemMiniCard extends Component {
                       primaryText={ text }
                       secondaryText={ createdAt.format("YYYY-MM-DD") }
                       leftCheckbox={
-                      <Checkbox name={ todoId }
+                      <Checkbox name={ id }
                                 checked={ completed }
                                 onCheck={ (event) => this.handleTodoClick(event) }/> }
             />
@@ -32,7 +32,7 @@ class TodoItemMiniCard extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        completed: state.todos.find((todo) => todo.todoId === ownProps.todoId).completed
+        completed: state.todos.find((todo) => todo.id === ownProps.id).completed
     }
 };
 

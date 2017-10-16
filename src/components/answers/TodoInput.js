@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-
 import TextField from 'material-ui/TextField';
+import { connect } from 'react-redux';
+import uuidv1 from 'uuid';
+
 import TodoList from '../../components/todos/TodoList';
-import { addTodo } from '../../actions';
+import { addTodo, updateTodo } from '../../actions';
+import { apiCall } from '../../util/utils';
+import { config } from '../../config/config.js';
 
 class TodoInput extends Component {
 
@@ -19,6 +22,7 @@ class TodoInput extends Component {
     handleClick = (event) => {
         event.preventDefault();
         const newTodo = {
+            id: uuidv1(),
             surveyId: this.props.surveyId,
             text: this.state.input,
             completed: false,
@@ -26,6 +30,8 @@ class TodoInput extends Component {
         
         this.props.dispatch(addTodo(newTodo));
         this.setState({ input: ''});
+        // TODO belongs in Middleware - refactor when introducing one!
+        this.saveTodo(newTodo);
     };
 
     render() {
@@ -50,6 +56,22 @@ class TodoInput extends Component {
         </div>
         );
     }
+
+    saveTodo = (newTodo) => {
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
+        const httpMethod = 'POST';
+        const dataTransformMethod = () => {};
+        const errorHandler = (error) => console.log(error);
+        const todoToSave = {
+            survey_id: newTodo.surveyId,
+            ...newTodo
+        };
+        const payload = {
+            'resource': todoToSave
+        };
+
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+    };
 }
 
 export default connect()(TodoInput);

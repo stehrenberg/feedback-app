@@ -78,7 +78,7 @@ class Questionnaire extends Component {
         return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
     };
 
-    // TODO Remove all the above :D
+    // TODO Remove all the above
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -113,9 +113,6 @@ class Questionnaire extends Component {
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
         ).then(() => {
-            if(this.props.todos.length > 0) {
-                this.saveTodos(this.props.todos);
-            }}).then(() => {
              this.setState({isSaved: true, showAlertBox: true});
         }).catch(err => {
             console.log('error!');
@@ -157,30 +154,6 @@ class Questionnaire extends Component {
                 'resource': questionsAsArray,
             }),
         })
-    };
-
-    saveTodos = (todosAsArray) => {
-        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
-        const httpMethod = 'POST';
-        const dataTransformMethod = (data) => {
-            const generatedRecords = data.resource;
-            const pimpedTodos = todosAsArray.map((todoObj, index) => ({
-                id: generatedRecords[index].todo_id,
-                ...todoObj
-            }));
-            console.log(pimpedTodos);
-        };
-        const errorHandler = (error) => console.log(error);
-        const todosToSave = todosAsArray.filter(todo => todo.id === undefined).map(todo => ({
-            survey_id: this.props.id,
-            text: todo.text,
-            completed: todo.completed
-        }));
-        const payload = {
-            'resource': todosToSave
-        };
-
-        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
     };
 
     getQuestionValuesAsArray = () => {
