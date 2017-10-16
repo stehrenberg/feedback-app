@@ -16,6 +16,10 @@ import './appMenu.css';
 
 class AppMenu extends React.Component {
 
+    componentDidMount() {
+        this.loadTodosFromBackend();
+    };
+
     render() {
         const tileData = [
             {
@@ -42,7 +46,7 @@ class AppMenu extends React.Component {
 
         return (
             <div>
-                <LogoHeader title="Overview" />
+                <LogoHeader title="Overview for" />
                 <TileMenu className="TileMenu"
                           tileData={ tileData }
                           cols={ 2 }
@@ -50,10 +54,6 @@ class AppMenu extends React.Component {
             </div>
         );
     }
-
-    componentDidMount() {
-        this.loadTodosFromBackend();
-    };
 
     loadTodosFromBackend = () => {
         const projectName = normalizeProjectName(this.props.projectName);
