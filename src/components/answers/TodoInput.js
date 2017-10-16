@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 
 import TodoList from '../../components/todos/TodoList';
-import { addTodo, updateTodo } from '../../actions';
+import { addTodo } from '../../actions';
 import { apiCall } from '../../util/utils';
 import { config } from '../../config/config.js';
 
@@ -52,7 +52,7 @@ class TodoInput extends Component {
                     <button type="submit" label="Add" onClick={ (event) => this.handleClick(event) } />
                 </div>
             </div>
-            <TodoList surveyId={ this.props.surveyId }/>
+            <TodoList surveyId={ this.props.surveyId } isReadOnly={ this.props.isReadOnly }/>
         </div>
         );
     }
@@ -68,7 +68,6 @@ class TodoInput extends Component {
             text: newTodo.text,
             completed: newTodo.completed
         };
-        console.log(todoToSave);
         const payload = {
             'resource': todoToSave
         };
