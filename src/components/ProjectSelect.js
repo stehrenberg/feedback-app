@@ -15,14 +15,13 @@ class ProjectSelect extends React.Component {
     }
 
     render() {
-        const { projectName } = this.props;
-        const projects = ['testproject', 'kundenfu'];
+        const { projects } = this.props;
 
         return (
             <SelectField
-                className={ 'project-select' }
-                underlineStyle={{ color: '#aaccee' }}
-                style={{ paddingLeft: 20 }}
+                className={ 'ProjectSelect' }
+                underlineStyle={{ color: '#ff0000' }}
+                style={{ paddingLeft: 20, width: 180 }}
                 value={ this.state.input }
                 onChange={ this.handleChange }
                 maxHeight={ 200 }>
@@ -44,6 +43,7 @@ ProjectSelect.PropTypes = {
 const mapStateToProps = (state) => {
     return {
         projectName: state.projectName,
+        projects: state.projects,
     };
 };
 

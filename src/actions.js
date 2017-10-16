@@ -1,4 +1,5 @@
 export const SET_PROJECT = 'SET_PROJECT';
+export const LOAD_PROJECTS = 'LOAD_PROJECTS';
 export const LOGIN = 'LOGIN';
 export const ADD_TODO = 'ADD_TODO';
 export const DELETE_TODO = 'DELETE_TODO';
@@ -11,6 +12,13 @@ export const setProject = (projectName) => {
         type: SET_PROJECT,
         projectName,
     };
+};
+
+export const loadProjects = (projectsList) => {
+    return {
+        type: LOAD_PROJECTS,
+        projectsList
+    }
 };
 
 export const setJWT = (jwt) => {
