@@ -267,7 +267,7 @@ CREATE TABLE IF NOT EXISTS `survey_testproject` (
 
 DROP TABLE IF EXISTS `todos`;
 CREATE TABLE IF NOT EXISTS `todos` (
-  `todo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `todo_id` varchar(32) NOT NULL,
   `survey_id` varchar(32) NOT NULL,
   `text` text NOT NULL,
   `completed` tinyint(1) NOT NULL DEFAULT '0',

@@ -1,10 +1,10 @@
 export const SET_PROJECT = 'SET_PROJECT';
 export const LOGIN = 'LOGIN';
 export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
 export const LOAD_TODOS = 'LOAD_TODOS';
 export const SET_TODO_FILTER = 'SET_TODO_FILTER';
 export const TOGGLE_TODO_STATUS = 'TOGGLE_TODO_STATUS';
-export const DELETE_TODO = 'DELETE_TODO';
 
 export const setProject = (projectName) => {
     return {
@@ -27,13 +27,12 @@ export const addTodo = (newTodo) => {
     }
 };
 
-export const deleteTodo = (todoText) => {
+export const deleteTodo = (todoId) => {
     return {
         type: DELETE_TODO,
-        todoText,
+        todoId,
     }
 };
-
 
 export const loadTodos = (todos) => {
     return {

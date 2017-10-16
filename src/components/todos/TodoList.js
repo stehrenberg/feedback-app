@@ -14,10 +14,10 @@ class TodoList extends React.Component {
         return (
             <List key={ todos } className="TodoList" >
                 { todos.map(
-                    (todo) => <TodoItem key={ todo.text }
+                    (todo) => <TodoItem key={ todo.id }
                                         text={ todo.text }
                                         completed={ todo.completed }
-                                        onDelete={ () => dispatch(deleteTodo(todo.text)) }
+                                        onDelete={ () => dispatch(deleteTodo(todo.id)) }
                         {...todo}/>) }
             </List>
         )

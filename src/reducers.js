@@ -22,20 +22,23 @@ function jwt(state = {}, action) {
 function todos(state = [], action) {
     switch(action.type) {
         case 'ADD_TODO':
-            return [
+            const newState = [
                 ...state,
                 {
+                    id: action.newTodo.id,
                     surveyId: action.newTodo.surveyId,
                     text: action.newTodo.text,
                     completed: action.newTodo.completed,
             }];
+            console.log(newState);
+            return newState;
         case 'DELETE_TODO':
-            return state.filter((todo) => todo.text !== action.todoText);
+            return state.filter((todo) => todo.id !== action.todoId);
         case 'LOAD_TODOS':
             return [...action.todos];
         case 'TOGGLE_TODO_STATUS':
             return state.map((todo) =>
-                (todo.todoId === action.todoId)
+                (todo.id === action.todoId)
                     ? {...todo, completed: !todo.completed}
                     : todo);
         default:
