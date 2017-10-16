@@ -56,7 +56,6 @@ class Questionnaire extends Component {
                     open={ this.state.showAlertBox }
                     autoHideDuration={ 1000 }
                     message={ 'Survey saved.' }
-                    style={{ left: '80%', bottom: 0 }}
                     onRequestClose={ () => this.setState({ showAlertBox: false }) }
                 />
             </div>
