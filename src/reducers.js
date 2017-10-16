@@ -10,6 +10,15 @@ function projectName(state = '', action) {
     }
 }
 
+function projects(state = [], action) {
+    switch(action.type) {
+        case 'LOAD_PROJECTS':
+            return [...action.projectsList];
+        default:
+            return state;
+    }
+}
+
 function jwt(state = {}, action) {
     switch(action.type) {
         case 'LOGIN':
@@ -57,6 +66,7 @@ function todoFilter(state = 'SHOW_ALL', action) {
 
 const feedbackApp = combineReducers({
     projectName,
+    projects,
     jwt,
     todos,
     todoFilter,

@@ -32,8 +32,8 @@ body {
     padding-top: 20px;
 }
 
-.App-header > h2 {
-    padding-bottom: 10px;
+.ProjectSelect > div > div > div {
+    color: #ffffff !important;
 }
 
 .App-intro {

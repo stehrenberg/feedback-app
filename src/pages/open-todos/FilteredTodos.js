@@ -37,7 +37,7 @@ class FilteredTodos extends Component {
 
         return (
             <div>
-            <LogoHeader title="ToDos" />
+            <LogoHeader title="ToDos" projectSwitchDisabled={ true }/>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <div className="App-content">
                     <div className="Paperbox">

@@ -9,7 +9,7 @@ import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
-import { loadTodos } from '../../actions';
+import { loadTodos, loadProjects } from '../../actions';
 import { apiCall, normalizeProjectName } from '../../util/utils';
 import { config } from '../../config/config';
 import './appMenu.css';
@@ -18,6 +18,7 @@ class AppMenu extends React.Component {
 
     componentDidMount() {
         this.loadTodosFromBackend();
+        this.loadProjectsFromBackend();
     };
 
     render() {
@@ -72,9 +73,40 @@ class AppMenu extends React.Component {
         const errorHandler = (error) => console.log(error);
         apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
             .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
-    }
-};
+    };
 
-const mapStateToProps = (state) => ({ projectName: state.projectName });
+    loadProjectsFromBackend = () => {
+        const customerEmail = this.props.customerEmail;
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/customer_projects?filter=customer_email%3D'${customerEmail}'`;
+        const httpMethod = 'GET';
+        const dataTransformMethod = (data) => data.resource.map(obj => parseInt(obj.project_id, 10));
+
+        const errorHandler = (error) => console.log(error);
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
+            .then((projectIds) => {
+                if(projectIds.length > 0) {
+                    this.loadProjectNamesFromIdList(projectIds);
+                }
+            });
+    };
+
+    loadProjectNamesFromIdList = (projectIds) => {
+        const concatenatedIds = projectIds.reduce((a, b) => `${a}%2C%20${b}`);
+        const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/projects?ids=${concatenatedIds}`;
+        const httpMethod = 'GET';
+        const dataTransformMethod = (data) => data.resource.map(obj => obj.project_name);
+
+        const errorHandler = (error) => console.log(error);
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
+            .then(projectNamesAsArray => this.props.dispatch(loadProjects(projectNamesAsArray)));
+    };
+}
+
+const mapStateToProps = (state) => ({
+    projectName: state.projectName,
+    customerEmail: state.jwt.email,
+    projects: state.projects,
+    todos: state.todos,
+});
 
 export default connect(mapStateToProps)(AppMenu);

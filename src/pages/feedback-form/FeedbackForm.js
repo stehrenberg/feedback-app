@@ -11,7 +11,7 @@ import '../../app.css'
 
 const FeedbackForm = (props) => (
     <div className="FeedbackForm">
-        <LogoHeader title="Cooperation Feedback Questionnaire"/>
+        <LogoHeader title="Feedback Questionnaire for"/>
         <div className="App-content">
             <Questionnaire id={ props.id }
                            questions={ questions.questionTexts }

@@ -6,7 +6,7 @@ import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
 import AlertBox from '../../components/AlertBox';
 import { config } from '../../config/config'
-import { apiCall, capitalize, normalizeProjectName } from '../../util/utils';
+import { apiCall, normalizeProjectName } from '../../util/utils';
 import '../../app.css';
 
 class FormHistory extends Component {
@@ -30,12 +30,9 @@ class FormHistory extends Component {
     }
 
     render() {
-        const projectName = this.props.projectName;
-        const headerProjectName = projectName? `for ${ capitalize(projectName) }` : "";
-
         return (
             <div>
-                <LogoHeader title={`Past Questionnaires ${ headerProjectName }` }/>
+                <LogoHeader title={'Past Questionnaires for' }/>
                 <SurveyDataTable formData={ this.state.forms.reverse() } history={ this.props.history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }
