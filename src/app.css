@@ -32,14 +32,6 @@ body {
     padding-top: 20px;
 }
 
-.ProjectSelect > div > div > div {
-    color: #ffffff !important;
-}
-
-.App-intro {
-    font-size: large;
-}
-
 .App-content {
     display: flex;
     flex-direction: column;
