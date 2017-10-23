@@ -20,8 +20,9 @@ class ProjectSelect extends React.Component {
         return (
             <SelectField
                 className={ 'ProjectSelect' }
-                underlineStyle={{ color: '#ff0000' }}
-                style={{ paddingLeft: 20, width: 180 }}
+                labelStyle={{ color: '#ffffff', fontSize: 20 }}
+                style={{ paddingLeft: 20, width: 200, top: 10 }}
+                underlineStyle={{ color: '#ff00ff' }}
                 value={ this.state.input }
                 onChange={ this.handleChange }
                 maxHeight={ 200 }>
