@@ -69,8 +69,8 @@ class AppMenu extends React.Component {
                 createdAt: Moment(todo.created_at),
             };
         });
-
         const errorHandler = (error) => console.log(error);
+
         apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
             .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
@@ -80,8 +80,8 @@ class AppMenu extends React.Component {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/customer_projects?filter=customer_email%3D'${customerEmail}'`;
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => data.resource.map(obj => parseInt(obj.project_id, 10));
-
         const errorHandler = (error) => console.log(error);
+
         apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
             .then((projectIds) => {
                 if(projectIds.length > 0) {

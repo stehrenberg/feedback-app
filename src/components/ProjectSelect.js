@@ -39,6 +39,7 @@ class ProjectSelect extends React.Component {
 
 ProjectSelect.PropTypes = {
     projectName: PropTypes.string,
+    projects: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = (state) => {
