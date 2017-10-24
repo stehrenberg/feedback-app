@@ -10,7 +10,7 @@ import { config } from '../../config/config.js';
 
 class TodoList extends React.Component {
 
-    render = () => {
+    render() {
         const { todos, dispatch, isReadOnly } = this.props;
 
         return (

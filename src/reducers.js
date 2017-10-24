@@ -31,7 +31,7 @@ function jwt(state = {}, action) {
 function todos(state = [], action) {
     switch(action.type) {
         case 'ADD_TODO':
-            const newState = [
+            return [
                 ...state,
                 {
                     id: action.newTodo.id,
@@ -39,8 +39,6 @@ function todos(state = [], action) {
                     text: action.newTodo.text,
                     completed: action.newTodo.completed,
             }];
-            console.log(newState);
-            return newState;
         case 'DELETE_TODO':
             return state.filter((todo) => todo.id !== action.todoId);
         case 'LOAD_TODOS':

@@ -17,6 +17,23 @@ class TodoInput extends Component {
         };
     }
 
+    handleChange  = (event) => this.setState({ input:  event.target.value});
+
+    handleClick = (event) => {
+        event.preventDefault();
+        const newTodo = {
+            id: uuidv1(),
+            surveyId: this.props.surveyId,
+            text: this.state.input,
+            completed: false,
+        };
+
+        this.props.dispatch(addTodo(newTodo));
+        this.setState({ input: ''});
+        // TODO belongs in Middleware - refactor when introducing one!
+        this.saveTodo(newTodo);
+    };
+
     render() {
         return(
             <div className="todos">
@@ -39,23 +56,6 @@ class TodoInput extends Component {
         </div>
         );
     }
-
-    handleChange  = (event) => this.setState({ input:  event.target.value});
-
-    handleClick = (event) => {
-        event.preventDefault();
-        const newTodo = {
-            id: uuidv1(),
-            surveyId: this.props.surveyId,
-            text: this.state.input,
-            completed: false,
-        };
-
-        this.props.dispatch(addTodo(newTodo));
-        this.setState({ input: ''});
-        // TODO belongs in Middleware - refactor when introducing one!
-        this.saveTodo(newTodo);
-    };
 
     saveTodo = (newTodo) => {
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/todos`;
