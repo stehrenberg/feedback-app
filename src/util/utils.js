@@ -1,7 +1,11 @@
 import Moment from 'moment';
 import { config } from '../config/config';
 
-export const apiCall = (apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload = {}) => {
+export const apiCall = (apiEndpoint,
+                        httpMethod,
+                        dataTransformMethod,
+                        errorHandler = (error) => console.log(error),
+                        payload = {}) => {
     let callConfig = {
         method: httpMethod,
         headers: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import Moment from 'moment';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
@@ -69,9 +70,8 @@ class AppMenu extends React.Component {
                 createdAt: Moment(todo.created_at),
             };
         });
-        const errorHandler = (error) => console.log(error);
 
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
 
@@ -79,10 +79,9 @@ class AppMenu extends React.Component {
         const customerEmail = this.props.customerEmail;
         const apiEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/customer_projects?filter=customer_email%3D'${customerEmail}'`;
         const httpMethod = 'GET';
-        const dataTransformMethod = (data) => data.resource.map(obj => parseInt(obj.project_id, 10));
-        const errorHandler = (error) => console.log(error);
+        const dataTransformMethod = (data) => data.resource.map(record => parseInt(record.project_id, 10));
 
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then((projectIds) => {
                 if(projectIds.length > 0) {
                     this.loadProjectNamesFromIdList(projectIds);
@@ -96,11 +95,17 @@ class AppMenu extends React.Component {
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => data.resource.map(obj => obj.project_name);
 
-        const errorHandler = (error) => console.log(error);
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler)
+        apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then(projectNamesAsArray => this.props.dispatch(loadProjects(projectNamesAsArray)));
     };
 }
+
+AppMenu.PropTypes = {
+    projectName: PropTypes.string,
+    customerEmail: PropTypes.string,
+    projects: PropTypes.arrayOf(PropTypes.string),
+    todos: PropTypes.arrayOf(PropTypes.object),
+};
 
 const mapStateToProps = (state) => ({
     projectName: state.projectName,
