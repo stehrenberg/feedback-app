@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Moment from 'moment';
 import { ListItem } from 'material-ui/List';
 import { Checkbox } from 'material-ui';
@@ -8,7 +9,7 @@ import { toggleTodoStatus } from '../../actions';
 
 class TodoItemMiniCard extends Component {
 
-    render = () => {
+    render() {
         const { id, text, completed, createdAt=Moment() } = this.props;
 
         return (
@@ -29,6 +30,13 @@ class TodoItemMiniCard extends Component {
         this.props.dispatch(toggleTodoStatus(todoId));
     };
 }
+
+TodoItemMiniCard.PropTypes = {
+    id: PropTypes.string,
+    text: PropTypes.string,
+    completed: PropTypes.bool,
+    createdAt: PropTypes.instanceOf(Date),
+};
 
 const mapStateToProps = (state, ownProps) => {
     return {
