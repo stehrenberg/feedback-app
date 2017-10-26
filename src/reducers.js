@@ -22,7 +22,7 @@ function projects(state = [], action) {
 function jwt(state = {}, action) {
     switch(action.type) {
         case 'LOGIN':
-            return action.jwt;
+            return {...action.jwt};
         default:
             return state;
     }
@@ -62,12 +62,22 @@ function todoFilter(state = 'SHOW_ALL', action) {
     }
 }
 
+function surveys(state = [], action) {
+    switch(action.type) {
+        case 'LOAD_SURVEYS':
+            return [...action.surveys];
+        default:
+            return state;
+    }
+}
+
 const feedbackApp = combineReducers({
     projectName,
     projects,
     jwt,
     todos,
     todoFilter,
+    surveys,
 });
 
 export default feedbackApp;

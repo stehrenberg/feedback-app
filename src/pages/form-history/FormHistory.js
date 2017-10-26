@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
 import AlertBox from '../../components/AlertBox';
+import { loadSurveys } from '../../actions';
 import { config } from '../../config/config'
 import { apiCall, normalizeProjectName } from '../../util/utils';
 import '../../app.css';
@@ -14,15 +15,16 @@ class FormHistory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            forms: [],
+            // forms: [],
             showAlertBox: false,
         };
     }
 
     componentWillMount() {
         this.fetchFormData().then((formsDataAsArray) => {
+            this.props.dispatch(loadSurveys(formsDataAsArray.reverse()));
             this.setState({
-                forms: formsDataAsArray,
+                // forms: formsDataAsArray,
                 showAlertBox: formsDataAsArray.length === 0,
             });
         }).catch((err) => this.setState({ showAlertBox: true }));
@@ -32,7 +34,7 @@ class FormHistory extends Component {
         return (
             <div>
                 <LogoHeader title={'Past Questionnaires for' }/>
-                <SurveyDataTable formData={ this.state.forms.reverse() } history={ this.props.history }/>
+                <SurveyDataTable formData={ this.props.surveys } history={ this.props.history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }
                     dialogText={ "No completed surveys to show yet." }
@@ -86,6 +88,9 @@ class FormHistory extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({ projectName: state.projectName });
+const mapStateToProps = (state) => ({
+    projectName: state.projectName,
+    surveys: state.surveys,
+});
 
 export default connect(mapStateToProps)(FormHistory);
