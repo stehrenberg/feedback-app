@@ -17,15 +17,19 @@ class FormHistory extends Component {
         this.state = {
             showAlertBox: false,
         };
+
+        this.previousProjectName = props.projectName;
     }
 
     componentWillMount() {
-        this.fetchSurveyData().then((surveysDataAsArray) => {
-            this.props.dispatch(loadSurveys(surveysDataAsArray.reverse()));
-            this.setState({
-                showAlertBox: surveysDataAsArray.length === 0,
-            });
-        }).catch((err) => this.setState({ showAlertBox: true }));
+        this.loadSurveyData();
+    }
+
+    componentDidUpdate() {
+        if (this.previousProjectName !== this.props.projectName) {
+            this.loadSurveyData();
+            this.previousProjectName = this.props.projectName;
+        }
     }
 
     render() {
@@ -47,6 +51,15 @@ class FormHistory extends Component {
                 </div>
             </div>
         );
+    }
+
+    loadSurveyData() {
+        this.fetchSurveyData().then((surveysDataAsArray) => {
+            this.props.dispatch(loadSurveys(surveysDataAsArray.reverse()));
+            this.setState({
+                showAlertBox: surveysDataAsArray.length === 0,
+            });
+        }).catch((err) => this.setState({ showAlertBox: true }));
     }
 
     fetchSurveyData = () => {
