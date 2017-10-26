@@ -17,7 +17,6 @@ class FormHistory extends Component {
             forms: [],
             showAlertBox: false,
         };
-        this.fetchFormData();
     }
 
     componentWillMount() {
