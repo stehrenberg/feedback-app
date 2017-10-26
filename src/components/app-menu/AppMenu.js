@@ -17,9 +17,20 @@ import './appMenu.css';
 
 class AppMenu extends React.Component {
 
-    componentDidMount() {
-        this.loadTodosFromBackend();
-        this.loadProjectsFromBackend();
+    constructor(props) {
+        super(props);
+        this.previousProjectName = props.projectName;
+    }
+
+    componentDidUpdate() {
+        if(this.previousProjectName !== this.props.projectName) {
+            this.loadAppData();
+            this.previousProjectName = this.props.projectName;
+        }
+    }
+
+    componentWillMount() {
+        this.loadAppData();
     };
 
     render() {
@@ -56,6 +67,11 @@ class AppMenu extends React.Component {
             </div>
         );
     }
+
+    loadAppData = () => {
+        this.loadTodosFromBackend();
+        this.loadProjectsFromBackend();
+    };
 
     loadTodosFromBackend = () => {
         const projectName = normalizeProjectName(this.props.projectName);
