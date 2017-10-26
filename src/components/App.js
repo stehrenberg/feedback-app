@@ -38,10 +38,9 @@ class App extends Component {
             localStorage.setItem("sessionToken", JSON.stringify(jwt));
             this.state.history.push(`/home/${ storedProjectName }`);
         };
-        const errorHandler = (error) => console.log(error);
         const payload = { session_token: jwt.session_token };
 
-        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, errorHandler, payload);
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod, undefined, payload);
     };
 
     render() {
