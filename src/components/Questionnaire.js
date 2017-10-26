@@ -3,7 +3,6 @@ import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 import SnackBar from 'material-ui/Snackbar';
 
-import { apiCall, normalizeProjectName } from '../util/utils';
 import { config } from '../config/config.js';
 
 class Questionnaire extends Component {
@@ -18,22 +17,6 @@ class Questionnaire extends Component {
         };
 
         this.saveTimeout = undefined;
-    }
-
-    // TODO Remove following redundant logic when rebuild using Redux!
-    componentWillMount() {
-        if (this.props.isReadOnly) {
-            this.fetchFormData().then((formsDataAsArray) => {
-                const updatedQuestions = this.state.questions.map(question => {
-                    const storedQuestion = formsDataAsArray.find(storedQuestion => storedQuestion.id === question.id);
-                    const questionValue = !(!storedQuestion) ? storedQuestion.questionValue : "";
-
-                    return  Object.assign({}, {...question}, {value: questionValue});
-                });
-
-                this.setState({questions: updatedQuestions});
-            });
-        }
     }
 
     render() {
@@ -61,23 +44,6 @@ class Questionnaire extends Component {
             </div>
         );
     }
-
-    fetchFormData = () => {
-        const projectName = normalizeProjectName(this.props.projectName);
-        const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey_result_${projectName}?filter=survey_id%3D'${ this.props.id }'`;
-        const errorHandler = (error) => console.log(error);
-        const transformationFunc = (data) => data.resource.map((resultTuple) => {
-            return {
-                // ID is stored as int in db but we need it as string for further comparisons.
-                id: resultTuple.question_id.toString(),
-                questionValue: resultTuple.question_answer,
-            };
-        });
-
-        return apiCall(surveyResultsEndpoint, 'GET', transformationFunc, errorHandler, {});
-    };
-
-    // TODO Remove all the above
 
     handleSubmit = (event) => {
         event.preventDefault();
