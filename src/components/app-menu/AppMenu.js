@@ -2,6 +2,7 @@ import React from 'react';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
 import HistoryIcon from '../../assets/history_icon.png';
@@ -19,11 +20,14 @@ class AppMenu extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isLoading: false,
+        };
         this.previousProjectName = props.projectName;
     }
 
     componentDidUpdate() {
-        if(this.previousProjectName !== this.props.projectName) {
+        if (this.previousProjectName !== this.props.projectName) {
             this.loadAppData();
             this.previousProjectName = this.props.projectName;
         }
@@ -59,18 +63,39 @@ class AppMenu extends React.Component {
 
         return (
             <div>
-                <LogoHeader title="Overview for" />
+                <LogoHeader title="Overview for"/>
+                { this.state.isLoading && <RefreshIndicator
+                    size={ 50 }
+                    left={ 70 }
+                    top={ 0 }
+                    loadingColor="#FF9800"
+                    status="loading"
+                    style={{
+                        transform: 'none',
+                        display: 'inline-block',
+                        position: 'fixed',
+                        background: 'none',
+                        boxShadow: 'none',
+                        right: 300,
+                        top: 100,
+                        left: 'initial',
+                      }}/>
+                }
                 <TileMenu className="TileMenu"
                           tileData={ tileData }
                           cols={ 2 }
-                          rows={ 2 } />
+                          rows={ 2 }/>
             </div>
         );
     }
 
     loadAppData = () => {
-        this.loadTodosFromBackend();
-        this.loadProjectsFromBackend();
+        this.setState({
+            isLoading: true,
+        });
+
+        Promise.all([this.loadTodosFromBackend(), this.loadProjectsFromBackend()])
+            .then(() => this.setState({ isLoading: false }));
     };
 
     loadTodosFromBackend = () => {
@@ -87,7 +112,7 @@ class AppMenu extends React.Component {
             };
         });
 
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod)
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then((todosAsArray) => this.props.dispatch(loadTodos(todosAsArray)));
     };
 
@@ -97,9 +122,9 @@ class AppMenu extends React.Component {
         const httpMethod = 'GET';
         const dataTransformMethod = (data) => data.resource.map(record => parseInt(record.project_id, 10));
 
-        apiCall(apiEndpoint, httpMethod, dataTransformMethod)
+        return apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then((projectIds) => {
-                if(projectIds.length > 0) {
+                if (projectIds.length > 0) {
                     this.loadProjectNamesFromIdList(projectIds);
                 }
             });
