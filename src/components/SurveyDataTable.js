@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Moment from 'moment';
+import { connect } from 'react-redux';
 import {
     Table,
     TableBody,
@@ -11,12 +12,12 @@ import {
 
 import '../app.css';
 
-export default class SurveyDataTable extends Component {
+class SurveyDataTable extends Component {
     render() {
         const understanding_id = 1;
         const cooperation_id = 2;
         const nps_id = 9;
-        const { formData, history } = this.props;
+        const { history, formData } = this.props;
 
         return (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -62,6 +63,15 @@ export default class SurveyDataTable extends Component {
         return !(!question) ? question.questionValue : '---';
     }
 };
+
+const mapStateToProps = (state) => {
+    return {
+        formData: state.surveys,
+    };
+};
+
+export default connect(mapStateToProps)(SurveyDataTable);
+
 
 const ClickableTableRow = ({ name, history, rowData }) => {
     return (

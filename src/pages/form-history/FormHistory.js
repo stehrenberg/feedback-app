@@ -15,17 +15,15 @@ class FormHistory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // forms: [],
             showAlertBox: false,
         };
     }
 
     componentWillMount() {
-        this.fetchFormData().then((formsDataAsArray) => {
-            this.props.dispatch(loadSurveys(formsDataAsArray.reverse()));
+        this.fetchSurveyData().then((surveysDataAsArray) => {
+            this.props.dispatch(loadSurveys(surveysDataAsArray.reverse()));
             this.setState({
-                // forms: formsDataAsArray,
-                showAlertBox: formsDataAsArray.length === 0,
+                showAlertBox: surveysDataAsArray.length === 0,
             });
         }).catch((err) => this.setState({ showAlertBox: true }));
     }
@@ -34,7 +32,7 @@ class FormHistory extends Component {
         return (
             <div>
                 <LogoHeader title={'Past Questionnaires for' }/>
-                <SurveyDataTable formData={ this.props.surveys } history={ this.props.history }/>
+                <SurveyDataTable history={ this.props.history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }
                     dialogText={ "No completed surveys to show yet." }
@@ -51,7 +49,7 @@ class FormHistory extends Component {
         );
     }
 
-    fetchFormData = () => {
+    fetchSurveyData = () => {
         const projectName = normalizeProjectName(this.props.projectName);
         const table = `_table/survey_result_${ projectName }`;
         const surveyResultsEndpoint = `${config.dreamfactoryApi.apiBaseUrl}${ table }`;
