@@ -47,7 +47,7 @@ class LoginForm extends Component {
 
         return (
             <div className="LoginMask">
-                <LogoHeader title={ "Login" }/>
+                <LogoHeader title={ "Login" } projectSwitchDisabled={ "true" }/>
                 <div className="App-content">
                     <form className="login-form Paperbox" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                         <TextField
