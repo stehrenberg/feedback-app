@@ -4,6 +4,10 @@ body {
     font-family: sans-serif;
 }
 
+button {
+    background-color: #ea7400 !important;
+}
+
 .FeedbackForm {
     display: flex;
     flex-direction: column;
@@ -16,7 +20,7 @@ body {
 }
 
 .App-header {
-    background-color: #00BCD4;
+    background-color: #003a57;
     text-align: center;
     height: 100px;
     width: 100%;
