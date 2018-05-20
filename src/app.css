@@ -4,10 +4,6 @@ body {
     font-family: sans-serif;
 }
 
-button {
-    background-color: #ea7400 !important;
-}
-
 .FeedbackForm {
     display: flex;
     flex-direction: column;
@@ -197,6 +193,14 @@ th {
     padding-top: 30px;
     padding-bottom: 15px;
     width: 270px;
+}
+
+.App-content button {
+    background-color: #ea7400 !important;
+}
+
+.App-footer button {
+    background-color: #ea7400 !important;
 }
 
 
