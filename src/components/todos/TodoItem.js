@@ -34,7 +34,7 @@ const TodoItem = (props) => {
     return todoItem;
 };
 
-TodoItem.PropTypes = {
+TodoItem.propTypes = {
     text: PropTypes.string.isRequired,
     surveyId: PropTypes.string.isRequired,
     todoType: PropTypes.string.isRequired,

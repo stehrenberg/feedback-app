@@ -91,7 +91,7 @@ class LoginForm extends Component {
     };
 }
 
-LoginForm.PropTypes = {
+LoginForm.propTypes = {
     history: PropTypes.object.isRequired,
 };
 

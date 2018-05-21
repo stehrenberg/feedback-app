@@ -37,7 +37,7 @@ class ProjectSelect extends React.Component {
     };
 }
 
-ProjectSelect.PropTypes = {
+ProjectSelect.propTypes = {
     projectName: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.string),
 };

@@ -100,7 +100,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-FilteredTodos.PropTypes = {
+FilteredTodos.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.string).isRequired,
     projectName: PropTypes.string.isRequired,
     todoFilter: PropTypes.string,

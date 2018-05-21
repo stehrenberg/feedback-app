@@ -37,7 +37,7 @@ const AlertBox = (props) => {
     );
 };
 
-AlertBox.PropTypes = {
+AlertBox.propTypes = {
     show: PropTypes.bool.isRequired,
     dialogText: PropTypes.string.isRequired,
     btnTexts: PropTypes.arrayOf(PropTypes.string).isRequired,

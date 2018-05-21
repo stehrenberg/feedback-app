@@ -43,7 +43,7 @@ const mapStateToProps = (state, ownProps) => {
     return { todos: state.todos.filter((todo) => todo.surveyId === ownProps.surveyId) };
 };
 
-TodoList.PropTypes = {
+TodoList.propTypes = {
     todos: PropTypes.arrayOf(PropTypes.string).isRequired,
     surveyId: PropTypes.string.isRequired,
     isReadOnly: PropTypes.bool.isRequired,

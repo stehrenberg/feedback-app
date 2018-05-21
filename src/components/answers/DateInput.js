@@ -13,7 +13,7 @@ const DateInput = ({name, value, handleChange, isReadOnly}) => {
         {...optionalProps}/>);
 };
 
-DateInput.PropTypes = {
+DateInput.propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     handleChange: PropTypes.func.isRequired,

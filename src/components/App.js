@@ -73,7 +73,7 @@ class App extends Component {
     checkAuthentication = () => Object.keys(this.props.store.getState().jwt).length > 0;
 }
 
-App.PropTypes = {
+App.propTypes = {
     store: PropTypes.object.isRequired,
 };
 

@@ -31,7 +31,7 @@ class TodoItemMiniCard extends Component {
     };
 }
 
-TodoItemMiniCard.PropTypes = {
+TodoItemMiniCard.propTypes = {
     id: PropTypes.string,
     text: PropTypes.string,
     completed: PropTypes.bool,

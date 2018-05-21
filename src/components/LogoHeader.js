@@ -16,7 +16,7 @@ const LogoHeader = ({ title, projectSwitchDisabled }) => (
     </div>
 );
 
-LogoHeader.PropTypes = {
+LogoHeader.propTypes = {
     title: PropTypes.string.isRequired,
     projectSwitchDisabled: PropTypes.bool,
 };

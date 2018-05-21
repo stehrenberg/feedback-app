@@ -1,11 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,13 +11,16 @@ class ProjectSelectDialog extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
             selectedValue: "",
+            showError: false,
         }
     }
 
     handleClose = () => {
-        this.props.onClose(this.state.selectedValue);
+        this.setState({
+            showError: true
+        });
     };
 
     handleItemClick = (value) => {
@@ -28,19 +28,19 @@ class ProjectSelectDialog extends React.Component {
     };
 
     render() {
-        const { projectList, open } = this.props;
-        console.log(this.props);
+        const { projectList, open, classes } = this.props;
 
         return (
                 <Dialog onClose={ this.handleClose } aria-labelledby="simple-dialog-title" open={ open }>
-                    <DialogTitle id="project-select_dialogue">Choose a project you want to work on:</DialogTitle>
+                    <DialogTitle disableTypography={true} className={classes.title} id="project-select_dialogue">Choose a project you want to work on:</DialogTitle>
+                    { this.state.showError && <p className="error-hint">You need to select a project</p> }
                     <div>
                         <List>
                             {
                                 projectList.map(
                                     project => (
-                                        <ListItem button onClick={ () => this.handleItemClick(project) } key={ project } >
-                                            <ListItemText primary={ project }/>
+                                        <ListItem button className={classes.listItem} onClick={ () => this.handleItemClick(project) } key={ project } >
+                                            <ListItemText disableTypography={true} primary={ project }/>
                                         </ListItem>
                                     ))
                             }
@@ -53,6 +53,24 @@ class ProjectSelectDialog extends React.Component {
 
 }
 
-ProjectSelectDialog.propTypes = {};
+ProjectSelectDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+};
 
-export default withStyles({})(ProjectSelectDialog);
+const style = {
+    title: {
+        fontSize: 18,
+        fontFamily: 'Roboto, sans-serif',
+        paddingBottom: 27,
+        borderBottom: '1px solid #c0c0c0',
+        color: '#121213',
+    },
+    listItem: {
+        color: '#515152',
+        "&:hover": {
+            color: '#00BCD4'
+        }
+    }
+};
+
+export default withStyles(style)(ProjectSelectDialog);

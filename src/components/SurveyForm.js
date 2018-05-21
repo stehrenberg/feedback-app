@@ -19,7 +19,7 @@ const SurveyForm = (props) => {
     );
 };
 
-SurveyForm.PropTypes = {
+SurveyForm.propTypes = {
     isReadOnly: PropTypes.bool.isRequired,
     onChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,

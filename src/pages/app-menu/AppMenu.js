@@ -36,6 +36,7 @@ class AppMenu extends React.Component {
                 localStorage.setItem("projectName", projectName);
             } else {
                 this.setState({ showProjectSelectDialog: true });
+                this.loadAppData();
             }
         }
     }
@@ -96,7 +97,7 @@ class AppMenu extends React.Component {
                           cols={ 2 }
                           rows={ 2 }/>
                 <ProjectSelectDialog
-                    projectList={[ "test1", "test2" ]}
+                    projectList={ this.props.projects }
                     onClose={ this.handleDialogClose }
                     open={ this.state.showProjectSelectDialog }
                 />
@@ -113,7 +114,10 @@ class AppMenu extends React.Component {
             isLoading: true,
         });
 
-        Promise.all([this.loadTodosFromBackend(), this.loadProjectsFromBackend()])
+        return Promise.all([
+            // this.loadTodosFromBackend(),
+            this.loadProjectsFromBackend()
+        ])
             .then(() => this.setState({ isLoading: false }));
     };
 
@@ -166,7 +170,7 @@ class AppMenu extends React.Component {
     };
 }
 
-AppMenu.PropTypes = {
+AppMenu.propTypes = {
     projectName: PropTypes.string,
     customerEmail: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.string),

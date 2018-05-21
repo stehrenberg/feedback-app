@@ -15,7 +15,7 @@ const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => {
     );
 };
 
-PrivateRoute.PropTypes = {
+PrivateRoute.propTypes = {
     component: PropTypes.node.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
 };
