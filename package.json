@@ -10,6 +10,7 @@
     "json-loader": "^0.5.4",
     "material-ui": "^0.18.7",
     "material-ui-icons": "^1.0.0-alpha.19",
+    "md5": "^2.2.1",
     "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "react": "^16.0.0",

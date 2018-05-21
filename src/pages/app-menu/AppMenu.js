@@ -29,7 +29,6 @@ class AppMenu extends React.Component {
 
     componentDidMount() {
 
-        console.log(this.props.projectName);
         if(!this.props.projectName) {
             const projectName = this.getProjectName();
             if(projectName) {
