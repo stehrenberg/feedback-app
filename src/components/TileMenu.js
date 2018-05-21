@@ -19,7 +19,7 @@ const TileMenu = ({ tileData, cols, rows }) => {
         title: {
             fontSize: 16,
             fontWeight: 'bold',
-            color: '#00BCD4',
+            color: '#ea7400',
             textAlign: 'center',
             marginLeft: 0,
         }

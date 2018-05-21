@@ -18,6 +18,7 @@ import { apiCall } from '../util/utils';
 import { config } from '../config/config';
 
 class App extends Component {
+
     constructor(props) {
         super(props);
         this.state = {

@@ -6,7 +6,7 @@
       "text": "How well do we understand what your company actually needs from us?",
       "inputType": "number",
       "preload": "false",
-      "value": ""
+      "value": 0
     },
     {
       "id": "2",
@@ -14,7 +14,7 @@
       "text": "How well do we cooperate?",
       "inputType": "number",
       "preload": "false",
-      "value": ""
+      "value": 0
     },
     {
       "id": "3",
@@ -70,7 +70,7 @@
       "text": "How likely is it that you would recommend our company/product to a friend or colleague?",
       "inputType": "number",
       "preload": "false",
-      "value": ""
+      "value": 0
     },
     {
       "id": "10",
