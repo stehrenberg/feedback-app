@@ -73,6 +73,8 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps)(SurveyDataTable);
 
 
+
+//FIXME als eigene Komponente auslagern?
 const ClickableTableRow = ({ name, history, rowData }) => {
     return (
         <TableRow key={ name } onClick={ () => history.push(`/feedback/${ name }`) } className="ClickableTableRow" hoverable={ true }>

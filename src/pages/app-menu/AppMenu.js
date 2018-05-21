@@ -11,7 +11,8 @@ import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
-import { loadTodos, loadProjects } from '../../actions';
+import ProjectSelectDialog from '../../components/ProjectSelectDialog';
+import { loadTodos, loadProjects, setProject } from '../../actions';
 import { apiCall, normalizeProjectName } from '../../util/utils';
 import { config } from '../../config/config';
 import './appMenu.css';
@@ -22,20 +23,29 @@ class AppMenu extends React.Component {
         super(props);
         this.state = {
             isLoading: false,
+            showProjectSelectDialog: false,
         };
-        this.previousProjectName = props.projectName;
     }
 
-    componentDidUpdate() {
-        if (this.previousProjectName !== this.props.projectName) {
-            this.loadAppData();
-            this.previousProjectName = this.props.projectName;
+    componentDidMount() {
+
+        if(!this.props.projectName) {
+            const projectName = this.getProjectName();
+            if(projectName) {
+                this.props.dispatch(setProject(normalizeProjectName(projectName)));
+                localStorage.setItem("projectName", projectName);
+            } else {
+                this.setState({ showProjectSelectDialog: true });
+            }
         }
     }
 
-    componentWillMount() {
-        this.loadAppData();
-    };
+    componentDidUpdate({ prevProjectName }) {
+        console.log(this.state);/*
+         if (prevProjectName !== this.props.projectName) {
+         this.loadAppData();
+         }*/
+    }
 
     render() {
         const tileData = [
@@ -85,9 +95,18 @@ class AppMenu extends React.Component {
                           tileData={ tileData }
                           cols={ 2 }
                           rows={ 2 }/>
+                <ProjectSelectDialog
+                    projectList={[ "test1", "test2" ]}
+                    onClose={ this.handleDialogClose }
+                    open={ this.state.showProjectSelectDialog }
+                />
             </div>
         );
     }
+
+    getProjectName = () => this.props.projectName.length > 0 ?
+            this.props.projectName
+            : localStorage.getItem("projectName");
 
     loadAppData = () => {
         this.setState({
@@ -138,6 +157,12 @@ class AppMenu extends React.Component {
 
         apiCall(apiEndpoint, httpMethod, dataTransformMethod)
             .then(projectNamesAsArray => this.props.dispatch(loadProjects(projectNamesAsArray)));
+    };
+
+    handleDialogClose = projectName => {
+        this.setState({ showProjectSelectDialog: false });
+        this.props.dispatch(setProject(normalizeProjectName(projectName)));
+        localStorage.setItem("projectName", projectName);
     };
 }
 

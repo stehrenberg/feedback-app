@@ -6,7 +6,7 @@ import { TextField } from 'material-ui';
 import LogoHeader from '../../components/LogoHeader';
 import LoginBtn from '../../components/buttons/LoginBtn';
 import { config } from '../../config/config';
-import { setJWT, setProject } from '../../actions';
+import { setJWT } from '../../actions';
 import { apiCall } from '../../util/utils';
 
 class LoginForm extends Component {
@@ -14,7 +14,6 @@ class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            projectName: '',
             loginFailed: false,
         };
     }
@@ -23,15 +22,12 @@ class LoginForm extends Component {
         event.preventDefault();
         const email = this.state.email;
         const password = this.state.password;
-        const projectName = this.state.projectName;
         this.authenticate(email, password)
             .then((jwt) => {
-                this.props.dispatch(setJWT(jwt));
-                this.props.history.push(`/home/${ this.state.projectName }`);
                 localStorage.setItem("sessionToken", JSON.stringify(jwt));
-                localStorage.setItem("projectName", this.state.projectName);
+                this.props.dispatch(setJWT(jwt));
+                this.props.history.push("/home/");
             }).catch((error) => console.log(error));
-        this.props.dispatch(setProject(projectName));
     }
 
     handleChange(event) {
@@ -50,20 +46,11 @@ class LoginForm extends Component {
                 <LogoHeader title={ "Cooperation Feedback App" } projectSwitchDisabled={ "true" }/>
                 <div className="App-content">
                     <form className="login-form Paperbox" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
-                        <TextField
-                            name="projectName"
-                            floatingLabelText="Project"
-                            floatingLabelFixed={true}
-                            type="text"
-                            autoComplete="off"
-                            onChange={ (event) => this.handleChange(event) }
-                            autoFocus
-                            required
-                        />
                         <div className="credentials">
                             <TextField
                                 name="email"
-                                floatingLabelText="Email"
+                                placeholder="Enter your Email"
+                                floatingLabelText="Your User ID:"
                                 floatingLabelFixed={true}
                                 errorText={ this.state.loginFailed ? INVALID_CREDS_MSG : "" }
                                 type="text"
@@ -72,7 +59,7 @@ class LoginForm extends Component {
                             />
                             <TextField
                                 name="password"
-                                floatingLabelText="Password"
+                                floatingLabelText="Your Password:"
                                 floatingLabelFixed={true}
                                 errorText={ this.state.loginFailed ? INVALID_CREDS_MSG : "" }
                                 type="password"

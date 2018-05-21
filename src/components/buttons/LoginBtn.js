@@ -4,7 +4,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const LoginButton = (props) => (
     <Route render={({ history }) => (
-    <RaisedButton type='submit' label="Login" secondary={ true } />
+    <RaisedButton type='submit' label="Login" secondary={ true }/>
   )} />
 );
 
