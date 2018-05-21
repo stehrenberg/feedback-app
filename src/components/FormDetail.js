@@ -25,7 +25,7 @@ const FormDetail = ({ match, history, surveys }) => {
 
     return (
         <div className="FeedbackForm">
-            <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` } />
+            <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` } projectSwitchDisabled={ true } />
             <div className="App-content">
                 <Questionnaire id={ formId } questions={ storedQuestions } isReadOnly={ true } />
                 <div className="App-footer">

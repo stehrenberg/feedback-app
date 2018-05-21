@@ -11,7 +11,7 @@ import '../../app.css'
 
 const FeedbackForm = (props) => (
     <div className="FeedbackForm">
-        <LogoHeader title="Feedback Questionnaire for"/>
+        <LogoHeader title={ `Feedback Questionnaire for ${ props.projectName }` } projectSwitchDisabled={ true }/>
         <div className="App-content">
             <Questionnaire id={ props.id }
                            questions={ questions.questionTexts }
@@ -24,6 +24,10 @@ const FeedbackForm = (props) => (
     </div>
     );
 
-const mapStateToProps = (state, ownProps) => ({ id: `${ Moment().format("YYYYMMDD") }-${ state.projectName }` });
+const mapStateToProps = (state, ownProps) => ({
+    //TODO Projektnamen fuer Survey-ID normalisieren?
+    id: `${ Moment().format("YYYYMMDD") }-${ state.projectName }`,
+    projectName: state.projectName,
+});
 
 export default connect(mapStateToProps)(FeedbackForm);

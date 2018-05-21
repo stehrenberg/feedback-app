@@ -29,14 +29,15 @@ class AppMenu extends React.Component {
 
     componentDidMount() {
 
+        console.log(this.props.projectName);
         if(!this.props.projectName) {
             const projectName = this.getProjectName();
             if(projectName) {
-                this.props.dispatch(setProject(normalizeProjectName(projectName)));
+                this.props.dispatch(setProject(projectName));
                 localStorage.setItem("projectName", projectName);
             } else {
-                this.setState({ showProjectSelectDialog: true });
-                this.loadProjectsFromBackend();
+                this.setState({ showProjectSelectDialog: true, isLoading: true });
+                this.loadProjectsFromBackend().then(() => this.setState({ isLoading: false }));
             }
         }
     }
@@ -164,7 +165,7 @@ class AppMenu extends React.Component {
 
     handleDialogClose = projectName => {
         this.setState({ showProjectSelectDialog: false });
-        this.props.dispatch(setProject(normalizeProjectName(projectName)));
+        this.props.dispatch(setProject(projectName));
         localStorage.setItem("projectName", projectName);
     };
 }

@@ -7,13 +7,6 @@ import { setProject } from '../actions';
 
 class ProjectSelect extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            input: this.props.projectName,
-        };
-    }
-
     render() {
         const { projects } = this.props;
 
@@ -23,7 +16,7 @@ class ProjectSelect extends React.Component {
                 labelStyle={{ color: '#ffffff', fontSize: 20 }}
                 style={{ paddingLeft: 20, width: 200, top: 10 }}
                 underlineStyle={{ color: '#ff00ff' }}
-                value={ this.state.input }
+                value={ this.props.projectName }
                 onChange={ this.handleChange }
                 maxHeight={ 200 }>
                 { projects.map(project => <MenuItem value={ project } key={ project } primaryText={`${ project }`} />)}
@@ -31,9 +24,8 @@ class ProjectSelect extends React.Component {
         );
     };
 
-    handleChange = (event, index, value) => {
-        this.setState({ input: value });
-        this.props.dispatch(setProject(value));
+    handleChange = (event, index, projectName) => {
+        this.props.dispatch(setProject(projectName));
     };
 }
 

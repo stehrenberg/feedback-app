@@ -43,7 +43,7 @@ class LoginForm extends Component {
 
         return (
             <div className="LoginMask">
-                <LogoHeader title={ "Cooperation Feedback App" } projectSwitchDisabled={ "true" }/>
+                <LogoHeader title={ "Cooperation Feedback App" } projectSwitchDisabled={ true }/>
                 <div className="App-content">
                     <form className="login-form Paperbox" action="" method="" onSubmit={ (event) => this.handleSubmit(event) }>
                         <div className="credentials">
