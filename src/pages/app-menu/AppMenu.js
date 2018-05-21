@@ -36,16 +36,15 @@ class AppMenu extends React.Component {
                 localStorage.setItem("projectName", projectName);
             } else {
                 this.setState({ showProjectSelectDialog: true });
-                this.loadAppData();
+                this.loadProjectsFromBackend();
             }
         }
     }
 
-    componentDidUpdate({ prevProjectName }) {
-        console.log(this.state);/*
-         if (prevProjectName !== this.props.projectName) {
+    componentDidUpdate({ projectName }) {
+         if (projectName !== this.props.projectName) {
          this.loadAppData();
-         }*/
+         }
     }
 
     render() {
@@ -115,7 +114,7 @@ class AppMenu extends React.Component {
         });
 
         return Promise.all([
-            // this.loadTodosFromBackend(),
+            this.loadTodosFromBackend(),
             this.loadProjectsFromBackend()
         ])
             .then(() => this.setState({ isLoading: false }));
