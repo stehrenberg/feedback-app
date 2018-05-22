@@ -15,12 +15,10 @@ class LogoHeader extends React.Component {
 
     onEnterViewport = () => {
         this.props.dispatch(toggleMiniNavBar(false));
-        console.log("hide!");
     };
 
     onExitViewport = () => {
         this.props.dispatch(toggleMiniNavBar(true));
-        console.log("yay");
     };
 
     render = () => {
@@ -70,9 +68,8 @@ const styles = {
     },
     avatar: {
         position: 'absolute',
-        border: "3px solid #000000",
-        boxShadow: "0px 0px 1px 3px #ff9999",
-        top: 50,
+        border: "4px solid #eeeeff",
+        top: 100,
         right: 60,
         width: 70,
         height: 70,

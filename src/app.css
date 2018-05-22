@@ -32,6 +32,7 @@ body {
     width: 100%;
     padding-top: 30px;
     padding-bottom: 80px;
+    z-index: 200;
     color: white;
 }
 
@@ -210,14 +211,9 @@ th {
     width: 270px;
 }
 
-.App-content.RaisedButton {
+.RaisedButton {
     background-color: #ea7400 !important;
 }
-
-.App-footer button {
-    background-color: #ea7400 !important;
-}
-
 
 span[data-forhalf] {
     padding: 3px 0 3px 0;
