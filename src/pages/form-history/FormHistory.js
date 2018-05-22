@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
+import Slide from '@material-ui/core/Slide';
+import ScrollTrigger from 'react-scroll-trigger';
 
 import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
@@ -35,7 +37,7 @@ class FormHistory extends Component {
     render() {
         return (
             <div>
-                <LogoHeader title={'Past Questionnaires for' }/>
+                <LogoHeader title={'Past Questionnaires for' } history={ this.props.history }/>
                 <SurveyDataTable history={ this.props.history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }

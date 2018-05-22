@@ -1,37 +1,61 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {connect} from 'react-redux';
+import {toggleMiniNavBar} from '../actions'
+import {withStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import logo from '../assets/mayflower_logo.png';
+import ScrollTrigger from 'react-scroll-trigger';
 import md5 from 'md5';
 import PropTypes from 'prop-types';
 
 import ProjectSelect from '../components/ProjectSelect';
 import profile from '../config/profile';
+import logo from '../assets/mayflower_logo.png';
 
-const LogoHeader = ({ title, projectSwitchDisabled, classes }) => (
-    <div className="App-header">
-        <img src={ logo } className="App-logo" alt="logo"/>
-        <div className={ classes.row }>
-            <Avatar
-                className={ classes.avatar }
-                src={ getAvatarURL(profile.email) }
-                />
-        </div>
-        <div>
-            <h2>
-                { title }
-            </h2>
-            { projectSwitchDisabled? '' : <ProjectSelect /> }
-        </div>
-    </div>
-);
+class LogoHeader extends React.Component {
 
-const getAvatarURL = (email) => {
-    const gravatarBaseURL = "https://www.gravatar.com/avatar/";
-    const emailHash = md5(profile.email.toLocaleLowerCase());
+    onEnterViewport = () => {
+        this.props.dispatch(toggleMiniNavBar(false));
+        console.log("hide!");
+    };
 
-    return `${gravatarBaseURL}${emailHash}?s=200`;
-};
+    onExitViewport = () => {
+        this.props.dispatch(toggleMiniNavBar(true));
+        console.log("yay");
+    };
+
+    render = () => {
+        const {title, projectSwitchDisabled, classes, history} = this.props;
+
+        return (
+            <div className="App-header">
+                <ScrollTrigger className="ScrollTrigger" onEnter={ this.onEnterViewport }
+                               onExit={ this.onExitViewport }>
+                    <img src={ logo } className="App-logo" alt="logo" onClick={ () => history.push("/home/") }/>
+                </ScrollTrigger>
+                <div className={ classes.row }>
+                    <Avatar
+                        className={ classes.avatar }
+                        src={ this.getAvatarURL(profile.email) }
+                    />
+                </div>
+                <div>
+                    <h2>
+                        { title }
+                    </h2>
+                    { projectSwitchDisabled ? '' : <ProjectSelect /> }
+                </div>
+            </div>
+        )
+            ;
+    };
+
+    getAvatarURL = (email) => {
+        const gravatarBaseURL = "https://www.gravatar.com/avatar/";
+        const emailHash = md5(profile.email.toLocaleLowerCase());
+
+        return `${gravatarBaseURL}${emailHash}?s=200`;
+    };
+}
 
 
 LogoHeader.propTypes = {
@@ -55,4 +79,4 @@ const styles = {
     }
 };
 
-export default withStyles(styles)(LogoHeader);
+export default connect()(withStyles(styles)(LogoHeader));

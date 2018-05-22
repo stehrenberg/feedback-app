@@ -78,7 +78,7 @@ class AppMenu extends React.Component {
 
         return (
             <div>
-                <LogoHeader title="Overview for"/>
+                <LogoHeader title="Overview for" history={ this.props.history }/>
                 { this.state.isLoading && <RefreshIndicator
                     size={ 50 }
                     left={ 70 }

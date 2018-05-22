@@ -11,7 +11,7 @@ const TileMenu = ({ tileData, cols, rows, classes }) => {
             display: 'flex',
             flexWrap: 'space-between',
             justifyContent: 'center',
-            paddingTop: 60,
+            paddingTop: 20,
         },
         gridList: {
             overflowY: 'auto',
@@ -44,7 +44,9 @@ const TileMenu = ({ tileData, cols, rows, classes }) => {
                         titleBackground={ 'none' }
                         titleStyle={ styles.title }>
                         {
-                            !!tile.count && <Badge className={ classes.todoBadge } badgeContent={ "+" + tile.count } color="primary"/>
+                            !!tile.count && <Badge className={ classes.todoBadge }
+                                                   badgeContent={ "+" + tile.count }
+                                                   color="primary" />
                         }
                         <img src={ tile.img } alt={ "" } />
                     </GridTile>
@@ -56,12 +58,13 @@ const TileMenu = ({ tileData, cols, rows, classes }) => {
 };
 
 
-const styles = {
+const badgeStyles = {
     todoBadge: {
         position: 'absolute',
         top: 25,
         right: 23,
-    }
+    },
+    colorPrimary: '#00af00',
 };
 
-export default withStyles(styles)(TileMenu);
+export default withStyles(badgeStyles)(TileMenu);

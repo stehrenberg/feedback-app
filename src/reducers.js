@@ -71,6 +71,15 @@ function surveys(state = [], action) {
     }
 }
 
+function showMiniNavBar(state = false, action) {
+    switch(action.type) {
+        case 'TOGGLE_NAVBAR':
+            return action.showMiniNavBar;
+        default:
+            return state;
+    }
+}
+
 const feedbackApp = combineReducers({
     projectName,
     projects,
@@ -78,6 +87,7 @@ const feedbackApp = combineReducers({
     todos,
     todoFilter,
     surveys,
+    showMiniNavBar,
 });
 
 export default feedbackApp;
