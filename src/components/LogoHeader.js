@@ -29,12 +29,8 @@ const LogoHeader = ({ title, projectSwitchDisabled, classes }) => (
 const getAvatarURL = (email) => {
     const gravatarBaseURL = "https://www.gravatar.com/avatar/";
     const emailHash = md5(profile.email.toLocaleLowerCase());
-    const url = `${gravatarBaseURL}${emailHash}?s=200`;
 
-    console.log(emailHash);
-    console.log(url);
-
-    return url;
+    return `${gravatarBaseURL}${emailHash}?s=200`;
 };
 
 

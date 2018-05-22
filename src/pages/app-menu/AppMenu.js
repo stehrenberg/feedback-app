@@ -48,6 +48,9 @@ class AppMenu extends React.Component {
     }
 
     render() {
+        const todoCount = this.props.todos.length;
+        const openTodoCount = this.props.todos.filter(todo => !todo.completed).length;
+
         const tileData = [
             {
                 img: AddQuestionnaireIcon,
@@ -62,12 +65,14 @@ class AppMenu extends React.Component {
             {
                 img: OpenTodosIcon,
                 title: "Open Todos",
-                link: "/todos/open"
+                link: "/todos/open",
+                count: openTodoCount,
             },
             {
                 img: CompletedTodosIcon,
                 title: "Completed Todos",
-                link: "/todos/completed"
+                link: "/todos/completed",
+                count: todoCount - openTodoCount,
             },
         ];
 
@@ -86,7 +91,7 @@ class AppMenu extends React.Component {
                         position: 'fixed',
                         background: 'none',
                         boxShadow: 'none',
-                        right: 300,
+                        right: 10,
                         top: 100,
                         left: 'initial',
                       }}/>
@@ -182,5 +187,6 @@ const mapStateToProps = (state) => ({
     projects: state.projects,
     todos: state.todos,
 });
+
 
 export default connect(mapStateToProps)(AppMenu);

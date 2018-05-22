@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { GridList, GridTile } from 'material-ui/GridList';
+import { withStyles } from '@material-ui/core/styles';
+import Badge from '@material-ui/core/Badge';
 
-const TileMenu = ({ tileData, cols, rows }) => {
+const TileMenu = ({ tileData, cols, rows, classes }) => {
 
     const styles = {
         root: {
@@ -25,7 +27,8 @@ const TileMenu = ({ tileData, cols, rows }) => {
         }
     };
 
-    return <div className="gridList" style={ styles.root }>
+    return (
+        <div className="gridList" style={ styles.root }>
         <GridList
             className="GridList"
             cols={ cols }
@@ -40,12 +43,25 @@ const TileMenu = ({ tileData, cols, rows }) => {
                         title={ tile.title }
                         titleBackground={ 'none' }
                         titleStyle={ styles.title }>
+                        {
+                            !!tile.count && <Badge className={ classes.todoBadge } badgeContent={ "+" + tile.count } color="primary"/>
+                        }
                         <img src={ tile.img } alt={ "" } />
                     </GridTile>
                 </Link>
             ))}
         </GridList>
-    </div>;
+    </div>
+    );
 };
 
-export default TileMenu;
+
+const styles = {
+    todoBadge: {
+        position: 'absolute',
+        top: 25,
+        right: 23,
+    }
+};
+
+export default withStyles(styles)(TileMenu);
