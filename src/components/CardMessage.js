@@ -23,7 +23,8 @@ const CardMessage = ({classes, title, text, show}) => (
 
 const styles = {
     card: {
-        width: 200,
+        zIndex: 10,
+        width: 230,
         position: 'absolute',
         top: 250,
         left: 20,

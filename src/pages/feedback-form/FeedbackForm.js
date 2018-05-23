@@ -9,6 +9,7 @@ import LogoHeader from '../../components/LogoHeader';
 import questions from '../../config/questionTexts.json';
 import MiniNavBar from '../../components/MiniNavBar';
 import CardMessage from '../../components/CardMessage';
+import profile from '../../config/profile';
 
 import '../../app.css'
 
@@ -17,7 +18,7 @@ class FeedbackForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModalDialog: true,
+            showModalDialog: this.isFirstSurvey(),
         };
     }
 
@@ -27,7 +28,7 @@ class FeedbackForm extends React.Component {
 
     render = () => {
         const {projectName, history, showMiniNavBar, id} = this.props;
-        const cardText = "The better your feedback, the more can improve our work for you.";
+        const cardText = "The better your feedback, the more we can improve our work for you.";
         const cardTitle = "Welcome to your first Feedback Questionnaire!";
 
         return (
@@ -46,6 +47,8 @@ class FeedbackForm extends React.Component {
             </div>
         );
     };
+
+    isFirstSurvey = () => { return profile.surveyCount < 1 };
 }
 
 const mapStateToProps = (state, ownProps) => ({

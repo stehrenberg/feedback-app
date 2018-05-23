@@ -97,6 +97,11 @@ th {
     justify-content: flex-start;
     align-items: flex-start;
     padding: 10px 0 15px 0;
+    cursor: help;
+}
+
+.Question > label {
+    cursor: help;
 }
 
 .Question textarea {

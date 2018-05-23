@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SurveyForm from '../components/SurveyForm';
 import { connect } from 'react-redux';
 import SnackBar from 'material-ui/Snackbar';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
 
 import { config } from '../config/config.js';
 
@@ -14,6 +16,7 @@ class Questionnaire extends Component {
             questions: this.props.questions,
             isSaved: false,
             showAlertBox: false,
+            anchorEl: null,
         };
 
         this.saveTimeout = undefined;
@@ -22,6 +25,19 @@ class Questionnaire extends Component {
     render() {
         return (
             <div className='Paperbox'>
+                <Popover open={ !!this.state.anchorEl }
+                         anchorEl={ this.state.anchorEl }
+                         onClose={ this.handlePopoverClose }
+                         anchorOrigin={{
+                             vertical: 'top',
+                             horizontal: 'center',
+                         }}
+                         transformOrigin={{
+                             vertical: 'bottom',
+                             horizontal: 'left',
+                         }}>
+                    <Typography>{ this.state.anchorEl }</Typography>
+                </Popover>
                 <SurveyForm
                     surveyId={ this.props.id }
                     questions={ this.state.questions }
@@ -34,7 +50,7 @@ class Questionnaire extends Component {
                     open={ this.state.showAlertBox }
                     autoHideDuration={ 1000 }
                     message={ 'Survey saved.' }
-                    onRequestClose={ () => this.setState({ showAlertBox: false }) }
+                    onRequestClose={ () => this.setState({showAlertBox: false}) }
                 />
             </div>
         );
@@ -52,13 +68,21 @@ class Questionnaire extends Component {
         window.clearTimeout(this.saveTimeout);
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
-            const newValue = question.shortText === name? value : question.value;
+            const newValue = question.shortText === name ? value : question.value;
             return Object.assign({}, {...question}, {value: newValue});
         });
 
-        this.setState({ questions: updatedQuestions });
+        this.setState({questions: updatedQuestions});
         this.saveTimeout = window.setTimeout(() => this.saveForm(), 500);
     };
+
+    handleElementClick = (event) => {
+        console.log(event);
+        this.setState({ anchorEl: event.currentTarget });
+    };
+
+    handlePopoverClose = () => this.setState({ anchorEl: null });
+
 
     saveForm = () => {
         const surveyEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey`;
@@ -73,13 +97,13 @@ class Questionnaire extends Component {
             }
         }).then(() => this.createNewSurveyResultRecord(httpMethod, questionsAsArray)
         ).then(() => {
-             this.setState({isSaved: true, showAlertBox: true});
+            this.setState({isSaved: true, showAlertBox: true});
         }).catch(err => {
             console.log('error!');
             console.log(err);
         });
     };
-    
+
     createNewSurveyRecord = (surveyEndpoint, httpMethod) => {
         const projectName = this.props.projectName;
 
