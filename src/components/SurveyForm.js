@@ -4,7 +4,6 @@ import Question from './Question';
 
 const SurveyForm = (props) => {
     return (
-
         <form action="" method="" onSubmit={ (event) => props.onSubmit(event) }>
         {   props.questions.map(
             question => <Question key={ question.shortText }

@@ -6,9 +6,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
-const CardMessage = ({classes, title, text, show}) => (
-        <Slide in={ show } direction="right" mountOnEnter unmountOnExit>
-            <Card className={ classes.card }>
+const CardMessage = ({classes, title, text, show, direction}) => (
+        <Slide in={ show } direction={ direction } mountOnEnter unmountOnExit>
+            <Card className={ [classes.card, classes[direction]] }>
                 <CardContent>
                     <Typography className={ classes.title } variant="headline" component="h2">
                         <p>{ title }</p>
@@ -25,12 +25,17 @@ const styles = {
     card: {
         zIndex: 10,
         width: 230,
-        position: 'absolute',
+        position: 'fixed',
         top: 250,
-        left: 20,
         padding: 5,
         marginTop: -10,
         marginBottom: 20,
+    },
+    right: {
+        left:20
+    },
+    left: {
+        right: 20
     },
     text: {
         marginBottom: 5,

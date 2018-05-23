@@ -22,7 +22,9 @@
       "text": "Core Deliveries and Roles",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "...",
+      "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
     },
     {
       "id": "4",
@@ -30,7 +32,9 @@
       "text": "What are the essentials we have to deliver?",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "...",
+      "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
     },
     {
       "id": "5",
@@ -38,7 +42,9 @@
       "text": "What should we deliver more of?",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "From what do you want more of?",
+      "placeholder": ""
     },
     {
       "id": "6",
@@ -46,7 +52,9 @@
       "text": "What should we avoid to do in the future?",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "What don't you need? Where do we err? What should we stop?",
+      "placeholder": "..."
     },
     {
       "id": "7",
@@ -54,7 +62,9 @@
       "text": "What should we deliver additionally?",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "What excites you? How could our competencies assist you further?",
+      "placeholder": ""
     },
     {
       "id": "8",
@@ -62,7 +72,9 @@
       "text": "What competencies and abilities should we acquire?",
       "inputType": "input",
       "preload": "true",
-      "value": ""
+      "value": "",
+      "help": "What do you need from us that we are missing so far?",
+      "placeholder": ""
     },
     {
       "id": "9",
@@ -70,7 +82,8 @@
       "text": "How likely is it that you would recommend our company/product to a friend or colleague?",
       "inputType": "number",
       "preload": "false",
-      "value": 0
+      "value": 0,
+      "help": "..."
     },
     {
       "id": "10",

@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import SnackBar from 'material-ui/Snackbar';
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 
-import { config } from '../config/config.js';
+import {config} from '../config/config.js';
 
 class Questionnaire extends Component {
 
@@ -15,8 +15,6 @@ class Questionnaire extends Component {
         this.state = {
             questions: this.props.questions,
             isSaved: false,
-            showAlertBox: false,
-            anchorEl: null,
         };
 
         this.saveTimeout = undefined;
@@ -25,19 +23,6 @@ class Questionnaire extends Component {
     render() {
         return (
             <div className='Paperbox'>
-                <Popover open={ !!this.state.anchorEl }
-                         anchorEl={ this.state.anchorEl }
-                         onClose={ this.handlePopoverClose }
-                         anchorOrigin={{
-                             vertical: 'top',
-                             horizontal: 'center',
-                         }}
-                         transformOrigin={{
-                             vertical: 'bottom',
-                             horizontal: 'left',
-                         }}>
-                    <Typography>{ this.state.anchorEl }</Typography>
-                </Popover>
                 <SurveyForm
                     surveyId={ this.props.id }
                     questions={ this.state.questions }
@@ -76,13 +61,12 @@ class Questionnaire extends Component {
         this.saveTimeout = window.setTimeout(() => this.saveForm(), 500);
     };
 
-    handleElementClick = (event) => {
+    handlePopoverOpen = (event) => {
+        this.setState({anchorEl: event.target});
         console.log(event);
-        this.setState({ anchorEl: event.currentTarget });
     };
 
-    handlePopoverClose = () => this.setState({ anchorEl: null });
-
+    handlePopoverClose = () => this.setState({anchorEl: null});
 
     saveForm = () => {
         const surveyEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey`;
