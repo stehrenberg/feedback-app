@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {List} from 'material-ui/List';
+import SnackBar from 'material-ui/Snackbar';
 import PropTypes from 'prop-types';
 
 import TodoItem from '../../components/todos/TodoItem';
@@ -8,7 +9,7 @@ import LogoHeader from '../../components/LogoHeader';
 import MiniNavBar from '../../components/MiniNavBar';
 import AlertBox from '../../components/AlertBox';
 import {setTodoFilter} from '../../actions';
-import {apiCall} from '../../util/utils';
+import { apiCall, getRandomInteger} from '../../util/utils';
 import {config} from '../../config/config';
 
 class FilteredTodos extends Component {
@@ -17,6 +18,7 @@ class FilteredTodos extends Component {
         super(props);
         this.state = {
             showAlertBox: false,
+            showSnackBar: false,
         }
     }
 
@@ -42,6 +44,14 @@ class FilteredTodos extends Component {
         }
     };
 
+    componentDidUpdate({todos}) {
+        const oldTodos = this.getVisibleTodos(todos, this.props.todoFilter);
+        const newTodos = this.getVisibleTodos(this.props.todos, this.props.todoFilter);
+        if (oldTodos.length != newTodos.length) {
+            this.setState({ showSnackBar: true });
+        }
+    }
+
     render = () => {
         const {todos, todoFilter, history, showMiniNavBar} = this.props;
 
@@ -64,6 +74,13 @@ class FilteredTodos extends Component {
                             dialogText={ "All done here. Great Job! 🎉" }
                             btnTexts={ ["Thanks!"] }
                             handleClose={ () => this.setState({ showAlertBox: false }) }
+                        />
+                        <SnackBar
+                            className={ 'save-todos' }
+                            open={ this.state.showSnackBar }
+                            autoHideDuration={ 2000 }
+                            message={ this.getSnackbarMsg() }
+                            onRequestClose={ () => this.setState({showSnackBar: false}) }
                         />
                     </div>
                 </div>
@@ -106,8 +123,24 @@ class FilteredTodos extends Component {
 
     isEverythingDone = (todoFilter) => {
         return (this.getVisibleTodos(this.props.todos, 'SHOW_OPEN').length < 1 && todoFilter === 'SHOW_OPEN');
-    }
+    };
 
+    getSnackbarMsg = () => {
+        const cocktail = "🍹";
+        const beer = "🍹";
+        const troete = "🎉";
+        const party = "🎊";
+        const cake = "🍰";
+        const cookie = "🍪";
+        const flex = "💪";
+        const clap = "👏";
+        const brofist = "👊";
+        const successEmojis = [cocktail, beer, troete, party, cake, cookie, flex, clap, brofist];
+
+        const emoji = successEmojis[getRandomInteger(successEmojis.length)];
+
+        return this.props.todoFilter === 'SHOW_OPEN' ? `Todo completed! ${ emoji }` : "Todo reopened 💩";
+    };
 }
 
 const mapStateToProps = (state) => {

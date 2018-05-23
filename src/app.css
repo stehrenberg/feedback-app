@@ -222,6 +222,10 @@ th {
     margin: 20px 0 20px 0;
 }
 
+.save-todos {
+    text-align: center;
+}
+
 .login-btn {
     display: flex;
     justify-content: center !important;

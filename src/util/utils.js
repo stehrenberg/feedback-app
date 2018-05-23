@@ -33,3 +33,5 @@ export const capitalize = (someString)  => someString.charAt(0).toUpperCase() + 
 export const momentFromSurveyId = (surveyId) => Moment(surveyId.split('-')[0], "YYYYMMDD");
 
 export const normalizeProjectName = (projectName='') => projectName.toLocaleLowerCase();
+
+export const getRandomInteger = (max) => Math.floor(Math.random() * Math.floor(max));
