@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import Slide from '@material-ui/core/Slide';
-import ScrollTrigger from 'react-scroll-trigger';
 
 import LogoHeader from '../../components/LogoHeader';
 import SurveyDataTable from '../../components/SurveyDataTable';
+import MiniNavBar from '../../components/MiniNavBar';
 import AlertBox from '../../components/AlertBox';
 import { loadSurveys } from '../../actions';
 import { config } from '../../config/config'
@@ -35,9 +34,11 @@ class FormHistory extends Component {
     }
 
     render() {
+        const { history, showMiniNavBar } = this.props;
         return (
             <div>
                 <LogoHeader title={'Past Questionnaires for' } history={ this.props.history }/>
+                <MiniNavBar history={ history } show={ showMiniNavBar }/>
                 <SurveyDataTable history={ this.props.history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }
@@ -45,12 +46,6 @@ class FormHistory extends Component {
                     btnTexts={ ["Noted!"] }
                     handleClose={ () => this.setState({ showAlertBox: false }) }
                 />
-                <div className="App-footer">
-                    <RaisedButton className="nav-btn"
-                                  primary={ true }
-                                  label="Back to Menu"
-                                  onClick={ this.props.history.goBack }/>
-                </div>
             </div>
         );
     }
@@ -104,6 +99,7 @@ class FormHistory extends Component {
 const mapStateToProps = (state) => ({
     projectName: state.projectName,
     surveys: state.surveys,
+    showMiniNavBar: state.showMiniNavBar,
 });
 
 export default connect(mapStateToProps)(FormHistory);

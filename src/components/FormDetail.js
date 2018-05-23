@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import Questionnaire from './Questionnaire';
 import LogoHeader from './LogoHeader';
+import MiniNavBar from '../components/MiniNavBar';
 import questions from '../config/questionTexts.json';
 
 const getQuestions = (surveyData) => {
@@ -17,7 +18,7 @@ const getQuestions = (surveyData) => {
     });
 };
 
-const FormDetail = ({ match, history, surveys }) => {
+const FormDetail = ({ match, history, surveys, showMiniNavBar }) => {
     const formId = match.params.formId;
     const meetingDate = Moment(formId.toString(), 'YYYYMMDD').format("dddd, MMMM Do YYYY");
     const survey = surveys.find(survey => survey.surveyId === formId);
@@ -27,10 +28,8 @@ const FormDetail = ({ match, history, surveys }) => {
         <div className="FeedbackForm">
             <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` } projectSwitchDisabled={ true } />
             <div className="App-content">
+                <MiniNavBar history={ history } show={ showMiniNavBar }/>
                 <Questionnaire id={ formId } questions={ storedQuestions } isReadOnly={ true } />
-                <div className="App-footer">
-                    <RaisedButton className="nav-btn" label="Back" onClick={ history.goBack } />
-                </div>
             </div>
         </div>
     );
@@ -44,6 +43,7 @@ FormDetail.propTypes = {
 const mapStateToProps = state => {
     return {
         surveys: state.surveys,
+        showMiniNavBar: state.showMiniNavBar
     };
 };
 
