@@ -17,11 +17,10 @@ body {
 }
 
 .App-logo {
-    height: 40px;
+    height: 60px;
 }
 
 .App-logo:hover {
-    height: 40px;
     cursor: pointer;
 }
 
@@ -216,7 +215,7 @@ th {
     width: 270px;
 }
 
-.RaisedButton {
+.login-form button {
     background-color: #ea7400 !important;
 }
 
@@ -229,13 +228,4 @@ span[data-forhalf] {
     width: 120px;
     height: 120px;
     padding: 30px;
-}
-
-.error-hint {
-    font-family: Roboto, sans-serif;
-    color: #ff0000;
-    font-size: 13px;
-    margin-left: 24px;
-    position: absolute;
-    top: 35px;
 }

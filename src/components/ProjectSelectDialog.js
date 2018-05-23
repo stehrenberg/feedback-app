@@ -1,6 +1,11 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Radio from '@material-ui/core/Radio';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -14,7 +19,9 @@ class ProjectSelectDialog extends React.Component {
         this.state = {
             selectedValue: "",
             showError: false,
-        }
+        };
+
+        this.radioGroup = null;
     }
 
     handleClose = () => {
@@ -28,25 +35,34 @@ class ProjectSelectDialog extends React.Component {
     };
 
     render() {
-        const { projectList, open, classes } = this.props;
+        const {projectList, open, classes} = this.props;
 
         return (
-                <Dialog onClose={ this.handleClose } aria-labelledby="simple-dialog-title" open={ open }>
-                    <DialogTitle disableTypography={true} className={classes.title} id="project-select_dialogue">Choose a project you want to work on:</DialogTitle>
-                    { this.state.showError && <p className="error-hint">You need to select a project</p> }
-                    <div>
-                        <List>
+            <Dialog onClose={ this.handleClose } aria-labelledby="simple-dialog-title" open={ open }>
+                <DialogTitle disableTypography={true} className={classes.title} id="project-select_dialogue">Choose a
+                    project you want to work on:</DialogTitle>
+                <div>
+                    <FormControl component="fieldset" required className={ classes.formControl }>
+                        <RadioGroup ref={ (node) => this.radioGroup = node }
+                                    name="projects"
+                                    className={ classes.radioGroup }
+                                    value={ this.state.selectedValue }
+                                    onChange={ (event, value) => this.handleItemClick(value) }>
                             {
                                 projectList.map(
                                     project => (
-                                        <ListItem button className={classes.listItem} onClick={ () => this.handleItemClick(project) } key={ project } >
-                                            <ListItemText disableTypography={true} primary={ project }/>
-                                        </ListItem>
-                                    ))
+                                        <FormControlLabel className={ classes.radioItem }
+                                                          value={ project }
+                                                          key={ project }
+                                                          control={ <Radio />}
+                                                          label={ project }/>)
+                                )
                             }
-                        </List>
-                    </div>
-                </Dialog>
+                        </RadioGroup>
+                        { this.state.showError && <FormHelperText className={ classes.errorHint }>You need to select a project!</FormHelperText> }
+                    </FormControl>
+                </div>
+            </Dialog>
         );
     }
 
@@ -57,20 +73,36 @@ ProjectSelectDialog.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
-const style = {
+const style = theme => ({
+    formControl: {
+        width: '100%',
+        paddingBottom: 40,
+    },
     title: {
-        fontSize: 18,
-        fontFamily: 'Roboto, sans-serif',
-        paddingBottom: 27,
+        paddingTop: 10,
+        paddingBottom: 20,
+        paddingLeft: 5,
+        paddingRight: 5,
+        margin: 20,
         borderBottom: '1px solid #c0c0c0',
         color: '#121213',
     },
-    listItem: {
-        color: '#515152',
+    radioItem: {
+        paddingLeft: 25,
+        marginRight: 0,
+        color: '#ffffff',
         "&:hover": {
-            color: '#00BCD4'
+            backgroundColor: theme.palette.primary.light,
         }
+    },
+    errorHint: {
+        fontFamily: 'Roboto, sans-serif',
+        color: '#ff0000',
+        fontSize: 13,
+        paddingLeft: 30,
+        paddingBottom: 10,
+        position: 'absolute',
     }
-};
+});
 
 export default withStyles(style)(ProjectSelectDialog);

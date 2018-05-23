@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { createMuiTheme } from '@material-ui/core/styles';
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
@@ -46,7 +47,7 @@ class App extends Component {
 
     render() {
         return (
-            <MuiThemeProvider theme="">
+            <MuiThemeProvider theme={ this.createAppTheme() }>
                 <DocumentTitle title="Cooperation Feedback Questionnaire">
                     <HashRouter history={ this.state.history }>
                         <Switch classes="">
@@ -71,6 +72,31 @@ class App extends Component {
     }
 
     checkAuthentication = () => Object.keys(this.props.store.getState().jwt).length > 0;
+
+    createAppTheme = () => {
+        return createMuiTheme({
+            palette: {
+                primary: {
+                    light: '#ffb14b',
+                    main: '#ea7400',
+                    dark: '#b75d00',
+                    contrastText: '#fff',
+                },
+                secondary: {
+                    light: '#00e6ff',
+                    main: '#00BCD4',
+                    dark: '#00505f',
+                    contrastText: '#000',
+                },
+                grey: {
+                    light: '#c9c9c9',
+                    main: '#88878B',
+                    dark: '#3c3c3c',
+                    contastText: '#ffffff'
+                }
+            },
+        });
+    };
 }
 
 App.propTypes = {

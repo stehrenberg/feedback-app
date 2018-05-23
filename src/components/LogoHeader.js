@@ -38,9 +38,7 @@ class LogoHeader extends React.Component {
                     />
                 </div>
                 <div>
-                    <h2>
-                        { title }
-                    </h2>
+                    <h2>{ title }</h2>
                     { projectSwitchDisabled ? '' : <ProjectSelect /> }
                 </div>
             </div>
