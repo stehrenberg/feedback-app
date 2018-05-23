@@ -46,11 +46,11 @@ class QuestionStepper extends React.Component {
         return ['Basic metrics', 'Contract basics', 'Inspect & Adapt', 'Next Iteration', 'NPS'];
     };
 
-    getStepContent = (step, {id, questions, onChange, onSubmit, isReadOnly}) => {
+    getStepContent = (step, {surveyId, questions, onChange, onSubmit, isReadOnly}) => {
         switch (step) {
             case 0:
                 return <SurveyForm
-                    surveyId={ id }
+                    surveyId={ surveyId }
                     questions={ questions.filter((question) => ["0", "1", "2"].includes(question.id)) }
                     onChange={ onChange }
                     onSubmit={ onSubmit }
@@ -58,7 +58,7 @@ class QuestionStepper extends React.Component {
                 />;
             case 1:
                 return <SurveyForm
-                    surveyId={ id }
+                    surveyId={ surveyId }
                     questions={ questions.filter((question) => ["3", "4"].includes(question.id)) }
                     onChange={ onChange }
                     onSubmit={ onSubmit }
@@ -66,7 +66,7 @@ class QuestionStepper extends React.Component {
                 />;
             case 2:
                 return <SurveyForm
-                    surveyId={ id }
+                    surveyId={ surveyId }
                     questions={ questions.filter((question) => ["5", "6", "7", "8"].includes(question.id)) }
                     onChange={ onChange }
                     onSubmit={ onSubmit }
@@ -74,7 +74,7 @@ class QuestionStepper extends React.Component {
                 />;
             case 3:
                 return <SurveyForm
-                    surveyId={ id }
+                    surveyId={ surveyId }
                     questions={ questions.filter((question) => ["9", "10"].includes(question.id)) }
                     onChange={ onChange }
                     onSubmit={ onSubmit }
@@ -82,7 +82,7 @@ class QuestionStepper extends React.Component {
                 />;
             case 4:
                 return <SurveyForm
-                    surveyId={ id }
+                    surveyId={ surveyId }
                     questions={ questions.filter((question) => question.id === "11") }
                     onChange={ onChange }
                     onSubmit={ onSubmit }

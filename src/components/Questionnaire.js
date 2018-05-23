@@ -25,6 +25,7 @@ class Questionnaire extends Component {
                                  onChange={ this.handleChange }
                                  questions={ this.state.questions }
                                  isReadOnly={ this.props.isReadOnly }
+                                 surveyId = { this.props.id }
                 />
                 <SnackBar
                     className={ 'save-feedback' }

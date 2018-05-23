@@ -1,7 +1,7 @@
 import React from 'react';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
@@ -12,9 +12,10 @@ import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
 import ProjectSelectDialog from '../../components/ProjectSelectDialog';
-import { loadTodos, loadProjects, setProject } from '../../actions';
-import { apiCall, normalizeProjectName } from '../../util/utils';
-import { config } from '../../config/config';
+import {loadTodos, loadProjects, setProject} from '../../actions';
+import {apiCall, normalizeProjectName} from '../../util/utils';
+import {config} from '../../config/config';
+import {profile} from '../../config/profile';
 import './appMenu.css';
 
 class AppMenu extends React.Component {
@@ -29,25 +30,32 @@ class AppMenu extends React.Component {
 
     componentDidMount() {
 
-        if(!this.props.projectName) {
+        if (!this.props.projectName) {
             const projectName = this.getProjectName();
-            if(projectName) {
+            if (projectName) {
                 this.props.dispatch(setProject(projectName));
                 localStorage.setItem("projectName", projectName);
             } else {
-                this.setState({ showProjectSelectDialog: true, isLoading: true });
-                this.loadProjectsFromBackend().then(() => this.setState({ isLoading: false }));
+                this.setState({showProjectSelectDialog: true, isLoading: true});
+                this.loadProjectsFromBackend().then(() => this.setState({isLoading: false}));
             }
+        } else {
+            this.loadAppData();
         }
     }
 
-    componentDidUpdate({ projectName }) {
-         if (projectName !== this.props.projectName) {
-         this.loadAppData();
-         }
+    componentDidUpdate({projectName}) {
+        if (projectName !== this.props.projectName) {
+
+            this.loadAppData();
+        }
     }
 
     render() {
+        const unseenTodos = this.props.todos.filter(todo => {
+            return todo.createdAt.isAfter(profile.lastTodoVisit['SHOW_OPEN']);
+        });
+        console.log(unseenTodos.length);
         const todoCount = this.props.todos.length;
         const openTodoCount = this.props.todos.filter(todo => !todo.completed).length;
 
@@ -94,7 +102,7 @@ class AppMenu extends React.Component {
                         right: 10,
                         top: 100,
                         left: 'initial',
-                      }}/>
+                    }}/>
                 }
                 <TileMenu className="TileMenu"
                           tileData={ tileData }
@@ -110,8 +118,8 @@ class AppMenu extends React.Component {
     }
 
     getProjectName = () => this.props.projectName.length > 0 ?
-            this.props.projectName
-            : localStorage.getItem("projectName");
+        this.props.projectName
+        : localStorage.getItem("projectName");
 
     loadAppData = () => {
         this.setState({
@@ -122,7 +130,7 @@ class AppMenu extends React.Component {
             this.loadTodosFromBackend(),
             this.loadProjectsFromBackend()
         ])
-            .then(() => this.setState({ isLoading: false }));
+            .then(() => this.setState({isLoading: false}));
     };
 
     loadTodosFromBackend = () => {
@@ -168,7 +176,7 @@ class AppMenu extends React.Component {
     };
 
     handleDialogClose = projectName => {
-        this.setState({ showProjectSelectDialog: false });
+        this.setState({showProjectSelectDialog: false});
         this.props.dispatch(setProject(projectName));
         localStorage.setItem("projectName", projectName);
     };

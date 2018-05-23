@@ -11,6 +11,7 @@ import AlertBox from '../../components/AlertBox';
 import {setTodoFilter} from '../../actions';
 import { apiCall, getRandomInteger} from '../../util/utils';
 import {config} from '../../config/config';
+import {updateLastTodoVisit} from '../../config/profile';
 
 class FilteredTodos extends Component {
 
@@ -26,6 +27,7 @@ class FilteredTodos extends Component {
         const todoFilter = this.decodeTodoFilter(this.props.match.params.filter);
         this.props.dispatch(setTodoFilter(todoFilter));
         this.setState({ showAlertBox: this.isEverythingDone(todoFilter)});
+        updateLastTodoVisit(todoFilter);
     };
 
     // TODO Move to TodoList Component after refactoring of FilteredTodos->render()
