@@ -9,7 +9,10 @@ const NumberInput = ({isReadOnly, handleChange, value, name,}) => {
         name={ name }
         count={ 10 }
         value={ value }
-        onChange={ (rating) => handleChange(name, rating) }
+        onChange={ (rating) => {
+            handleChange(name, rating)
+            }
+        }
         half={ false }
         size={ 24 }
         color2={ '#ffc300' }

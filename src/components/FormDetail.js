@@ -9,15 +9,6 @@ import LogoHeader from './LogoHeader';
 import MiniNavBar from '../components/MiniNavBar';
 import questions from '../config/questionTexts.json';
 
-const getQuestions = (surveyData) => {
-    return questions.questionTexts.map(question => {
-        const storedQuestion = surveyData.find(storedQuestion => storedQuestion.questionId.toString() === question.id);
-        const questionValue = !(!storedQuestion) ? storedQuestion.questionValue : "";
-
-        return Object.assign({}, { ...question }, { value: questionValue });
-    });
-};
-
 const FormDetail = ({ match, history, surveys, showMiniNavBar }) => {
     const formId = match.params.formId;
     const meetingDate = Moment(formId.toString(), 'YYYYMMDD').format("dddd, MMMM Do YYYY");
@@ -33,6 +24,15 @@ const FormDetail = ({ match, history, surveys, showMiniNavBar }) => {
             </div>
         </div>
     );
+};
+
+const getQuestions = (surveyData) => {
+    return questions.questionTexts.map(question => {
+        const storedQuestion = surveyData.find(storedQuestion => storedQuestion.questionId.toString() === question.id);
+        const questionValue = !(!storedQuestion) ? storedQuestion.questionValue : "";
+
+        return Object.assign({}, { ...question }, { value: questionValue });
+    });
 };
 
 FormDetail.propTypes = {

@@ -22,14 +22,8 @@ class QuestionStepper extends React.Component {
         });
     };
 
-    handleReset = () => {
-        this.setState({
-            activeStep: 0,
-        });
-    };
-
     render() {
-        const { classes } = this.props;
+        const { classes, onChange, onSubmit } = this.props;
         const steps = this.getSteps();
         const { activeStep } = this.state;
 
@@ -41,7 +35,7 @@ class QuestionStepper extends React.Component {
                             <Step key={ label } onClick={ () => this.handleClick(index) }>
                                 <StepLabel className="QuestionStepperLabel">{ label }</StepLabel>
                                 <StepContent>
-                                    { this.getStepContent(index)}
+                                    { this.getStepContent(index, {...this.props}) }
                                 </StepContent>
                             </Step>
                         );
@@ -51,52 +45,51 @@ class QuestionStepper extends React.Component {
         );
     }
 
-
     getSteps = () => {
         return ['Basic metrics', 'Contract basics', 'Inspect & Adapt', 'Next Iteration', 'NPS'];
     };
 
-    getStepContent = (step) => {
+    getStepContent = (step, {id, questions, onChange, onSubmit, isReadOnly}) => {
         switch (step) {
             case 0:
                 return <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.props.questions.filter((question) => ["0", "1", "2"].includes(question.id)) }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
+                    surveyId={ id }
+                    questions={ questions.filter((question) => ["0", "1", "2"].includes(question.id)) }
+                    onChange={ onChange }
+                    onSubmit={ onSubmit }
+                    isReadOnly={ isReadOnly }
                 />;
             case 1:
                 return <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.props.questions.filter((question) => ["3", "4"].includes(question.id)) }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
+                    surveyId={ id }
+                    questions={ questions.filter((question) => ["3", "4"].includes(question.id)) }
+                    onChange={ onChange }
+                    onSubmit={ onSubmit }
+                    isReadOnly={ isReadOnly }
                 />;
             case 2:
                 return <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.props.questions.filter((question) => ["5", "6", "7", "8"].includes(question.id)) }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
+                    surveyId={ id }
+                    questions={ questions.filter((question) => ["5", "6", "7", "8"].includes(question.id)) }
+                    onChange={ onChange }
+                    onSubmit={ onSubmit }
+                    isReadOnly={ isReadOnly }
                 />;
             case 3:
                 return <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.props.questions.filter((question) => ["9", "10"].includes(question.id)) }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
+                    surveyId={ id }
+                    questions={ questions.filter((question) => ["9", "10"].includes(question.id)) }
+                    onChange={ onChange }
+                    onSubmit={ onSubmit }
+                    isReadOnly={ isReadOnly }
                 />;
             case 4:
                 return <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.props.questions.filter((question) => question.id === "11") }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
+                    surveyId={ id }
+                    questions={ questions.filter((question) => question.id === "11") }
+                    onChange={ onChange }
+                    onSubmit={ onSubmit }
+                    isReadOnly={ isReadOnly }
                 />;
             default:
                 return 'Unknown step';

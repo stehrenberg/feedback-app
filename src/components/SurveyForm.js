@@ -5,17 +5,20 @@ import Question from './Question';
 const SurveyForm = (props) => {
     return (
         <form action="" method="" onSubmit={ (event) => props.onSubmit(event) }>
-        {   props.questions.map(
-            question => <Question key={ question.shortText }
+            {
+                props.questions.map((question) => {
+                    return (
+                        <Question key={ question.shortText }
                                   name={ question.shortText }
                                   label={ question.text }
                                   value={ question.value }
                                   onChange={ props.onChange }
                                   isReadOnly={ props.isReadOnly }
-                                  surveyId={ props.surveyId }
-                {...question} />)
-        }
-    </form>
+                                  surveyId={ props.surveyId } {...question} />
+                    );
+                })
+            }
+        </form>
     );
 };
 

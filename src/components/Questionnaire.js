@@ -23,9 +23,7 @@ class Questionnaire extends Component {
     render() {
         return (
             <div className='Paperbox'>
-                <QuestionStepper onSubmit={ this.handleSubmit }
-                                     onChange={ this.handleChange }
-                                 {...this.props}/>
+                <QuestionStepper onSubmit={ this.handleSubmit } onChange={ this.handleChange } questions={ this.state.questions }/>
                 <SnackBar
                     className={ 'save-feedback' }
                     open={ this.state.showAlertBox }
@@ -50,19 +48,11 @@ class Questionnaire extends Component {
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
             const newValue = question.shortText === name ? value : question.value;
-            return Object.assign({}, {...question}, {value: newValue});
+            return {...question, value: newValue};
         });
-
-        this.setState({questions: updatedQuestions});
+        this.setState({ questions: updatedQuestions });
         this.saveTimeout = window.setTimeout(() => this.saveForm(), 500);
     };
-
-    handlePopoverOpen = (event) => {
-        this.setState({anchorEl: event.target});
-        console.log(event);
-    };
-
-    handlePopoverClose = () => this.setState({anchorEl: null});
 
     saveForm = () => {
         const surveyEndpoint = `${config.dreamfactoryApi.apiBaseUrl}_table/survey`;

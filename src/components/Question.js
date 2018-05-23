@@ -11,7 +11,7 @@ class Question extends React.Component {
         };
     }
 
-    render = () => {
+    render() {
         const {id, label, help} = this.props;
 
         return (

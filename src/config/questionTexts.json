@@ -24,7 +24,7 @@
       "preload": "true",
       "value": "",
       "help": "This is what you commissioned us to do - our core tasks and services for you as defined in our contract.",
-      "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
+      "placeholder": "e.g. Scrum Master, DevOps consulting, Agile Coaching, ..."
     },
     {
       "id": "4",
@@ -34,7 +34,7 @@
       "preload": "true",
       "value": "",
       "help": "What are the must-have results you need from us?",
-      "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
+      "placeholder": "e.g. Scrum Master, DevOps consulting, Agile Coaching, ..."
     },
     {
       "id": "5",
@@ -77,7 +77,7 @@
       "placeholder": "Technical skills, agile tools, ..."
     },
     {
-      "id": "09",
+      "id": "9",
       "shortText": "nextMeeting",
       "text": "Next Meeting:",
       "inputType": "date",

@@ -7,7 +7,6 @@ import TextInput from './answers/TextInput';
 import TodoInput from './answers/TodoInput';
 
 const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value, surveyId }) => {
-
     let inputField;
 
     switch(inputType) {
