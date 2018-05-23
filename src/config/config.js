@@ -9,15 +9,31 @@ export const config = {
         loginEndpoint: env.REACT_APP_DF_LOGIN_ENDPOINT,
         apiKey: env.REACT_APP_DF_APIKEY,
     },
-    rankLimits: {
-        supporter: 5,
-        regular: 13,
-        heavy: 30,
-        supreme: 42
+    rank: {
+        rookie: {
+            limit: 0,
+            color: '#ffffff',
+        },
+        supporter: {
+            limit: 5,
+            color: '#00bcd4'
+        },
+        regular: {
+            limit: 13,
+            color: '#d88c40',
+        },
+        heavy: {
+            limit: 30,
+            color: '#dddddd',
+        },
+        supreme: {
+            limit: 42,
+            color: '#d3b536'
+        }
     },
     kudosPoints: {
         survey: 5,
         todo: 2,
         completeTodo: 8,
-    }
+    },
 };

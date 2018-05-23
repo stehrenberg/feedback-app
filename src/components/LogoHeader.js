@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import ProjectSelect from '../components/ProjectSelect';
 import profile from '../config/profile';
+import { config } from '../config/config';
 import logo from '../assets/mayflower_logo.png';
 
 class LogoHeader extends React.Component {
@@ -68,7 +69,7 @@ const styles = {
     },
     avatar: {
         position: 'absolute',
-        border: "4px solid #eeeeff",
+        border: `4px solid ${ config.rank.rookie.color }`,
         top: 100,
         right: 60,
         width: 70,
