@@ -17,7 +17,9 @@ const FormDetail = ({ match, history, surveys, showMiniNavBar }) => {
 
     return (
         <div className="FeedbackForm">
-            <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` } projectSwitchDisabled={ true } />
+            <LogoHeader title={ `Feedback Meeting on ${ meetingDate }` }
+                        history={ history }
+                        projectSwitchDisabled={ true } />
             <div className="App-content">
                 <MiniNavBar history={ history } show={ showMiniNavBar }/>
                 <Questionnaire id={ formId } questions={ storedQuestions } isReadOnly={ true } />

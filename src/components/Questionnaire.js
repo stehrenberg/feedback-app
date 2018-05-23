@@ -23,7 +23,11 @@ class Questionnaire extends Component {
     render() {
         return (
             <div className='Paperbox'>
-                <QuestionStepper onSubmit={ this.handleSubmit } onChange={ this.handleChange } questions={ this.state.questions }/>
+                <QuestionStepper onSubmit={ this.handleSubmit }
+                                 onChange={ this.handleChange }
+                                 questions={ this.state.questions }
+                                 isReadOnly={ this.props.isReadOnly }
+                />
                 <SnackBar
                     className={ 'save-feedback' }
                     open={ this.state.showAlertBox }
