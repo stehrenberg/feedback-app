@@ -23,7 +23,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "...",
+      "help": "This is what you commissioned us to do - our core tasks and services for you as defined in our contract.",
       "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
     },
     {
@@ -33,7 +33,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "...",
+      "help": "What are the must-have results you need from us?",
       "placeholder": "e.g. Scrum Master, DevOps consulting, App development, Agile Coaching, ..."
     },
     {
@@ -43,7 +43,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "From what do you want more of?",
+      "help": "Which of our skills and competencies do you value, but need more of?",
       "placeholder": ""
     },
     {
@@ -54,7 +54,7 @@
       "preload": "true",
       "value": "",
       "help": "What don't you need? Where do we err? What should we stop?",
-      "placeholder": "..."
+      "placeholder": ""
     },
     {
       "id": "7",
@@ -64,7 +64,7 @@
       "preload": "true",
       "value": "",
       "help": "What excites you? How could our competencies assist you further?",
-      "placeholder": ""
+      "placeholder": "e.g. workshops, consulting, coaching"
     },
     {
       "id": "8",
@@ -74,31 +74,33 @@
       "preload": "true",
       "value": "",
       "help": "What do you need from us that we are missing so far?",
-      "placeholder": ""
+      "placeholder": "Technical skills, agile tools, ..."
     },
     {
-      "id": "9",
+      "id": "09",
+      "shortText": "nextMeeting",
+      "text": "Next Meeting:",
+      "inputType": "date",
+      "help": "We've calculated a suggestion for the next feedback meeting, based on the interval rule you set in your profile. Adjust as needed!",
+      "value": ""
+    },
+    {
+      "id": "10",
+      "shortText": "tasks",
+      "text": "Tasks for the next iteration:",
+      "inputType": "todo",
+      "preload": "false",
+      "value": "",
+      "help": "Which tasks should we work on until the next feedback date? "
+    },
+    {
+      "id": "11",
       "shortText": "nps",
       "text": "How likely is it that you would recommend our company/product to a friend or colleague?",
       "inputType": "number",
       "preload": "false",
       "value": 0,
-      "help": "..."
-    },
-    {
-      "id": "10",
-      "shortText": "nextMeeting",
-      "text": "Next Meeting:",
-      "inputType": "date",
-      "value": ""
-    },
-    {
-      "id": "11",
-      "shortText": "tasks",
-      "text": "Tasks for the next iteration:",
-      "inputType": "todo",
-      "preload": "false",
-      "value": ""
+      "help": "We use this to calculate our Net Promoter Score and determine how good we serve our customers."
     }
   ]
 }

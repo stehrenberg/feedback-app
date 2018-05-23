@@ -7,6 +7,7 @@ export const profile = {
     loginCount: 0,
     surveyCount: 0,
     lastTodoVisit: null,
+    feedbackIntervallInWeeks: 4,
 };
 
 export default profile;

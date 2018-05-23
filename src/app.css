@@ -80,8 +80,8 @@ th {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 30px 100px 30px 60px;
-    width: 558px;
+    padding: 20px 100px 20px 60px;
+    width: 600px;
     background-color: #ffffff;
     border-width: 1px;
     border-color: rgba(227, 224, 230, 0.23);
@@ -95,12 +95,15 @@ th {
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 10px 0 15px 0;
+    padding: 30px 0 15px 20px;
     cursor: help;
 }
 
 .Question > label {
+    color: #3c3c3c;
     cursor: help;
+    font-size: 15px;
+    font-weight: 450;
 }
 
 .Question textarea {

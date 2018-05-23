@@ -38,7 +38,11 @@ class FeedbackForm extends React.Component {
                             history={ history }/>
                 <div className="App-content">
                     <MiniNavBar history={ history } show={ showMiniNavBar }/>
-                    <CardMessage show={ this.state.showModalDialog } title={ cardTitle } text={ cardText } direction="right"/>
+                    <CardMessage show={ this.state.showModalDialog }
+                                 title={ cardTitle }
+                                 text={ cardText }
+                                 position="absolute"
+                                 direction="right"/>
                     <Questionnaire id={ id }
                                    questions={ questions.questionTexts }
                                    todos={ [] }

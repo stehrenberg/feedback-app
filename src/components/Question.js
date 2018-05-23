@@ -17,7 +17,8 @@ class Question extends React.Component {
         return (
             <div className="Question">
                 <CardMessage show={ this.state.showHelp }
-                             direction="left"
+                             direction="right"
+                             position="fixed"
                              title="What this means..."
                              text={ help } />
                 <label id={ id }

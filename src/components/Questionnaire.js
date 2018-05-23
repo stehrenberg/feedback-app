@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import SurveyForm from '../components/SurveyForm';
 import {connect} from 'react-redux';
 import SnackBar from 'material-ui/Snackbar';
+import QuestionStepper from '../components/QuestionStepper';
 import Popover from '@material-ui/core/Popover';
-import Typography from '@material-ui/core/Typography';
 
 import {config} from '../config/config.js';
 
@@ -23,13 +23,9 @@ class Questionnaire extends Component {
     render() {
         return (
             <div className='Paperbox'>
-                <SurveyForm
-                    surveyId={ this.props.id }
-                    questions={ this.state.questions }
-                    onChange={ this.handleChange }
-                    onSubmit={ this.handleSubmit }
-                    isReadOnly={ this.props.isReadOnly }
-                />
+                <QuestionStepper onSubmit={ this.handleSubmit }
+                                     onChange={ this.handleChange }
+                                 {...this.props}/>
                 <SnackBar
                     className={ 'save-feedback' }
                     open={ this.state.showAlertBox }
