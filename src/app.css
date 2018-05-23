@@ -99,6 +99,18 @@ th {
     cursor: help;
 }
 
+#Stepper {
+    color: #ea7400;
+}
+
+.QuestionStepperLabel:hover svg {
+    color: #ea7400;
+}
+
+.QuestionStepperLabel :hover{
+    color: #ea7400;
+}
+
 .Question > label {
     color: #3c3c3c;
     cursor: help;

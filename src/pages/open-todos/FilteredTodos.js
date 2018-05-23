@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {List} from 'material-ui/List';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
 
 import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
@@ -24,7 +23,7 @@ class FilteredTodos extends Component {
     componentDidMount = () => {
         const todoFilter = this.decodeTodoFilter(this.props.match.params.filter);
         this.props.dispatch(setTodoFilter(todoFilter));
-        this.setState({ showAlertBox: this.isEverythingDone()});
+        this.setState({ showAlertBox: this.isEverythingDone(todoFilter)});
     };
 
     // TODO Move to TodoList Component after refactoring of FilteredTodos->render()
@@ -62,8 +61,8 @@ class FilteredTodos extends Component {
                         </div>
                         <AlertBox
                             show={ this.state.showAlertBox }
-                            dialogText={ "All done here. Great Job!" }
-                            btnTexts={ ["Thx!"] }
+                            dialogText={ "All done here. Great Job! 🎉" }
+                            btnTexts={ ["Thanks!"] }
                             handleClose={ () => this.setState({ showAlertBox: false }) }
                         />
                     </div>
@@ -105,8 +104,8 @@ class FilteredTodos extends Component {
         return visibleTodos.reverse();
     };
 
-    isEverythingDone = () => {
-        return this.getVisibleTodos(this.props.todos, 'SHOW_OPEN').length < 1;
+    isEverythingDone = (todoFilter) => {
+        return (this.getVisibleTodos(this.props.todos, 'SHOW_OPEN').length < 1 && todoFilter === 'SHOW_OPEN');
     }
 
 }

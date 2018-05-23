@@ -39,7 +39,7 @@ class QuestionStepper extends React.Component {
                     { steps.map((label, index) => {
                         return (
                             <Step key={ label } onClick={ () => this.handleClick(index) }>
-                                <StepLabel>{ label }</StepLabel>
+                                <StepLabel className="QuestionStepperLabel">{ label }</StepLabel>
                                 <StepContent>
                                     { this.getStepContent(index)}
                                 </StepContent>
@@ -47,14 +47,6 @@ class QuestionStepper extends React.Component {
                         );
                     })}
                 </Stepper>
-                { this.state.activeStep === steps.length && (
-                    <Paper square elevation={0} className={ classes.resetContainer }>
-                        <Typography>All steps completed - you&quot;re finished</Typography>
-                        <Button onClick={() => console.log("yay!")} className={ classes.button }>
-                            Done!
-                        </Button>
-                    </Paper>
-                )}
             </React.Fragment>
         );
     }
