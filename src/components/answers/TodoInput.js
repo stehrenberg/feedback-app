@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import uuidv1 from 'uuid';
 
 import TodoList from '../../components/todos/TodoList';
-import { addTodo } from '../../actions';
+import { addTodo, addKudosPoints } from '../../actions';
 import { apiCall } from '../../util/utils';
 import { config } from '../../config/config.js';
 
@@ -29,6 +29,7 @@ class TodoInput extends Component {
         };
 
         this.props.dispatch(addTodo(newTodo));
+        this.props.dispatch(addKudosPoints(config.kudosPoints.todo));
         this.setState({ input: ''});
         // TODO belongs in Middleware - refactor when introducing one!
         this.saveTodo(newTodo);

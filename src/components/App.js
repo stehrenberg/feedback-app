@@ -14,9 +14,10 @@ import FormDetail from '../components/FormDetail';
 import FilteredTodos from '../pages/open-todos/FilteredTodos';
 import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../pages/app-menu/AppMenu';
-import { setJWT } from '../actions';
+import { setJWT, addKudosPoints} from '../actions';
 import { apiCall } from '../util/utils';
 import { config } from '../config/config';
+import profile from '../config/profile';
 
 class App extends Component {
 
@@ -43,6 +44,10 @@ class App extends Component {
         const payload = { session_token: jwt.session_token };
 
         return apiCall(apiEndpoint, httpMethod, dataTransformMethod, undefined, payload);
+    };
+
+    componentDidMount = () => {
+        this.props.dispatch(addKudosPoints(profile.kudoPoints));
     };
 
     render() {

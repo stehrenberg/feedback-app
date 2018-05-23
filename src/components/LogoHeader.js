@@ -8,8 +8,9 @@ import md5 from 'md5';
 import PropTypes from 'prop-types';
 
 import ProjectSelect from '../components/ProjectSelect';
-import profile from '../config/profile';
+import KudosBar from '../components/KudosBar';
 import { config } from '../config/config';
+import profile from '../config/profile';
 import logo from '../assets/mayflower_logo.png';
 
 class LogoHeader extends React.Component {
@@ -36,6 +37,7 @@ class LogoHeader extends React.Component {
                         className={ classes.avatar }
                         src={ this.getAvatarURL(profile.email) }
                     />
+                    <KudosBar value={ 42 }/>
                 </div>
                 <div>
                     <h2>{ title }</h2>
@@ -54,11 +56,12 @@ class LogoHeader extends React.Component {
     };
 }
 
-
 LogoHeader.propTypes = {
     title: PropTypes.string.isRequired,
     projectSwitchDisabled: PropTypes.bool,
 };
+
+const ownRank = profile.currentRank;
 
 const styles = {
     row: {
@@ -67,9 +70,9 @@ const styles = {
     },
     avatar: {
         position: 'absolute',
-        border: `4px solid ${ config.rank.rookie.color }`,
-        top: 100,
-        right: 60,
+        border: `4px solid ${ config.rank[ownRank].color }`,
+        top: 80,
+        right: '3%',
         width: 70,
         height: 70,
     }

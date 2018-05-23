@@ -11,7 +11,7 @@ const styles = {
         position: 'fixed',
         zIndex: '100',
         top: 0,
-        height: 80,
+        height: 100,
         width: '100%',
         backgroundColor: '#003a57',
     },

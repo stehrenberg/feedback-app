@@ -24,7 +24,7 @@ class Question extends React.Component {
                 <label id={ id }
                        onClick={ this.handleClick }
                        onMouseOut={ this.handleMouseOut }>
-                    {label }
+                    { label }
                 </label>
                 <AnswerInput {...this.props}/>
             </div>

@@ -4,7 +4,7 @@ import { List } from 'material-ui/List';
 import { connect } from 'react-redux';
 
 import TodoItem from './TodoItem';
-import { deleteTodo } from '../../actions';
+import { deleteTodo, addKudosPoints } from '../../actions';
 import { apiCall } from '../../util/utils';
 import { config } from '../../config/config.js';
 
@@ -22,6 +22,7 @@ class TodoList extends React.Component {
                                         isReadOnly={ isReadOnly }
                                         onDelete={ () => {
                                             dispatch(deleteTodo(todo.id));
+                                            {/*dispatch(addKudosPoints(-(config.kudosPoints.todo)));*/}
                                             this.deleteTodoFromBE(todo.id);
                                         } }
                         {...todo}/>) }
@@ -40,7 +41,7 @@ class TodoList extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    return { todos: state.todos.filter((todo) => todo.surveyId === ownProps.surveyId) };
+    return { todos: state.todos.filter((todo) => todo.surveyId === ownProps.surveyId).reverse() };
 };
 
 TodoList.propTypes = {

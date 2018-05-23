@@ -80,6 +80,19 @@ function showMiniNavBar(state = false, action) {
     }
 }
 
+function kudosPoints(state = 0, action) {
+    switch(action.type) {
+        case 'ADD_KUDOS_POINTS':
+            const bla = state.kudosPoints + action.kudosPoints;
+            console.log(state.kudosPoints, bla);
+            return bla;
+        case 'LEVEL_UP':
+            return action.kudosRest;
+        default:
+            return state;
+    }
+}
+
 const feedbackApp = combineReducers({
     projectName,
     projects,
@@ -88,6 +101,7 @@ const feedbackApp = combineReducers({
     todoFilter,
     surveys,
     showMiniNavBar,
+    kudosPoints,
 });
 
 export default feedbackApp;

@@ -1,12 +1,11 @@
 import React from 'react';
 import {withStyles} from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
-const CardMessage = ({ classes, title, text, show, direction, position }) => (
+const CardMessage = ({ classes, title, text, show, direction, position, yPos }) => (
         <Slide in={ show } direction={ direction } mountOnEnter unmountOnExit>
             <Card className={ [classes.card, classes[direction], classes[position]] }>
                 <CardContent>
@@ -25,15 +24,15 @@ const styles = {
     card: {
         zIndex: 10,
         width: 230,
-        padding: 5,
+        padding: 0,
         marginTop: -10,
         marginBottom: 20,
     },
     right: {
-        left:20
+        left:0
     },
     left: {
-        right: 20
+        right: 0
     },
     absolute: {
         position: 'absolute',
@@ -41,7 +40,7 @@ const styles = {
     },
     fixed: {
         position: 'fixed',
-        top: 200,
+        top: 230,
     },
     text: {
         marginBottom: 5,

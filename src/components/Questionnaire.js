@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import SurveyForm from '../components/SurveyForm';
 import {connect} from 'react-redux';
 import SnackBar from 'material-ui/Snackbar';
 import QuestionStepper from '../components/QuestionStepper';
-import Popover from '@material-ui/core/Popover';
 
 import {config} from '../config/config.js';
 

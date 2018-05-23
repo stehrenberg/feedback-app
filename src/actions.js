@@ -8,6 +8,8 @@ export const SET_TODO_FILTER = 'SET_TODO_FILTER';
 export const TOGGLE_TODO_STATUS = 'TOGGLE_TODO_STATUS';
 export const LOAD_SURVEYS = 'LOAD_SURVEYS';
 export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
+export const ADD_KUDOS_POINTS = 'ADD_KUDOS_POINTS';
+export const LEVEL_UP = 'LEVEL_UP';
 
 export const setProject = (projectName) => {
     return {
@@ -77,5 +79,18 @@ export const toggleMiniNavBar = (showMiniNavBar) => {
         type: TOGGLE_NAVBAR,
         showMiniNavBar,
     }
+};
 
+export const addKudosPoints = (kudosPoints) => {
+    return {
+        type: ADD_KUDOS_POINTS,
+        kudosPoints,
+    }
+};
+
+export const levelUp = (kudosRest) => {
+    return {
+        type: LEVEL_UP,
+        kudosRest
+    }
 };

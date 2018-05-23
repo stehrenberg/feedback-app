@@ -5,7 +5,8 @@ import { ListItem } from 'material-ui/List';
 import { Checkbox } from 'material-ui';
 import { connect } from 'react-redux';
 
-import { toggleTodoStatus } from '../../actions';
+import { toggleTodoStatus, addKudosPoints} from '../../actions';
+import { config } from '../../config/config';
 
 class TodoItemMiniCard extends Component {
 
@@ -28,6 +29,7 @@ class TodoItemMiniCard extends Component {
     handleTodoClick = (event) => {
         const todoId = event.target.name;
         this.props.dispatch(toggleTodoStatus(todoId));
+        this.props.dispatch(addKudosPoints(config.kudosPoints.completeTodo));
     };
 }
 
