@@ -9,9 +9,17 @@ import { toggleTodoStatus, addKudosPoints} from '../../actions';
 import { config } from '../../config/config';
 
 class TodoItemMiniCard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            pendingChange: false,
+            pendingCompleted: false,
+        };
+    }
 
     render() {
-        const { id, text, completed, createdAt=Moment() } = this.props;
+        const { id, text, createdAt=Moment() } = this.props;
+        const completed = this.state.pendingChange ? this.state.pendingCompleted : this.props.completed;
 
         return (
             <ListItem name={ text }
@@ -27,9 +35,15 @@ class TodoItemMiniCard extends Component {
     };
 
     handleTodoClick = (event) => {
+        this.setState({
+            pendingChange: true,
+            pendingCompleted: !this.props.completed,
+        });
         const todoId = event.target.name;
-        this.props.dispatch(toggleTodoStatus(todoId));
-        this.props.dispatch(addKudosPoints(config.kudosPoints.completeTodo));
+        setTimeout(() => {
+            this.props.dispatch(toggleTodoStatus(todoId));
+            this.props.dispatch(addKudosPoints(config.kudosPoints.completeTodo));
+        }, 500);
     };
 }
 
