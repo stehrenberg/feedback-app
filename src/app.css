@@ -248,3 +248,7 @@ span[data-forhalf] {
     height: 120px;
     padding: 30px;
 }
+
+#project-select-label label:hover > span {
+    color: #ea7400 !important;
+}

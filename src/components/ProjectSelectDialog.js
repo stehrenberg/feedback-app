@@ -42,7 +42,7 @@ class ProjectSelectDialog extends React.Component {
                 <DialogTitle disableTypography={true} className={classes.title} id="project-select_dialogue">Choose a
                     project you want to work on:</DialogTitle>
                 <div>
-                    <FormControl component="fieldset" required className={ classes.formControl }>
+                    <FormControl component="fieldset" required id="project-select-label" className={ classes.formControl }>
                         <RadioGroup ref={ (node) => this.radioGroup = node }
                                     name="projects"
                                     className={ classes.radioGroup }
@@ -59,14 +59,13 @@ class ProjectSelectDialog extends React.Component {
                                 )
                             }
                         </RadioGroup>
-                        { this.state.showError && <FormHelperText className={ classes.errorHint }>You need to select a project!</FormHelperText> }
+                        { this.state.showError &&
+                        <FormHelperText className={ classes.errorHint }>You need to select a project!</FormHelperText> }
                     </FormControl>
                 </div>
             </Dialog>
         );
     }
-
-
 }
 
 ProjectSelectDialog.propTypes = {
@@ -90,9 +89,8 @@ const style = theme => ({
     radioItem: {
         paddingLeft: 25,
         marginRight: 0,
-        color: '#ffffff',
         "&:hover": {
-            backgroundColor: theme.palette.primary.light,
+            backgroundColor: '#f0f0f0',
         }
     },
     errorHint: {
