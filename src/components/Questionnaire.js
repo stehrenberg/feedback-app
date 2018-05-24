@@ -27,6 +27,7 @@ class Questionnaire extends Component {
                                  questions={ this.state.questions }
                                  isReadOnly={ this.props.isReadOnly }
                                  surveyId = { this.props.id }
+                                 history={ this.props.history }
                 />
                 <SnackBar
                     className={ 'save-feedback' }

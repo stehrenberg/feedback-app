@@ -6,8 +6,11 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Typography from '@material-ui/core/Typography';
+import HomeIcon from '@material-ui/icons/Home';
 
 import SurveyForm from '../components/SurveyForm';
+import withTheme from "@material-ui/core/es/styles/withTheme";
+import * as theme from "material-ui";
 
 class QuestionStepper extends React.Component {
     state = {
@@ -18,7 +21,9 @@ class QuestionStepper extends React.Component {
     handleClick = (stepIndex) => {
         this.setState({
             activeStep: stepIndex,
+            ignoreMouseEnter: true,
         });
+        setTimeout(this.setState({ ignoreMouseEnter: false }), 2000);
     };
 
     handleSubmit = (onSubmit, stepIndex) => {
@@ -31,8 +36,9 @@ class QuestionStepper extends React.Component {
     };
 
     render() {
-        const {classes, onChange, onSubmit} = this.props;
+        const {classes, onChange, onSubmit, history} = this.props;
         const steps = this.getSteps();
+        const {main, light} = this.props.theme.palette.primary;
 
         return (
             <React.Fragment>
@@ -41,7 +47,11 @@ class QuestionStepper extends React.Component {
                         return (
                             <Step key={ label }
                                   onMouseEnter={ () => {
-                                      setTimeout(() => this.handleClick(index), 150)
+                                      if (!this.state.allDone && !this.state.ignoreMouseEnter) {
+                                          this.setState({ ignoreMouseEnter: true });
+                                          setTimeout(() => this.handleClick(index), 150);
+                                          //setTimeout(() => this.setState({ignoreMouseEnter: false}), 2000);
+                                      }
                                   }}
                                   onClick={ () => this.handleClick(index) }>
                                 <StepLabel className="QuestionStepperLabel">{ label }</StepLabel>
@@ -53,13 +63,15 @@ class QuestionStepper extends React.Component {
                     })}
                     { this.state.activeStep == steps.length && <span>All done!</span> }
                 </Stepper>
-                {
-                    this.state.allDone && <div className={ classes.typoRoot }>
-                        <Typography className={ classes.typography }>
+                <div className={ classes.typoRoot }>
+                    {
+                        this.state.allDone && <Typography className={ classes.typography }>
                             { "All done - thanks for your feedback! 😊" }
                         </Typography>
-                    </div>
-                }
+                    }
+                </div>
+                <HomeIcon className="nav-back-icon"
+                          onClick={ () => history.push('/home') }/>
             </React.Fragment>
         );
     }
@@ -133,15 +145,21 @@ const styles = theme => ({
         padding: 30,
     },
     typography: {
-        width: '60%',
-        padding: '30px 0',
+        width: '70%',
+        paddingTop: '30px',
+        margin: '30px',
         borderTop: '1px solid #cecece',
-        fontSize: 18,
-        fontWeight: 500,
-        fontColor: '#ea7400',
-        fontFamily: 'Roboto, sans-serif',
+        fontSize: 16,
+        fontWeight: 450,
+        color: '#888888',
+
         textAlign: 'center'
-    }
+    },
+    typoRoot: {
+        display: 'flex',
+        height: 100,
+        justifyContent: 'center',
+    },
 });
 
-export default withStyles(styles)(QuestionStepper);
+export default withStyles(styles)(withTheme()(QuestionStepper));

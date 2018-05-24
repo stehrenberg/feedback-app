@@ -46,7 +46,9 @@ class FeedbackForm extends React.Component {
                     <Questionnaire id={ id }
                                    questions={ questions.questionTexts }
                                    todos={ [] }
-                                   isReadOnly={ false }/>
+                                   isReadOnly={ false }
+                                   history={ history }
+                    />
                 </div>
             </div>
         );

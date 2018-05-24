@@ -252,3 +252,20 @@ span[data-forhalf] {
 #project-select-label label:hover > span {
     color: #ea7400 !important;
 }
+
+.nav-back-icon {
+    font-size: 50px !important;
+    padding: 5px;
+    /*box-shadow: -0.5px -0.5px 10px 1px #c0c0c0;
+    border-radius: 100%;
+    background-color: #ffffff;*/
+    position: fixed;
+    bottom: 20px;
+    left: 60px;
+    color: #88878B;
+}
+
+.nav-back-icon:hover {
+    color: #ea7400;
+    cursor: pointer;
+}

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
 
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import {HashRouter, Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 import PrivateRoute from './PrivateRoute';
@@ -16,9 +16,9 @@ import FormDetail from '../components/FormDetail';
 import FilteredTodos from '../pages/open-todos/FilteredTodos';
 import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../pages/app-menu/AppMenu';
-import { setJWT, addKudosPoints, toggleSnackbar } from '../actions';
-import { apiCall } from '../util/utils';
-import { config } from '../config/config';
+import {setJWT, addKudosPoints, toggleSnackbar} from '../actions';
+import {apiCall} from '../util/utils';
+import {config} from '../config/config';
 import profile from '../config/profile';
 
 class App extends Component {
@@ -26,7 +26,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            history: createHashHistory({ queryKey: false }),
+            history: createHashHistory({queryKey: false}),
         }
     }
 
@@ -43,7 +43,7 @@ class App extends Component {
             localStorage.setItem("sessionToken", JSON.stringify(jwt));
             this.state.history.push("/home/");
         };
-        const payload = { session_token: jwt.session_token };
+        const payload = {session_token: jwt.session_token};
 
         return apiCall(apiEndpoint, httpMethod, dataTransformMethod, undefined, payload);
     };
@@ -54,9 +54,28 @@ class App extends Component {
 
     render() {
         const points = 12;
+        const theme = createMuiTheme({
+            palette: {
+                primary: {
+                    light: '#ffb14b',
+                    main: '#ea7400',
+                    dark: '#b75d00',
+                },
+                secondary: {
+                    light: '#00e6ff',
+                    main: '#00BCD4',
+                    dark: '#00505f',
+                },
+                grey: {
+                    light: '#c9c9c9',
+                    main: '#88878B',
+                    dark: '#3c3c3c',
+                }
+            },
+        });
 
         return (
-            <MuiThemeProvider theme={ this.createAppTheme() }>
+            <MuiThemeProvider theme={ theme }>
                 <DocumentTitle title="Cooperation Feedback Questionnaire">
                     <HashRouter history={ this.state.history }>
                         <Switch classes="">
@@ -81,31 +100,6 @@ class App extends Component {
     }
 
     checkAuthentication = () => Object.keys(this.props.store.getState().jwt).length > 0;
-
-    createAppTheme = () => {
-        return createMuiTheme({
-            palette: {
-                primary: {
-                    light: '#ffb14b',
-                    main: '#ea7400',
-                    dark: '#b75d00',
-                    contrastText: '#fff',
-                },
-                secondary: {
-                    light: '#00e6ff',
-                    main: '#00BCD4',
-                    dark: '#00505f',
-                    contrastText: '#000',
-                },
-                grey: {
-                    light: '#c9c9c9',
-                    main: '#88878B',
-                    dark: '#3c3c3c',
-                    contastText: '#ffffff'
-                }
-            },
-        });
-    };
 }
 
 App.propTypes = {

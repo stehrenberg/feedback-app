@@ -11,12 +11,13 @@ const styles = {
         position: 'fixed',
         zIndex: '100',
         top: 0,
-        height: 100,
+        height: 80,
         width: '100%',
         backgroundColor: '#003a57',
     },
     icon: {
         paddingBottom: 5,
+        width: '100%',
         cursor: "pointer",
     }
 };
@@ -37,16 +38,13 @@ class MiniNavBar extends React.Component {
 
         return (
             <Slide direction="down" in={ show } mountOnEnter unmountOnExit>
-                <BottomNavigation
-                    value={ value }
-                    onChange={ this.handleChange }
-                    showLabels
-                    className={ classes.root }
-                >
+                <BottomNavigation value={ value }
+                                  onChange={ this.handleChange }
+                                  showLabels
+                                  className={ classes.root }>
                     <BottomNavigationAction className={ classes.icon }
                                             value='/home/'
-                                            icon={ <HomeIcon style={{ fontSize: 32, color: '#ea7400' }}/> }
-                    />
+                                            icon={ <HomeIcon style={{fontSize: 32, color: '#ea7400'}}/> }/>
                 </BottomNavigation>
             </Slide>
         );
