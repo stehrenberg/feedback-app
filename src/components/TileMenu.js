@@ -45,7 +45,7 @@ const TileMenu = ({ tileData, cols, rows, classes }) => {
                         titleStyle={ styles.title }>
                         {
                             !!tile.count && <Badge className={ classes.todoBadge }
-                                                   badgeContent={ "+" + tile.count }
+                                                   badgeContent={ tile.count }
                                                    color="primary" />
                         }
                         <img src={ tile.img } alt={ "" } />
@@ -59,12 +59,12 @@ const TileMenu = ({ tileData, cols, rows, classes }) => {
 
 
 const badgeStyles = {
+    colorPrimary: '#00af00',
     todoBadge: {
         position: 'absolute',
         top: 25,
         right: 23,
     },
-    colorPrimary: '#00af00',
 };
 
 export default withStyles(badgeStyles)(TileMenu);

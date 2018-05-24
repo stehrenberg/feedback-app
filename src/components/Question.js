@@ -1,4 +1,5 @@
 import React from 'react';
+import Tooltip from '@material-ui/core/Tooltip';
 import AnswerInput from '../components/AnswerInput';
 import CardMessage from '../components/CardMessage';
 
@@ -21,11 +22,13 @@ class Question extends React.Component {
                              position="fixed"
                              title="What this means..."
                              text={ help } />
-                <label id={ id }
-                       onClick={ this.handleClick }
-                       onMouseOut={ this.handleMouseOut }>
-                    { label }
-                </label>
+                <Tooltip id="tooltip" title="Click for explanation" placement="top">
+                    <label id={ id }
+                           onClick={ this.handleClick }
+                           onMouseOut={ this.handleMouseOut }>
+                        { label }
+                    </label>
+                </Tooltip>
                 <AnswerInput {...this.props}/>
             </div>
         );
@@ -35,5 +38,7 @@ class Question extends React.Component {
 
     handleMouseOut = () => setTimeout(() => this.setState({showHelp: false}), 400);
 }
+
+
 
 export default Question;
