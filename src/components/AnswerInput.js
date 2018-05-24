@@ -6,7 +6,7 @@ import DateInput from './answers/DateInput';
 import TextInput from './answers/TextInput';
 import TodoInput from './answers/TodoInput';
 
-const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value, surveyId }) => {
+const AnswerInput = ({ inputType, isReadOnly, onChange, onClick, name, placeholder, value, surveyId }) => {
     let inputField;
 
     switch(inputType) {
@@ -14,6 +14,7 @@ const AnswerInput = ({ inputType, isReadOnly, onChange, name, placeholder, value
             inputField = <NumberInput name={ name }
                                       value={ value }
                                       handleChange={ onChange }
+                                      onClick={ onClick }
                                       isReadOnly={ isReadOnly }/>;
             break;
 

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { createMuiTheme } from '@material-ui/core/styles';
+
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 
 import PrivateRoute from './PrivateRoute';
 import FeedbackForm from '../pages/feedback-form/FeedbackForm';
@@ -14,7 +16,7 @@ import FormDetail from '../components/FormDetail';
 import FilteredTodos from '../pages/open-todos/FilteredTodos';
 import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../pages/app-menu/AppMenu';
-import { setJWT, addKudosPoints} from '../actions';
+import { setJWT, addKudosPoints, toggleSnackbar } from '../actions';
 import { apiCall } from '../util/utils';
 import { config } from '../config/config';
 import profile from '../config/profile';
@@ -51,6 +53,8 @@ class App extends Component {
     };
 
     render() {
+        const points = 12;
+
         return (
             <MuiThemeProvider theme={ this.createAppTheme() }>
                 <DocumentTitle title="Cooperation Feedback Questionnaire">

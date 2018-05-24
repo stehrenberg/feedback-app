@@ -5,12 +5,14 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
+import Typography from '@material-ui/core/Typography';
 
 import SurveyForm from '../components/SurveyForm';
 
 class QuestionStepper extends React.Component {
     state = {
         activeStep: 0,
+        allDone: false,
     };
 
     handleClick = (stepIndex) => {
@@ -19,17 +21,29 @@ class QuestionStepper extends React.Component {
         });
     };
 
+    handleSubmit = (onSubmit, stepIndex) => {
+        onSubmit();
+        this.handleClick(stepIndex + 1);
+    };
+
+    handleLastStep = (event) => {
+        this.setState({allDone: true});
+    };
+
     render() {
-        const { classes, onChange, onSubmit } = this.props;
+        const {classes, onChange, onSubmit} = this.props;
         const steps = this.getSteps();
-        const { activeStep } = this.state;
 
         return (
             <React.Fragment>
-                <Stepper activeStep={ activeStep } orientation="vertical">
+                <Stepper activeStep={ this.state.activeStep } orientation="vertical">
                     { steps.map((label, index) => {
                         return (
-                            <Step key={ label } onClick={ () => this.handleClick(index) }>
+                            <Step key={ label }
+                                  onMouseEnter={ () => {
+                                      setTimeout(() => this.handleClick(index), 150)
+                                  }}
+                                  onClick={ () => this.handleClick(index) }>
                                 <StepLabel className="QuestionStepperLabel">{ label }</StepLabel>
                                 <StepContent>
                                     { this.getStepContent(index, {...this.props}) }
@@ -37,7 +51,15 @@ class QuestionStepper extends React.Component {
                             </Step>
                         );
                     })}
+                    { this.state.activeStep == steps.length && <span>All done!</span> }
                 </Stepper>
+                {
+                    this.state.allDone && <div className={ classes.typoRoot }>
+                        <Typography className={ classes.typography }>
+                            { "All done - thanks for your feedback! 😊" }
+                        </Typography>
+                    </div>
+                }
             </React.Fragment>
         );
     }
@@ -53,7 +75,7 @@ class QuestionStepper extends React.Component {
                     surveyId={ surveyId }
                     questions={ questions.filter((question) => ["0", "1", "2"].includes(question.id)) }
                     onChange={ onChange }
-                    onSubmit={ onSubmit }
+                    onSubmit={ (onSubmit) => this.handleSubmit }
                     isReadOnly={ isReadOnly }
                 />;
             case 1:
@@ -61,7 +83,7 @@ class QuestionStepper extends React.Component {
                     surveyId={ surveyId }
                     questions={ questions.filter((question) => ["3", "4"].includes(question.id)) }
                     onChange={ onChange }
-                    onSubmit={ onSubmit }
+                    onSubmit={ (onSubmit) => this.handleSubmit }
                     isReadOnly={ isReadOnly }
                 />;
             case 2:
@@ -69,7 +91,7 @@ class QuestionStepper extends React.Component {
                     surveyId={ surveyId }
                     questions={ questions.filter((question) => ["5", "6", "7", "8"].includes(question.id)) }
                     onChange={ onChange }
-                    onSubmit={ onSubmit }
+                    onSubmit={ (onSubmit) => this.handleSubmit }
                     isReadOnly={ isReadOnly }
                 />;
             case 3:
@@ -77,7 +99,7 @@ class QuestionStepper extends React.Component {
                     surveyId={ surveyId }
                     questions={ questions.filter((question) => ["9", "10"].includes(question.id)) }
                     onChange={ onChange }
-                    onSubmit={ onSubmit }
+                    onSubmit={ (onSubmit) => this.handleSubmit }
                     isReadOnly={ isReadOnly }
                 />;
             case 4:
@@ -85,7 +107,8 @@ class QuestionStepper extends React.Component {
                     surveyId={ surveyId }
                     questions={ questions.filter((question) => question.id === "11") }
                     onChange={ onChange }
-                    onSubmit={ onSubmit }
+                    onClick={ (event) => this.handleLastStep(event) }
+                    onSubmit={ (onSubmit) => this.handleSubmit }
                     isReadOnly={ isReadOnly }
                 />;
             default:
@@ -109,6 +132,16 @@ const styles = theme => ({
     resetContainer: {
         padding: 30,
     },
+    typography: {
+        width: '60%',
+        padding: '30px 0',
+        borderTop: '1px solid #cecece',
+        fontSize: 18,
+        fontWeight: 500,
+        fontColor: '#ea7400',
+        fontFamily: 'Roboto, sans-serif',
+        textAlign: 'center'
+    }
 });
 
 export default withStyles(styles)(QuestionStepper);

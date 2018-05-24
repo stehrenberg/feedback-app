@@ -8,10 +8,10 @@ import TodoItem from '../../components/todos/TodoItem';
 import LogoHeader from '../../components/LogoHeader';
 import MiniNavBar from '../../components/MiniNavBar';
 import AlertBox from '../../components/AlertBox';
-import {setTodoFilter} from '../../actions';
+import { setTodoFilter, toggleSnackbar} from '../../actions';
 import { apiCall, getRandomInteger} from '../../util/utils';
 import {config} from '../../config/config';
-import {updateLastTodoVisit} from '../../config/profile';
+import { updateLastTodoVisit} from '../../config/profile';
 
 class FilteredTodos extends Component {
 
@@ -51,6 +51,7 @@ class FilteredTodos extends Component {
         const newTodos = this.getVisibleTodos(this.props.todos, this.props.todoFilter);
         if (oldTodos.length != newTodos.length) {
             this.setState({ showSnackBar: true });
+            this.props.dispatch(toggleSnackbar("+12 Kudos Points 💖"));
         }
     }
 

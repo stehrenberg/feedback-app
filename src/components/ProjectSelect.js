@@ -15,7 +15,7 @@ class ProjectSelect extends React.Component {
                 className={ 'ProjectSelect' }
                 labelStyle={{ color: '#ffffff', fontSize: 20 }}
                 style={{ paddingLeft: 20, width: 300, top: 10 }}
-                underlineStyle={{ color: '#ea7400' }}
+                selectedMenuItemStyle={{ color: '#ea7400' }}
                 value={ this.props.projectName }
                 onChange={ this.handleChange }
                 maxHeight={ 200 }>

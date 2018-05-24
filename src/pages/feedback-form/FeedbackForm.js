@@ -23,7 +23,7 @@ class FeedbackForm extends React.Component {
     }
 
     componentDidMount = () => {
-        setTimeout(() => this.setState({showModalDialog: false}), 10000);
+        setTimeout(() => this.setState({showModalDialog: false}), 5000);
     };
 
     render = () => {

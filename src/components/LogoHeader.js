@@ -33,11 +33,12 @@ class LogoHeader extends React.Component {
                     <img src={ logo } className="App-logo" alt="logo" onClick={ () => history.push("/home/") }/>
                 </ScrollTrigger>
                 <div className={ classes.row }>
-                    <Avatar
+                    { !(!profile.email) && <Avatar
                         className={ classes.avatar }
                         src={ this.getAvatarURL(profile.email) }
-                    />
-                    <KudosBar value={ 42 }/>
+                    /> }
+                    {   // FIXME
+                        false && <KudosBar value={ 12 }/> }
                 </div>
                 <div>
                     <h2>{ title }</h2>

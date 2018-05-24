@@ -10,6 +10,7 @@ export const LOAD_SURVEYS = 'LOAD_SURVEYS';
 export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
 export const ADD_KUDOS_POINTS = 'ADD_KUDOS_POINTS';
 export const LEVEL_UP = 'LEVEL_UP';
+export const TOGGLE_SNACKBAR = 'TOGGLE_SNACKBAR';
 
 export const setProject = (projectName) => {
     return {
@@ -92,5 +93,12 @@ export const levelUp = (kudosRest) => {
     return {
         type: LEVEL_UP,
         kudosRest
+    }
+};
+
+export const toggleSnackbar= (message) => {
+    return {
+        type: TOGGLE_SNACKBAR,
+        message
     }
 };

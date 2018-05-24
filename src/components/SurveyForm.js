@@ -13,6 +13,7 @@ const SurveyForm = (props) => {
                                   label={ question.text }
                                   value={ question.value }
                                   onChange={ props.onChange }
+                                  onClick={ !(!props.onClick) ? props.onClick : () => {} }
                                   isReadOnly={ props.isReadOnly }
                                   surveyId={ props.surveyId } {...question} />
                     );

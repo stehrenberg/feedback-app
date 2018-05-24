@@ -3,6 +3,7 @@ import Moment from 'moment';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
+import SnackBar from 'material-ui/Snackbar';
 
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
 import HistoryIcon from '../../assets/history_icon.png';
@@ -12,7 +13,7 @@ import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
 import ProjectSelectDialog from '../../components/ProjectSelectDialog';
-import {loadTodos, loadProjects, setProject} from '../../actions';
+import {loadTodos, loadProjects, setProject } from '../../actions';
 import {apiCall, normalizeProjectName} from '../../util/utils';
 import {config} from '../../config/config';
 import {profile} from '../../config/profile';
@@ -46,16 +47,11 @@ class AppMenu extends React.Component {
 
     componentDidUpdate({projectName}) {
         if (projectName !== this.props.projectName) {
-
             this.loadAppData();
         }
     }
 
     render() {
-        const unseenTodos = this.props.todos.filter(todo => {
-            return todo.createdAt.isAfter(profile.lastTodoVisit['SHOW_OPEN']);
-        });
-        console.log(unseenTodos.length);
         const todoCount = this.props.todos.length;
         const openTodoCount = this.props.todos.filter(todo => !todo.completed).length;
 
@@ -80,7 +76,7 @@ class AppMenu extends React.Component {
                 img: CompletedTodosIcon,
                 title: "Completed Todos",
                 link: "/todos/completed",
-                count: todoCount - openTodoCount,
+                count: 0,
             },
         ];
 
@@ -192,8 +188,8 @@ AppMenu.propTypes = {
 const mapStateToProps = (state) => ({
     projectName: state.projectName,
     customerEmail: state.jwt.email,
-    projects: state.projects,
-    todos: state.todos,
+    projects: [...state.projects],
+    todos: [...state.todos],
 });
 
 

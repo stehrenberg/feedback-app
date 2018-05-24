@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactStars from 'react-stars';
 
-const NumberInput = ({isReadOnly, handleChange, value, name,}) => {
+const NumberInput = ({isReadOnly, handleChange, onClick, value, name,}) => {
 
     const optionalProps = isReadOnly ? {edit: false} : {};
 
@@ -9,10 +9,7 @@ const NumberInput = ({isReadOnly, handleChange, value, name,}) => {
         name={ name }
         count={ 10 }
         value={ value }
-        onChange={ (rating) => {
-            handleChange(name, rating)
-            }
-        }
+        onChange={ (rating) => handleChange(name, rating, onClick) }
         half={ false }
         size={ 24 }
         color2={ '#ffc300' }

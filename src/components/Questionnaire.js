@@ -4,6 +4,7 @@ import SnackBar from 'material-ui/Snackbar';
 import QuestionStepper from '../components/QuestionStepper';
 
 import {config} from '../config/config.js';
+import {toggleSnackbar} from "../actions";
 
 class Questionnaire extends Component {
 
@@ -46,7 +47,7 @@ class Questionnaire extends Component {
         }
     };
 
-    handleChange = (name, value) => {
+    handleChange = (name, value, additionalOnClickFunc=()=>{}) => {
         window.clearTimeout(this.saveTimeout);
         const oldQuestions = this.state.questions;
         const updatedQuestions = oldQuestions.map(question => {
@@ -55,6 +56,7 @@ class Questionnaire extends Component {
         });
         this.setState({ questions: updatedQuestions });
         this.saveTimeout = window.setTimeout(() => this.saveForm(), 500);
+        additionalOnClickFunc();
     };
 
     saveForm = () => {

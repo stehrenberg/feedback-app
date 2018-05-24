@@ -84,10 +84,21 @@ function kudosPoints(state = 0, action) {
     switch(action.type) {
         case 'ADD_KUDOS_POINTS':
             const bla = state.kudosPoints + action.kudosPoints;
-            console.log(state.kudosPoints, bla);
             return bla;
         case 'LEVEL_UP':
             return action.kudosRest;
+        default:
+            return state;
+    }
+}
+
+function snackbar(state={}, action) {
+    switch(action.type) {
+        case 'TOGGLE_SNACKBAR':
+            return {
+                showSnackbar: !state.showSnackbar,
+                message: action.message || ""
+            };
         default:
             return state;
     }
