@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {Router as HashRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
 
 import PrivateRoute from './PrivateRoute';

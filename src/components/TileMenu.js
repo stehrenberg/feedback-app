@@ -29,6 +29,8 @@ const TileMenu = ({tileData, cols, rows, classes}) => {
         }
     };
 
+    const foo = (<span></span>);
+
     return (
         <div className="gridList" style={ styles.root }>
             <GridList
@@ -48,6 +50,7 @@ const TileMenu = ({tileData, cols, rows, classes}) => {
                             {
                                 !!tile.count && <Badge className={ classes.todoBadge }
                                                        badgeContent={ tile.count }
+                                                       children={ foo }
                                                        color={ "primary" } />
                             }
                             <img src={ tile.img } alt={ "" }/>
