@@ -1,13 +1,11 @@
 import React, {Component} from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {createMuiTheme} from '@material-ui/core/styles';
+
 
 import createHashHistory from 'history/createHashHistory';
 import PropTypes from 'prop-types';
 import DocumentTitle from 'react-document-title';
 import {HashRouter, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
-
 
 import PrivateRoute from './PrivateRoute';
 import FeedbackForm from '../pages/feedback-form/FeedbackForm';
@@ -53,29 +51,7 @@ class App extends Component {
     };
 
     render() {
-        const points = 12;
-        const theme = createMuiTheme({
-            palette: {
-                primary: {
-                    light: '#ffb14b',
-                    main: '#ea7400',
-                    dark: '#b75d00',
-                },
-                secondary: {
-                    light: '#00e6ff',
-                    main: '#00BCD4',
-                    dark: '#00505f',
-                },
-                grey: {
-                    light: '#c9c9c9',
-                    main: '#88878B',
-                    dark: '#3c3c3c',
-                }
-            },
-        });
-
         return (
-            <MuiThemeProvider theme={ theme }>
                 <DocumentTitle title="Cooperation Feedback Questionnaire">
                     <HashRouter history={ this.state.history }>
                         <Switch classes="">
@@ -95,7 +71,6 @@ class App extends Component {
                         </Switch>
                     </HashRouter>
                 </DocumentTitle>
-            </MuiThemeProvider>
         );
     }
 

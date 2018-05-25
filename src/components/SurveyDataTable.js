@@ -62,7 +62,7 @@ class SurveyDataTable extends Component {
         const question = formData.find(data => data.questionId === questionId);
         return !(!question) ? question.questionValue : '---';
     }
-};
+}
 
 const mapStateToProps = (state) => {
     return {

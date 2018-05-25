@@ -49,8 +49,7 @@ class QuestionStepper extends React.Component {
                                   onMouseEnter={ () => {
                                       if (!this.state.allDone && !this.state.ignoreMouseEnter) {
                                           this.setState({ ignoreMouseEnter: true });
-                                          setTimeout(() => this.handleClick(index), 150);
-                                          //setTimeout(() => this.setState({ignoreMouseEnter: false}), 2000);
+                                          setTimeout(() => this.handleClick(index), 200);
                                       }
                                   }}
                                   onClick={ () => this.handleClick(index) }>

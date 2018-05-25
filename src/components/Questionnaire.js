@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import SnackBar from 'material-ui/Snackbar';
 import QuestionStepper from '../components/QuestionStepper';
+import Snackbar from '@material-ui/core/Snackbar';
+import CheckmarkIcon from '@material-ui/icons/Check'
 
 import {config} from '../config/config.js';
 import {toggleSnackbar} from "../actions";
@@ -29,13 +30,22 @@ class Questionnaire extends Component {
                                  surveyId = { this.props.id }
                                  history={ this.props.history }
                 />
-                <SnackBar
-                    className={ 'save-feedback' }
+                <Snackbar
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'right',
+                    }}
                     open={ this.state.showAlertBox }
-                    autoHideDuration={ 1000 }
-                    message={ 'Survey saved.' }
-                    onRequestClose={ () => this.setState({showAlertBox: false}) }
-                />
+                    autoHideDuration={ 1500 }
+                    onClose={ () => this.setState({showAlertBox: false}) }
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={
+                        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <p>Survey saved</p>
+                            <CheckmarkIcon style={{ color: "#00af00", marginLeft: 180 }}/>
+                        </div> }/>
             </div>
         );
     }
