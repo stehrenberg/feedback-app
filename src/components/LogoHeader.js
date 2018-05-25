@@ -2,12 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {toggleMiniNavBar} from '../actions'
 import {withStyles} from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
 import ScrollTrigger from 'react-scroll-trigger';
-import md5 from 'md5';
 import PropTypes from 'prop-types';
-
 import ProjectSelect from '../components/ProjectSelect';
+import Avatar from './Avatar';
 import KudosBar from '../components/KudosBar';
 import { config } from '../config/config';
 import profile from '../config/profile';
@@ -33,12 +31,9 @@ class LogoHeader extends React.Component {
                     <img src={ logo } className="App-logo" alt="logo" onClick={ () => history.push("/home/") }/>
                 </ScrollTrigger>
                 <div className={ classes.row }>
-                    { !(!profile.email) && <Avatar
-                        className={ classes.avatar }
-                        src={ this.getAvatarURL(profile.email) }
-                    /> }
+                    { !(!profile.email) && <Avatar className={classes.avatar} /> }
                     {   // FIXME
-                        false && <KudosBar value={ 12 }/> }
+                        true && <KudosBar value={ 12 }/> }
                 </div>
                 <div>
                     <h2>{ title }</h2>
@@ -47,13 +42,6 @@ class LogoHeader extends React.Component {
             </div>
         )
             ;
-    };
-
-    getAvatarURL = (email) => {
-        const gravatarBaseURL = "https://www.gravatar.com/avatar/";
-        const emailHash = md5(profile.email.toLocaleLowerCase());
-
-        return `${gravatarBaseURL}${emailHash}?s=200`;
     };
 }
 
