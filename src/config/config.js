@@ -33,8 +33,8 @@ export const config = {
         }
     },
     kudosPoints: {
-        survey: 5,
-        todo: 2,
-        completeTodo: 8,
+        survey: 10,
+        todo: 10,
+        completeTodo: 10,
     },
 };

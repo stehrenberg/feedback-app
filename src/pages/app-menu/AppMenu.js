@@ -13,6 +13,7 @@ import CompletedTodosIcon from '../../assets/completed_todos_icon.png';
 import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
 import ProjectSelectDialog from '../../components/ProjectSelectDialog';
+import KudosBar from '../../components/KudosBar';
 import {loadTodos, loadProjects, setProject } from '../../actions';
 import {apiCall, normalizeProjectName} from '../../util/utils';
 import {config} from '../../config/config';
@@ -82,6 +83,7 @@ class AppMenu extends React.Component {
 
         return (
             <div>
+                {   true && <KudosBar value={ 12 }/> }
                 <LogoHeader title="Overview for" history={ this.props.history }/>
                 { this.state.isLoading && <RefreshIndicator
                     size={ 50 }

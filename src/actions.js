@@ -9,6 +9,7 @@ export const TOGGLE_TODO_STATUS = 'TOGGLE_TODO_STATUS';
 export const LOAD_SURVEYS = 'LOAD_SURVEYS';
 export const TOGGLE_NAVBAR = 'TOGGLE_NAVBAR';
 export const ADD_KUDOS_POINTS = 'ADD_KUDOS_POINTS';
+export const SAVE_KUDOS_POINTS = 'SAVE_KUDOS_POINTS';
 export const LEVEL_UP = 'LEVEL_UP';
 export const TOGGLE_SNACKBAR = 'TOGGLE_SNACKBAR';
 
@@ -85,6 +86,13 @@ export const toggleMiniNavBar = (showMiniNavBar) => {
 export const addKudosPoints = (kudosPoints) => {
     return {
         type: ADD_KUDOS_POINTS,
+        kudosPoints,
+    }
+};
+
+export const saveKudosPoints = (kudosPoints) => {
+    return {
+        type: SAVE_KUDOS_POINTS,
         kudosPoints,
     }
 };

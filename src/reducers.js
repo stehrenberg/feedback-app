@@ -80,13 +80,14 @@ function showMiniNavBar(state = false, action) {
     }
 }
 
-function kudosPoints(state = 0, action) {
+function kudosPoints(state = {new: 0, total: 0}, action) {
     switch(action.type) {
         case 'ADD_KUDOS_POINTS':
-            const bla = state.kudosPoints + action.kudosPoints;
-            return bla;
-        case 'LEVEL_UP':
-            return action.kudosRest;
+            return { ...state, new: state.new + action.kudosPoints };
+        case 'SAVE_KUDOS_POINTS':
+            return {total: action.kudosPoints, new: 0};
+        // case 'LEVEL_UP':
+        //     return action.kudosRest;
         default:
             return state;
     }

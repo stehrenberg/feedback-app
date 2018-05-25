@@ -14,7 +14,7 @@ import FormDetail from '../components/FormDetail';
 import FilteredTodos from '../pages/open-todos/FilteredTodos';
 import LoginForm from '../pages/login/LoginForm';
 import AppMenu from '../pages/app-menu/AppMenu';
-import {setJWT, addKudosPoints, toggleSnackbar} from '../actions';
+import {setJWT, saveKudosPoints} from '../actions';
 import {apiCall} from '../util/utils';
 import {config} from '../config/config';
 import profile from '../config/profile';
@@ -47,7 +47,7 @@ class App extends Component {
     };
 
     componentDidMount = () => {
-        this.props.dispatch(addKudosPoints(profile.kudoPoints));
+        this.props.dispatch(saveKudosPoints(profile.kudosPoints));
     };
 
     render() {

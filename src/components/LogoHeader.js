@@ -6,7 +6,6 @@ import ScrollTrigger from 'react-scroll-trigger';
 import PropTypes from 'prop-types';
 import ProjectSelect from '../components/ProjectSelect';
 import Avatar from './Avatar';
-import KudosBar from '../components/KudosBar';
 import { config } from '../config/config';
 import profile from '../config/profile';
 import logo from '../assets/mayflower_logo.png';
@@ -32,8 +31,6 @@ class LogoHeader extends React.Component {
                 </ScrollTrigger>
                 <div className={ classes.row }>
                     { !(!profile.email) && <Avatar className={classes.avatar} /> }
-                    {   // FIXME
-                        true && <KudosBar value={ 12 }/> }
                 </div>
                 <div>
                     <h2>{ title }</h2>

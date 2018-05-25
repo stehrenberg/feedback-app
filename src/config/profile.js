@@ -3,7 +3,7 @@ import Moment from 'moment';
 export const profile = {
     name: "Stephanie Ehrenberg",
     email: "sehrenbe@hm.edu",
-    kudoPoints: 5,
+    kudosPoints: 5,
     kudoPointsSum: 28,
     currentRank: 'regular',
     loginCount: 0,
