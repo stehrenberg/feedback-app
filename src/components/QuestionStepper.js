@@ -7,6 +7,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
+import {addKudosPoints} from '../actions';
+import {config} from '../config/config';
 
 import SurveyForm from '../components/SurveyForm';
 import withTheme from "@material-ui/core/es/styles/withTheme";
@@ -32,6 +34,7 @@ class QuestionStepper extends React.Component {
     };
 
     handleLastStep = (event) => {
+        this.props.dispatch(addKudosPoints(config.kudosPoints.todo));
         this.setState({allDone: true});
     };
 

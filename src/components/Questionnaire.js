@@ -3,9 +3,7 @@ import {connect} from 'react-redux';
 import QuestionStepper from '../components/QuestionStepper';
 import Snackbar from '@material-ui/core/Snackbar';
 import CheckmarkIcon from '@material-ui/icons/Check'
-
 import {config} from '../config/config.js';
-import {toggleSnackbar} from "../actions";
 
 class Questionnaire extends Component {
 
