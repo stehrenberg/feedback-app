@@ -10,7 +10,9 @@ const TextInput = ({isReadOnly, handleChange, value, name, inputType, placeholde
         type={ inputType }
         value={ value }
         hintText={ placeholder }
+        hintStyle={{ fontSize: 14 }}
         multiLine={ true }
+        underlineFocusStyle={{ borderColor: '#ea7400' }}
         onChange={ (event) => handleChange(name, event.target.value) }
         rows={ 1 }
         fullWidth={ true }

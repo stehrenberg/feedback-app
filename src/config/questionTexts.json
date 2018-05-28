@@ -26,7 +26,7 @@
       "preload": "true",
       "value": "",
       "help": "This is what you commissioned us to do - our core tasks and services for you as defined in our contract.",
-      "placeholder": "e.g. Vue.JS Frontend development, NixOS consulting, ReactJS Workshop, ..."
+      "placeholder": "Vue.JS Frontend development, NixOS consulting, ReactJS Workshop, ..."
     },
     {
       "id": "4",
@@ -36,7 +36,7 @@
       "preload": "true",
       "value": "",
       "help": "What are the must-have results you need from us?",
-      "placeholder": "e.g. Scrum Master, NixOS consulting, Agile Coaching, ..."
+      "placeholder": "Scrum Master, NixOS consulting, Agile Coaching, ..."
     },
     {
       "id": "5",
@@ -46,27 +46,27 @@
       "preload": "true",
       "value": "",
       "help": "Which of our skills and competencies do you value, but need more of?",
-      "placeholder": "DevOps, Agile/Lean Requiremens Engineering, Microservices Architecture"
+      "placeholder": "DevOps, Agile/Lean Requiremens Engineering, Microservices Architecture, ..."
     },
     {
       "id": "6",
-      "shortText": "avoid",
-      "text": "What should we avoid to do in the future?",
-      "inputType": "input",
-      "preload": "true",
-      "value": "",
-      "help": "What don't you need? Where do we err? What should we stop?",
-      "placeholder": "As in: "Really, people - stop it NOW."
-    },
-    {
-      "id": "7",
       "shortText": "deliverAdditionally",
       "text": "What should we deliver additionally?",
       "inputType": "input",
       "preload": "true",
       "value": "",
       "help": "What excites you? How could our competencies assist you further?",
-      "placeholder": "e.g. NixOS workshops, workshop for Software Architecture, Agile Coaching for Kanban and Scrum"
+      "placeholder": "NixOS workshops, workshop for Software Architecture, Agile Coaching for Kanban and Scrum, ..."
+    },
+    {
+      "id": "7",
+      "shortText": "avoid",
+      "text": "What should we avoid to do in the future?",
+      "inputType": "input",
+      "preload": "true",
+      "value": "",
+      "help": "What don't you need? Where do we err? What should we stop? (As in: 'Really, people. Stop it NOW.')",
+      "placeholder": "'Remote Sprint Retrospective Meeting', 'Calling our PO instead of mailing her', 'Daily Standup at 8 o'Clock',...'"
     },
     {
       "id": "8",
@@ -75,7 +75,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "What do you need from us that we are missing so far?\n\n...Expect non-agile Software Engineering and code-monkeying. We don't do that.",
+      "help": "What do you need from us that we are missing so far? - Expect non-agile Software Engineering and code-monkeying. We don't do that.",
       "placeholder": "Technical skills, agile tools, ..."
     },
     {
@@ -102,7 +102,7 @@
       "inputType": "number",
       "preload": "false",
       "value": 0,
-      "help": "We use this to calculate our Net Promoter Score and determine how good we serve our customers."
+      "help": "We use this to calculate our Net Promoter Score and determine how good we serve our customers. \nHint: Getting a 9+ rating really excites us - it means you love what we do and we did our job right."
     }
   ]
 }

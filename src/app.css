@@ -93,7 +93,7 @@ th {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: flex-start;
     padding: 30px 0 15px 20px;
     cursor: help;
@@ -124,10 +124,6 @@ th {
     margin-top: 10px;
     font-size: 14px;
     color: #88878B;
-    border-style: solid;
-    border-bottom-width: 2px;
-    border-color: #c9c9c9;
-    outline: none;
 }
 
 .Question textarea[disabled] {
