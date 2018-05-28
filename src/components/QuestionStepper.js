@@ -14,6 +14,7 @@ import {config} from '../config/config';
 import SurveyForm from '../components/SurveyForm';
 import withTheme from "@material-ui/core/es/styles/withTheme";
 import * as theme from "material-ui";
+import {withRouter} from "react-router-dom";
 
 class QuestionStepper extends React.Component {
     state = {
@@ -40,7 +41,8 @@ class QuestionStepper extends React.Component {
     };
 
     render() {
-        const {classes, onChange, onSubmit, history} = this.props;
+        const {classes, onChange, onSubmit, history } = this.props;
+        console.log(this.props);
         const steps = this.getSteps();
         const {main, light} = this.props.theme.palette.primary;
 
@@ -73,6 +75,7 @@ class QuestionStepper extends React.Component {
                         </Typography>
                     }
                 </div>
+                { /*TODO gehört hier mal gar nicht rein, findet kein Schwein!*/ }
                 <HomeIcon className="nav-back-icon"
                           onClick={ () => history.push('/home') }/>
             </React.Fragment>
@@ -161,8 +164,8 @@ const styles = theme => ({
     typoRoot: {
         display: 'flex',
         height: 100,
-        justifyContent: 'center',
+        justifyContent: 'center'
     },
 });
 
-export default connect()(withStyles(styles)(withTheme()(QuestionStepper)));
+export default connect()(withStyles(styles)(withTheme()(withRouter(QuestionStepper))));

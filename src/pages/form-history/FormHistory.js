@@ -39,7 +39,7 @@ class FormHistory extends Component {
             <div>
                 <LogoHeader title={'Past Questionnaires for' } history={ this.props.history }/>
                 <MiniNavBar history={ history } show={ showMiniNavBar }/>
-                <SurveyDataTable history={ this.props.history }/>
+                <SurveyDataTable history={ history }/>
                 <AlertBox 
                     show={ this.state.showAlertBox }
                     dialogText={ "No completed surveys to show yet." }

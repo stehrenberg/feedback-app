@@ -27,7 +27,9 @@ class FeedbackForm extends React.Component {
     };
 
     render = () => {
-        const {projectName, history, showMiniNavBar, id} = this.props;
+        const {projectName, showMiniNavBar, id} = this.props;
+        const history = this.props.history;
+        console.log(history);
         const cardText = "The better your feedback, the more we can improve our work for you.";
         const cardTitle = "Welcome to your first Feedback Questionnaire!";
 
