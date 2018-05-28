@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {withStyles} from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
@@ -34,7 +35,7 @@ class QuestionStepper extends React.Component {
     };
 
     handleLastStep = (event) => {
-        this.props.dispatch(addKudosPoints(config.kudosPoints.todo));
+        this.props.dispatch(addKudosPoints(config.kudosPoints.survey));
         this.setState({allDone: true});
     };
 
@@ -164,4 +165,4 @@ const styles = theme => ({
     },
 });
 
-export default withStyles(styles)(withTheme()(QuestionStepper));
+export default connect()(withStyles(styles)(withTheme()(QuestionStepper)));
