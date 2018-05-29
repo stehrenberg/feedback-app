@@ -26,7 +26,7 @@
       "preload": "true",
       "value": "",
       "help": "This is what you commissioned us to do - our core tasks and services for you as defined in our contract.",
-      "placeholder": "Vue.JS Frontend development, NixOS consulting, ReactJS Workshop, ..."
+      "placeholder": "Vue.JS, NixOS consulting, ReactJS Workshop, ..."
     },
     {
       "id": "4",
@@ -35,7 +35,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "What are the must-have results you need from us?",
+      "help": "What are the must-have results you need from us? What would be critical if ",
       "placeholder": "Scrum Master, NixOS consulting, Agile Coaching, ..."
     },
     {
@@ -45,8 +45,8 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "Which of our skills and competencies do you value, but need more of?",
-      "placeholder": "DevOps, Agile/Lean Requiremens Engineering, Microservices Architecture, ..."
+      "help": "Which of the skills and competencies we're already using in your project do you value most? What are we already doing, but should put more focus on?",
+      "placeholder": "Agile/Lean Requiremens Engineering, Prototyping, ..."
     },
     {
       "id": "6",
@@ -55,8 +55,8 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "What excites you? How could our competencies assist you further?",
-      "placeholder": "NixOS workshops, workshop for Software Architecture, Agile Coaching for Kanban and Scrum, ..."
+      "help": "What excites you? What would your company benefit from additionally? How could our services assist your company further?",
+      "placeholder": "NixOS workshops, Microservices workshop, Kanban coaching, ..."
     },
     {
       "id": "7",
@@ -65,8 +65,8 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "What don't you need? Where do we err? What should we stop? (As in: 'Really, people. Stop it NOW.')",
-      "placeholder": "'Remote Sprint Retrospective Meeting', 'Calling our PO instead of mailing her', 'Daily Standup at 8 o'Clock',...'"
+      "help": "What don't you need? Where do we err? What should we stop? As in: 'Really, people. Stop it NOW'?",
+      "placeholder": "Remote Sprint Retrospective, Calling our PO instead of mailing, ..."
     },
     {
       "id": "8",
@@ -75,7 +75,7 @@
       "inputType": "input",
       "preload": "true",
       "value": "",
-      "help": "What do you need from us that we are missing so far? - Expect non-agile Software Engineering and code-monkeying. We don't do that.",
+      "help": "What do you need from us that we are missing so far? Are there tools or technologies you would like us to use? Should we level up on some soft skills?",
       "placeholder": "Technical skills, agile tools, ..."
     },
     {
@@ -83,7 +83,7 @@
       "shortText": "nextMeeting",
       "text": "Next Meeting:",
       "inputType": "date",
-      "help": "We've calculated a suggestion for our next feedback meeting, based on the interval rule that you've set in your profile. Adjust as needed!",
+      "help": "We have calculated a suggestion for our next feedback meeting, based on the interval rule that you have set in your profile. Adjust as needed!",
       "value": ""
     },
     {
@@ -93,7 +93,7 @@
       "inputType": "todo",
       "preload": "false",
       "value": "",
-      "help": "Which tasks should we work on until the next feedback date? "
+      "help": "Which tasks should we explicitly work on until the next feedback date?"
     },
     {
       "id": "11",
@@ -102,7 +102,7 @@
       "inputType": "number",
       "preload": "false",
       "value": 0,
-      "help": "We use this to calculate our Net Promoter Score and determine how good we serve our customers. \nHint: Getting a 9+ rating really excites us - it means you love what we do and we did our job right."
+      "help": "We use this to calculate our overall Net Promoter Score and determine how good we serve our customers. Getting a 9+ rating really excites us - it means you love what we do and we did our job right."
     }
   ]
 }
