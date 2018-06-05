@@ -40,7 +40,7 @@ class LogoHeader extends React.Component {
                         { projectSwitchDisabled ? '' : <ProjectSelect /> }
                     </div>
                 </div>
-                <ProfileMenu />
+                    <ProfileMenu className="ProfileMenu"/>
             </React.Fragment>
         )
             ;
