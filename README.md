@@ -1,8 +1,13 @@
-#Oh hai there!
+Oh hai there!
+----------------
 
-React Frontend for Mayflowers Cooperation Feedback Questionnaire Webapp.
+This is the React-Fronend-Codebase for Mayflower's *Cooperation Feedback Questionnaire* Webapp.
+
+
+**Behoooold: Da Feedback-App!!!!111onetwothree**  
+
 You can give Feedback, create Todos, mark Todos as done and collect Kudos.
-The app is still in prototype-y alpha-version-y stadium. WIP :)
+The app is still in a prototype-y alpha-version-y state. I'm on it :)
 
 Have pfun!
 
