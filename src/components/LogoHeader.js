@@ -4,9 +4,11 @@ import {toggleMiniNavBar} from '../actions'
 import {withStyles} from '@material-ui/core/styles';
 import ScrollTrigger from 'react-scroll-trigger';
 import PropTypes from 'prop-types';
-import ProjectSelect from '../components/ProjectSelect';
+
+import ProjectSelect from './ProjectSelect';
+import ProfileMenu from './ProfileMenu';
 import Avatar from './Avatar';
-import { config } from '../config/config';
+import {config} from '../config/config';
 import profile from '../config/profile';
 import logo from '../assets/mayflower_logo.png';
 
@@ -24,19 +26,22 @@ class LogoHeader extends React.Component {
         const {title, projectSwitchDisabled, classes, history} = this.props;
 
         return (
-            <div className="App-header">
-                <ScrollTrigger className="ScrollTrigger" onEnter={ this.onEnterViewport }
-                               onExit={ this.onExitViewport }>
-                    <img src={ logo } className="App-logo" alt="logo" onClick={ () => history.push("/home/") }/>
-                </ScrollTrigger>
-                <div className={ classes.row }>
-                    { !(!profile.email) && <Avatar className={classes.avatar} /> }
+            <React.Fragment>
+                <div className="App-header">
+                    <ScrollTrigger className="ScrollTrigger" onEnter={ this.onEnterViewport }
+                                   onExit={ this.onExitViewport }>
+                        <img src={ logo } className="App-logo" alt="logo" onClick={ () => history.push("/home/") }/>
+                    </ScrollTrigger>
+                    <div className={ classes.row }>
+                        { !(!profile.email) && <Avatar className={classes.avatar}/> }
+                    </div>
+                    <div>
+                        <h2>{ title }</h2>
+                        { projectSwitchDisabled ? '' : <ProjectSelect /> }
+                    </div>
                 </div>
-                <div>
-                    <h2>{ title }</h2>
-                    { projectSwitchDisabled ? '' : <ProjectSelect /> }
-                </div>
-            </div>
+                <ProfileMenu />
+            </React.Fragment>
         )
             ;
     };
@@ -61,7 +66,7 @@ const styles = {
         right: '3%',
         width: 70,
         height: 70,
-    }
+    },
 };
 
 export default connect()(withStyles(styles)(LogoHeader));
