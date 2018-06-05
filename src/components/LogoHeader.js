@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import ProjectSelect from './ProjectSelect';
 import ProfileMenu from './ProfileMenu';
 import Avatar from './Avatar';
-import {config} from '../config/config';
+import { config } from '../config/config';
 import profile from '../config/profile';
 import logo from '../assets/mayflower_logo.png';
 
