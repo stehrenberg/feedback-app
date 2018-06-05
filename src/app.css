@@ -42,8 +42,8 @@ body {
     padding-top: 19px;
 }
 
-.ProfileMenu {
-    width: 250;
+#profile-menu {
+    height: 500px !important;
 }
 
 .App-content {
