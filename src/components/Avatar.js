@@ -23,19 +23,10 @@ class Avatar extends React.Component {
         return (
             <React.Fragment>
                 <MUIAvatar className={ this.props.className } src={ getAvatarURL(profile.email) } onClick={ this.handleClick }/>
-                <ProfileMenu onClose={ this.handleClose }
-                             anchorEl={ this.state.anchorEl || null }/>
             </React.Fragment>
         );
     };
 
-    handleClick = event => {
-        this.setState({anchorEl: event.currentTarget});
-    };
-
-    handleClose = () => {
-        this.setState({anchorEl: null});
-    };
 }
 
 

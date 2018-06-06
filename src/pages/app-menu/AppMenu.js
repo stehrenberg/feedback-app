@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import SnackBar from 'material-ui/Snackbar';
+import BarChartIcon from '@material-ui/icons/InsertChart';
+import AccountIcon from '@material-ui/icons/AccountBox';
+import HomeIcon from '@material-ui/icons/Home';
 
 import AddQuestionnaireIcon from '../../assets/add-questionnaire_icon.png';
 import HistoryIcon from '../../assets/history_icon.png';
@@ -14,7 +17,8 @@ import TileMenu from '../../components/TileMenu';
 import LogoHeader from '../../components/LogoHeader';
 import ProjectSelectDialog from '../../components/ProjectSelectDialog';
 import KudosBar from '../../components/KudosBar';
-import {loadTodos, loadProjects, setProject } from '../../actions';
+import ProfileMenu from '../../components/ProfileMenu';
+import {loadTodos, loadProjects, setProject} from '../../actions';
 import {apiCall, normalizeProjectName} from '../../util/utils';
 import {config} from '../../config/config';
 import {profile} from '../../config/profile';
@@ -27,6 +31,8 @@ class AppMenu extends React.Component {
         this.state = {
             isLoading: false,
             showProjectSelectDialog: false,
+            showStatsMenu: false,
+            anchorEl: null,
         };
     }
 
@@ -106,6 +112,13 @@ class AppMenu extends React.Component {
                           tileData={ tileData }
                           cols={ 2 }
                           rows={ 2 }/>
+                <BarChartIcon className="nav-back-icon right"
+                              onClick={ this.handleStatsClick }/>
+                <ProfileMenu id="profile-menu"
+                             show={ this.state.showStatsMenu }
+                             anchorEl={ this.state.anchorEl }
+                             onClose={ this.handleClose }
+                />
                 <ProjectSelectDialog
                     projectList={ this.props.projects }
                     onClose={ this.handleDialogClose }
@@ -178,6 +191,15 @@ class AppMenu extends React.Component {
         this.props.dispatch(setProject(projectName));
         localStorage.setItem("projectName", projectName);
     };
+
+    handleStatsClick = (event) => {
+        console.log("hi!");
+        this.setState({showStatsMenu: true, anchorEl: event.currentTarget});
+    };
+
+    handleClose = () => {
+        this.setState({showStatsMenu: false, anchorEl: null});
+    }
 }
 
 AppMenu.propTypes = {

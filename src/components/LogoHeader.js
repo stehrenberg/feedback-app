@@ -6,7 +6,7 @@ import ScrollTrigger from 'react-scroll-trigger';
 import PropTypes from 'prop-types';
 
 import ProjectSelect from './ProjectSelect';
-import ProfileMenu from './ProfileMenu';
+
 import Avatar from './Avatar';
 import { config } from '../config/config';
 import profile from '../config/profile';
@@ -40,7 +40,6 @@ class LogoHeader extends React.Component {
                         { projectSwitchDisabled ? '' : <ProjectSelect /> }
                     </div>
                 </div>
-                    <ProfileMenu className="ProfileMenu"/>
             </React.Fragment>
         )
             ;

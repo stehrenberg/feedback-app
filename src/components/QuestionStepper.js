@@ -75,8 +75,10 @@ class QuestionStepper extends React.Component {
                         </Typography>
                     }
                 </div>
-                { /*TODO gehört hier mal gar nicht rein, findet kein Schwein!*/ }
-                <HomeIcon className="nav-back-icon"
+                {
+                    //FIXME gehört hier mal gar nicht rein, findet kein Schwein!
+                }
+                <HomeIcon className="nav-back-icon left"
                           onClick={ () => history.push('/home') }/>
             </React.Fragment>
         );
